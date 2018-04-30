@@ -1,3 +1,15 @@
 page-home {
-
+    #home-logo {
+        width: auto;
+        height: 25px;
+    }
+    .white-line {
+        border: 1px solid white;
+    }
+    .black-line {
+        border: 1px solid black;
+    }
+    .no-text-transform {
+        text-transform: none;
+    }
 }
