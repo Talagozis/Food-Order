@@ -12,4 +12,10 @@ page-stores {
     .no-text-transform {
         text-transform: none;
     }
+    .no-padding {
+        padding: 3px;
+    }
+    ion-toolbar .toolbar-content {
+        padding: 0 10%;
+    }
 }
