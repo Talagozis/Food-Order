@@ -8,13 +8,13 @@ page-home {
         height: 100%;
       
         ion-row.header {
-            height: 10%;
+            height: 50px;
         }
         ion-row.content {
-            height: 75%;
+            height: 100%;
         }
         ion-row.footer {
-            height: 15%;
+            height: 70px;
         }
       }
 }

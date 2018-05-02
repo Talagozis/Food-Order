@@ -1,0 +1,1495 @@
+[
+    {
+        "name": "Μπουγάτσα Ρεκόρ",
+        "slug": "rekor",
+        "description": null,
+        "shortDescription": null,
+        "logo": "/rekor-logo.jpg",
+        "cover": "rekor-cover.jpg",
+        "minOrderCost": 0,
+        "newUntilDate": null,
+        "orderEmail": "rekorrekor1974@gmail.com",
+        "linkWebsite": null,
+        "linkFacebook": "www.facebook.com/bougatsarekor",
+        "linkFoursquare": null,
+        "managerName": "Παπαδόπουλος Γιάννης",
+        "managerPhoneNumber": "6936120191",
+        "managerEmail": null,
+        "canOrderOnline": true,
+        "hasDelivery": true,
+        "hasTakeaway": true,
+        "canPayByCash": true,
+        "canPayByCreditCard": false,
+        "isActive": true,
+        "isClosed": false,
+        "isArchived": false,
+        "sendOrderByEmail": false,
+        "sendOrderByPush": true,
+        "bid": 4223701720,
+        "isOpen": true,
+        "isNew": false,
+        "View": {
+            "catalog": 1
+        },
+        "OpenHours": [
+            {
+                "bid": 4223701720,
+                "dayOfWeek": 1,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 2702567425,
+                "dayOfWeek": 2,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 1181433130,
+                "dayOfWeek": 3,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 3955266131,
+                "dayOfWeek": 4,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 2434131836,
+                "dayOfWeek": 5,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 912997541,
+                "dayOfWeek": 6,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 3686830542,
+                "dayOfWeek": 0,
+                "startTime": "2016-12-01T06:30:00",
+                "endTime": "2016-12-01T23:00:00",
+                "Store": null
+            }
+        ],
+        "Addresses": [
+            {
+                "bid": 2434131836,
+                "line": "Κ. Καραμανλή 1",
+                "zip": "62122",
+                "city": "Σέρρες",
+                "region": "Κέντρο",
+                "country": "Ελλάδα",
+                "lat": 41.090602,
+                "lon": 23.549876,
+                "Store": null
+            },
+            {
+                "bid": 3418394953,
+                "line": "Μεραρχίας 57",
+                "zip": "62125",
+                "city": "Σέρρες",
+                "region": "Κέντρο",
+                "country": "Ελλάδα",
+                "lat": 41.086035,
+                "lon": 23.545926,
+                "Store": null
+            },
+            {
+                "bid": 1897260658,
+                "line": "Βενιζέλου 160",
+                "zip": "62121",
+                "city": "Σέρρες",
+                "region": "Καμενίκια",
+                "country": "Ελλάδα",
+                "lat": 41.086725,
+                "lon": 23.533378,
+                "Store": null
+            }
+        ],
+        "Contacts": [
+            {
+                "bid": 3686830542,
+                "value": "2321055444",
+                "contactTypeName": "Σταθερό τηλέφωνο",
+                "contactTypePicture": "landline.png",
+                "Store": null,
+                "ContactType": {
+                    "bid": 4223701720,
+                    "name": "Σταθερό τηλέφωνο",
+                    "picture": "landline.png"
+                }
+            },
+            {
+                "bid": 2165696247,
+                "value": "2321023341",
+                "contactTypeName": "Σταθερό τηλέφωνο",
+                "contactTypePicture": "landline.png",
+                "Store": null,
+                "ContactType": {
+                    "bid": 4223701720,
+                    "name": "Σταθερό τηλέφωνο",
+                    "picture": "landline.png"
+                }
+            }
+        ],
+        "Products": null,
+        "Offers": null,
+        "Store_Areas": [
+            {
+                "cost": 0,
+                "Store": null,
+                "Area": {
+                    "bid": 4223701720,
+                    "zipCode": "62100",
+                    "Region": {
+                        "bid": 4223701720,
+                        "name": "Σέρρες",
+                        "slug": "serres",
+                        "Areas": null,
+                        "Stores": null
+                    },
+                    "Store_Areas": null
+                }
+            },
+            {
+                "cost": 0,
+                "Store": null,
+                "Area": {
+                    "bid": 2702567425,
+                    "zipCode": "62121",
+                    "Region": {
+                        "bid": 4223701720,
+                        "name": "Σέρρες",
+                        "slug": "serres",
+                        "Areas": null,
+                        "Stores": null
+                    },
+                    "Store_Areas": null
+                }
+            },
+            {
+                "cost": 0,
+                "Store": null,
+                "Area": {
+                    "bid": 1181433130,
+                    "zipCode": "62122",
+                    "Region": {
+                        "bid": 4223701720,
+                        "name": "Σέρρες",
+                        "slug": "serres",
+                        "Areas": null,
+                        "Stores": null
+                    },
+                    "Store_Areas": null
+                }
+            },
+            {
+                "cost": 0,
+                "Store": null,
+                "Area": {
+                    "bid": 3955266131,
+                    "zipCode": "62123",
+                    "Region": {
+                        "bid": 4223701720,
+                        "name": "Σέρρες",
+                        "slug": "serres",
+                        "Areas": null,
+                        "Stores": null
+                    },
+                    "Store_Areas": null
+                }
+            },
+            {
+                "cost": 0,
+                "Store": null,
+                "Area": {
+                    "bid": 2434131836,
+                    "zipCode": "62124",
+                    "Region": {
+                        "bid": 4223701720,
+                        "name": "Σέρρες",
+                        "slug": "serres",
+                        "Areas": null,
+                        "Stores": null
+                    },
+                    "Store_Areas": null
+                }
+            },
+            {
+                "cost": 0,
+                "Store": null,
+                "Area": {
+                    "bid": 912997541,
+                    "zipCode": "62125",
+                    "Region": {
+                        "bid": 4223701720,
+                        "name": "Σέρρες",
+                        "slug": "serres",
+                        "Areas": null,
+                        "Stores": null
+                    },
+                    "Store_Areas": null
+                }
+            }
+        ],
+        "Product_Tags": [
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 4223701720,
+                    "name": "Μπουγάτσα",
+                    "slug": "mpougatsa",
+                    "description": null,
+                    "picture": "mpougatsa-picture.jpg",
+                    "cover": "mpougatsa-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 13,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3955266131,
+                    "name": "Μπουγάτσες",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 1,
+                "Product": null,
+                "Tag": {
+                    "bid": 2702565297,
+                    "name": "Νηστίσιμο",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": "ffb300",
+                    "maxLevel": 0,
+                    "productCount": 13,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2702567425,
+                    "name": "Σφολιάτες",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 912997541,
+                    "name": "Προϊόντα Ζύμης",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 2,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3686830542,
+                    "name": "Στριφτόπιτες Ατομικές",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 2165696247,
+                    "name": "Pizza",
+                    "slug": "pizza",
+                    "description": null,
+                    "picture": "pizza-picture.jpg",
+                    "cover": "pizza-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3418394953,
+                    "name": "Πίτσες",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 3,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1897260658,
+                    "name": "Σπιτική Πίτα",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 5,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 376126363,
+                    "name": "Σερραϊκά επιδόρπια",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 3,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 3149959364,
+                    "name": "Γλυκά",
+                    "slug": "glika",
+                    "description": null,
+                    "picture": "glika-picture.jpg",
+                    "cover": "glika-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 3,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1360389480,
+                    "name": "Ποτά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 2,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 4134222481,
+                    "name": "Ακανέδες",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 1,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 2613088186,
+                    "name": "Καφές",
+                    "slug": "kafes",
+                    "description": null,
+                    "picture": "kafes-picture.jpg",
+                    "cover": "kafes-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 8,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1091953891,
+                    "name": "Καφέδες",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 8,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1628825069,
+                    "name": "Γαλακτοκομικά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1539345830,
+                    "name": "Σπιτική στριφτή πίτα",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 18211535,
+                    "name": "Προϊόντα για κέρασμα",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 7,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 107690774,
+                    "name": "Χυμοί",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2881523775,
+                    "name": "Αναψυκτικά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 3,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 286647124,
+                    "name": "Νερό",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 1,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1091951763,
+                    "name": "Προσφορές",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 7,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            }
+        ],
+        "AspNetUsers": [
+            {
+                "bid": 3955266131,
+                "userName": "jr_pap@yahoo.gr",
+                "email": "jr_pap@yahoo.gr",
+                "mobileNumber": null,
+                "usernameSignupType": 0,
+                "providerSignupType": 0,
+                "created_at": "0001-01-01T00:00:00",
+                "updated_at": null,
+                "User": null,
+                "Roles": null,
+                "Stores": null
+            },
+            {
+                "bid": 1807736731,
+                "userName": "rekor.serresdelivery@gmail.com",
+                "email": "rekor.serresdelivery@gmail.com",
+                "mobileNumber": null,
+                "usernameSignupType": 0,
+                "providerSignupType": 0,
+                "created_at": "0001-01-01T00:00:00",
+                "updated_at": null,
+                "User": null,
+                "Roles": null,
+                "Stores": null
+            }
+        ]
+    },
+    {
+        "name": "Mamma`s Pizza",
+        "slug": "mammaspizza",
+        "description": null,
+        "shortDescription": null,
+        "logo": "/mammaspizza-logo.jpg",
+        "cover": "/mammaspizza-cover.jpg",
+        "minOrderCost": 0,
+        "newUntilDate": null,
+        "orderEmail": "mammaspizza.serresdelivery@gmail.com",
+        "linkWebsite": "www.mammaspizza.gr",
+        "linkFacebook": "www.facebook.com/pizzamammas",
+        "linkFoursquare": null,
+        "managerName": "Καμακάρης Γιώργος",
+        "managerPhoneNumber": "6996629202",
+        "managerEmail": null,
+        "canOrderOnline": true,
+        "hasDelivery": true,
+        "hasTakeaway": true,
+        "canPayByCash": true,
+        "canPayByCreditCard": false,
+        "isActive": true,
+        "isClosed": false,
+        "isArchived": false,
+        "sendOrderByEmail": true,
+        "sendOrderByPush": true,
+        "bid": 2702567425,
+        "isOpen": true,
+        "isNew": false,
+        "View": {
+            "catalog": 1
+        },
+        "OpenHours": [
+            {
+                "bid": 2165696247,
+                "dayOfWeek": 1,
+                "startTime": "2016-12-03T14:00:00",
+                "endTime": "2016-12-03T01:00:00",
+                "Store": null
+            },
+            {
+                "bid": 644561952,
+                "dayOfWeek": 2,
+                "startTime": "2016-12-03T17:00:00",
+                "endTime": "2016-12-03T01:00:00",
+                "Store": null
+            },
+            {
+                "bid": 1897260658,
+                "dayOfWeek": 3,
+                "startTime": "2016-12-03T14:00:00",
+                "endTime": "2016-12-03T01:00:00",
+                "Store": null
+            },
+            {
+                "bid": 376126363,
+                "dayOfWeek": 4,
+                "startTime": "2016-12-03T14:00:00",
+                "endTime": "2016-12-03T01:00:00",
+                "Store": null
+            },
+            {
+                "bid": 3149959364,
+                "dayOfWeek": 5,
+                "startTime": "2016-12-03T14:00:00",
+                "endTime": "2016-12-03T01:00:00",
+                "Store": null
+            },
+            {
+                "bid": 107690774,
+                "dayOfWeek": 0,
+                "startTime": "2016-12-11T14:00:00",
+                "endTime": "2016-12-11T01:00:00",
+                "Store": null
+            },
+            {
+                "bid": 1181426746,
+                "dayOfWeek": 6,
+                "startTime": "2017-06-03T14:00:00",
+                "endTime": "2017-06-03T01:00:00",
+                "Store": null
+            }
+        ],
+        "Addresses": [
+            {
+                "bid": 3955266131,
+                "line": "Σινώπης 1",
+                "zip": "62125",
+                "city": "Σερρες",
+                "region": null,
+                "country": "Ελλάδα",
+                "lat": 41.082339,
+                "lon": 23.54306,
+                "Store": null
+            }
+        ],
+        "Contacts": [
+            {
+                "bid": 1181433130,
+                "value": "2321050888",
+                "contactTypeName": "Σταθερό τηλέφωνο",
+                "contactTypePicture": "landline.png",
+                "Store": null,
+                "ContactType": {
+                    "bid": 4223701720,
+                    "name": "Σταθερό τηλέφωνο",
+                    "picture": "landline.png"
+                }
+            },
+            {
+                "bid": 3955266131,
+                "value": "6986187505",
+                "contactTypeName": "Whats up",
+                "contactTypePicture": "whatsup.jpg",
+                "Store": null,
+                "ContactType": {
+                    "bid": 2702567425,
+                    "name": "Whats up",
+                    "picture": "whatsup.jpg"
+                }
+            },
+            {
+                "bid": 2434131836,
+                "value": "6940596148",
+                "contactTypeName": "CU",
+                "contactTypePicture": "cu.jpg",
+                "Store": null,
+                "ContactType": {
+                    "bid": 2434131836,
+                    "name": "CU",
+                    "picture": "cu.jpg"
+                }
+            },
+            {
+                "bid": 912997541,
+                "value": "6906456340",
+                "contactTypeName": "F2G",
+                "contactTypePicture": "f2g.png",
+                "Store": null,
+                "ContactType": {
+                    "bid": 912997541,
+                    "name": "F2G",
+                    "picture": "f2g.png"
+                }
+            }
+        ],
+        "Products": null,
+        "Offers": null,
+        "Store_Areas": [],
+        "Product_Tags": [
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 2165696247,
+                    "name": "Pizza",
+                    "slug": "pizza",
+                    "description": null,
+                    "picture": "pizza-picture.jpg",
+                    "cover": "pizza-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 18,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 1,
+                "Product": null,
+                "Tag": {
+                    "bid": 2702565297,
+                    "name": "Νηστίσιμο",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": "ffb300",
+                    "maxLevel": 0,
+                    "productCount": 14,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 3865786892,
+                    "name": "Ζυμαρικά",
+                    "slug": "zimarika",
+                    "description": null,
+                    "picture": "zimarika-picture.jpg",
+                    "cover": "zimarika-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 11,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 2344652597,
+                    "name": "Σαλάτες",
+                    "slug": "salates",
+                    "description": null,
+                    "picture": "salates-picture.jpg",
+                    "cover": "salates-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 7,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 823518302,
+                    "name": "Burger",
+                    "slug": "burger",
+                    "description": null,
+                    "picture": "/burger-picture.jpg",
+                    "cover": "/burger-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 7,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 3597351303,
+                    "name": "Club",
+                    "slug": "club",
+                    "description": null,
+                    "picture": "club-picture.jpg",
+                    "cover": "club-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 11,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2076217008,
+                    "name": "Club Pizza",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 7,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 555082713,
+                    "name": "Σνίτσελ",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 2,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3328915714,
+                    "name": "Ορεκτικά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 3149959364,
+                    "name": "Γλυκά",
+                    "slug": "glika",
+                    "description": null,
+                    "picture": "glika-picture.jpg",
+                    "cover": "glika-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1807781419,
+                    "name": "Επιδόρπια",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1360389480,
+                    "name": "Ποτά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 10,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2881523775,
+                    "name": "Αναψυκτικά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3955264003,
+                    "name": "Χυμοί - Νερά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 2,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1091951763,
+                    "name": "Προσφορές",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1181431002,
+                    "name": "Τεμάχια",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 6,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            }
+        ],
+        "AspNetUsers": [
+            {
+                "bid": 197125325,
+                "userName": "gkamakaris@gmail.com",
+                "email": "gkamakaris@gmail.com",
+                "mobileNumber": null,
+                "usernameSignupType": 0,
+                "providerSignupType": 0,
+                "created_at": "0001-01-01T00:00:00",
+                "updated_at": null,
+                "User": null,
+                "Roles": null,
+                "Stores": null
+            }
+        ]
+    },
+    {
+        "name": "Σουβλάκι ο Σώτος",
+        "slug": "swtos",
+        "description": null,
+        "shortDescription": null,
+        "logo": "swtos-logo.jpg",
+        "cover": "swtos-cover.jpg",
+        "minOrderCost": 0,
+        "newUntilDate": null,
+        "orderEmail": "oswtos.serresdelivery@gmail.com",
+        "linkWebsite": "www.oswtos.gr",
+        "linkFacebook": null,
+        "linkFoursquare": null,
+        "managerName": "Κοτσαμπάς Σωτήρης",
+        "managerPhoneNumber": "6974015456",
+        "managerEmail": null,
+        "canOrderOnline": true,
+        "hasDelivery": true,
+        "hasTakeaway": true,
+        "canPayByCash": true,
+        "canPayByCreditCard": false,
+        "isActive": true,
+        "isClosed": true,
+        "isArchived": false,
+        "sendOrderByEmail": false,
+        "sendOrderByPush": true,
+        "bid": 1181433130,
+        "isOpen": false,
+        "isNew": false,
+        "View": {
+            "catalog": 1
+        },
+        "OpenHours": [
+            {
+                "bid": 4223695336,
+                "dayOfWeek": 0,
+                "startTime": "2017-04-27T12:00:00",
+                "endTime": "2017-04-27T20:00:00",
+                "Store": null
+            },
+            {
+                "bid": 18207279,
+                "dayOfWeek": 1,
+                "startTime": "2017-03-09T11:00:00",
+                "endTime": "2017-03-09T18:00:00",
+                "Store": null
+            },
+            {
+                "bid": 2792040280,
+                "dayOfWeek": 3,
+                "startTime": "2017-03-09T11:00:00",
+                "endTime": "2017-03-09T18:00:00",
+                "Store": null
+            },
+            {
+                "bid": 1270905985,
+                "dayOfWeek": 6,
+                "startTime": "2017-03-09T11:00:00",
+                "endTime": "2017-03-09T18:00:00",
+                "Store": null
+            },
+            {
+                "bid": 4044738986,
+                "dayOfWeek": 2,
+                "startTime": "2017-03-09T11:00:00",
+                "endTime": "2017-03-09T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 2523604691,
+                "dayOfWeek": 4,
+                "startTime": "2017-03-09T11:00:00",
+                "endTime": "2017-03-09T23:00:00",
+                "Store": null
+            },
+            {
+                "bid": 1002470396,
+                "dayOfWeek": 5,
+                "startTime": "2017-03-09T11:00:00",
+                "endTime": "2017-03-09T23:00:00",
+                "Store": null
+            }
+        ],
+        "Addresses": [
+            {
+                "bid": 912997541,
+                "line": "Ερμού 16 και Σελευκού γωνία",
+                "zip": "62122",
+                "city": "Σέρρες",
+                "region": "Κέντρο",
+                "country": "Ελλάδα",
+                "lat": 41.090208,
+                "lon": 23.54907,
+                "Store": null
+            }
+        ],
+        "Contacts": [
+            {
+                "bid": 644561952,
+                "value": "2321056211",
+                "contactTypeName": "Σταθερό τηλέφωνο",
+                "contactTypePicture": "landline.png",
+                "Store": null,
+                "ContactType": {
+                    "bid": 4223701720,
+                    "name": "Σταθερό τηλέφωνο",
+                    "picture": "landline.png"
+                }
+            },
+            {
+                "bid": 3418394953,
+                "value": "6982114133",
+                "contactTypeName": "Whats up",
+                "contactTypePicture": "whatsup.jpg",
+                "Store": null,
+                "ContactType": {
+                    "bid": 2702567425,
+                    "name": "Whats up",
+                    "picture": "whatsup.jpg"
+                }
+            },
+            {
+                "bid": 1897260658,
+                "value": "6943443636",
+                "contactTypeName": "CU",
+                "contactTypePicture": "cu.jpg",
+                "Store": null,
+                "ContactType": {
+                    "bid": 2434131836,
+                    "name": "CU",
+                    "picture": "cu.jpg"
+                }
+            },
+            {
+                "bid": 376126363,
+                "value": "6994094045",
+                "contactTypeName": "Q",
+                "contactTypePicture": "q.png",
+                "Store": null,
+                "ContactType": {
+                    "bid": 3955266131,
+                    "name": "Q",
+                    "picture": "q.png"
+                }
+            }
+        ],
+        "Products": null,
+        "Offers": null,
+        "Store_Areas": [],
+        "Product_Tags": [
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2344652597,
+                    "name": "Σαλάτες",
+                    "slug": "salates",
+                    "description": null,
+                    "picture": "salates-picture.jpg",
+                    "cover": "salates-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 9,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3328915714,
+                    "name": "Ορεκτικά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 3,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2523608947,
+                    "name": "Αλοιφές",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 2,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 3060480125,
+                    "name": "Σουβλάκια",
+                    "slug": "souvlakia",
+                    "description": null,
+                    "picture": "/souvlakia-picture.jpg",
+                    "cover": "/souvlakia-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 5,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 1986737769,
+                    "name": "Ψητά",
+                    "slug": "psita",
+                    "description": null,
+                    "picture": "psita-picture.jpg",
+                    "cover": "psita-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 47,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1181431002,
+                    "name": "Τεμάχια",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 14,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1449866591,
+                    "name": "Μερίδες",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 12,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3507872064,
+                    "name": "Σάντουιτς",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 18,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1360389480,
+                    "name": "Ποτά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 5,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 2881523775,
+                    "name": "Αναψυκτικά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 4,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 3955264003,
+                    "name": "Χυμοί - Νερά",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 2,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 2,
+                "Product": null,
+                "Tag": {
+                    "bid": 1091951763,
+                    "name": "Προσφορές",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 7,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 3,
+                "Product": null,
+                "Tag": {
+                    "bid": 823518302,
+                    "name": "Burger",
+                    "slug": "burger",
+                    "description": null,
+                    "picture": "/burger-picture.jpg",
+                    "cover": "/burger-cover.jpg",
+                    "color": null,
+                    "maxLevel": 0,
+                    "productCount": 3,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            },
+            {
+                "level": 1,
+                "Product": null,
+                "Tag": {
+                    "bid": 3597349175,
+                    "name": "Σερραϊκό",
+                    "slug": null,
+                    "description": null,
+                    "picture": null,
+                    "cover": null,
+                    "color": "ef5350",
+                    "maxLevel": 0,
+                    "productCount": 1,
+                    "storeCount": 0,
+                    "Product_Tags": null
+                }
+            }
+        ],
+        "AspNetUsers": [
+            {
+                "bid": 1181388442,
+                "userName": "oswtos.serresdelivery@gmail.com",
+                "email": "oswtos.serresdelivery@gmail.com",
+                "mobileNumber": null,
+                "usernameSignupType": 0,
+                "providerSignupType": 0,
+                "created_at": "0001-01-01T00:00:00",
+                "updated_at": null,
+                "User": null,
+                "Roles": null,
+                "Stores": null
+            }
+        ]
+    }
+]
