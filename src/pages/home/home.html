@@ -1,47 +1,25 @@
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-2><button ion-button menuToggle><ion-icon name="menu"></ion-icon></button></ion-col>
-        <ion-col col-8><ion-title><img id="home-logo" src="../../assets/imgs/logo.png" class="img-responsive"/></ion-title></ion-col>
-        <ion-col col-2><button ion-button><ion-icon name="cart"></ion-icon></button></ion-col>
-      </ion-row>
-      <div class="white-line"></div>
-      <ion-row>
-        <ion-col col-10><ion-searchbar placeholder="Αναζήτηση"></ion-searchbar></ion-col>
-        <ion-col col-2><button ion-button><ion-icon name="options"></ion-icon></button></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-navbar>
-</ion-header>
-<h1>{{ environment }}</h1>
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Family Kitchen</h2>
-      <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
-      <p>Γύρος,Σουβλάκια,Ψητά,Σαλάτες,ClubBurger</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Family Kitchen</h2>
-      <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
-      <p>Γύρος,Σουβλάκια,Ψητά,Σαλάτες,ClubBurger</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Parisniko</h2>
-      <h2 ion-text color="danger" item-right>Κλειστό</h2>
-      <p>ClubBurger,Σαλάτες,Γλυκά,Καφές,Τοστ</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Parisniko</h2>
-      <h2 ion-text color="danger" item-right>Κλειστό</h2>
-      <p>ClubBurger,Σαλάτες,Γλυκά,Καφές,Τοστ</p>
-    </ion-item>
-  </ion-list>
-  <div class="black-line"></div>
-  <button class="no-text-transform center" ion-button full>Εμφάνιση όλων</button>
+<ion-content>
+  <ion-grid>
+
+    <ion-row class="header">
+      <ion-col col-2>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="content">
+
+    </ion-row>
+
+    <ion-row class="footer">
+      <ion-col col-12>
+        <button class="center" ion-button full (click)="navigateToStoresPage()">
+          ΠΑΡΑΓΓΕΙΛΕ ΤΩΡΑ!
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

@@ -13,4 +13,8 @@ export class HomePage {
     this.environment = ENV.mode;
   }
 
+  navigateToStoresPage() {
+    this.navCtrl.setRoot('StoresPage');
+  }
+
 }

@@ -1,15 +1,20 @@
 page-home {
-    #home-logo {
-        width: auto;
-        height: 25px;
+    ion-content {
+        background-image: url("../assets/imgs/homepagebg.jpg");
+        background-position: center;
+        background-size: cover;
     }
-    .white-line {
-        border: 1px solid white;
-    }
-    .black-line {
-        border: 1px solid black;
-    }
-    .no-text-transform {
-        text-transform: none;
-    }
+    ion-grid {
+        height: 100%;
+      
+        ion-row.header {
+            height: 10%;
+        }
+        ion-row.content {
+            height: 75%;
+        }
+        ion-row.footer {
+            height: 15%;
+        }
+      }
 }
