@@ -1,6 +1,6 @@
 page-home {
     ion-content {
-        background-image: url("../assets/imgs/homepagebg.jpg");
+        background-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.4) 80%), url("../assets/imgs/homepagebg.jpg");
         background-position: center;
         background-size: cover;
     }
@@ -16,5 +16,13 @@ page-home {
         ion-row.footer {
             height: 70px;
         }
+      }
+      .header button {
+        height: 3.6rem; 
+        font-size: 2.8rem; 
+        font-weight: 500; 
+        text-transform: uppercase; 
+        color: #fff; 
+        background-color: transparent;
       }
 }
