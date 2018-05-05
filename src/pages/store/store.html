@@ -3,13 +3,13 @@
     <ion-grid>
       <ion-row text-center>
         <ion-col col-8>
-          <ion-title style="margin-top: 5px;">Κατάλογος</ion-title>
+          <ion-title style="margin-top: 10px;">Κατάλογος</ion-title>
         </ion-col>
         <ion-col col-2>
-          <button ion-button><ion-icon name="share"></ion-icon></button>
+          <button ion-button icon-only><ion-icon name="share"></ion-icon></button>
         </ion-col>
         <ion-col col-2>
-          <button ion-button><ion-icon name="cart"></ion-icon></button>
+          <button ion-button icon-only><ion-icon name="cart"></ion-icon></button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -23,4 +23,56 @@
     <h2>Family Kitchen</h2>
     <p><ion-icon name="cart">5€</ion-icon></p>
   </ion-item>
+  
+  <div padding>
+    <ion-segment [(ngModel)]="storeSegment">
+      <ion-segment-button value="catalog">
+        ΚΑΤΑΛΟΓΟΣ
+      </ion-segment-button>
+      <ion-segment-button value="info">
+        ΠΛΗΡΟΦΟΡΙΕΣ
+      </ion-segment-button>
+      <ion-segment-button value="contact">
+        ΕΠΙΚΟΙΝΩΝΙΑ
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  
+  <div [ngSwitch]="storeSegment">
+    <ion-list *ngSwitchCase="'catalog'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/imgs/logo.png">
+        </ion-thumbnail>
+        <h2>Σουβλάκι</h2>
+        <h2 right>1.20€</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/imgs/logo.png">
+        </ion-thumbnail>
+        <h2>Σουβλάκι</h2>
+        <h2 right>1.20€</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="../../assets/imgs/logo.png">
+        </ion-thumbnail>
+        <h2>Σουβλάκι</h2>
+        <h2 right>1.20€</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'info'">
+      <ion-item>
+        <h2>Μεραρχίας 50</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'contact'">
+      <ion-item>
+        <h2>Τηλέφωνο</h2>
+        <h2 right>1234567890</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>

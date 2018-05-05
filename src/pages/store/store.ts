@@ -7,7 +7,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'store.html',
 })
 export class StorePage {
-
+  storeSegment: string = "catalog";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
