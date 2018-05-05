@@ -1,3 +1,9 @@
 page-store {
-
+    .store-cover {
+        background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.2) 80%), url("https://www.serresdelivery.gr/image/store/parisniko-cover.jpg");
+        // background: url("https://www.serresdelivery.gr/image/store/parisniko-cover.jpg") center !important;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+      }
 }
