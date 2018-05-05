@@ -41,36 +41,76 @@
   <div [ngSwitch]="storeSegment">
     <ion-list *ngSwitchCase="'catalog'">
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="../../assets/imgs/logo.png">
-        </ion-thumbnail>
         <h2>Σουβλάκι</h2>
-        <h2 right>1.20€</h2>
+        <h2 item-right>1.20€</h2>
       </ion-item>
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="../../assets/imgs/logo.png">
-        </ion-thumbnail>
         <h2>Σουβλάκι</h2>
-        <h2 right>1.20€</h2>
+        <h2 item-right>1.20€</h2>
       </ion-item>
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="../../assets/imgs/logo.png">
-        </ion-thumbnail>
         <h2>Σουβλάκι</h2>
-        <h2 right>1.20€</h2>
+        <h2 item-right>1.20€</h2>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'info'">
       <ion-item>
-        <h2>Μεραρχίας 50</h2>
+        <h2 text-left>Μεραρχίας 50, ΤΚ 62121, Σέρρες</h2>
+        <hr>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>Κυριακή</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Δευτέρα</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Τρίτη</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Τετάρτη</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Πέμτπη</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Παρασκευή</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Σάββατο</ion-col>
+            <ion-col col-6>12:00 - 02:00</ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'contact'">
       <ion-item>
-        <h2>Τηλέφωνο</h2>
-        <h2 right>1234567890</h2>
+        <h2>Τηλέφωνα</h2>
+        <hr>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>Σταθερό</ion-col>
+            <ion-col col-6>2321012345</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Whatsup</ion-col>
+            <ion-col col-6>6972345678</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Vodafone</ion-col>
+            <ion-col col-6>6972345678</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>Wind</ion-col>
+            <ion-col col-6>6972345678</ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-list>
   </div>
