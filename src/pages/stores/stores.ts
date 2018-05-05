@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 
-/**
- * Generated class for the StoresPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-stores',
@@ -34,6 +27,10 @@ export class StoresPage {
   getStores(): void {
     console.log("3");
     this.storeProvider.find().subscribe(s => { console.log(s); this.stores = s; });
+
+  navigateToStorePage() {
+    this.navCtrl.push('StorePage');
+
   }
 
 }
