@@ -26,7 +26,8 @@ export class StoresPage {
 
   getStores(): void {
     console.log("3");
-    this.storeProvider.find().subscribe(s => { console.log(s); this.stores = s; });
+    this.storeProvider.find().subscribe(s => this.stores = s);
+  }
 
   navigateToStorePage() {
     this.navCtrl.push('StorePage');
