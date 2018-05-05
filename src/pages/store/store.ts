@@ -15,8 +15,4 @@ export class StorePage {
     console.log('ionViewDidLoad StorePage');
   }
 
-  navigateToStoresPage() {
-    this.navCtrl.setRoot('StoresPage');
-  }
-
 }

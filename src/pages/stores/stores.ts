@@ -16,7 +16,7 @@ export class StoresPage {
   }
 
   navigateToStorePage() {
-    this.navCtrl.setRoot('StorePage');
+    this.navCtrl.push('StorePage');
   }
 
 }
