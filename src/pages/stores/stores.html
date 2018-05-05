@@ -3,13 +3,17 @@
     <ion-grid>
       <ion-row>
         <ion-col col-2>
-          <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
         </ion-col>
         <ion-col col-8>
           <ion-searchbar placeholder="Αναζήτηση"></ion-searchbar>
         </ion-col>
         <ion-col col-2>
-          <button ion-button><ion-icon name="options"></ion-icon></button>
+          <button ion-button>
+            <ion-icon name="options"></ion-icon>
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -18,30 +22,24 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Family Kitchen</h2>
-      <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
+
+    <ion-item *ngFor="let store of stores">
+      <ion-thumbnail item-start>
+        <img src="../../assets/logos/{{store.logo}}" class="img-responsive">
+      </ion-thumbnail>
+      <h2>{{store.name}}</h2>
+
+      <div *ngIf="store.isOpen;else other_content">
+        <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
+      </div>
+
+      <ng-template #other_content>
+        <h2 ion-text color="danger" item-right>Κλειστό</h2>
+      </ng-template>
+
       <p>Γύρος,Σουβλάκια,Ψητά,Σαλάτες,ClubBurger</p>
     </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Family Kitchen</h2>
-      <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
-      <p>Γύρος,Σουβλάκια,Ψητά,Σαλάτες,ClubBurger</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Parisniko</h2>
-      <h2 ion-text color="danger" item-right>Κλειστό</h2>
-      <p>ClubBurger,Σαλάτες,Γλυκά,Καφές,Τοστ</p>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-      <h2>Parisniko</h2>
-      <h2 ion-text color="danger" item-right>Κλειστό</h2>
-      <p>ClubBurger,Σαλάτες,Γλυκά,Καφές,Τοστ</p>
-    </ion-item>
+
   </ion-list>
 </ion-content>
 
