@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the StoresPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-stores',
@@ -20,6 +13,10 @@ export class StoresPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StoresPage');
+  }
+
+  navigateToStorePage() {
+    this.navCtrl.setRoot('StorePage');
   }
 
 }
