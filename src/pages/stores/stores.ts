@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 
@@ -11,7 +11,7 @@ import { StoreProvider } from '../../providers/store/store';
 export class StoresPage {
   stores: StoreApi[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storeProvider: StoreProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
     console.log("1");
   }
 
@@ -32,6 +32,11 @@ export class StoresPage {
   navigateToStorePage() {
     this.navCtrl.push('StorePage');
 
+  }
+
+  openFilters() {
+    const filtersModal = this.modalCtrl.create('FiltersPage');
+    filtersModal.present();
   }
 
 }
