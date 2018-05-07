@@ -11,7 +11,7 @@
           <ion-searchbar placeholder="Αναζήτηση"></ion-searchbar>
         </ion-col>
         <ion-col col-2>
-          <button ion-button>
+          <button ion-button (click)="openFilters()">
             <ion-icon name="options"></ion-icon>
           </button>
         </ion-col>
@@ -23,7 +23,7 @@
 <ion-content>
   <ion-list>
 
-    <ion-item *ngFor="let store of stores" (click)="navigateToStorePage()">
+    <ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage()">
       <ion-thumbnail item-start>
         <img src="../../assets/logos/{{store.logo}}" class="img-responsive">
       </ion-thumbnail>
@@ -45,6 +45,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button class="no-text-transform center" ion-button full>Εμφάνιση όλων</button>
+    <button center ion-button full>ΕΜΦΑΝΙΣΗ ΟΛΩΝ</button>
   </ion-toolbar>
 </ion-footer>
