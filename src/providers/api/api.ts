@@ -16,7 +16,8 @@ export class Api<T> {
   }
 
   getOne(endpoint: string, bid: number): Observable<T> {
-    return this.http.get<T>(this.url + '/' + endpoint + '/' + bid.toString());
+    return this.http.get<T>('/assets/mock/store.json');
+    //return this.http.get<T>(this.url + '/' + endpoint + '/' + bid.toString());
   }
 
 

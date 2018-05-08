@@ -6,10 +6,14 @@
           <ion-title style="margin-top: 10px;">Κατάλογος</ion-title>
         </ion-col>
         <ion-col col-2>
-          <button ion-button icon-only><ion-icon name="share"></ion-icon></button>
+          <button ion-button icon-only>
+            <ion-icon name="share"></ion-icon>
+          </button>
         </ion-col>
         <ion-col col-2>
-          <button ion-button icon-only><ion-icon name="cart"></ion-icon></button>
+          <button ion-button icon-only>
+            <ion-icon name="cart"></ion-icon>
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -17,56 +21,62 @@
 </ion-header>
 
 <ion-content>
-  <ion-item no-lines>
-    <ion-fab right top>
-      <ion-badge *ngIf="store.isOpen;else isClosed" item-end color="secondary">Ανοιχτό</ion-badge>
-      <ng-template #isClosed><ion-badge item-end color="danger">Κλειστό</ion-badge></ng-template>
-    </ion-fab>
-    <ion-thumbnail item-start><img src="https://www.serresdelivery.gr/image/store/{{store.logo}}" class="img-responsive"></ion-thumbnail>
-    <h2>{{store.name}}</h2>
-    <p><ion-icon name="cart">{{store.minOrderCost}}€</ion-icon></p>
-  </ion-item>
-  
-  <div padding>
-    <ion-segment [(ngModel)]="storeSegment">
-      <ion-segment-button value="catalog">
-        ΚΑΤΑΛΟΓΟΣ
-      </ion-segment-button>
-      <ion-segment-button value="info">
-        ΠΛΗΡΟΦΟΡΙΕΣ
-      </ion-segment-button>
-      <ion-segment-button value="contact">
-        ΕΠΙΚΟΙΝΩΝΙΑ
-      </ion-segment-button>
-    </ion-segment>
-  </div>
-  
-  <div [ngSwitch]="storeSegment">
-    <ion-list *ngSwitchCase="'catalog'">
-      <ion-item *ngFor="let product of store.Product_Tags">
-        <h2>{{product.Tag.name}}</h2>TODO FIX
-        <h2 item-right>1.20€</h2>
-      </ion-item>
-    </ion-list>
+  <div *ngIf="store">
+    <ion-item no-lines>
+      <ion-fab right top>
+        <ion-badge *ngIf="store.isOpen;else isClosed" item-end color="secondary">Ανοιχτό</ion-badge>
+        <ng-template #isClosed>
+          <ion-badge item-end color="danger">Κλειστό</ion-badge>
+        </ng-template>
+      </ion-fab>
+      <ion-thumbnail item-start>
+        <img src="https://www.serresdelivery.gr/image/store/{{store.logo}}" class="img-responsive">
+      </ion-thumbnail>
+      <h2>{{store.name}}</h2>
+      <p>
+        <ion-icon name="cart">{{store.minOrderCost}}€</ion-icon>
+      </p>
+    </ion-item>
 
-    <ion-list *ngSwitchCase="'info'">
-      <ion-item *ngFor="let address of store.Addresses">
+    <div padding>
+      <ion-segment [(ngModel)]="storeSegment">
+        <ion-segment-button value="catalog">
+          ΚΑΤΑΛΟΓΟΣ
+        </ion-segment-button>
+        <ion-segment-button value="info">
+          ΠΛΗΡΟΦΟΡΙΕΣ
+        </ion-segment-button>
+        <ion-segment-button value="contact">
+          ΕΠΙΚΟΙΝΩΝΙΑ
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div [ngSwitch]="storeSegment">
+      <ion-list *ngSwitchCase="'catalog'">
+        <ion-item *ngFor="let product of store.Product_Tags">
+          <h2>{{product.Tag.name}}</h2>TODO FIX
+          <h2 item-right>1.20€</h2>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'info'">
+        <ion-item *ngFor="let address of store.Addresses">
           <h2 text-left>{{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</h2>
-      </ion-item>
-      <ion-item *ngFor="let openHour of store.OpenHours">
-        <h2>{{openHour.dayOfWeek}}</h2>TODO FIX
-        <h2 item-right>{{openHour.startTime}} - {{openHour.startTime}}</h2>
-      </ion-item>
-    </ion-list>
+        </ion-item>
+        <ion-item *ngFor="let openHour of store.OpenHours">
+          <h2>{{openHour.dayOfWeek}}</h2>TODO FIX
+          <h2 item-right>{{openHour.startTime}} - {{openHour.startTime}}</h2>
+        </ion-item>
+      </ion-list>
 
-    <ion-list *ngSwitchCase="'contact'">
-      <ion-item *ngFor="let contact of store.Contacts">
-        <a ion-button block outline href="tel:{{contact.value}}">
-          <img src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive" style="width: 15px; height: 15px">
-          {{contact.value}}
-        </a>
-      </ion-item>
-    </ion-list>
+      <ion-list *ngSwitchCase="'contact'">
+        <ion-item *ngFor="let contact of store.Contacts">
+          <a ion-button block outline href="tel:{{contact.value}}">
+            <img src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive" style="width: 15px; height: 15px"> {{contact.value}}
+          </a>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
-
 </ion-content>

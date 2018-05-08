@@ -12,7 +12,6 @@ export class StoresPage {
   stores: StoreApi[];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
-    console.log("1");
   }
 
   ionViewDidLoad() {
@@ -20,17 +19,15 @@ export class StoresPage {
   }
 
   ngOnInit() {
-    console.log("2");
     this.getStores();
   }
 
   getStores(): void {
-    console.log("3");
     this.storeProvider.find().subscribe(s => this.stores = s);
   }
 
-  navigateToStorePage(store) {
-    this.navCtrl.push('StorePage', {store: store});
+  navigateToStorePage(store: StoreApi) {
+    this.navCtrl.push('StorePage', {storeId: store.bid});
 
   }
 
