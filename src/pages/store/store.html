@@ -18,10 +18,13 @@
 
 <ion-content>
   <ion-item no-lines>
-    <ion-fab right top><ion-badge item-end color="secondary">Ανοιχτό</ion-badge></ion-fab>
-    <ion-thumbnail item-start><img src="../../assets/imgs/logo.png" class="img-responsive"></ion-thumbnail>
-    <h2>Family Kitchen</h2>
-    <p><ion-icon name="cart">5€</ion-icon></p>
+    <ion-fab right top>
+      <ion-badge *ngIf="store.isOpen;else isClosed" item-end color="secondary">Ανοιχτό</ion-badge>
+      <ng-template #isClosed><ion-badge item-end color="danger">Κλειστό</ion-badge></ng-template>
+    </ion-fab>
+    <ion-thumbnail item-start><img src="https://www.serresdelivery.gr/image/store/{{store.logo}}" class="img-responsive"></ion-thumbnail>
+    <h2>{{store.name}}</h2>
+    <p><ion-icon name="cart">{{store.minOrderCost}}€</ion-icon></p>
   </ion-item>
   
   <div padding>
@@ -40,77 +43,28 @@
   
   <div [ngSwitch]="storeSegment">
     <ion-list *ngSwitchCase="'catalog'">
-      <ion-item>
-        <h2>Σουβλάκι</h2>
-        <h2 item-right>1.20€</h2>
-      </ion-item>
-      <ion-item>
-        <h2>Σουβλάκι</h2>
-        <h2 item-right>1.20€</h2>
-      </ion-item>
-      <ion-item>
-        <h2>Σουβλάκι</h2>
+      <ion-item *ngFor="let product of store.Product_Tags">
+        <h2>{{product.Tag.name}}</h2>TODO FIX
         <h2 item-right>1.20€</h2>
       </ion-item>
     </ion-list>
+
     <ion-list *ngSwitchCase="'info'">
-      <ion-item>
-        <h2 text-left>Μεραρχίας 50, ΤΚ 62121, Σέρρες</h2>
-        <hr>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-6>Κυριακή</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Δευτέρα</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Τρίτη</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Τετάρτη</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Πέμτπη</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Παρασκευή</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Σάββατο</ion-col>
-            <ion-col col-6>12:00 - 02:00</ion-col>
-          </ion-row>
-        </ion-grid>
+      <ion-item *ngFor="let address of store.Addresses">
+          <h2 text-left>{{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</h2>
+      </ion-item>
+      <ion-item *ngFor="let openHour of store.OpenHours">
+        <h2>{{openHour.dayOfWeek}}</h2>TODO FIX
+        <h2 item-right>{{openHour.startTime}} - {{openHour.startTime}}</h2>
       </ion-item>
     </ion-list>
+
     <ion-list *ngSwitchCase="'contact'">
-      <ion-item>
-        <h2>Τηλέφωνα</h2>
-        <hr>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-6>Σταθερό</ion-col>
-            <ion-col col-6>2321012345</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Whatsup</ion-col>
-            <ion-col col-6>6972345678</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Vodafone</ion-col>
-            <ion-col col-6>6972345678</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-6>Wind</ion-col>
-            <ion-col col-6>6972345678</ion-col>
-          </ion-row>
-        </ion-grid>
+      <ion-item *ngFor="let contact of store.Contacts">
+        <a ion-button block outline href="tel:{{contact.value}}">
+          <img src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive" style="width: 15px; height: 15px">
+          {{contact.value}}
+        </a>
       </ion-item>
     </ion-list>
   </div>

@@ -23,17 +23,17 @@
 <ion-content>
   <ion-list>
 
-    <ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage()">
+    <ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage(store)">
       <ion-thumbnail item-start>
         <img src="../../assets/logos/{{store.logo}}" class="img-responsive">
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
 
-      <div *ngIf="store.isOpen;else other_content">
+      <div *ngIf="store.isOpen;else isClosed">
         <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
       </div>
 
-      <ng-template #other_content>
+      <ng-template #isClosed>
         <h2 ion-text color="danger" item-right>Κλειστό</h2>
       </ng-template>
 
