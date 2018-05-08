@@ -23,7 +23,7 @@
 <ion-content>
   <ion-list>
 
-    <ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage()">
+    <ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage(store)">
       <ion-thumbnail item-start>
         <img src="../../assets/logos/{{store.logo}}" class="img-responsive">
       </ion-thumbnail>

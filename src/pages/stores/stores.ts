@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 
@@ -29,8 +29,8 @@ export class StoresPage {
     this.storeProvider.find().subscribe(s => this.stores = s);
   }
 
-  navigateToStorePage() {
-    this.navCtrl.push('StorePage');
+  navigateToStorePage(store) {
+    this.navCtrl.push('StorePage', {store: store});
 
   }
 

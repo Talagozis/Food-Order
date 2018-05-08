@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { StoreApi } from 'models/Api/Store';
 
 @IonicPage()
 @Component({
@@ -8,7 +9,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StorePage {
   storeSegment: string = "catalog";
+  store: StoreApi;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.store = this.navParams.get('store');
   }
 
   ionViewDidLoad() {
