@@ -25,4 +25,29 @@ export class HttpClientExt {
       headers: headers
     });
   }
+
+  put<T>(url, data) {
+    let headers = new HttpHeaders();
+    this.createAuthorizationHeader(headers);
+    return this.http.post<T>(url, data, {
+      headers: headers
+    });
+  }
+
+  delete<T>(url) {
+    let headers = new HttpHeaders();
+    this.createAuthorizationHeader(headers);
+    return this.http.get<T>(url, {
+      headers: headers
+    });
+  }
+
+  patch<T>(url, data) {
+    let headers = new HttpHeaders();
+    this.createAuthorizationHeader(headers);
+    return this.http.post<T>(url, data, {
+      headers: headers
+    });
+  }
+
 }

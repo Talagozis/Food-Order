@@ -26,14 +26,14 @@ export class Api<T> {
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+    return this.http.put(this.url + '/' + endpoint, body);
   }
 
   delete(endpoint: string, reqOpts?: any) {
-    return this.http.delete(this.url + '/' + endpoint, reqOpts);
+    return this.http.delete(this.url + '/' + endpoint);
   }
 
   patch(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.patch(this.url + '/' + endpoint, body, reqOpts);
+    return this.http.patch(this.url + '/' + endpoint, body);
   }
 }
