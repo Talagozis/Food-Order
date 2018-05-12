@@ -25,7 +25,7 @@ export class StoresPage {
   getStores(): void {
     this.storeProvider.find().subscribe(s => this.stores = s);
   }
-
+  
   navigateToStorePage(store: StoreApi) {
     this.navCtrl.push('StorePage', {storeId: store.bid});
 
@@ -34,6 +34,22 @@ export class StoresPage {
   openFilters() {
     const filtersModal = this.modalCtrl.create('FiltersPage');
     filtersModal.present();
+  }
+
+  searchStores(event: any) {
+    // Reset items back to all of the items
+   
+
+    // set val to the value of the searchbar
+    let val = event.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      // this.stores = this.stores.filter((store) => {
+      //   return (store.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      // })
+      api call to search
+    }
   }
 
 }
