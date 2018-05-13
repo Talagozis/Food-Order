@@ -10,6 +10,7 @@ import { StoreProvider } from '../../providers/store/store';
 })
 export class StoresPage {
   stores: StoreApi[];
+  initialStores: StoreApi[];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
   }
@@ -23,7 +24,10 @@ export class StoresPage {
   }
 
   getStores(): void {
-    this.storeProvider.find().subscribe(s => this.stores = s);
+    this.storeProvider.find().subscribe(s => {
+      this.initialStores = s;
+      this.stores = s;
+    });
   }
   
   navigateToStorePage(store: StoreApi) {
@@ -37,18 +41,13 @@ export class StoresPage {
   }
 
   searchStores(event: any) {
-    // Reset items back to all of the items
-   
-
-    // set val to the value of the searchbar
     let val = event.target.value;
-
-    // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      // this.stores = this.stores.filter((store) => {
-      //   return (store.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      // })
-      api call to search
+      this.stores = this.initialStores.filter((s) => {
+        return (s.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    } else {
+      this.stores = this.initialStores;
     }
   }
 

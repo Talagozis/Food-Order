@@ -8,7 +8,7 @@
           </button>
         </ion-col>
         <ion-col col-8>
-          <ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores"></ion-searchbar>
+          <ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
         </ion-col>
         <ion-col col-2>
           <button ion-button (click)="openFilters()">
