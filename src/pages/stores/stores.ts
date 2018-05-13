@@ -17,7 +17,7 @@ export class StoresPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad StoresPage');
+    // console.log('ionViewDidLoad StoresPage');
   }
 
   ngOnInit() {
@@ -36,6 +36,7 @@ export class StoresPage {
   }
 
   openFilters() {
+
     let cuisines = this.initialStores.map(
       a => a.Product_Tags
     ).reduce(
@@ -47,17 +48,10 @@ export class StoresPage {
     cuisines = cuisines.filter(
       (obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos
     );
+
+
     let filtersModal = this.modalCtrl.create('FiltersPage', {cuisines: cuisines});
-    let self = this; 
-    filtersModal.onDidDismiss( bid =>
-      self.stores = self.initialStores.filter((s) => {
-        return (
-          s.Product_Tags
-          .map( pt => pt.Tag )
-          .filter( t => t.bid === bid)
-        );
-      })
-    );
+    filtersModal.onDidDismiss(this.onFilterModalDidDismiss.bind(this));
     filtersModal.present();
   }
 
@@ -72,15 +66,10 @@ export class StoresPage {
     }
   }
 
-  // onFilterModalDidDismiss(bid: number) {
-  //   console.log(this);
-  //   this.stores = this.initialStores.filter((s) => {
-  //     return (
-  //       s.Product_Tags
-  //       .map( pt => pt.Tag)
-  //       .filter( t => t.bid === bid)
-  //     );
-  //   })
-  // }
+  onFilterModalDidDismiss(bid: number) {
+    this.stores = this.initialStores.filter(s => {
+      return s.Product_Tags.filter( t => t.Tag.bid === bid).length > 0;
+    });
+  }
 
 }

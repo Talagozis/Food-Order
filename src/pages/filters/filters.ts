@@ -19,12 +19,12 @@ export class FiltersPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FiltersPage');
+    // console.log('ionViewDidLoad FiltersPage');
   }
 
-  closeFilters() {
-    this.view.dismiss();
-  }
+  // closeFilters() {
+  //   this.view.dismiss();
+  // }
 
   filterCuisine(bid: number) {
     this.view.dismiss(bid);
