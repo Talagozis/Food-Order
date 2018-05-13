@@ -24,9 +24,9 @@
   <div *ngIf="store">
     <ion-item no-lines>
       <ion-fab right top>
-        <ion-badge *ngIf="store.isOpen;else isClosed" item-end color="secondary">Ανοιχτό</ion-badge>
+        <button ion-fab color="secondary"><ion-badge *ngIf="store.isOpen;else isClosed" item-end></ion-badge>Ανοιχτό</button>
         <ng-template #isClosed>
-          <ion-badge item-end color="danger">Κλειστό</ion-badge>
+          <button ion-fab color="danger"><ion-badge item-end color="danger"></ion-badge>Κλειστό</button>
         </ng-template>
       </ion-fab>
       <ion-thumbnail item-start>

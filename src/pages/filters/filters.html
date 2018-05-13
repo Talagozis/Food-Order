@@ -9,19 +9,14 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-label>Τύπος πιάτου</ion-label>
-      <ion-select [(ngModel)]="dishType" multiple="true">
-        <ion-option>Πίτσα</ion-option>
-        <ion-option>Σαλάτες</ion-option>
-        <ion-option>Club sandwitch</ion-option>
-      </ion-select>
+    <ion-list-header text-center>
+      ΔΙΑΛΕΞΤΕ ΚΟΥΖΙΝΑ
+    </ion-list-header>
+  
+    <ion-item *ngFor="let cuisine of cuisines">
+      <ion-label>{{cuisine.Tag.name}}</ion-label>
+      <ion-checkbox (click)="filterCuisine(cuisine.Tag.bid)"></ion-checkbox>
     </ion-item>
+
   </ion-list>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <button center ion-button full (click)="applyFilters()">ΕΦΑΡΜΟΓΗ</button>
-  </ion-toolbar>
-</ion-footer>
