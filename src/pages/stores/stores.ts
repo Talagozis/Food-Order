@@ -67,7 +67,7 @@ export class StoresPage {
   }
 
   onFilterModalDidDismiss(bid: number) {
-    if (bid === 0) {
+    if (!bid) {
       return false;
     } 
     this.stores = this.initialStores.filter(s => {

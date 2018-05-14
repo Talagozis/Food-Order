@@ -23,7 +23,7 @@ export class FiltersPage {
   }
 
   closeFilters() {
-    this.view.dismiss(0);
+    this.view.dismiss(undefined);
   }
 
   filterCuisine(bid: number) {
