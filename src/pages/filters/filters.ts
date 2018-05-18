@@ -22,9 +22,9 @@ export class FiltersPage {
     // console.log('ionViewDidLoad FiltersPage');
   }
 
-  // closeFilters() {
-  //   this.view.dismiss();
-  // }
+  closeFilters() {
+    this.view.dismiss(undefined);
+  }
 
   filterCuisine(bid: number) {
     this.view.dismiss(bid);

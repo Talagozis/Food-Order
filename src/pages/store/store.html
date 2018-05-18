@@ -34,7 +34,7 @@
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
       <p>
-        <ion-icon name="cart">{{store.minOrderCost}}€</ion-icon>
+        <ion-icon name="cart">{{store.minOrderCost|currency:"€"}}</ion-icon>
       </p>
     </ion-item>
 
@@ -54,19 +54,19 @@
 
     <div [ngSwitch]="storeSegment">
       <ion-list *ngSwitchCase="'catalog'">
-        <ion-item *ngFor="let product of store.Product_Tags">
-          <h2>{{product.Tag.name}}</h2>TODO FIX
-          <h2 item-right>1.20€</h2>
+        <ion-item *ngFor="let product of store.Products">
+          <h2>{{product.name}}</h2>
+          <h2 item-right>{{product.price|currency:"€"}}</h2>
+          <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
         </ion-item>
       </ion-list>
 
       <ion-list *ngSwitchCase="'info'">
         <ion-item *ngFor="let address of store.Addresses">
-          <h2 text-left>{{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</h2>
+          <p><ion-icon name="home"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</p>
         </ion-item>
         <ion-item *ngFor="let openHour of store.OpenHours">
-          <h2>{{openHour.dayOfWeek}}</h2>TODO FIX
-          <h2 item-right>{{openHour.startTime}} - {{openHour.startTime}}</h2>
+          <p><ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}</p>
         </ion-item>
       </ion-list>
 
