@@ -66,7 +66,7 @@
           <p><ion-icon name="home"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</p>
         </ion-item>
         <ion-item *ngFor="let openHour of store.OpenHours">
-          <p><ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}</p>
+          <p><ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}</p>
         </ion-item>
       </ion-list>
 
