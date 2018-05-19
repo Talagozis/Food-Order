@@ -1,18 +1,81 @@
-<!--
-  Generated template for the StorePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Store</ion-title>
+  <ion-navbar color="primary">
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col col-8>
+          <ion-title style="margin-top: 10px;">Κατάλογος</ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only>
+            <ion-icon name="share"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only>
+            <ion-icon name="cart"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
+  <div *ngIf="store">
+    <ion-item no-lines>
+      <ion-fab right top>
+        <button ion-fab color="secondary"><ion-badge *ngIf="store.isOpen;else isClosed" item-end></ion-badge>Ανοιχτό</button>
+        <ng-template #isClosed>
+          <button ion-fab color="danger"><ion-badge item-end color="danger"></ion-badge>Κλειστό</button>
+        </ng-template>
+      </ion-fab>
+      <ion-thumbnail item-start>
+        <img src="https://www.serresdelivery.gr/image/store/{{store.logo}}" class="img-responsive">
+      </ion-thumbnail>
+      <h2>{{store.name}}</h2>
+      <p>
+        <ion-icon name="cart">{{store.minOrderCost|priceFormat}}</ion-icon>
+      </p>
+    </ion-item>
 
-<ion-content padding>
+    <div padding>
+      <ion-segment [(ngModel)]="storeSegment">
+        <ion-segment-button value="catalog">
+          ΚΑΤΑΛΟΓΟΣ
+        </ion-segment-button>
+        <ion-segment-button value="info">
+          ΠΛΗΡΟΦΟΡΙΕΣ
+        </ion-segment-button>
+        <ion-segment-button value="contact">
+          ΕΠΙΚΟΙΝΩΝΙΑ
+        </ion-segment-button>
+      </ion-segment>
+    </div>
 
+    <div [ngSwitch]="storeSegment">
+      <ion-list *ngSwitchCase="'catalog'">
+        <ion-item *ngFor="let product of store.Products">
+          <h2>{{product.name}}</h2>
+          <h2 item-right>{{product.price|priceFormat}}</h2>
+          <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'info'">
+        <ion-item *ngFor="let address of store.Addresses">
+          <p><ion-icon name="home"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</p>
+        </ion-item>
+        <ion-item *ngFor="let openHour of store.OpenHours">
+          <p><ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}</p>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'contact'">
+        <ion-item *ngFor="let contact of store.Contacts">
+          <a ion-button outline round href="tel:{{contact.value}}"> {{contact.value}}</a>
+          <img item-right src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive">
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
