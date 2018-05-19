@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import { TagLevel, Product_TagApi } from '../../models/api/Product_tag';
+import { TagLevel } from '../../models/api/Product_tag';
+import { FilterViewModel } from '../filters/filters';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,7 @@ import { TagLevel, Product_TagApi } from '../../models/api/Product_tag';
 export class StoresPage {
   stores: StoreApi[];
   initialStores: StoreApi[];
+  selectedCuisineBids: number[] = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
   }
@@ -30,27 +32,28 @@ export class StoresPage {
       this.stores = s;
     });
   }
-  
+
   navigateToStorePage(store: StoreApi) {
-    this.navCtrl.push('StorePage', {storeId: store.bid});
+    this.navCtrl.push('StorePage', { storeId: store.bid });
   }
 
   openFilters() {
-
     let cuisines = this.initialStores.map(
       a => a.Product_Tags
     ).reduce(
       (a, b) => a.concat(b)
-    );
-    cuisines = cuisines.filter(
+    ).filter(
       (pt) => pt.level == TagLevel.Cuisine
-    );
-    cuisines = cuisines.filter(
+    ).filter(
       (obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos
     );
 
+    let filterViewModels = cuisines.map<FilterViewModel>(a => ({
+      Tag: a.Tag,
+      isChecked: this.selectedCuisineBids.indexOf(a.Tag.bid) > -1
+    }))
 
-    let filtersModal = this.modalCtrl.create('FiltersPage', {cuisines: cuisines});
+    let filtersModal = this.modalCtrl.create('FiltersPage', { filterViewModels: filterViewModels });
     filtersModal.onDidDismiss(this.onFilterModalDidDismiss.bind(this));
     filtersModal.present();
   }
@@ -66,12 +69,17 @@ export class StoresPage {
     }
   }
 
-  onFilterModalDidDismiss(bid: number) {
-    if (!bid) {
-      return false;
-    } 
+  onFilterModalDidDismiss(bids: number[]): void {
+    if (!bids) {
+      return;
+    }
+    this.selectedCuisineBids = bids;
+    if (bids.length == 0) {
+      this.stores = this.initialStores;
+      return;
+    }
     this.stores = this.initialStores.filter(s => {
-      return s.Product_Tags.filter( t => t.Tag.bid === bid).length > 0;
+      return s.Product_Tags.filter(t => bids.indexOf(t.Tag.bid) > -1).length > 0;
     });
   }
 

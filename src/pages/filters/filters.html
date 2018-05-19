@@ -2,7 +2,7 @@
   <ion-navbar color="primary">
     <ion-title>Φίλτρα</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="closeFilters()"><ion-icon name="close"></ion-icon></button>
+      <button ion-button (click)="clearFilters()">ΚΑΘΑΡΙΣΜΟΣ</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -13,10 +13,25 @@
       ΔΙΑΛΕΞΤΕ ΚΟΥΖΙΝΑ
     </ion-list-header>
   
-    <ion-item *ngFor="let cuisine of cuisines">
-      <ion-label>{{cuisine.Tag.name}}</ion-label>
-      <ion-checkbox (click)="filterCuisine(cuisine.Tag.bid)"></ion-checkbox>
+    <ion-item *ngFor="let filterViewModel of filterViewModels">
+      <ion-label>{{filterViewModel.Tag.name}}</ion-label>
+      <ion-checkbox [(ngModel)]="filterViewModel.isChecked"></ion-checkbox>
     </ion-item>
 
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-8>
+          <button ion-button full (click)="filterCuisine()">ΑΝΑΖΗΤΗΣΗ</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full (click)="closeFilters()">ΚΛΕΙΣΙΜΟ</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
