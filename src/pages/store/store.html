@@ -34,7 +34,7 @@
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
       <p>
-        <ion-icon name="cart">{{store.minOrderCost|currency:"€"}}</ion-icon>
+        <ion-icon name="cart">{{store.minOrderCost|priceFormat}}</ion-icon>
       </p>
     </ion-item>
 
@@ -56,7 +56,7 @@
       <ion-list *ngSwitchCase="'catalog'">
         <ion-item *ngFor="let product of store.Products">
           <h2>{{product.name}}</h2>
-          <h2 item-right>{{product.price|currency:"€"}}</h2>
+          <h2 item-right>{{product.price|priceFormat}}</h2>
           <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
         </ion-item>
       </ion-list>
@@ -72,9 +72,8 @@
 
       <ion-list *ngSwitchCase="'contact'">
         <ion-item *ngFor="let contact of store.Contacts">
-          <a ion-button block outline href="tel:{{contact.value}}">
-            <img src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive" style="width: 15px; height: 15px"> {{contact.value}}
-          </a>
+          <a ion-button outline round href="tel:{{contact.value}}"> {{contact.value}}</a>
+          <img item-right src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive">
         </ion-item>
       </ion-list>
     </div>
