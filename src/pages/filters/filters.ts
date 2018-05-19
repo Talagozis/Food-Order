@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Product_TagApi } from 'models/Api/Product_Tag';
-import { BindingFlags } from '@angular/compiler/src/core';
 
 @IonicPage()
 @Component({
