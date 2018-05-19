@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { TagLevel, Product_TagApi } from '../../models/api/Product_tag';
+import { TagApi } from '../../models/api/Tag';
+import { FilterViewModel } from '../filters/filters';
 
 @IonicPage()
 @Component({
@@ -30,9 +32,9 @@ export class StoresPage {
       this.stores = s;
     });
   }
-  
+
   navigateToStorePage(store: StoreApi) {
-    this.navCtrl.push('StorePage', {storeId: store.bid});
+    this.navCtrl.push('StorePage', { storeId: store.bid });
   }
 
   openFilters() {
@@ -41,16 +43,18 @@ export class StoresPage {
       a => a.Product_Tags
     ).reduce(
       (a, b) => a.concat(b)
-    );
-    cuisines = cuisines.filter(
+    ).filter(
       (pt) => pt.level == TagLevel.Cuisine
-    );
-    cuisines = cuisines.filter(
+    ).filter(
       (obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos
     );
 
+    let filterViewModels = cuisines.map<FilterViewModel>(a => ({
+      Tag: a.Tag,
+      isChecked: false
+    }))
 
-    let filtersModal = this.modalCtrl.create('FiltersPage', {cuisines: cuisines});
+    let filtersModal = this.modalCtrl.create('FiltersPage', { filterViewModels: filterViewModels });
     filtersModal.onDidDismiss(this.onFilterModalDidDismiss.bind(this));
     filtersModal.present();
   }
@@ -69,9 +73,9 @@ export class StoresPage {
   onFilterModalDidDismiss(bid: number) {
     if (!bid) {
       return false;
-    } 
+    }
     this.stores = this.initialStores.filter(s => {
-      return s.Product_Tags.filter( t => t.Tag.bid === bid).length > 0;
+      return s.Product_Tags.filter(t => t.Tag.bid === bid).length > 0;
     });
   }
 

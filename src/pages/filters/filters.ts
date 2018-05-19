@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Product_TagApi } from 'models/Api/Product_Tag';
+import { Product_TagApi, TagLevel } from 'models/Api/Product_Tag';
 import { BindingFlags } from '@angular/compiler/src/core';
+import { TagApi } from '../../models/api/Tag';
 
 @IonicPage()
 @Component({
@@ -9,13 +10,13 @@ import { BindingFlags } from '@angular/compiler/src/core';
   templateUrl: 'filters.html',
 })
 export class FiltersPage {
-  cuisines: Product_TagApi[];
+  filterViewModels: FilterViewModel[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
   }
 
   ngOnInit() {
-    this.cuisines = this.navParams.get('cuisines');
+    this.filterViewModels = this.navParams.get('filterViewModels');
   }
 
   ionViewDidLoad() {
@@ -30,4 +31,10 @@ export class FiltersPage {
     this.view.dismiss(bid);
   }
 
+}
+
+export interface FilterViewModel {
+  Tag: TagApi;
+  // level: TagLevel;
+  isChecked: boolean;
 }
