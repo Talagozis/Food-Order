@@ -34,7 +34,7 @@
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
       <p>
-        <ion-icon name="cart">{{store.minOrderCost|currency:"€"}}</ion-icon>
+        <ion-icon name="cart">{{store.minOrderCost|priceFormat}}</ion-icon>
       </p>
     </ion-item>
 
@@ -56,7 +56,7 @@
       <ion-list *ngSwitchCase="'catalog'">
         <ion-item *ngFor="let product of store.Products">
           <h2>{{product.name}}</h2>
-          <h2 item-right>{{product.price|currency:"€"}}</h2>
+          <h2 item-right>{{product.price|priceFormat}}</h2>
           <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
         </ion-item>
       </ion-list>
