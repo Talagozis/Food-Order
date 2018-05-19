@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { Product_TagApi, TagLevel } from 'models/Api/Product_Tag';
-import { BindingFlags } from '@angular/compiler/src/core';
 import { TagApi } from '../../models/api/Tag';
 
 @IonicPage()
@@ -23,12 +21,22 @@ export class FiltersPage {
     // console.log('ionViewDidLoad FiltersPage');
   }
 
+  clearFilters() {
+    this.view.dismiss([]);
+  }
+
   closeFilters() {
     this.view.dismiss(undefined);
   }
 
-  filterCuisine(bid: number) {
-    this.view.dismiss(bid);
+  filterCuisine() {
+    let bids = [];
+    for (let filterViewModel of this.filterViewModels) {
+      if (filterViewModel.isChecked) {
+        bids.push(filterViewModel.Tag.bid);
+      }
+    }
+    this.view.dismiss(bids);
   }
 
 }

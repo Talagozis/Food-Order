@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DayNameFormatPipe implements PipeTransform {
   transform(value: string) {
-    console.log(value);
     if (value == '0') {
       return 'Κυριακή';
     } else if (value == '1') {
