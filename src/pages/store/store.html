@@ -72,8 +72,10 @@
 
       <ion-list *ngSwitchCase="'contact'">
         <ion-item *ngFor="let contact of store.Contacts">
-          <a ion-button outline round href="tel:{{contact.value}}"> {{contact.value}}</a>
-          <img item-right src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive">
+          <ion-avatar item-start>
+              <img item-right src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive" style="width: 24px; height: 24px">
+          </ion-avatar>
+          <a ion-button block href="tel:{{contact.value}}"> {{contact.value}}</a>
         </ion-item>
       </ion-list>
     </div>
