@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ENV } from '@app/env'
 
 @Injectable()
 export class HttpClientExt {
@@ -7,7 +8,8 @@ export class HttpClientExt {
   constructor(private http: HttpClient) {}
 
   private createAuthorizationHeader(headers: HttpHeaders) {
-    headers.append('X-Amvrosia-Auth', '*'); 
+    console.log(ENV.API_HEADER_VALUE);
+    headers.append(ENV.API_HEADER_NAME, ENV.API_HEADER_VALUE); 
   }
 
   get<T>(url) {
