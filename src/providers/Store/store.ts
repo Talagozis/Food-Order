@@ -15,11 +15,11 @@ export class StoreProvider {
   constructor(public api: Api<StoreApi>) { }
 
    find(): Observable<StoreApi[]> {
-     return this.api.get('/store')
+     return this.api.get('store')
    }
 
   findOne(bid: number): Observable<StoreApi> {
-    return this.api.getOne('/store', bid)
+    return this.api.getOne('store', bid)
   }
 
 }

@@ -6,17 +6,17 @@ import { HttpClientExt } from '../http-client/http-client';
  */
 @Injectable()
 export class Api<T> {
-  private url: string = '/assets/mock/stores.json';
+  private url: string = 'http://localhost:49844/api/v1/';
 
   constructor(public http: HttpClientExt) {
   }
 
   get(endpoint: string): Observable<T[]> {
-    return this.http.get<T[]>(this.url);
+    return this.http.get<T[]>(this.url + endpoint);
   }
 
   getOne(endpoint: string, bid: number): Observable<T> {
-    return this.http.get<T>('/assets/mock/store.json');
+    return this.http.get<T>(this.url + endpoint + '/' + bid);
     //return this.http.get<T>(this.url + '/' + endpoint + '/' + bid.toString());
   }
 

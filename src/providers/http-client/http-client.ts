@@ -10,7 +10,9 @@ export class HttpClientExt {
   private createAuthorizationHeader(headers: HttpHeaders) {
     console.log(ENV.API_HEADER_VALUE);
     headers.append(ENV.API_HEADER_NAME, ENV.API_HEADER_VALUE); 
+    headers.append('Origin', ENV.API_CROSS_ORIGIN_URL); 
   }
+  
 
   get<T>(url) {
     let headers = new HttpHeaders();
