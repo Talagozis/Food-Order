@@ -4,15 +4,15 @@ import { StoresPage } from './stores';
 import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
-  declarations: [
-    StoresPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(StoresPage),
-    PipesModule
-  ],
-  exports: [
-    StoresPage
-  ]
+	declarations: [
+		StoresPage,
+	],
+	imports: [
+		IonicPageModule.forChild(StoresPage),
+		PipesModule
+	],
+	exports: [
+		StoresPage
+	]
 })
-export class StoresPageModule {}
+export class StoresPageModule { }

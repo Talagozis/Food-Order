@@ -5,26 +5,26 @@ import { StoreProvider } from '../../providers/store/store';
 
 @IonicPage()
 @Component({
-  selector: 'page-store',
-  templateUrl: 'store.html',
+	selector: 'page-store',
+	templateUrl: 'store.html',
 })
 export class StorePage {
-  storeSegment: string = "catalog";
-  store: StoreApi;
+	storeSegment: string = "catalog";
+	store: StoreApi;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storeProvider: StoreProvider) {
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad StorePage');
-  }
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad StorePage');
+	}
 
-  ngOnInit() {
-    this.getStore();
-  }
+	ngOnInit() {
+		this.getStore();
+	}
 
-  getStore(): void {
-    var storeId = this.navParams.get('storeId');
-    this.storeProvider.findOne(storeId).subscribe(s => this.store = s);
-  }
+	getStore(): void {
+		var storeId = this.navParams.get('storeId');
+		this.storeProvider.findOne(storeId).subscribe(s => this.store = s);
+	}
 }
