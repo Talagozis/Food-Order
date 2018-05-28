@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClientExt } from '../http-client/http-client';
+import { ENV } from '@app/env'
+
+
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
 @Injectable()
 export class Api<T> {
-  private url: string = 'http://localhost:49844/api/v1/';
+  private url: string = ENV.API_URL;
 
   constructor(public http: HttpClientExt) {
   }
