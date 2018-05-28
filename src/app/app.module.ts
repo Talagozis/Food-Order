@@ -13,27 +13,27 @@ import { Api } from '../providers/api/api';
 import { HttpClientExt } from '../providers/http-client/http-client';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    IonicModule.forRoot(MyApp),
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    StoreProvider,
-    Api,
-    HttpClientExt
-  ]
+	declarations: [
+		MyApp,
+		HomePage,
+	],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		IonicModule.forRoot(MyApp),
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		HomePage,
+	],
+	providers: [
+		StatusBar,
+		SplashScreen,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		StoreProvider,
+		Api,
+		HttpClientExt
+	]
 })
-export class AppModule {}
+export class AppModule { }

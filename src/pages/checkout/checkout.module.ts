@@ -3,11 +3,11 @@ import { IonicPageModule } from 'ionic-angular';
 import { CheckoutPage } from './checkout';
 
 @NgModule({
-  declarations: [
-    CheckoutPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(CheckoutPage),
-  ],
+	declarations: [
+		CheckoutPage,
+	],
+	imports: [
+		IonicPageModule.forChild(CheckoutPage),
+	],
 })
-export class CheckoutPageModule {}
+export class CheckoutPageModule { }

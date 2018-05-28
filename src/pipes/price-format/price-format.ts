@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'priceFormat',
+	name: 'priceFormat',
 })
 export class PriceFormatPipe implements PipeTransform {
-  transform(value: string) {
-    return parseFloat(value).toFixed(2) + '€';
-  }
+	transform(value: string) {
+		return parseFloat(value).toFixed(2) + '€';
+	}
 }
