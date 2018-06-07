@@ -20,10 +20,11 @@ export class MyApp {
 
 		console.log("Environment variables set to: " + ENV.mode);
 
-		// used for an example of ngFor and navigation
-		this.pages = [
-			{ title: 'Καταστήματα', component: 'StoresPage' }
-		];
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: 'Προσφορές', component: HomePage, },
+      { title: 'Καταστήματα', component: 'StoresPage' }
+    ];
 
 	}
 

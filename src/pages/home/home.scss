@@ -4,27 +4,14 @@ page-home {
         background-position: center;
         background-size: cover;
     }
-    ion-grid {
-        height: 100%;
-      
-        ion-row.header {
-            height: 50px;
-        }
-        ion-row.content {
-            height: 100%;
-        }
-        ion-row.footer {
-            height: 70px;
-        }
-      }
-      .header button {
+    .header button {
         height: 3.6rem; 
         font-size: 2.8rem; 
         font-weight: 500; 
         text-transform: uppercase; 
         color: #fff; 
         background-color: transparent;
-      }
+    }
     .pointer {
         cursor: pointer;
     }
