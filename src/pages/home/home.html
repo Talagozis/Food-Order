@@ -1,54 +1,66 @@
+<ion-header>
+  <ion-navbar transparent>
+    <button menuToggle left>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <h3 ion-text color="light">Food-Order</h3>
+      <!-- <img src="../assets/imgs/logo-horizontal.png" height="40px" /> -->
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content>
-  <ion-grid>
-
-    <ion-row class="header">
-      <ion-col col-2>
-        <button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="content">
-      <ion-col col-12>
-        <img src="../assets/imgs/logo-horizontal.png" style="margin-top: 5px;" />
-
-        <ion-list>
-          <ion-item class="pointer">
-
-            <ion-grid>
-              <ion-row>
-                <ion-col col-2>
-                  <ion-avatar item-start>
-                    <img src="../assets/logos/rekor-logo.jpg" class="img-responsive">
-                  </ion-avatar>
-                </ion-col>
-                <ion-col col-5 text-center>
-                  <h2 ion-text color="danger">Δύο + Δύο Σουβλάκια</h2>
-                  <h2>Απομένουν: 15:40:39</h2>
-                  <h2>Ισχύει για 15 παραγγελίες ακόμα</h2>
-                </ion-col>
-                <ion-col col-5 text-right>
-                  <h2>Κερδίζεις: 2€</h2>
-                  <h2>Αρχική: 5€</h2>
-                  <h2>Τελική: 3€</h2>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            
-          </ion-item>
-        </ion-list>
-
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="footer">
-      <ion-col col-12>
-        <button class="center" ion-button full (click)="navigateToStoresPage()">
-          ΠΑΡΑΓΓΕΙΛΕ ΤΩΡΑ!
-        </button>
-      </ion-col>
-    </ion-row>
-
-  </ion-grid>
+  <!-- <ion-list>
+    <ion-card>
+      <ion-item class="pointer">
+        <ion-avatar item-left>
+            <img src="../assets/logos/rekor-logo.jpg" class="img-responsive">
+        </ion-avatar>
+        <p style="float: right"><strong ion-text color="danger">2.00€</strong></p>
+        <p>2+2 Σουβλάκια</p>
+        <p>Για <strong>15</strong> παραγγελίες ακόμα</p>
+        <p><ion-icon name="time"></ion-icon> <strong>20:40:31</strong></p>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item class="pointer">
+        <ion-avatar item-left>
+            <img src="../assets/logos/mammaspizza-logo.jpg" class="img-responsive">
+        </ion-avatar>
+        <p style="float: right"><strong ion-text color="danger">1.10€</strong></p>
+        <p>1+1 Τυροπυτάκια</p>
+        <p>Για <strong>5</strong> παραγγελίες ακόμα</p>
+        <p><ion-icon name="time"></ion-icon> <strong>20:40:31</strong></p>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item class="pointer">
+        <ion-avatar item-left>
+            <img src="../assets/logos/rekor-logo.jpg" class="img-responsive">
+        </ion-avatar>
+        <p style="float: right"><strong ion-text color="danger">6.80€</strong></p>
+        <p>Ατομική πίτσα και σαλάτα</p>
+        <p>Για <strong>15</strong> παραγγελίες ακόμα</p>
+        <p><ion-icon name="time"></ion-icon> <strong>20:40:31</strong></p>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item class="pointer">
+        <ion-avatar item-left>
+            <img src="../assets/logos/swtos-logo.jpg" class="img-responsive">
+        </ion-avatar>
+        <p style="float: right"><strong ion-text color="danger">3.60€</strong></p>
+        <p>2 μερίδες μπουγάτσα</p>
+        <p>Για <strong>5</strong> παραγγελίες ακόμα</p>
+        <p><ion-icon name="time"></ion-icon> <strong>20:40:31</strong></p>
+      </ion-item>
+    </ion-card>
+  </ion-list> -->
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar transparent>
+    <button center ion-button full (click)="navigateToStoresPage()">ΠΑΡΑΓΓΕΙΛΕ ΤΩΡΑ!</button>
+  </ion-toolbar>
+</ion-footer>
