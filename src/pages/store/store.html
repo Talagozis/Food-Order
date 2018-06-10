@@ -54,11 +54,14 @@
 
     <div [ngSwitch]="storeSegment">
       <ion-list *ngSwitchCase="'catalog'">
-        <ion-item *ngFor="let product of store.Products">
-          <h2>{{product.name}}</h2>
-          <h2 item-right>{{product.price|priceFormat}}</h2>
-          <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
-        </ion-item>
+        <div *ngFor="let category of categories">
+          <p text-center><strong>{{category.key}}</strong></p>
+          <ion-item *ngFor="let product of category">
+            <h2>{{product.title}}</h2> 
+            <h2 item-right>{{product.price|priceFormat}}</h2>
+            <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
+          </ion-item>
+        </div>
       </ion-list>
 
       <ion-list *ngSwitchCase="'info'">
