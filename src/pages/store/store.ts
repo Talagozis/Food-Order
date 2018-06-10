@@ -4,6 +4,7 @@ import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { ProductApi } from '../../models/api/Product';
 import { List } from 'linqts';
+import '../../utils/linqtsExtension';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,7 @@ export class StorePage {
 		this.storeProvider.findOne(storeId).subscribe(
 			s => {
 				this.store = s;
-				var p = new List<ProductApi>(s.Products);
+				var p = s.Products.ToList();
 				p = p.Where(a => a.isActive);
 				p = p.Where(a => a.Product_Tags.filter(b => b.level === 2 || b.level === 3).length > 0);
 				p = p.OrderBy(a => a.orderNumber);
