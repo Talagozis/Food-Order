@@ -33,4 +33,7 @@ export class ProductModalPage {
     console.log('ionViewDidLoad ProductModalPage');
   }
 
+  closeProductModal() {
+    this.navCtrl.pop();
+  }
 }

@@ -2,7 +2,9 @@
   <ion-navbar color="primary">
     <ion-title>Φίλτρα</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="clearFilters()">ΚΑΘΑΡΙΣΜΟΣ</button>
+      <button ion-button icon-only (click)="closeFilters()">
+        <ion-icon name="close"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -10,7 +12,7 @@
 <ion-content padding>
   <ion-list>
     <ion-list-header text-center>
-      ΔΙΑΛΕΞΤΕ ΚΟΥΖΙΝΑ
+      <p><strong>ΔΙΑΛΕΞΤΕ ΚΟΥΖΙΝΑ</strong></p>
     </ion-list-header>
   
     <ion-item *ngFor="let filterViewModel of filterViewModels">
@@ -29,7 +31,7 @@
           <button ion-button full (click)="filterCuisine()">ΑΝΑΖΗΤΗΣΗ</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button full (click)="closeFilters()">ΚΛΕΙΣΙΜΟ</button>
+          <button ion-button full (click)="clearFilters()">ΚΑΘΑΡΙΣΜΟΣ</button>
         </ion-col>
       </ion-row>
     </ion-grid>
