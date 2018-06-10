@@ -56,7 +56,7 @@
       <ion-list *ngSwitchCase="'catalog'">
         <div *ngFor="let category of categories">
           <p text-center><strong>{{category.key}}</strong></p>
-          <ion-item *ngFor="let product of category">
+          <ion-item class="pointer" *ngFor="let product of category" (click)="openModal(product)">
             <h2>{{product.title}}</h2> 
             <h2 item-right>{{product.price|priceFormat}}</h2>
             <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>

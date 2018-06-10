@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { ProductApi } from '../../models/api/Product';
@@ -15,7 +15,7 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
 	}
 
 	ionViewDidLoad() {
@@ -49,5 +49,26 @@ export class StorePage {
 				// console.log(this.categories);
 			}
 		);
+	}
+
+	openModal(product) {
+		let productModal = this.modalCtrl.create('ProductModalPage', { product: product });
+		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
+		productModal.present();
+	}
+
+	onProductModalDidDismiss(): void {
+		console.log('onProductModalDidDismiss');
+		// if (!bids) {
+		// 	return;
+		// }
+		// this.selectedCuisineBids = bids;
+		// if (bids.length == 0) {
+		// 	this.stores = this.initialStores;
+		// 	return;
+		// }
+		// this.stores = this.initialStores.filter(s => {
+		// 	return s.Product_Tags.filter(t => bids.indexOf(t.Tag.bid) > -1).length > 0;
+		// });
 	}
 }
