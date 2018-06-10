@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar color="primary">
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          {{product.name}}
+        </ion-col>
+        <ion-col>
+          {{product.price}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let attributeGroup of attributeGroups">
+        <ion-col>
+            <ion-item>
+              <ion-label>{{attributeGroup.description}}</ion-label>
+              <ion-select [(ngModel)]="attributeGroup.Product_Attributes[0].Ingredient.bid">
+                <ion-option *ngFor="let attribute of attributeGroup.Product_Attributes" value="{{attribute.Ingredient.bid}}">
+                  <p>{{attribute.Ingredient.name}}</p>
+                  <p>+{{attribute.price|priceFormat}}</p>
+                </ion-option>
+              </ion-select>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="ingredients.length > 0">
+        <ion-col>
+            <ion-list>
+              <h4>Επίλεξε υλικά</h4>
+              <ion-item *ngFor="let ingredient of ingredients">
+                <ion-label>{{ingredient.Ingredient.name}}</ion-label>
+                <ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
+              </ion-item>
+            </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8>
+            <button ion-button full>+-1</button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button full>ΠΡΟΣΘΗΚΗ</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
