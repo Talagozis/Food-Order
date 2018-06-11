@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController  } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import { ProductApi } from '../../models/api/Product';
-import { List } from 'linqts';
+// import { ProductApi } from '../../models/api/Product';
+// import { List } from 'linqts';
 import '../../utils/linqtsExtension';
 
 @IonicPage()
@@ -16,7 +16,7 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	constructor(public navCtrl: NavController, public viewCtrl: ViewController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
 	}
 
 	ionViewDidLoad() {
@@ -24,6 +24,7 @@ export class StorePage {
 	}
 
 	ngOnInit() {
+		this.viewCtrl.setBackButtonText('');
 		this.getStore();
 	}
 

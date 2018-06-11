@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProductApi } from 'models/api/Product';
 import { Product_AttributeGroupApi } from 'models/api/Product_AttributeGroup';
 import { Product_IngredientApi } from 'models/api/Product_Ingredient';
-import { List } from 'linqts';
+// import { List } from 'linqts';
 import '../../utils/linqtsExtension';
 
 @IonicPage()
