@@ -44,7 +44,9 @@
     <div [ngSwitch]="storeSegment">
       <ion-list *ngSwitchCase="'catalog'">
         <div *ngFor="let category of categories">
-          <p text-center ion-text color="primary">{{category.key}}</p>
+          <ion-list-header text-capitalize>
+            {{category.key}}
+          </ion-list-header>
           <ion-item class="pointer" *ngFor="let product of category" (click)="openModal(product)">
             <h2>{{product.title}}</h2>
             <h2 item-right ion-text color="primary">{{product.price|priceFormat}}</h2>
