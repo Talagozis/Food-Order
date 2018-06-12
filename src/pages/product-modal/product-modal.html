@@ -11,32 +11,36 @@
   
   <ion-content>
     <ion-grid>
+
       <ion-row>
-        <ion-col>
-          {{product.name}}
+        <ion-col col-10>
+          <p>{{product.name}}</p>
         </ion-col>
-        <ion-col>
-          {{product.price}}
+        <ion-col col-2>
+            <p ion-text color="danger">{{product.price|priceFormat}}</p>
         </ion-col>
       </ion-row>
+
       <ion-row *ngFor="let attributeGroup of attributeGroups">
         <ion-col>
-            <ion-item>
-              <ion-label>{{attributeGroup.description}}</ion-label>
-              <ion-select [(ngModel)]="attributeGroup.Product_Attributes[0].Ingredient.bid">
-                <ion-option *ngFor="let attribute of attributeGroup.Product_Attributes" value="{{attribute.Ingredient.bid}}">
-                  <p>{{attribute.Ingredient.name}}</p>
-                  <p>+{{attribute.price|priceFormat}}</p>
-                </ion-option>
-              </ion-select>
+          <ion-list radio-group [(ngModel)]="attributeGroup.Product_Attributes[0].Ingredient.bid">
+            <ion-list-header text-capitalize>
+              {{attributeGroup.description}}
+            </ion-list-header>
+            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes">
+              <ion-label>{{attribute.Ingredient.name}} +{{attribute.price|priceFormat}}</ion-label>
+              <ion-radio value="{{attribute.Ingredient.bid}}"></ion-radio>
             </ion-item>
+          </ion-list>
         </ion-col>
       </ion-row>
 
       <ion-row *ngIf="ingredients.length > 0">
         <ion-col>
             <ion-list>
-              <h4>Επίλεξε υλικά</h4>
+              <ion-list-header text-capitalize>
+                Επίλεξε υλικά
+              </ion-list-header>
               <ion-item *ngFor="let ingredient of ingredients">
                 <ion-label>{{ingredient.Ingredient.name}}</ion-label>
                 <ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
@@ -54,9 +58,12 @@
           <button ion-button block ion-icon><ion-icon name="remove"></ion-icon></button>
         </ion-col>
         <ion-col col-2>
-            <button ion-button block ion-icon><ion-icon name="add"></ion-icon></button>
-          </ion-col>
-        <ion-col col-8>
+          <button ion-button block>2</button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button block ion-icon><ion-icon name="add"></ion-icon></button>
+        </ion-col>
+        <ion-col col-6>
           <button ion-button block text-capitalize>Προσθήκη</button>
         </ion-col>
       </ion-row>
