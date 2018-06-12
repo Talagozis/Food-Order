@@ -1,22 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-grid>
-      <ion-row text-center>
-        <ion-col col-10>
-          <ion-title style="margin-top: 10px;">Κατάλογος</ion-title>
-        </ion-col>
-        <!-- <ion-col col-2>
-          <button ion-button icon-only>
-            <ion-icon name="share"></ion-icon>
-          </button>
-        </ion-col> -->
-        <ion-col col-2>
-          <button ion-button icon-only>
-            <ion-icon name="cart"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-title text-capitalize>Κατάλογος</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -40,14 +29,14 @@
 
     <div padding>
       <ion-segment [(ngModel)]="storeSegment">
-        <ion-segment-button value="catalog">
-          ΚΑΤΑΛΟΓΟΣ
+        <ion-segment-button value="catalog" text-capitalize>
+          Κατάλογος
         </ion-segment-button>
-        <ion-segment-button value="info">
-          ΠΛΗΡΟΦΟΡΙΕΣ
+        <ion-segment-button value="info" text-capitalize>
+          Πληροφορίες
         </ion-segment-button>
-        <ion-segment-button value="contact">
-          ΕΠΙΚΟΙΝΩΝΙΑ
+        <ion-segment-button value="contact" text-capitalize>
+          Επικοινωνία
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -55,11 +44,10 @@
     <div [ngSwitch]="storeSegment">
       <ion-list *ngSwitchCase="'catalog'">
         <div *ngFor="let category of categories">
-          <p text-center><strong>{{category.key}}</strong></p>
+          <p text-center ion-text color="primary">{{category.key}}</p>
           <ion-item class="pointer" *ngFor="let product of category" (click)="openModal(product)">
-            <h2>{{product.title}}</h2> 
-            <h2 item-right>{{product.price|priceFormat}}</h2>
-            <button ion-button round color-primary item-right><ion-icon name="add"></ion-icon></button>
+            <h2>{{product.title}}</h2>
+            <h2 item-right ion-text color="primary">{{product.price|priceFormat}}</h2>
           </ion-item>
         </div>
       </ion-list>
@@ -78,7 +66,7 @@
           <ion-avatar item-start>
               <img item-right src="https://www.serresdelivery.gr/image/contact-type/{{contact.contactTypePicture}}" class="img-responsive" style="width: 24px; height: 24px">
           </ion-avatar>
-          <a ion-button block href="tel:{{contact.value}}"> {{contact.value}}</a>
+          <a center ion-button block href="tel:{{contact.value}}"> {{contact.value}}</a>
         </ion-item>
       </ion-list>
     </div>

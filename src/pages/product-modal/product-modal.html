@@ -1,5 +1,11 @@
 <ion-header>
     <ion-navbar color="primary">
+      <ion-title>Λεπτομέρειες</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="closeProductModal()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
     </ion-navbar>
   </ion-header>
   
@@ -42,16 +48,17 @@
   </ion-content>
   
   <ion-footer>
-    <ion-toolbar>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-8>
-            <button ion-button full>+-1</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button block ion-icon><ion-icon name="remove"></ion-icon></button>
+        </ion-col>
+        <ion-col col-2>
+            <button ion-button block ion-icon><ion-icon name="add"></ion-icon></button>
           </ion-col>
-          <ion-col col-4>
-            <button ion-button full>ΠΡΟΣΘΗΚΗ</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-toolbar>
+        <ion-col col-8>
+          <button ion-button block text-capitalize>Προσθήκη</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-footer>
