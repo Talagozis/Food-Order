@@ -19,7 +19,7 @@
         </ng-template>
       </ion-fab>
       <ion-thumbnail item-start>
-        <img src="https://www.serresdelivery.gr/image/store/{{store.logo}}" class="img-responsive">
+        <img src="{{store.logo|imageStore}}" class="img-responsive">
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
       <p>
