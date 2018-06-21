@@ -34,7 +34,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #FF5722,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -48,10 +48,10 @@ $colors: (
 
 
 
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
+$searchbar-md-input-search-icon-color: #FF5722;
 
 
 

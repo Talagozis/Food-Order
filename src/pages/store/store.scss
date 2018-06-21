@@ -2,4 +2,13 @@ page-store {
     .pointer {
         cursor: pointer;
     }
+    .text-white {
+        color: white !important;
+    }
+    .background-color-primary {
+        background-color: color($colors, primary, base) !important;
+    }
+    .bold {
+        font-weight: bold !important;
+    }
 }
