@@ -11,4 +11,34 @@ page-store {
     .bold {
         font-weight: bold !important;
     }
+
+    .accordion-list {
+        background: color($colors, light);
+        height: 100%;
+    }
+    .section {
+        background: white;
+        color: black;
+        margin-bottom: 4px;
+    }
+    .section-active {
+        background: color($colors, primary, base);
+        color: white;
+    }
+ 
+    .child {
+        background: #e8e7e6;
+        color: black;
+        margin-bottom: 4px;
+    }
+    .child-item {
+        background: #f3f2f1;
+        padding: 10px;
+    }
+    .label {
+        margin: 0px;
+    }
+    .list {
+        margin-bottom: 4px;
+    }
 }

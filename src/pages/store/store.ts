@@ -48,9 +48,19 @@ export class StorePage {
 					category.key = tagName;
 					return category;
 				});
-				// console.log(this.categories);
+				console.log(this.categories);
 			}
 		);
+	}
+
+	toggleSection(i) {
+		this.categories[i].open = !this.categories[i].open;
+		console.log(this.categories[i].open);
+	}
+
+	toggleItem(i, j) {
+		this.categories[i].children[j].open = !this.categories[i].children[j].open;
+		console.log(this.categories[i].children[j].open);
 	}
 
 	openModal(product) {

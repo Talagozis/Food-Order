@@ -36,7 +36,28 @@
     </div>
 
     <div [ngSwitch]="storeSegment">
-      <ion-list *ngSwitchCase="'catalog'">
+
+      <ion-list *ngSwitchCase="'catalog'" class="accordion-list">
+        <ion-list-header *ngFor="let category of categories; let i = index" no-lines no-padding> 
+          <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': category.open, 'section': !category.open}">
+            <ion-icon item-left name="arrow-forward" *ngIf="!category.open"></ion-icon>
+            <ion-icon item-left name="arrow-down" *ngIf="category.open"></ion-icon>
+              {{category.key}}
+          </button>
+          <ion-list *ngIf="category.open">
+            <ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap (click)="openModal(product)">
+              <h2>{{product.title}}</h2>
+              <p text-lowercase>{{ product.description }}</p>
+              <button ion-button outline item-end>{{product.price|priceFormat}}</button>
+            </ion-item>
+          </ion-list>
+        </ion-list-header>
+      </ion-list>
+
+
+
+
+      <!-- <ion-list *ngSwitchCase="'catalog'">
         <div *ngFor="let category of categories">
           <ion-list-header text-capitalize>
             {{category.key}}
@@ -46,7 +67,8 @@
             <h2 item-right ion-text color="primary">{{product.price|priceFormat}}</h2>
           </ion-item>
         </div>
-      </ion-list>
+      </ion-list> -->
+
 
       <ion-list *ngSwitchCase="'info'">
         <ion-item *ngFor="let address of store.Addresses">
