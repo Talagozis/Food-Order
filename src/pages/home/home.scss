@@ -15,4 +15,17 @@ page-home {
     .pointer {
         cursor: pointer;
     }
+    .scroll-content {
+        display: table !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .scroll {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .margin-top-150 {
+        margin-top: 30%;
+    }
 }

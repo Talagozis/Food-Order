@@ -2,16 +2,16 @@ page-store {
     .pointer {
         cursor: pointer;
     }
-    .text-black {
+    .segment-button {
+        background-color: color($colors, light, base) !important;
         color: black !important;
-    }
-    .background-color-primary {
-        background-color: color($colors, primary, base) !important;
-    }
-    .bold {
         font-weight: bold !important;
     }
-
+    .segment-activated {
+        background-color: color($colors, secondary, base) !important;
+        color: black !important;
+        font-weight: bold !important;
+    }
     .accordion-list {
         background: color($colors, light);
         height: 100%;
@@ -25,7 +25,6 @@ page-store {
         background: color($colors, primary, base);
         color: white;
     }
- 
     .child {
         background: #e8e7e6;
         color: black;

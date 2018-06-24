@@ -20,7 +20,7 @@ export class StorePage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad StorePage');
+		// console.log('ionViewDidLoad StorePage');
 	}
 
 	ngOnInit() {
@@ -48,19 +48,13 @@ export class StorePage {
 					category.key = tagName;
 					return category;
 				});
-				console.log(this.categories);
+				// console.log(this.categories);
 			}
 		);
 	}
 
 	toggleSection(i) {
 		this.categories[i].open = !this.categories[i].open;
-		console.log(this.categories[i].open);
-	}
-
-	toggleItem(i, j) {
-		this.categories[i].children[j].open = !this.categories[i].children[j].open;
-		console.log(this.categories[i].children[j].open);
 	}
 
 	openModal(product) {
@@ -70,7 +64,6 @@ export class StorePage {
 	}
 
 	onProductModalDidDismiss(): void {
-		console.log('onProductModalDidDismiss');
 		// if (!bids) {
 		// 	return;
 		// }
