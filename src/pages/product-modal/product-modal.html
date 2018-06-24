@@ -25,9 +25,9 @@
         <ion-col>
           <ion-list radio-group [(ngModel)]="attributeGroup.Product_Attributes[0].Ingredient.bid">
             <ion-list-header text-capitalize>
-              {{attributeGroup.description}}
+              <h4><strong>{{attributeGroup.description}}</strong></h4>
             </ion-list-header>
-            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes">
+            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes" item-start>
               <ion-label>{{attribute.Ingredient.name}} +{{attribute.price|priceFormat}}</ion-label>
               <ion-radio value="{{attribute.Ingredient.bid}}"></ion-radio>
             </ion-item>

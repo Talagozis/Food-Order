@@ -46,8 +46,8 @@
           </button>
           <ion-list *ngIf="category.open">
             <ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap (click)="openModal(product)">
-              <h3>{{product.title}}</h3>
-              <p>{{ product.description }}</p>
+              <h3 text-capitalize>{{product.title}}</h3>
+              <p text-capitalize>{{ product.description }}</p>
               <button ion-button outline item-end>{{product.price|priceFormat}}</button>
             </ion-item>
           </ion-list>
@@ -56,10 +56,10 @@
 
       <ion-list *ngSwitchCase="'info'">
         <ion-item *ngFor="let address of store.Addresses">
-          <p><ion-icon name="home"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}</p>
+          <ion-icon name="home"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}
         </ion-item>
         <ion-item *ngFor="let openHour of store.OpenHours">
-          <p><ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}</p>
+          <ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}
         </ion-item>
       </ion-list>
 
