@@ -30,7 +30,7 @@ export class ProductModalPage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad ProductModalPage');
+		// console.log('ionViewDidLoad ProductModalPage');
 	}
 
   closeProductModal() {

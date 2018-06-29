@@ -19,7 +19,7 @@ export class CheckoutPage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad CheckoutPage');
+		// console.log('ionViewDidLoad CheckoutPage');
 	}
 
 }

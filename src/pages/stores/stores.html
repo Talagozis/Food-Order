@@ -1,22 +1,14 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-2>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-        </ion-col>
-        <ion-col col-8>
-          <ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
-        </ion-col>
-        <ion-col col-2>
-          <button ion-button (click)="openFilters()">
-            <ion-icon name="options"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-searchbar style=" padding-left: 0; padding-right: 0;" placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button (click)="openFilters()">
+        <ion-icon name="options"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -30,7 +22,7 @@
       <h2>{{store.name}}</h2>
 
       <div *ngIf="store.isOpen;else isClosed">
-        <h2 ion-text color="secondary" item-right>Ανοιχτό</h2>
+        <h2 ion-text color="success" item-right>Ανοιχτό</h2>
       </div>
 
       <ng-template #isClosed>
@@ -43,7 +35,7 @@
   </ion-list>
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-grid>
     <ion-row>
       <ion-col no-padding>
@@ -51,4 +43,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-footer>
+</ion-footer> -->

@@ -20,7 +20,7 @@ export class StorePage {
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad StorePage');
+		// console.log('ionViewDidLoad StorePage');
 	}
 
 	ngOnInit() {
@@ -53,6 +53,10 @@ export class StorePage {
 		);
 	}
 
+	toggleSection(i) {
+		this.categories[i].open = !this.categories[i].open;
+	}
+
 	openModal(product) {
 		let productModal = this.modalCtrl.create('ProductModalPage', { product: product });
 		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
@@ -60,7 +64,6 @@ export class StorePage {
 	}
 
 	onProductModalDidDismiss(): void {
-		console.log('onProductModalDidDismiss');
 		// if (!bids) {
 		// 	return;
 		// }
