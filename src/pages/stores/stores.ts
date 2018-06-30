@@ -4,6 +4,7 @@ import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { TagLevel } from '../../models/api/Product_tag';
 import { FilterViewModel } from '../filters/filters';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ export class StoresPage {
 	initialStores: StoreApi[];
 	selectedCuisineBids: number[] = [];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, private storage: Storage) {
 	}
 
 	ionViewDidLoad() {
@@ -27,9 +28,20 @@ export class StoresPage {
 	}
 
 	getStores(): void {
-		this.storeProvider.findAllAvailable(s => {
-			this.initialStores = s;
-			this.stores = s;
+		this.storage.get('stores').then(s => {
+			if (s) {
+				alert("iparxei");
+				this.initialStores = s;
+				this.stores = s;	
+			} else {
+				alert("den iparxei");
+				this.storeProvider.findAllAvailable(s => {
+					this.initialStores = s;
+					this.stores = s;
+		
+					this.storage.set('stores', s);
+				});	
+			}
 		});
 	}
 
