@@ -1,4 +1,5 @@
 <ion-menu [content]="content">
+
   <ion-header>
     <ion-navbar>
       <ion-title>Menu</ion-title>
@@ -6,11 +7,14 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+      <ion-list>
+        <button menuClose ion-item *ngFor="let p of primaryPages" (click)="openPage(p)">
+          {{p.title}}
+        </button>
+        <button menuClose ion-item *ngFor="let s of secondaryPages" (click)="openPage(s)">
+          {{s.title}}
+        </button>
+      </ion-list>
   </ion-content>
 
 </ion-menu>

@@ -13,19 +13,22 @@ export class MyApp {
 
 	rootPage: any = HomePage;
 
-	pages: Array<{ title: string, component: any }>;
+	primaryPages: Array<{ title: string, component: any }>;
+	secondaryPages: Array<{ title: string, component: any }>;
 
 	constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
 		this.initializeApp();
 
 		console.log("Environment variables set to: " + ENV.mode);
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-    //   { title: 'Προσφορές', component: HomePage, },
-      { title: 'Καταστήματα', component: 'StoresPage' }
-    ];
+		// used for an example of ngFor and navigation
+		this.primaryPages = [
+			{ title: 'Καταστήματα', component: 'StoresPage' }
+		];
 
+		this.secondaryPages = [
+			{ title: 'Πολιτική Απορρήτου', component: 'PrivacyPolicyPage' }
+		];
 	}
 
 	initializeApp() {
