@@ -3,18 +3,15 @@
     <button ion-button menuToggle start color="light">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>
-      <h3 ion-text color="light">Food-Order</h3>
-    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div class="row">
-    <div class="col">
-        <button center text-capitalize ion-button block large color="secondary" class="margin-top-150" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
-    </div>
-  </div>
+  <ion-row>
+    <ion-col center>
+      <button text-capitalize ion-button block large color="secondary" class="margin-top-percent-50" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
+    </ion-col>
+  </ion-row>
   <!-- <img src="../assets/imgs/logo-horizontal-yellow.png" /> -->
   <!-- <ion-list>
     <ion-card>
@@ -63,9 +60,3 @@
     </ion-card>
   </ion-list> -->
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-navbar transparent>
-    <button center text-capitalize ion-button block color="secondary" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
-  </ion-navbar>
-</ion-footer> -->
