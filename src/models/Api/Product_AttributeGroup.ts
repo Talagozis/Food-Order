@@ -8,4 +8,5 @@ export interface Product_AttributeGroupApi {
     Product: ProductApi;
 
     Product_Attributes: Product_AttributeApi[];
+    selectedAttributeBid?: number;
 }

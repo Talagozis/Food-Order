@@ -22,22 +22,22 @@ export class ProductModalPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
 		this.quantity = 1;
 		this.info = '';
-	}
 
-	ngOnInit() {
 		this.product = this.navParams.get('product');
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
 			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
 			.ToArray();
 		this.ingredients = this.product.Product_Ingredients.ToList().OrderBy(b => !b.isDefault).ThenBy(b => b.price).ToArray();
-	
-		for (let i=0; i< this.attributeGroups.length; i++)
-		{
-			for (let j=0; j< this.attributeGroups[i].Product_Attributes.length; j++)
-			{
-				this.attributeGroups[i].Product_Attributes[j].has = j === 0;
-			}
+
+		for (let i = 0; i < this.attributeGroups.length; i++) {
+			if(this.attributeGroups[i].Product_Attributes.length > 0)
+				this.attributeGroups[i].selectedAttributeBid = this.attributeGroups[i].Product_Attributes[0].Ingredient.bid;
 		}
+
+	}
+
+	ngOnInit() {
+
 	}
 
 	ionViewDidLoad() {
@@ -45,37 +45,39 @@ export class ProductModalPage {
 	}
 
 	addToCart() {
-		this.storage.get('cart').then((c: CartItem[]) => {
-			var cartItem: CartItem = {
-				bid: this.product.bid,
-				quantity: this.quantity,
-				name: this.product.name,
-				totalPrice: 0,
-				discount: 0,
-				info: this.info,
-				ingredients: this.product.Product_Ingredients.map(a => ({
+		var cartItem: CartItem = {
+			bid: this.product.bid,
+			quantity: this.quantity,
+			name: this.product.name,
+			totalPrice: 0,
+			discount: 0,
+			info: this.info,
+			ingredients: this.product.Product_Ingredients.map(a => ({
+				bid: a.Ingredient.bid,
+				name: a.Ingredient.name,
+				has: a.isDefault
+			})),
+			attributes: this.product.Product_AttributeGroups
+				.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
+				.reduce((a, b) => a.concat(b))
+				.map(a => ({
 					bid: a.Ingredient.bid,
 					name: a.Ingredient.name,
-					has: a.isDefault
+					has: true
 				})),
-				attributes: this.product.Product_AttributeGroups
-					.map(b => b.Product_Attributes)
-					.reduce((a, b) => a.concat(b))
-					.map(a => ({
-						bid: a.Ingredient.bid,
-						name: a.Ingredient.name,
-						has: a.has
-					})),
-			};
-			if (c === null) {
+		};
+		console.log(cartItem);
+
+		this.storage.get('cart').then((c: CartItem[]) => {
+			if (c === null)
 				c = [];
-			}
+
 			c.push(cartItem);
 			this.storage.set('cart', c);
 		});
 	}
 
-  closeProductModal() {
-    this.navCtrl.pop();
-  }
+	closeProductModal() {
+		this.navCtrl.pop();
+	}
 }

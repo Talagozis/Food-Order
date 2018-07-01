@@ -23,13 +23,13 @@
 
       <ion-row *ngFor="let attributeGroup of attributeGroups">
         <ion-col>
-          <ion-list radio-group [(ngModel)]="attributeGroup.Product_Attributes[0].bid" name={{attributeGroup.bid}}>
+          <ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
             <ion-list-header text-capitalize>
               <h4><strong>{{attributeGroup.description}}</strong></h4>
             </ion-list-header>
-            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes" item-start>
+            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
               <ion-label>{{attribute.Ingredient.name}} +{{attribute.price|priceFormat}}</ion-label>
-              <ion-radio ></ion-radio>
+              <ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
             </ion-item>
           </ion-list>
         </ion-col>
