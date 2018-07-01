@@ -4,25 +4,20 @@ page-home {
         background-position: center;
         background-size: cover;
     }
-    .margin-top-percent-20 {
-        margin-top: 20%;
+    .margin-bottom-percent-15 {
+        margin-bottom: 15%;
     }
-    .margin-bottom-percent-10 {
-        margin-bottom: 10%;
+    .pointer {
+        cursor: pointer;
     }
-
-    // OFFERS CSS FOR VERSION 2.0
-    // .pointer {
-    //     cursor: pointer;
-    // }
-    // .scroll-content {
-    //     display: table !important;
-    //     width: 100% !important;
-    //     height: 100% !important;
-    // }
-    // .scroll {
-    //     display: table-cell;
-    //     vertical-align: middle;
-    //     text-align: center;
-    // }
+    .scroll-content {
+        display: table !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .scroll {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
 }
