@@ -8,7 +8,7 @@ page-store {
         font-weight: bold !important;
     }
     .segment-activated {
-        background-color: color($colors, secondary, base) !important;
+        background-color: color($colors, secondary-light, base) !important;
         color: black !important;
         font-weight: bold !important;
     }
@@ -22,7 +22,7 @@ page-store {
         margin-bottom: 4px;
     }
     .section-active {
-        background: color($colors, primary, base);
+        background: color($colors, primary-light, base);
         color: white;
     }
     .child {

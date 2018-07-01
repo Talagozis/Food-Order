@@ -1,8 +1,11 @@
 page-home {
     ion-content {
-        background-image: linear-gradient(to top, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.4) 80%), url("../assets/imgs/homepagebg.jpg");
+        background-image: linear-gradient(to top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.8) 80%), url("../assets/imgs/background.jpg");
         background-position: center;
         background-size: cover;
+    }
+    .margin-bottom-percent-15 {
+        margin-bottom: 15%;
     }
     .pointer {
         cursor: pointer;
@@ -16,8 +19,5 @@ page-home {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
-    }
-    .margin-top-percent-50 {
-        margin-top: 50%;
     }
 }
