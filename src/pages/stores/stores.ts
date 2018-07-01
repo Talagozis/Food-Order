@@ -30,11 +30,11 @@ export class StoresPage {
 	getStores(): void {
 		this.storage.get('stores').then(s => {
 			if (s) {
-				alert("iparxei");
+				// alert("iparxei");
 				this.initialStores = s;
 				this.stores = s;	
 			} else {
-				alert("den iparxei");
+				// alert("den iparxei");
 				this.storeProvider.findAllAvailable(s => {
 					this.initialStores = s;
 					this.stores = s;
