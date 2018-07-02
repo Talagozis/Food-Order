@@ -23,13 +23,13 @@
 
       <ion-row *ngFor="let attributeGroup of attributeGroups">
         <ion-col>
-          <ion-list radio-group [(ngModel)]="attributeGroup.Product_Attributes[0].Ingredient.bid">
+          <ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
             <ion-list-header text-capitalize>
               <h4><strong>{{attributeGroup.description}}</strong></h4>
             </ion-list-header>
-            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes" item-start>
+            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
               <ion-label>{{attribute.Ingredient.name}} +{{attribute.price|priceFormat}}</ion-label>
-              <ion-radio value="{{attribute.Ingredient.bid}}"></ion-radio>
+              <ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
             </ion-item>
           </ion-list>
         </ion-col>
@@ -48,6 +48,13 @@
             </ion-list>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-textarea [(ngModel)]="info" placeholder="Παρατηρήσεις & σχλόλια"></ion-textarea>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
   </ion-content>
   
@@ -58,13 +65,13 @@
           <button ion-button block ion-icon><ion-icon name="remove"></ion-icon></button>
         </ion-col>
         <ion-col col-2>
-          <button ion-button block>2</button>
+          <ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
         </ion-col>
         <ion-col col-2>
           <button ion-button block ion-icon><ion-icon name="add"></ion-icon></button>
         </ion-col>
         <ion-col col-6>
-          <button ion-button block text-capitalize>Προσθήκη</button>
+          <button ion-button block text-capitalize (click)="addToCart()">Προσθήκη</button>
         </ion-col>
       </ion-row>
     </ion-grid>

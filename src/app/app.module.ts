@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StoreProvider } from '../providers/store/store';
 import { Api } from '../providers/api/api';
 import { HttpClientExt } from '../providers/http-client/http-client';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { HttpClientExt } from '../providers/http-client/http-client';
 		BrowserModule,
 		HttpClientModule,
 		IonicModule.forRoot(MyApp),
+		IonicStorageModule.forRoot(),
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
