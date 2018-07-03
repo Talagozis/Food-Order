@@ -9,7 +9,74 @@
   </ion-navbar>
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <ion-list>
+    <ion-list-header text-capitalize>
+      Καλάθι παραγγελίας
+    </ion-list-header>
+    <ion-item>
+      <h2>Cart item name</h2>
+      <h2 item-right>{{6.80|priceFormat}}</h2>
+    </ion-item>
+    <ion-item>
+      <h2>Cart item name</h2>
+      <h2 item-right>{{6.80|priceFormat}}</h2>
+    </ion-item>
+  </ion-list>
 
+  <ion-list>
+    <ion-list-header text-capitalize>
+      Στοιχεία παραγγελίας
+    </ion-list-header>
+    <ion-item>
+      <ion-label class="required" color="primary" floating>Επώνυμο</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="required" color="primary" floating>Όνομα</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="required" color="primary" floating>Διεύθυνση & αριθμός</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="required" color="primary" floating>Τηλέφωνο</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="required" color="primary" floating>Επιβεβαίωση τηλ</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Όνομα στο κουδούνι</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="required" color="primary">Όροφος</ion-label>
+      <ion-select interface="popover">
+        <ion-option value="0">Ισόγειο</ion-option>
+        <ion-option value="0.5">Ημιόροφος</ion-option>
+        <ion-option value="1">1ος όροφος</ion-option>
+        <ion-option value="2">2ος όροφος</ion-option>
+        <ion-option value="3">3ος όροφος</ion-option>
+        <ion-option value="4">4ος όροφος</ion-option>
+        <ion-option value="5">5ος όροφος</ion-option>
+        <ion-option value="6">6ος όροφος</ion-option>
+        <ion-option value="7">7ος όροφος</ion-option>
+        <ion-option value="8">8ος όροφος</ion-option>
+        <ion-option value="9">9ος όροφος</ion-option>
+        <ion-option value="10">Μονοκατοικία</ion-option>
+        <ion-option value="11">Κατάστημα</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  
 </ion-content>
+
+<ion-footer>
+  <ion-navbar>
+    <button center text-capitalize ion-button block>Αποστολή Παραγγελίας</button>
+  </ion-navbar>   
+</ion-footer>
