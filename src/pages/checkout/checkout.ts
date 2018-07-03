@@ -1,25 +1,19 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CheckoutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { CartItem } from 'models/Api/CartItem';
 
 @IonicPage()
 @Component({
-	selector: 'page-checkout',
-	templateUrl: 'checkout.html',
+  selector: 'page-checkout',
+  templateUrl: 'checkout.html',
 })
 export class CheckoutPage {
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
-	}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
 
-	ionViewDidLoad() {
-		// console.log('ionViewDidLoad CheckoutPage');
-	}
+  ionViewDidLoad() {
+    // console.log('ionViewDidLoad CheckoutPage');
+  }
 
 }

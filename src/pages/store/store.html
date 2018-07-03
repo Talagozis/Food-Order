@@ -1,11 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title text-capitalize>Κατάλογος</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="cart"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -74,3 +69,9 @@
     </div>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-navbar>
+    <button ion-button block text-capitalize (click)="navigateToCheckoutPage()"><ion-icon name="cart"></ion-icon> Καλάθι</button>
+  </ion-navbar>
+</ion-footer>
