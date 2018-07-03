@@ -21,7 +21,9 @@ import { IonicStorageModule } from '@ionic/storage';
 	imports: [
 		BrowserModule,
 		HttpClientModule,
-		IonicModule.forRoot(MyApp),
+		IonicModule.forRoot(MyApp, {
+			backButtonText: '',
+		}),
 		IonicStorageModule.forRoot(),
 	],
 	bootstrap: [IonicApp],

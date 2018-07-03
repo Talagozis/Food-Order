@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ViewController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
-// import { ProductApi } from '../../models/api/Product';
-// import { List } from 'linqts';
 import '../../utils/linqtsExtension';
 
 @IonicPage()
@@ -16,16 +14,14 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public viewCtrl: ViewController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
 	}
 
 	ionViewDidLoad() {
 		// console.log('ionViewDidLoad StorePage');
-
 	}
 
 	ngOnInit() {
-		this.viewCtrl.setBackButtonText('');
 		this.getStore();
 	}
 
@@ -76,5 +72,9 @@ export class StorePage {
 		// this.stores = this.initialStores.filter(s => {
 		// 	return s.Product_Tags.filter(t => bids.indexOf(t.Tag.bid) > -1).length > 0;
 		// });
+	}
+
+	navigateToCheckoutPage() {
+		this.navCtrl.push('CheckoutPage');
 	}
 }
