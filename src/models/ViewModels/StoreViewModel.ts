@@ -1,4 +1,12 @@
 import { StoreApi } from "../api/Store";
+import { OpenHourApi } from "../../models/api/OpenHour";
+import { StoreAddressApi } from "../../models/api/StoreAddress";
+import { StoreContactApi } from "../../models/api/StoreContact";
+import { ProductApi } from "../../models/api/Product";
+import { OfferApi } from "../../models/api/Offer";
+import { Product_TagApi, TagLevel } from "../../models/api/Product_tag";
+import { Store_AreaApi } from "../../models/api/Store_Area";
+import { StoreViewApi } from "../../models/api/StoreView";
 
 export class StoreViewModel implements StoreApi {
     name: string;
@@ -29,16 +37,20 @@ export class StoreViewModel implements StoreApi {
     bid: number;
     isOpen: boolean;
     isNew: boolean;
-    View;
-    OpenHours;
-    Addresses;
-    Contacts;
-    Products;
-    Offers;
-    Store_Areas;
-    Product_Tags;
+    View: StoreViewApi;
+    OpenHours: OpenHourApi[];
+    Addresses: StoreAddressApi[];
+    Contacts: StoreContactApi[];
+    Products: ProductApi[];
+    Offers: OfferApi[];
+    Store_Areas: Store_AreaApi[];
+    Product_Tags: Product_TagApi[];
     
+    public constructor(init?:Partial<StoreViewModel>) {
+        Object.assign(this, init);
+    }
+
     public getCuisines() {
-        return 'test';
+        return this.Product_Tags.filter(a => a.level === TagLevel.Cuisine).map(a => a.Tag.name).join(", ");
     }
 }
