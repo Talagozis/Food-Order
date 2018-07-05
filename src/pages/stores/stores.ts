@@ -28,6 +28,13 @@ export class StoresPage {
 		this.getStores();
 	}
 
+	doRefresh(refresher) {
+		this.getStores();
+		setTimeout(() => {
+			refresher.complete();
+		}, 3000);
+	}
+
 	getStores(): void {
 		this.storage.get('stores').then((s: StoreApi[]) => {
 			if (s) {
