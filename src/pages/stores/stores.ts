@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import { TagLevel } from '../../models/api/Product_tag';
+import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
 import { FilterViewModel } from '../filters/filters';
 import { Storage } from '@ionic/storage';
+import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 
 @IonicPage()
 @Component({
@@ -12,8 +13,8 @@ import { Storage } from '@ionic/storage';
 	templateUrl: 'stores.html',
 })
 export class StoresPage {
-	stores: StoreApi[];
-	initialStores: StoreApi[];
+	stores: StoreViewModel[];
+	initialStores: StoreViewModel[];
 	selectedCuisineBids: number[] = [];
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, private storage: Storage) {
@@ -27,17 +28,33 @@ export class StoresPage {
 		this.getStores();
 	}
 
+	doRefresh(refresher) {
+		this.getStores();
+		setTimeout(() => {
+			refresher.complete();
+		}, 3000);
+	}
+
 	getStores(): void {
-		this.storage.get('stores').then(s => {
+		this.storage.get('stores').then((s: StoreApi[]) => {
 			if (s) {
-				// alert("iparxei");
-				this.initialStores = s;
-				this.stores = s;	
+				
+				let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
+					...a,
+				}));
+					
+					
+				this.initialStores = storeViewModels;
+				this.stores = storeViewModels;	
 			} else {
-				// alert("den iparxei");
-				this.storeProvider.findAllAvailable(s => {
-					this.initialStores = s;
-					this.stores = s;
+				this.storeProvider.findAllAvailable((s: StoreApi[]) => {
+					
+					let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
+						...a,
+					}));
+
+					this.initialStores = storeViewModels;
+					this.stores = storeViewModels;
 		
 					this.storage.set('stores', s);
 				});	
@@ -50,7 +67,7 @@ export class StoresPage {
 	}
 
 	openFilters() {
-		let cuisines = this.initialStores.map(
+		let cuisines: Product_TagApi[] = this.initialStores.map(
 			a => a.Product_Tags
 		).reduce(
 			(a, b) => a.concat(b)

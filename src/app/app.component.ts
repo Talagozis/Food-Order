@@ -13,8 +13,8 @@ export class MyApp {
 
 	rootPage: any = HomePage;
 
-	primaryPages: Array<{ title: string, component: any }>;
-	secondaryPages: Array<{ title: string, component: any }>;
+	primaryPages: Array<{ title: string, component: any, icon: string }>;
+	secondaryPages: Array<{ title: string, component: any, icon: string }>;
 
 	constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
 		this.initializeApp();
@@ -23,11 +23,12 @@ export class MyApp {
 
 		// used for an example of ngFor and navigation
 		this.primaryPages = [
-			{ title: 'Καταστήματα', component: 'StoresPage' }
+			{ title: 'Καταστήματα', component: 'StoresPage', icon: 'restaurant' },
+			{ title: 'Καλάθι', component: 'CheckoutPage', icon: 'cart' }
 		];
 
 		this.secondaryPages = [
-			{ title: 'Πολιτική Απορρήτου', component: 'PrivacyPolicyPage' }
+			{ title: 'Πολιτική Απορρήτου', component: 'PrivacyPolicyPage', icon: 'document' }
 		];
 	}
 
