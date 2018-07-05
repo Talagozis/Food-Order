@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { StoreApi } from 'models/Api/Store';
+import { StoreApi } from '../../models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import '../../utils/linqtsExtension';
+import { ProductProvider } from '../../providers/Store/product';
+import { ProductApi } from '../../models/api/Product';
 
 @IonicPage()
 @Component({
@@ -14,7 +16,7 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider) {
 	}
 
 	ionViewDidLoad() {
@@ -26,28 +28,29 @@ export class StorePage {
 	}
 
 	getStore(): void {
-		var storeId = this.navParams.get('storeId');
-		this.storeProvider.findOne(storeId).subscribe(
-			s => {
-				this.store = s;
-				var p = s.Products.ToList();
-				p = p.Where(a => a.isActive);
-				p = p.Where(a => a.Product_Tags.filter(b => b.level === 2 || b.level === 3).length > 0);
-				p = p.OrderBy(a => a.orderNumber);
-				var categories = p.GroupBy(
-					a => a.Product_Tags
-						.filter(b => b.level === 2 || b.level === 3)
-						.sort(b => b.level === 3 ? 1 : b.level === 2 ? -1 : 0)[0].Tag.name, b => b
-					);
-				this.categories = Object.keys(categories).map(function(tagName){
-					let category = categories[tagName]
-						.sort((a, b) => a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1);
-					category.key = tagName;
-					return category;
-				});
-				// console.log(this.categories);
-			}
-		);
+		var storeBid = this.navParams.get('storeId');
+
+		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
+			this.store = s;
+		});
+
+		this.productProvider.findByStoreBid(storeBid).subscribe((p: ProductApi[]) => {
+			var products = p.ToList();
+			products = products.Where(a => a.isActive);
+			products = products.Where(a => a.Product_Tags.filter(b => b.level === 2 || b.level === 3).length > 0);
+			products = products.OrderBy(a => a.orderNumber);
+			var categories = products.GroupBy(a =>
+				a.Product_Tags
+					.filter(b => b.level === 2 || b.level === 3)
+					.sort(b => b.level === 3 ? 1 : b.level === 2 ? -1 : 0)[0].Tag.name, b => b
+			);
+			this.categories = Object.keys(categories).map(function (tagName) {
+				let category = categories[tagName]
+					.sort((a, b) => a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1);
+				category.key = tagName;
+				return category;
+			});
+		});
 	}
 
 	toggleSection(i) {

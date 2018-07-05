@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
+import { Storage } from '@ionic/storage';
+
 import { StoreProvider } from '../../providers/store/store';
 import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
 import { FilterViewModel } from '../filters/filters';
-import { Storage } from '@ionic/storage';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 
 @IonicPage()

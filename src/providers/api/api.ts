@@ -14,8 +14,12 @@ export class Api<T> {
 	constructor(public http: HttpClientExt) {
 	}
 
-	get(endpoint: string): Observable<T[]> {
-		return this.http.get<T[]>(this.url + endpoint);
+	get(endpoint: string, parameters?: object): Observable<T[]> {
+		var x: string = "";
+		if(parameters)
+			x = "?" + Object.entries(parameters).map(([key, val]) => key + "=" + encodeURIComponent(val)).join('&');
+			
+		return this.http.get<T[]>(this.url + endpoint + x);
 	}
 
 	getOne(endpoint: string, bid: number): Observable<T> {
@@ -24,19 +28,20 @@ export class Api<T> {
 	}
 
 
-	post(endpoint: string, body: any) {
-		return this.http.post<T>(this.url + '/' + endpoint, body);
-	}
+	// post(endpoint: string, body: any) {
+	// 	return this.http.post<T>(this.url + '/' + endpoint, body);
+	// }
 
-	put(endpoint: string, body: any, reqOpts?: any) {
-		return this.http.put(this.url + '/' + endpoint, body);
-	}
+	// put(endpoint: string, body: any, reqOpts?: any) {
+	// 	return this.http.put(this.url + '/' + endpoint, body);
+	// }
 
-	delete(endpoint: string, reqOpts?: any) {
-		return this.http.delete(this.url + '/' + endpoint);
-	}
+	// delete(endpoint: string, reqOpts?: any) {
+	// 	return this.http.delete(this.url + '/' + endpoint);
+	// }
 
-	patch(endpoint: string, body: any, reqOpts?: any) {
-		return this.http.patch(this.url + '/' + endpoint, body);
-	}
+	// patch(endpoint: string, body: any, reqOpts?: any) {
+	// 	return this.http.patch(this.url + '/' + endpoint, body);
+	// }
+
 }

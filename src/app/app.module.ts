@@ -8,10 +8,12 @@ import { HomePage } from '../pages/home/home';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';
+
 import { StoreProvider } from '../providers/store/store';
+import { ProductProvider } from '../providers/Store/product';
 import { Api } from '../providers/api/api';
 import { HttpClientExt } from '../providers/http-client/http-client';
-import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
 	declarations: [
@@ -36,6 +38,7 @@ import { IonicStorageModule } from '@ionic/storage';
 		SplashScreen,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		StoreProvider,
+		ProductProvider,
 		Api,
 		HttpClientExt
 	]
