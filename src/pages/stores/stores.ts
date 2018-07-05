@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
@@ -28,7 +28,7 @@ export class StoresPage {
 		this.getStores();
 	}
 
-	doRefresh(refresher) {
+	doRefresh(refresher: Refresher) {
 		this.getStores();
 		setTimeout(() => {
 			refresher.complete();
