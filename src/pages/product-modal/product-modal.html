@@ -32,7 +32,7 @@
 					<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
 						<ion-label>
 							<span>{{attribute.Ingredient.name}}</span>
-							<span>+{{attribute.price|priceFormat}}</span>
+							<span *ngIf="attributeGroup.showPrice()">+{{attribute.price|priceFormat}}</span>
 						</ion-label>
 						<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
 					</ion-item>

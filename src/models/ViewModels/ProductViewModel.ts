@@ -21,4 +21,7 @@ export class ProductViewModel implements ProductApi {
 	Product_AttributeGroups: Product_AttributeGroupViewModel[];
 	Product_Ingredients: Product_IngredientViewModel[];
 
+	public constructor(init?:Partial<ProductViewModel>) {
+        Object.assign(this, init);
+    }
 }

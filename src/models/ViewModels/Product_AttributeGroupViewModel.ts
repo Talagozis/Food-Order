@@ -9,4 +9,12 @@ export class Product_AttributeGroupViewModel implements Product_AttributeGroupAp
 	Product_Attributes: Product_AttributeViewModel[];
 	selectedAttributeBid?: number;
 
+    public constructor(init?: Partial<Product_AttributeGroupViewModel>) {
+        Object.assign(this, init);
+    }
+
+	public showPrice(): boolean	{
+		return this.Product_Attributes.map(a => a.price).reduce((a, b) => a + b) > 0;
+	}
+
 }

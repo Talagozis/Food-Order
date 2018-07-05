@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProductApi } from 'models/api/Product';
-import { Product_AttributeGroupApi } from 'models/api/Product_AttributeGroup';
-import { Product_IngredientApi } from 'models/api/Product_Ingredient';
-import '../../utils/linqtsExtension';
-import { CartItem } from 'models/Api/CartItem';
 import { Storage } from '@ionic/storage';
+
+import '../../utils/linqtsExtension';
+
+import { ProductApi } from '../../models/api/Product';
+import { CartItem } from '../../models/Api/CartItem';
+import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
+import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
+import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
+import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
 
 @IonicPage()
 @Component({
@@ -13,9 +17,9 @@ import { Storage } from '@ionic/storage';
 	templateUrl: 'product-modal.html',
 })
 export class ProductModalPage {
-	product: ProductApi;
-	attributeGroups: Product_AttributeGroupApi[];
-	ingredients: Product_IngredientApi[];
+	product: ProductViewModel;
+	attributeGroups: Product_AttributeGroupViewModel[];
+	ingredients: Product_IngredientViewModel[];
 	quantity: number;
 	info: string;
 
@@ -23,10 +27,29 @@ export class ProductModalPage {
 		this.quantity = 1;
 		this.info = '';
 
-		this.product = this.navParams.get('product');
+		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
+
+		this.product = new ProductViewModel({
+			...productApi,
+			Product_AttributeGroups: productApi.Product_AttributeGroups.map(a => new Product_AttributeGroupViewModel({
+				...a,
+				Product: null,
+				Product_Attributes: a.Product_Attributes.map(b => new Product_AttributeViewModel({
+					...b,
+					Product_AttributeGroup: null
+				})),
+			})),
+			Product_Ingredients: productApi.Product_Ingredients.map(a => new Product_IngredientViewModel({
+				...a,
+				Product: null,
+			})),
+
+		});
+
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
 			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
 			.ToArray();
+		
 		this.ingredients = this.product.Product_Ingredients.ToList().OrderBy(b => !b.isDefault).ThenBy(b => b.price).ToArray();
 
 		for (let i = 0; i < this.attributeGroups.length; i++) {

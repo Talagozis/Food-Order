@@ -7,4 +7,9 @@ export class Product_IngredientViewModel implements Product_IngredientApi {
 	isDefault: boolean;
 	Product: ProductViewModel;
 	Ingredient: IngredientViewModel;
+
+	public constructor(init?: Partial<Product_IngredientViewModel>) {
+        Object.assign(this, init);
+	}
+	
 }

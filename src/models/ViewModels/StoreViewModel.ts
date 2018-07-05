@@ -46,11 +46,11 @@ export class StoreViewModel implements StoreApi {
     Store_Areas: Store_AreaApi[];
     Product_Tags: Product_TagApi[];
     
-    public constructor(init?:Partial<StoreViewModel>) {
+    public constructor(init?: Partial<StoreViewModel>) {
         Object.assign(this, init);
     }
 
-    public getCuisines() {
+    public getCuisines(): string {
         return this.Product_Tags.filter(a => a.level === TagLevel.Cuisine).map(a => a.Tag.name).join(", ");
     }
 }
