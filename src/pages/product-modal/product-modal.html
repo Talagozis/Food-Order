@@ -1,78 +1,89 @@
 <ion-header>
-    <ion-navbar color="primary">
-      <ion-title>Λεπτομέρειες</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="closeProductModal()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content>
-    <ion-grid>
+	<ion-navbar color="primary">
+		<ion-title>Λεπτομέρειες</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="closeProductModal()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
 
-      <ion-row>
-        <ion-col col-10>
-          <p>{{product.name}}</p>
-        </ion-col>
-        <ion-col col-2>
-            <p ion-text color="primary">{{product.price|priceFormat}}</p>
-        </ion-col>
-      </ion-row>
+<ion-content>
+	<ion-grid>
 
-      <ion-row *ngFor="let attributeGroup of attributeGroups">
-        <ion-col>
-          <ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
-            <ion-list-header text-capitalize>
-              <h4><strong>{{attributeGroup.description}}</strong></h4>
-            </ion-list-header>
-            <ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
-              <ion-label>{{attribute.Ingredient.name}} +{{attribute.price|priceFormat}}</ion-label>
-              <ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
+		<ion-row>
+			<ion-col col-10>
+				<p>{{product.name}}</p>
+			</ion-col>
+			<ion-col col-2>
+				<p ion-text color="primary">{{product.price|priceFormat}}</p>
+			</ion-col>
+		</ion-row>
 
-      <ion-row *ngIf="ingredients.length > 0">
-        <ion-col>
-            <ion-list>
-              <ion-list-header text-capitalize>
-                <h4><strong>Επίλεξε υλικά</strong></h4>
-              </ion-list-header>
-              <ion-item *ngFor="let ingredient of ingredients">
-                <ion-label>{{ingredient.Ingredient.name}}</ion-label>
-                <ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
-              </ion-item>
-            </ion-list>
-        </ion-col>
-      </ion-row>
+		<ion-row *ngFor="let attributeGroup of attributeGroups">
+			<ion-col>
+				<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
+					<ion-list-header text-capitalize>
+						<h4>
+							<strong>{{attributeGroup.description}}</strong>
+						</h4>
+					</ion-list-header>
+					<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
+						<ion-label>
+							<span>{{attribute.Ingredient.name}}</span>
+							<span>+{{attribute.price|priceFormat}}</span>
+						</ion-label>
+						<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
 
-      <ion-row>
-        <ion-col>
-          <ion-textarea [(ngModel)]="info" placeholder="Παρατηρήσεις & σχλόλια"></ion-textarea>
-        </ion-col>
-      </ion-row>
+		<ion-row *ngIf="ingredients.length > 0">
+			<ion-col>
+				<ion-list>
+					<ion-list-header text-capitalize>
+						<h4>
+							<strong>Επίλεξε υλικά</strong>
+						</h4>
+					</ion-list-header>
+					<ion-item *ngFor="let ingredient of ingredients">
+						<ion-label>{{ingredient.Ingredient.name}}</ion-label>
+						<ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
 
-    </ion-grid>
-  </ion-content>
-  
-  <ion-footer>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-2>
-          <button ion-button block ion-icon><ion-icon name="remove"></ion-icon></button>
-        </ion-col>
-        <ion-col col-2>
-          <ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
-        </ion-col>
-        <ion-col col-2>
-          <button ion-button block ion-icon><ion-icon name="add"></ion-icon></button>
-        </ion-col>
-        <ion-col col-6>
-          <button ion-button block text-capitalize (click)="addToCart()">Προσθήκη</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-footer>
+		<ion-row>
+			<ion-col>
+				<ion-textarea [(ngModel)]="info" placeholder="Παρατηρήσεις & σχλόλια"></ion-textarea>
+			</ion-col>
+		</ion-row>
+
+	</ion-grid>
+</ion-content>
+
+<ion-footer>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-2>
+				<button ion-button block ion-icon>
+					<ion-icon name="remove"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-2>
+				<ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
+			</ion-col>
+			<ion-col col-2>
+				<button ion-button block ion-icon>
+					<ion-icon name="add"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-6>
+				<button ion-button block text-capitalize (click)="addToCart()">Προσθήκη</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-footer>
