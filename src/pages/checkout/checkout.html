@@ -15,14 +15,10 @@
     <ion-list-header text-capitalize>
       Καλάθι παραγγελίας
     </ion-list-header>
-    <ion-item>
-      <h2>Cart item name</h2>
-      <h2 item-right>{{6.80|priceFormat}}</h2>
-    </ion-item>
-    <ion-item>
-      <h2>Cart item name</h2>
-      <h2 item-right>{{6.80|priceFormat}}</h2>
-    </ion-item>
+    <!-- <ion-item *ngFor="let cartItem of cartItems">
+      <h2>{{cartItem.name}}</h2>
+      <h2 item-right>{{cartItem.totalPrice|priceFormat}}</h2>
+    </ion-item> -->
   </ion-list>
 
   <ion-list>

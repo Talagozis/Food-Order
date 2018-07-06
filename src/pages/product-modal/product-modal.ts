@@ -98,6 +98,15 @@ export class ProductModalPage {
 			c.push(cartItem);
 			this.storage.set('cart', c);
 		});
+		this.navCtrl.pop();
+	}
+
+	increaseQuantity() {
+		this.quantity++;
+	}
+
+	decreaseQuantity() {
+		this.quantity--;
 	}
 
 	closeProductModal() {
