@@ -58,7 +58,7 @@
 
 		<ion-row>
 			<ion-col>
-				<ion-textarea [(ngModel)]="info" placeholder="Παρατηρήσεις & σχλόλια"></ion-textarea>
+				<ion-textarea type="text" [(ngModel)]="info" placeholder="Παρατηρήσεις & σχόλια"></ion-textarea>
 			</ion-col>
 		</ion-row>
 
@@ -69,7 +69,7 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col col-2>
-				<button ion-button block ion-icon>
+				<button ion-button block ion-icon (click)="changeQuantity(-1)">
 					<ion-icon name="remove"></ion-icon>
 				</button>
 			</ion-col>
@@ -77,7 +77,7 @@
 				<ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
 			</ion-col>
 			<ion-col col-2>
-				<button ion-button block ion-icon>
+				<button ion-button block ion-icon (click)="changeQuantity(+1)">
 					<ion-icon name="add"></ion-icon>
 				</button>
 			</ion-col>

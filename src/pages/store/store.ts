@@ -5,6 +5,7 @@ import { StoreProvider } from '../../providers/store/store';
 import '../../utils/linqtsExtension';
 import { ProductProvider } from '../../providers/Store/product';
 import { ProductApi } from '../../models/api/Product';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,8 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, private storage: Storage) {
+		this.storage.clear();
 	}
 
 	ionViewDidLoad() {

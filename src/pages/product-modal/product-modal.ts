@@ -49,11 +49,11 @@ export class ProductModalPage {
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
 			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
 			.ToArray();
-		
+
 		this.ingredients = this.product.Product_Ingredients.ToList().OrderBy(b => !b.isDefault).ThenBy(b => b.price).ToArray();
 
 		for (let i = 0; i < this.attributeGroups.length; i++) {
-			if(this.attributeGroups[i].Product_Attributes.length > 0)
+			if (this.attributeGroups[i].Product_Attributes.length > 0)
 				this.attributeGroups[i].selectedAttributeBid = this.attributeGroups[i].Product_Attributes[0].Ingredient.bid;
 		}
 
@@ -98,7 +98,15 @@ export class ProductModalPage {
 			c.push(cartItem);
 			this.storage.set('cart', c);
 		});
+		this.navCtrl.pop();
 	}
+
+	changeQuantity(amount: number) {
+		this.quantity += amount;
+		this.quantity = Math.max(this.quantity, 1);
+	}
+
+
 
 	closeProductModal() {
 		this.navCtrl.pop();
