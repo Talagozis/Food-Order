@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CartItem } from 'models/Api/CartItem';
 
 @IonicPage()
 @Component({
@@ -8,10 +9,12 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'checkout.html',
 })
 export class CheckoutPage {
-  // cartItems: any;
+  cartItems: CartItem[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-    // this.cartItems = this.storage.get('cart');
+    this.storage.get('cart').then((c: CartItem[]) => {
+			this.cartItems = c;
+		});
   }
 
   ionViewDidLoad() {
