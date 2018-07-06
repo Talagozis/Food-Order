@@ -11,14 +11,21 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-list-header text-capitalize>
-      Καλάθι παραγγελίας
+  <ion-list class="accordion-list">
+    <ion-list-header no-lines no-padding> 
+      <button ion-item (click)="toggleSectionCartDetails(cartDetails)" detail-none [ngClass]="{'section-active': cartDetails, 'section': !cartDetails}">
+        <ion-icon item-left name="arrow-forward" *ngIf="!cartDetails"></ion-icon>
+        <ion-icon item-left name="arrow-down" *ngIf="cartDetails"></ion-icon>
+          Καλάθι Παραγγελίας
+      </button>
+      <ion-list *ngIf="cartDetails">
+        <ion-item *ngFor="let cartItem of cartItems" detail-none class="child-item" text-wrap>
+          <h3 text-capitalize>{{cartItem.name}}</h3>
+          <p item-end>Ποσότητα: {{cartItem.quantity}}</p>
+          <p item-end>{{cartItem.totalPrice|priceFormat}}</p>
+        </ion-item>
+      </ion-list>
     </ion-list-header>
-    <ion-item *ngFor="let cartItem of cartItems">
-      <h2>{{cartItem.name}}</h2>
-      <h2 item-right>{{cartItem.totalPrice|priceFormat}}</h2>
-    </ion-item>
   </ion-list>
 
   <ion-list>
@@ -73,6 +80,6 @@
 
 <ion-footer>
   <ion-navbar>
-    <button center text-capitalize ion-button block>Αποστολή Παραγγελίας</button>
+    <button center text-capitalize ion-button block>{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας</button>
   </ion-navbar>   
 </ion-footer>

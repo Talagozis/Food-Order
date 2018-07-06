@@ -10,8 +10,13 @@ import { CartItem } from 'models/Api/CartItem';
 })
 export class CheckoutPage {
   cartItems: CartItem[];
+  totalCartPrice: number;
+  cartDetails: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+    this.cartDetails = false;
+
+    this.totalCartPrice = 0.00;
     this.storage.get('cart').then((c: CartItem[]) => {
 			this.cartItems = c;
 		});
@@ -19,6 +24,10 @@ export class CheckoutPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad CheckoutPage');
+  }
+
+  toggleSectionCartDetails(i) {
+		this.cartDetails = !this.cartDetails;
   }
 
 }

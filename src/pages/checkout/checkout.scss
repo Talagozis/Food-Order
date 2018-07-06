@@ -3,4 +3,41 @@ page-checkout {
         content: " *";
         color: color($colors, primary, base);
     }
+    .segment-button {
+        background-color: color($colors, light, base) !important;
+        color: black !important;
+        font-weight: bold !important;
+    }
+    .segment-activated {
+        background-color: color($colors, secondary-light, base) !important;
+        color: black !important;
+        font-weight: bold !important;
+    }
+    .accordion-list {
+        background: color($colors, light);
+    }
+    .section {
+        background: white;
+        color: black;
+        margin-bottom: 4px;
+    }
+    .section-active {
+        background: color($colors, primary-light, base);
+        color: white;
+    }
+    .child {
+        background: #e8e7e6;
+        color: black;
+        margin-bottom: 4px;
+    }
+    .child-item {
+        background: #f3f2f1;
+        padding: 10px;
+    }
+    .label {
+        margin: 0px;
+    }
+    .list {
+        margin-bottom: 4px;
+    }
 }
