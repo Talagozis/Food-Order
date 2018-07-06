@@ -13,9 +13,9 @@
 
 	<ion-list class="accordion-list">
 		<ion-list-header no-lines no-padding>
-			<button ion-item (click)="toggleSectionCartDetails(cartDetails)" detail-none [ngClass]="{'section-active': cartDetails, 'section': !cartDetails}">
-				<ion-icon item-left name="arrow-forward" *ngIf="!cartDetails"></ion-icon>
-				<ion-icon item-left name="arrow-down" *ngIf="cartDetails"></ion-icon>
+			<button ion-item (click)="toggleSectionCartDetails(showCartDetails)" detail-none [ngClass]="{'section-active': cartDetails, 'section': !cartDetails}">
+				<ion-icon item-left name="arrow-forward" *ngIf="!showCartDetails"></ion-icon>
+				<ion-icon item-left name="arrow-down" *ngIf="showCartDetails"></ion-icon>
 				Καλάθι Παραγγελίας
 			</button>
 			<ion-list *ngIf="cartDetails">
@@ -80,6 +80,8 @@
 
 <ion-footer>
 	<ion-navbar>
-		<button center text-capitalize ion-button block [disabled]="!canSendOrder" (click)="sendOrder()">{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας</button>
+		<button center text-capitalize ion-button block [disabled]="!canSendOrder" (click)="sendOrder()">
+			{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας
+		</button>
 	</ion-navbar>
 </ion-footer>

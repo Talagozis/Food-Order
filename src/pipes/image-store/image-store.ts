@@ -6,6 +6,6 @@ import { ENV } from '@app/env'
 })
 export class ImageStorePipe implements PipeTransform {
 	transform(value: string, ...args) {
-		return ENV.API_IMAGE_URL + "store/" + value;
+		return ENV.IMAGE_URL + "store/" + value;
 	}
 }

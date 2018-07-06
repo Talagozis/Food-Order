@@ -1,8 +1,13 @@
 export const ENV: IENV = {
 	mode: 'Production',
+	
+	IMAGE_URL: "",
+
 	API_HEADER_NAME: "",
 	API_HEADER_VALUE: "",
-	API_CROSS_ORIGIN_URL: "http://localhost:8100/",
 	API_URL: "",
-	API_IMAGE_URL: "",
+
+	RPC_HEADER_NAME: "",
+	RPC_HEADER_VALUE: "",
+	RPC_URL: "",
 }

@@ -10,10 +10,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { StoreProvider } from '../providers/store/store';
-import { ProductProvider } from '../providers/Store/product';
-import { Api } from '../providers/api/api';
 import { HttpClientExt } from '../providers/http-client/http-client';
+import { Api } from '../providers/api/api';
+import { Rpc } from '../providers/rpc/rpc';
+import { StoreProvider } from '../providers/store/store';
+import { ProductProvider } from '../providers/Product/product';
+import { OrderProvider } from '../providers/Order/order';
+
 
 @NgModule({
 	declarations: [
@@ -39,7 +42,9 @@ import { HttpClientExt } from '../providers/http-client/http-client';
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		StoreProvider,
 		ProductProvider,
+		OrderProvider,
 		Api,
+		Rpc,
 		HttpClientExt
 	]
 })

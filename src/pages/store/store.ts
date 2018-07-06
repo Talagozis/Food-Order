@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { StoreApi } from '../../models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import '../../utils/linqtsExtension';
-import { ProductProvider } from '../../providers/Store/product';
+import { ProductProvider } from '../../providers/Product/product';
 import { ProductApi } from '../../models/api/Product';
 import { Storage } from '@ionic/storage';
 
@@ -80,6 +80,6 @@ export class StorePage {
 	}
 
 	navigateToCheckoutPage() {
-		this.navCtrl.push('CheckoutPage');
+		this.navCtrl.push('CheckoutPage', { storeId: this.store.bid });
 	}
 }
