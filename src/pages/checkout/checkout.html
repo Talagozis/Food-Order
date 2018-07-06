@@ -80,6 +80,6 @@
 
 <ion-footer>
   <ion-navbar>
-    <button center text-capitalize ion-button block>{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας</button>
+    <button center text-capitalize ion-button block [disabled]="!canSendOrder" (click)="sendOrder()">{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας</button>
   </ion-navbar>   
 </ion-footer>

@@ -12,12 +12,15 @@ export class CheckoutPage {
   cartItems: CartItem[];
   totalCartPrice: number;
   cartDetails: boolean;
+  canSendOrder: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
     this.cartDetails = false;
-
     this.totalCartPrice = 0.00;
     this.storage.get('cart').then((c: CartItem[]) => {
+      this.canSendOrder = true;
+      if (c === null)
+        this.canSendOrder = false;
 			this.cartItems = c;
 		});
   }
@@ -28,6 +31,15 @@ export class CheckoutPage {
 
   toggleSectionCartDetails(i) {
 		this.cartDetails = !this.cartDetails;
+  }
+
+  sendOrder() {
+    //send order
+
+    
+    this.storage.clear();
+
+    this.navCtrl.setRoot('ThankYouPage');
   }
 
 }
