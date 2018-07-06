@@ -1,85 +1,85 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle start>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Καλάθι
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle start>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			Καλάθι
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-list class="accordion-list">
-    <ion-list-header no-lines no-padding> 
-      <button ion-item (click)="toggleSectionCartDetails(cartDetails)" detail-none [ngClass]="{'section-active': cartDetails, 'section': !cartDetails}">
-        <ion-icon item-left name="arrow-forward" *ngIf="!cartDetails"></ion-icon>
-        <ion-icon item-left name="arrow-down" *ngIf="cartDetails"></ion-icon>
-          Καλάθι Παραγγελίας
-      </button>
-      <ion-list *ngIf="cartDetails">
-        <ion-item *ngFor="let cartItem of cartItems" detail-none class="child-item" text-wrap>
-          <h3 text-capitalize>{{cartItem.name}}</h3>
-          <p item-end>Ποσότητα: {{cartItem.quantity}}</p>
-          <p item-end>{{cartItem.totalPrice|priceFormat}}</p>
-        </ion-item>
-      </ion-list>
-    </ion-list-header>
-  </ion-list>
+	<ion-list class="accordion-list">
+		<ion-list-header no-lines no-padding>
+			<button ion-item (click)="toggleSectionCartDetails(cartDetails)" detail-none [ngClass]="{'section-active': cartDetails, 'section': !cartDetails}">
+				<ion-icon item-left name="arrow-forward" *ngIf="!cartDetails"></ion-icon>
+				<ion-icon item-left name="arrow-down" *ngIf="cartDetails"></ion-icon>
+				Καλάθι Παραγγελίας
+			</button>
+			<ion-list *ngIf="cartDetails">
+				<ion-item *ngFor="let cartItem of cartItems" detail-none class="child-item" text-wrap>
+					<h3 text-capitalize>{{cartItem.name}}</h3>
+					<p item-end>Ποσότητα: {{cartItem.quantity}}</p>
+					<p item-end>{{cartItem.totalPrice|priceFormat}}</p>
+				</ion-item>
+			</ion-list>
+		</ion-list-header>
+	</ion-list>
 
-  <ion-list>
-    <ion-list-header text-capitalize>
-      Στοιχεία παραγγελίας
-    </ion-list-header>
-    <ion-item>
-      <ion-label class="required" color="primary" floating>Επώνυμο</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label class="required" color="primary" floating>Όνομα</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label class="required" color="primary" floating>Διεύθυνση & αριθμός</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label class="required" color="primary" floating>Τηλέφωνο</ion-label>
-      <ion-input type="tel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label class="required" color="primary" floating>Επιβεβαίωση τηλ</ion-label>
-      <ion-input type="tel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Όνομα στο κουδούνι</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label class="required" color="primary">Όροφος</ion-label>
-      <ion-select okText="ΟΚ" cancelText="ΑΚΥΡΟ">
-        <ion-option value="0">Ισόγειο</ion-option>
-        <ion-option value="0.5">Ημιόροφος</ion-option>
-        <ion-option value="1">1ος όροφος</ion-option>
-        <ion-option value="2">2ος όροφος</ion-option>
-        <ion-option value="3">3ος όροφος</ion-option>
-        <ion-option value="4">4ος όροφος</ion-option>
-        <ion-option value="5">5ος όροφος</ion-option>
-        <ion-option value="6">6ος όροφος</ion-option>
-        <ion-option value="7">7ος όροφος</ion-option>
-        <ion-option value="8">8ος όροφος</ion-option>
-        <ion-option value="9">9ος όροφος</ion-option>
-        <ion-option value="10">Μονοκατοικία</ion-option>
-        <ion-option value="11">Κατάστημα</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  
+	<ion-list>
+		<ion-list-header text-capitalize>
+			Στοιχεία παραγγελίας
+		</ion-list-header>
+		<ion-item>
+			<ion-label class="required" color="primary" floating>Επώνυμο</ion-label>
+			<ion-input></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label class="required" color="primary" floating>Όνομα</ion-label>
+			<ion-input></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label class="required" color="primary" floating>Διεύθυνση & αριθμός</ion-label>
+			<ion-input></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label class="required" color="primary" floating>Τηλέφωνο</ion-label>
+			<ion-input type="tel"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label class="required" color="primary" floating>Επιβεβαίωση τηλ</ion-label>
+			<ion-input type="tel"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary" floating>Όνομα στο κουδούνι</ion-label>
+			<ion-input></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label class="required" color="primary">Όροφος</ion-label>
+			<ion-select okText="ΟΚ" cancelText="ΑΚΥΡΟ">
+				<ion-option value="0">Ισόγειο</ion-option>
+				<ion-option value="0.5">Ημιόροφος</ion-option>
+				<ion-option value="1">1ος όροφος</ion-option>
+				<ion-option value="2">2ος όροφος</ion-option>
+				<ion-option value="3">3ος όροφος</ion-option>
+				<ion-option value="4">4ος όροφος</ion-option>
+				<ion-option value="5">5ος όροφος</ion-option>
+				<ion-option value="6">6ος όροφος</ion-option>
+				<ion-option value="7">7ος όροφος</ion-option>
+				<ion-option value="8">8ος όροφος</ion-option>
+				<ion-option value="9">9ος όροφος</ion-option>
+				<ion-option value="10">Μονοκατοικία</ion-option>
+				<ion-option value="11">Κατάστημα</ion-option>
+			</ion-select>
+		</ion-item>
+	</ion-list>
+
 </ion-content>
 
 <ion-footer>
-  <ion-navbar>
-    <button center text-capitalize ion-button block [disabled]="!canSendOrder" (click)="sendOrder()">{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας</button>
-  </ion-navbar>   
+	<ion-navbar>
+		<button center text-capitalize ion-button block [disabled]="!canSendOrder" (click)="sendOrder()">{{totalCartPrice|priceFormat}} Αποστολή Παραγγελίας</button>
+	</ion-navbar>
 </ion-footer>

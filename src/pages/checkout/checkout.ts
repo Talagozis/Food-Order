@@ -5,41 +5,41 @@ import { CartItem } from 'models/Api/CartItem';
 
 @IonicPage()
 @Component({
-  selector: 'page-checkout',
-  templateUrl: 'checkout.html',
+	selector: 'page-checkout',
+	templateUrl: 'checkout.html',
 })
 export class CheckoutPage {
-  cartItems: CartItem[];
-  totalCartPrice: number;
-  cartDetails: boolean;
-  canSendOrder: boolean;
+	cartItems: CartItem[];
+	totalCartPrice: number;
+	cartDetails: boolean;
+	canSendOrder: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-    this.cartDetails = false;
-    this.totalCartPrice = 0.00;
-    this.storage.get('cart').then((c: CartItem[]) => {
-      this.canSendOrder = true;
-      if (c === null)
-        this.canSendOrder = false;
+	constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+		this.cartDetails = false;
+		this.totalCartPrice = 0.00;
+		this.storage.get('cart').then((c: CartItem[]) => {
+			this.canSendOrder = true;
+			if (c || c.length === 0)
+				this.canSendOrder = false;
 			this.cartItems = c;
 		});
-  }
+	}
 
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad CheckoutPage');
-  }
+	ionViewDidLoad() {
+		// console.log('ionViewDidLoad CheckoutPage');
+	}
 
-  toggleSectionCartDetails(i) {
+	toggleSectionCartDetails(i) {
 		this.cartDetails = !this.cartDetails;
-  }
+	}
 
-  sendOrder() {
-    //send order
+	sendOrder() {
+		//send order
 
-    
-    this.storage.clear();
 
-    this.navCtrl.setRoot('ThankYouPage');
-  }
+		this.storage.clear();
+
+		this.navCtrl.setRoot('ThankYouPage');
+	}
 
 }
