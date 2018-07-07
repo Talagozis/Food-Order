@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 import '../../utils/linqtsExtension';
 
@@ -10,6 +9,7 @@ import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
 import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
 import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
 import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
+import { CartProvider } from '../../providers/Cart/cart';
 
 @IonicPage()
 @Component({
@@ -23,7 +23,7 @@ export class ProductModalPage {
 	quantity: number;
 	info: string;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider) {
 		this.quantity = 1;
 		this.info = '';
 
@@ -59,13 +59,9 @@ export class ProductModalPage {
 
 	}
 
-	ngOnInit() {
+	ngOnInit() { }
 
-	}
-
-	ionViewDidLoad() {
-		// console.log('ionViewDidLoad ProductModalPage');
-	}
+	ionViewDidLoad() { }
 
 	addToCart() {
 		var cartItem: CartItem = {
@@ -91,13 +87,8 @@ export class ProductModalPage {
 		};
 		console.log(cartItem);
 
-		this.storage.get('cart').then((c: CartItem[]) => {
-			if (c === null)
-				c = [];
+		this.cartProvider.AddCartItem(cartItem);
 
-			c.push(cartItem);
-			this.storage.set('cart', c);
-		});
 		this.navCtrl.pop();
 	}
 

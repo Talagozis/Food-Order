@@ -16,6 +16,7 @@ import { Rpc } from '../providers/rpc/rpc';
 import { StoreProvider } from '../providers/store/store';
 import { ProductProvider } from '../providers/Product/product';
 import { OrderProvider } from '../providers/Order/order';
+import { CartProvider } from '../providers/Cart/cart';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { OrderProvider } from '../providers/Order/order';
 		StoreProvider,
 		ProductProvider,
 		OrderProvider,
+		CartProvider,
 		Api,
 		Rpc,
 		HttpClientExt
