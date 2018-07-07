@@ -23,6 +23,14 @@ export class CheckoutPage {
 	showCartDetails: boolean;
 	canSendOrder: boolean;
 
+	customerForename: string;
+	customerSurname: string;
+	customerAddressLine: string;
+	customerFloorNumber: string;
+	customerDoorName: string;
+	customerPhoneNumber: string;
+	customerPhoneNumberConfirm: string;
+
 	constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
@@ -76,13 +84,13 @@ export class CheckoutPage {
 			...this.cart,
 			date: new Date(),
 			orderDetails: { //// Get from html
-				customerForename: "test",
-				customerSurname: "test",
-				customerAddressLine: "test",
-				customerFloorNumber: "test",
-				customerDoorName: "test",
-				customerPhoneNumber: "test",
-				customerPhoneNumberConfirm: "test",
+				customerForename: this.customerForename,
+				customerSurname: this.customerSurname,
+				customerAddressLine: this.customerAddressLine,
+				customerFloorNumber: this.customerFloorNumber,
+				customerDoorName: this.customerDoorName,
+				customerPhoneNumber: this.customerPhoneNumber,
+				customerPhoneNumberConfirm: this.customerPhoneNumberConfirm,
 				isTakeAway: false,
 				info: "\$test",
 			},
