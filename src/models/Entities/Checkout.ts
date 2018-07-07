@@ -10,9 +10,9 @@ export interface OrderDetails {
     customerSurname: string;
     customerAddressLine: string;
     customerFloorNumber: string;
-    customerDoorName: string;
+    customerDoorName?: string;
     customerPhoneNumber: string;
     customerPhoneNumberConfirm: string;
-    isTakeAway: boolean;
-    info: string;
+    isTakeAway?: boolean;
+    info?: string;
 }

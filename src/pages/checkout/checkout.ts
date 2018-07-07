@@ -9,6 +9,7 @@ import { CheckoutRpc } from '../../models/Rpc/Checkout';
 import { Cart } from '../../models/Entities/Cart';
 import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
+import { OrderDetails } from '../../models/Entities/Checkout';
 
 @IonicPage()
 @Component({
@@ -22,6 +23,8 @@ export class CheckoutPage {
 	totalCartPrice: number;
 	showCartDetails: boolean;
 	canSendOrder: boolean;
+
+	orderDetails: OrderDetails;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 		this.showCartDetails = false;
@@ -75,14 +78,8 @@ export class CheckoutPage {
 		let checkoutRpc: CheckoutRpc = {
 			...this.cart,
 			date: new Date(),
-			orderDetails: { //// Get from html
-				customerForename: "test",
-				customerSurname: "test",
-				customerAddressLine: "test",
-				customerFloorNumber: "test",
-				customerDoorName: "test",
-				customerPhoneNumber: "test",
-				customerPhoneNumberConfirm: "test",
+			orderDetails: {
+				...this.orderDetails,
 				isTakeAway: false,
 				info: "\$test",
 			},
