@@ -8,60 +8,110 @@ import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../
 @Injectable()
 export class CartProvider {
 
+	private CARTS_KEYWORD: string = "carts";
+
+
 	constructor(private storage: Storage) { }
 
-	private get(): Promise<CartViewModel[]> {
-		return this.storage.get("carts").then((carts: CartViewModel[]) => {
 
-			if (!carts) {
-				console.debug("Carts from storage was undefined or null. It is created now.");
-				carts = new Array<CartViewModel>();
-			}
+	public async get(): Promise<CartViewModel[]> {
 
-			return carts;
-		});
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
 
+		carts = await this.validateCarts(carts);
+
+		return carts;
 	}
 
-	public getByStoreBid(storeBid: number): Promise<CartViewModel> {
-		return this.get().then((carts: CartViewModel[]) => {
+	public async getByStoreBid(storeBid: number): Promise<CartViewModel> {
 
-			var cart = carts.find(a =>a.storeBid === storeBid);
-			if (!cart) {
-				console.log("No cart for this store. It is created now.");
-				cart = {
-					storeBid: storeBid,
-					cartItems: new Array<CartItemViewModel>(),
-					cartItemOffers: new Array<CartItemOfferViewModel>(),
-				}
-			}
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
 
-			return cart;
-		});
+		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+
+		return cart;
 	}
 
-	public addCartItem(storeBid: number, cartItem: CartItemViewModel): void {
-		this.getByStoreBid(storeBid).then((cart: CartViewModel) => {
-			cart.cartItems.push(cartItem);
-		});
+	public async addCartItem(storeBid: number, cartItem: CartItemViewModel): Promise<void> {
+
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+
+		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+
+		cart.cartItems.push(cartItem);
+		carts.push(cart);
+
+		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
 
-	public clearCartItem(storeBid: number): void {
-		this.getByStoreBid(storeBid).then((cart: CartViewModel) => {
-			cart.cartItems = new Array<CartItemViewModel>();
-		});
+	public async clearCartItem(storeBid: number): Promise<void> {
+
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+
+		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+
+		cart.cartItems = new Array<CartItemViewModel>();
+		carts.push(cart);
+
+		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
 
-	public addOfferDetails(storeBid: number, cartItemOffer: CartItemOfferViewModel): void {
-		this.getByStoreBid(storeBid).then((cart: CartViewModel) => {
-			cart.cartItemOffers.push(cartItemOffer);
-		});
+	public async addOfferDetails(storeBid: number, cartItemOffer: CartItemOfferViewModel): Promise<void> {
+
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+
+		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+
+		cart.cartItemOffers.push(cartItemOffer);
+		carts.push(cart);
+
+		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
 
-	public clearOffersDetails(storeBid: number): void {
-		this.getByStoreBid(storeBid).then((cart: CartViewModel) => {
-			cart.cartItemOffers = new Array<CartItemOfferViewModel>();
-		});
+	public async clearOffersDetails(storeBid: number): Promise<void> {
+
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+
+		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+
+		cart.cartItemOffers = new Array<CartItemOfferViewModel>();
+		carts.push(cart);
+
+		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
+
+
+	private async validateCarts(carts: CartViewModel[]): Promise<CartViewModel[]> {
+
+		if (!carts) {
+			console.debug("Carts from storage was undefined or null. It is created now.");
+			carts = new Array<CartViewModel>();
+			await this.storage.set(this.CARTS_KEYWORD, carts);
+		}
+
+		return carts;
+	}
+
+	private async validateCart(carts: CartViewModel[], storeBid: number): Promise<CartViewModel> {
+
+		carts = await this.validateCarts(carts);
+
+		var cart = carts.find(a => a.storeBid === storeBid);
+
+		if (!cart) {
+			console.log("No cart for this store. It is created now.");
+
+			cart = {
+				storeBid: storeBid,
+				cartItems: new Array<CartItemViewModel>(),
+				cartItemOffers: new Array<CartItemOfferViewModel>(),
+			};
+			carts.push(cart);
+			await this.storage.set(this.CARTS_KEYWORD, carts);
+		}
+
+		return cart;
+	}
+
 
 }
