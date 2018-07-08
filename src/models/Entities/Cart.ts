@@ -1,12 +1,8 @@
-import { StoreApi } from "../../models/api/Store";
-import { AspNetUserApi } from "../../models/Api/AspNetUser";
-
-export interface Cart {
-    Store: StoreApi;
-    AspNetUser: AspNetUserApi;
+export class Cart {
+    Store: StoreDetails;
+    AspNetUser: AspNetUserDetails;
     productsDetails: ProductDetails[];
     offersDetails: OfferDetails[];
-    sessionDetals: SessionDetails[];
 }
 
 
@@ -33,5 +29,10 @@ export interface AttributeDetails {
     has: boolean;
 }
 
-export interface SessionDetails {
+export interface StoreDetails {
+    bid: number;
+}
+
+export interface AspNetUserDetails {
+    bid: number;
 }

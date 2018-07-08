@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+
+import '../../utils/linqtsExtension';
+
 import { StoreApi } from '../../models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import '../../utils/linqtsExtension';
 import { ProductProvider } from '../../providers/Product/product';
 import { ProductApi } from '../../models/api/Product';
-import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -17,13 +18,11 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, private storage: Storage) {
-		this.storage.clear();
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider) {
+		// this.storage.clear();
 	}
 
-	ionViewDidLoad() {
-		// console.log('ionViewDidLoad StorePage');
-	}
+	ionViewDidLoad() {}
 
 	ngOnInit() {
 		this.getStore();
@@ -60,7 +59,7 @@ export class StorePage {
 	}
 
 	openModal(product) {
-		let productModal = this.modalCtrl.create('ProductModalPage', { product: product });
+		let productModal = this.modalCtrl.create('ProductModalPage', {storeBid: this.store.bid, product: product });
 		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
 		productModal.present();
 	}

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
-import { Storage } from '@ionic/storage';
 
 import { StoreProvider } from '../../providers/store/store';
 import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
@@ -18,12 +17,10 @@ export class StoresPage {
 	initialStores: StoreViewModel[];
 	selectedCuisineBids: number[] = [];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, private storage: Storage) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
 	}
 
-	ionViewDidLoad() {
-		// console.log('ionViewDidLoad StoresPage');
-	}
+	ionViewDidLoad() { }
 
 	ngOnInit() {
 		this.getStores();
@@ -37,30 +34,15 @@ export class StoresPage {
 	}
 
 	getStores(): void {
-		this.storage.get('stores').then((s: StoreApi[]) => {
-			if (s) {
-				
-				let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
-					...a,
-				}));
+		this.storeProvider.findAllAvailable((s: StoreApi[]) => {
 					
-					
-				this.initialStores = storeViewModels;
-				this.stores = storeViewModels;	
-			} else {
-				this.storeProvider.findAllAvailable((s: StoreApi[]) => {
-					
-					let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
-						...a,
-					}));
+			let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
+				...a,
+			}));
 
-					this.initialStores = storeViewModels;
-					this.stores = storeViewModels;
-		
-					this.storage.set('stores', s);
-				});	
-			}
-		});
+			this.initialStores = storeViewModels;
+			this.stores = storeViewModels;
+		});	
 	}
 
 	navigateToStorePage(store: StoreApi) {

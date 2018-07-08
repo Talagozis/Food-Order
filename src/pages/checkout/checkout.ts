@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 import { OrderProvider } from '../../providers/Order/order';
 import { CheckoutRpcResponse } from '../../models/Request/CheckoutRpcResponse';
 import { ResponseStatus } from '../../models/Request/Response';
 import { CheckoutRpc } from '../../models/Rpc/Checkout';
-import { Cart } from '../../models/Entities/Cart';
 import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { OrderDetails } from '../../models/Entities/Checkout';
+import { CartProvider } from '../../providers/Cart/cart';
+import { CartViewModel } from '../../models/ViewModels/CartViewModel';
+import { AspNetUserDetails } from '../../models/Entities/Cart';
 
 @IonicPage()
 @Component({
@@ -18,7 +19,7 @@ import { OrderDetails } from '../../models/Entities/Checkout';
 })
 export class CheckoutPage {
 	store: StoreApi;
-	cart: Cart;
+	cart: CartViewModel;
 
 	totalCartPrice: number;
 	showCartDetails: boolean;
@@ -26,7 +27,7 @@ export class CheckoutPage {
 
 	orderDetails: OrderDetails;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
@@ -35,18 +36,7 @@ export class CheckoutPage {
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
 			this.store = s;
 
-			this.storage.get('carts').then((carts: Cart[]) => {
-
-				if (!carts) {
-					console.log("carts from storage is undefined or null");
-					return;
-				}
-
-				let cart = carts.find(a => a.Store.bid === this.store.bid);
-				if (!cart) {
-					console.log("no cart for this store");
-					return;
-				}
+			this.cartProvider.getByStoreBid(s.bid).then((cart: CartViewModel) => {
 
 				this.cart = cart;
 
@@ -57,17 +47,10 @@ export class CheckoutPage {
 
 				this.canSendOrder = true;
 			});
-
-
 		});
-
-
-
 	}
 
-	ionViewDidLoad() {
-		// console.log('ionViewDidLoad CheckoutPage');
-	}
+	ionViewDidLoad() { }
 
 	toggleSectionCartDetails(i) {
 		this.showCartDetails = !this.showCartDetails;
@@ -75,16 +58,19 @@ export class CheckoutPage {
 
 	sendOrder(): void {
 
-		let checkoutRpc: CheckoutRpc = {
-			...this.cart,
-			date: new Date(),
-			orderDetails: {
-				...this.orderDetails,
-				isTakeAway: false,
-				info: "\$test",
-			},
-
+		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
+		checkoutRpc.orderDetails = {
+			...this.orderDetails,
+			isTakeAway: false,
+			info: "\$test",
 		};
+		checkoutRpc.AspNetUser = { // test user
+			bid: 0
+		} as AspNetUserDetails;
+		checkoutRpc.Store = { // test stoe
+			bid: 4134222481
+		} as AspNetUserDetails;
+		checkoutRpc.sessionDetals = {}
 
 		this.orderProvider.checkout(checkoutRpc).subscribe((c: CheckoutRpcResponse) => {
 
@@ -94,7 +80,8 @@ export class CheckoutPage {
 				return;
 			}
 
-			this.storage.clear();
+			this.cartProvider.clearCartItem(this.store.bid);
+			this.cartProvider.clearOffersDetails(this.store.bid);
 
 			this.navCtrl.setRoot('ThankYouPage');
 		});

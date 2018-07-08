@@ -4,12 +4,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import '../../utils/linqtsExtension';
 
 import { ProductApi } from '../../models/api/Product';
-import { CartItem } from '../../models/Api/CartItem';
 import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
 import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
 import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
 import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
 import { CartProvider } from '../../providers/Cart/cart';
+import { CartItemViewModel } from '../../models/ViewModels/CartViewModel';
 
 @IonicPage()
 @Component({
@@ -17,6 +17,7 @@ import { CartProvider } from '../../providers/Cart/cart';
 	templateUrl: 'product-modal.html',
 })
 export class ProductModalPage {
+	storeBid: number;
 	product: ProductViewModel;
 	attributeGroups: Product_AttributeGroupViewModel[];
 	ingredients: Product_IngredientViewModel[];
@@ -26,6 +27,7 @@ export class ProductModalPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider) {
 		this.quantity = 1;
 		this.info = '';
+		this.storeBid = this.navParams.get("storeBid") as number;
 
 		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
 
@@ -64,11 +66,11 @@ export class ProductModalPage {
 	ionViewDidLoad() { }
 
 	addToCart() {
-		var cartItem: CartItem = {
+		var cartItem: CartItemViewModel = {
 			bid: this.product.bid,
-			quantity: this.quantity,
 			name: this.product.name,
-			totalPrice: 0,
+			totalPrice: this.product.price,
+			quantity: this.quantity,
 			discount: 0,
 			info: this.info,
 			ingredients: this.product.Product_Ingredients.map(a => ({
@@ -87,7 +89,7 @@ export class ProductModalPage {
 		};
 		console.log(cartItem);
 
-		this.cartProvider.AddCartItem(cartItem);
+		this.cartProvider.addCartItem(this.storeBid, cartItem);
 
 		this.navCtrl.pop();
 	}
