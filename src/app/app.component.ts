@@ -23,8 +23,7 @@ export class MyApp {
 
 		// used for an example of ngFor and navigation
 		this.primaryPages = [
-			{ title: 'Καταστήματα', component: 'StoresPage', icon: 'restaurant' },
-			{ title: 'Καλάθι', component: 'CheckoutPage', icon: 'cart' }
+			{ title: 'Καταστήματα', component: 'StoresPage', icon: 'restaurant' }
 		];
 
 		this.secondaryPages = [
