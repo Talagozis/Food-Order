@@ -16,7 +16,7 @@ export class Rpc<T extends RpcResponse> {
 	}
 
 	post(endpoint: string, parameters: object): Observable<T> {
-		return this.http.post<T>(this.url + '/' + endpoint, parameters);
+		return this.http.post<T>(this.url + endpoint, parameters);
 	}
 
 }

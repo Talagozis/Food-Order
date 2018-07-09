@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { OrderProvider } from '../../providers/Order/order';
 import { CheckoutRpcResponse } from '../../models/Request/CheckoutRpcResponse';
@@ -27,10 +27,21 @@ export class CheckoutPage {
 
 	orderDetails: OrderDetails;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
+		this.orderDetails = { 
+			customerSurname: "test", // den doulebei
+			customerForename: "",
+			customerAddressLine: "",
+			customerPhoneNumber: "",
+			customerPhoneNumberConfirm: "",
+			customerDoorName: "",
+			customerFloorNumber: "",
+			isTakeAway: false,
+			info: "",
+		};
 
 		var storeBid = this.navParams.get('storeId');
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
@@ -67,7 +78,7 @@ export class CheckoutPage {
 		checkoutRpc.AspNetUser = { // test user
 			bid: 0
 		} as AspNetUserDetails;
-		checkoutRpc.Store = { // test stoe
+		checkoutRpc.Store = { // test store
 			bid: 4134222481
 		} as AspNetUserDetails;
 		checkoutRpc.sessionDetals = {}
@@ -77,6 +88,7 @@ export class CheckoutPage {
 			if (!c || c.status !== ResponseStatus.Success) {
 				console.log(c);
 				console.log("ResponseStatus: " + c.status);
+				this.presentAlert(c);
 				return;
 			}
 
@@ -86,6 +98,15 @@ export class CheckoutPage {
 			this.navCtrl.setRoot('ThankYouPage');
 		});
 
+	}
+
+	presentAlert(c: CheckoutRpcResponse) {
+		let alert = this.alertCtrl.create({
+			title: 'Order',
+			subTitle: c.checkoutStatus.toString(),
+			buttons: ['OK']
+		});
+		alert.present();
 	}
 
 }
