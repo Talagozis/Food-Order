@@ -22,7 +22,7 @@
 				<ion-item *ngFor="let cartItem of cart.cartItems" detail-none class="child-item" text-wrap>
 					<h3 text-capitalize>{{cartItem.name}}</h3>
 					<p item-end>Ποσότητα: {{cartItem.quantity}}</p>
-					<p item-end>{{cartItem.totalPrice|priceFormat}}</p>
+					<button ion-button outline item-end>{{cartItem.totalPrice|priceFormat}}</button>
 				</ion-item>
 			</ion-list>
 		</ion-list-header>
