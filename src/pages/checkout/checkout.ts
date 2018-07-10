@@ -27,6 +27,14 @@ export class CheckoutPage {
 
 	orderDetails: OrderDetails;
 
+	customerSurname: string;
+	customerForename: string;
+	customerAddressLine: string;
+	customerPhoneNumber: string;
+	customerPhoneNumberConfirm: string;
+	customerDoorName: string;
+	customerFloorNumber: string;
+
 	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
@@ -68,10 +76,16 @@ export class CheckoutPage {
 	}
 
 	sendOrder(): void {
-
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {
-			...this.orderDetails,
+			// ...this.orderDetails,
+			customerSurname: this.customerSurname,
+			customerForename: this.customerForename,
+			customerAddressLine: this.customerAddressLine,
+			customerPhoneNumber: this.customerPhoneNumber,
+			customerPhoneNumberConfirm: this.customerPhoneNumberConfirm,
+			customerDoorName: this.customerDoorName,
+			customerFloorNumber: this.customerFloorNumber,
 			isTakeAway: false,
 			info: "\$test",
 		};
