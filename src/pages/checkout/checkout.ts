@@ -102,7 +102,17 @@ export class CheckoutPage {
 			if (!c || c.status !== ResponseStatus.Success) {
 				console.log(c);
 				console.log("ResponseStatus: " + c.status);
-				this.presentAlert(c);
+				let message = '';
+				if (c.checkoutStatus >= 10 && c.checkoutStatus <= 16) {
+					message = 'Υπήρξε πρόβλημα με το κατάστημα.';
+				} else if (c.checkoutStatus >= 20 && c.checkoutStatus <= 27) {
+					message = 'Υπήρξε πρόβλημα με τα στοιχεία σας.';
+				} else if (c.checkoutStatus >= 30 && c.checkoutStatus <= 35) {
+					message = 'Υπήρξε πρόβλημα με τα προϊόντα του καλαθιού.';
+				} else {
+					message = 'Υπήρξε κάποιο πρόβλημα.';
+				}
+				this.presentAlert(message);
 				return;
 			}
 
@@ -114,10 +124,10 @@ export class CheckoutPage {
 
 	}
 
-	presentAlert(c: CheckoutRpcResponse) {
+	presentAlert(message: string) {
 		let alert = this.alertCtrl.create({
-			title: 'Order',
-			subTitle: c.checkoutStatus.toString(),
+			title: 'Η παραγγελία απέτυχε.',
+			subTitle: message,
 			buttons: ['OK']
 		});
 		alert.present();
