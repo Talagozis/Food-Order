@@ -32,7 +32,7 @@ export class CheckoutPage {
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
 		this.orderDetails = { 
-			customerSurname: "test", // den doulebei
+			customerSurname: "",
 			customerForename: "",
 			customerAddressLine: "",
 			customerPhoneNumber: "",
@@ -51,7 +51,7 @@ export class CheckoutPage {
 
 				this.cart = cart;
 
-				// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // add all checks here
+				// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
 				// 	console.log("criteria for order are not meet");
 				// 	return;
 				// }
@@ -68,7 +68,6 @@ export class CheckoutPage {
 	}
 
 	sendOrder(): void {
-
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {
 			...this.orderDetails,
@@ -86,9 +85,7 @@ export class CheckoutPage {
 		this.orderProvider.checkout(checkoutRpc).subscribe((c: CheckoutRpcResponse) => {
 
 			if (!c || c.status !== ResponseStatus.Success) {
-				console.log(c);
-				console.log("ResponseStatus: " + c.status);
-				this.presentAlert(c);
+				this.handleOrderFailureMessage(c);
 				return;
 			}
 
@@ -100,11 +97,26 @@ export class CheckoutPage {
 
 	}
 
-	presentAlert(c: CheckoutRpcResponse) {
+	handleOrderFailureMessage(c: CheckoutRpcResponse) { // <= More detailed messages
+		let message = '';
+		if (c.checkoutStatus >= 10 && c.checkoutStatus <= 16) {
+			message = 'Υπήρξε πρόβλημα με το κατάστημα.';
+		} else if (c.checkoutStatus >= 20 && c.checkoutStatus <= 27) {
+			message = 'Υπήρξε πρόβλημα με τα στοιχεία σας.';
+		} else if (c.checkoutStatus >= 30 && c.checkoutStatus <= 35) {
+			message = 'Υπήρξε πρόβλημα με τα προϊόντα του καλαθιού.';
+		} else {
+			message = 'Υπήρξε κάποιο πρόβλημα.';
+		}
+		this.presentAlert(message);
+		return;
+	}
+
+	presentAlert(message: string) {
 		let alert = this.alertCtrl.create({
-			title: 'Order',
-			subTitle: c.checkoutStatus.toString(),
-			buttons: ['OK']
+			title: 'Η παραγγελία απέτυχε.',
+			subTitle: message,
+			buttons: ['OK'],
 		});
 		alert.present();
 	}
