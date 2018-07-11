@@ -11,6 +11,7 @@ export interface CartItemViewModel {
     totalPrice: number;
     discount: number;
     info: string;
+    identifier: number;
 
     ingredients: {
         bid: number;

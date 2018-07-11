@@ -9,7 +9,7 @@ import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { OrderDetails } from '../../models/Entities/Checkout';
 import { CartProvider } from '../../providers/Cart/cart';
-import { CartViewModel } from '../../models/ViewModels/CartViewModel';
+import { CartViewModel, CartItemViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
 
 @IonicPage()
@@ -67,8 +67,9 @@ export class CheckoutPage {
 		this.showCartDetails = !this.showCartDetails;
 	}
 
-	removeCartItem(cartItemBid: number) {
-		this.cartProvider.removeCartItem(this.store.bid, cartItemBid);
+	removeCartItem(cartItem: CartItemViewModel) {
+		this.cartProvider.removeCartItem(this.store.bid, cartItem)
+			.then(c => {this.cart = c});
 	}
 
 	sendOrder(): void {

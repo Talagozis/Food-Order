@@ -23,7 +23,7 @@
 					<h3 item-start><strong>{{cartItem.quantity}}</strong>x</h3>
 					<h3 text-capitalize>{{cartItem.name}}</h3>
 					<h3 item-end>{{cartItem.totalPrice|priceFormat}}</h3>
-					<button ion-button outline item-end color="grey" (click)="removeCartItem(cartItem.bid)"><ion-icon name="trash"></ion-icon></button>
+					<button ion-button outline item-end color="grey" (click)="removeCartItem(cartItem)"><ion-icon name="trash"></ion-icon></button>
 				</ion-item>
 			</ion-list>
 		</ion-list-header>
