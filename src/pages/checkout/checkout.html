@@ -37,48 +37,48 @@
 				<ion-icon name="person"></ion-icon>
 				<span>Επώνυμο</span>
 			</ion-label>
-			<ion-input type="text" [(ngModel)]="customerForname"></ion-input>
+			<ion-input type="text" [(ngModel)]="orderDetails.customerForname"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label class="required" color="primary" floating>
 				<ion-icon name="person"></ion-icon>
 				<span>Όνομα</span>
 			</ion-label>
-			<ion-input type="text" [(ngModel)]="customerSurname"></ion-input>
+			<ion-input type="text" [(ngModel)]="orderDetails.customerSurname"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label class="required" color="primary" floating>
 				<ion-icon name="home"></ion-icon>
 				<span>Διεύθυνση & αριθμός</span>
 			</ion-label>
-			<ion-input type="text" [(ngModel)]="customerAddressLine"></ion-input>
+			<ion-input type="text" [(ngModel)]="orderDetails.customerAddressLine"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label class="required" color="primary" floating>
 				<ion-icon name="call"></ion-icon>
 				<span>Τηλέφωνο</span>
 			</ion-label>
-			<ion-input type="tel" [(ngModel)]="customerPhoneNumber"></ion-input>
+			<ion-input type="tel" [(ngModel)]="orderDetails.customerPhoneNumber"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label class="required" color="primary" floating>
 				<ion-icon name="call"></ion-icon>
 				<span>Επιβεβαίωση τηλεφώνου</span>
 			</ion-label>
-			<ion-input type="tel" [(ngModel)]="customerPhoneNumberConfirm"></ion-input>
+			<ion-input type="tel" [(ngModel)]="orderDetails.customerPhoneNumberConfirm"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label color="primary" floating>
 				<ion-icon name="notifications"></ion-icon>
 				<span>Όνομα στο κουδούνι</span>
 			</ion-label>
-			<ion-input [(ngModel)]="customerDoorName"></ion-input>
+			<ion-input [(ngModel)]="orderDetails.customerDoorName"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label class="required" color="primary">
 				<ion-icon name="list-box"></ion-icon> Όροφος
 			</ion-label>
-			<ion-select [(ngModel)]="customerFloorNumber" okText="ΟΚ" cancelText="ΑΚΥΡΟ">
+			<ion-select [(ngModel)]="orderDetails.customerFloorNumber" okText="ΟΚ" cancelText="ΑΚΥΡΟ">
 				<ion-option value="0">Ισόγειο</ion-option>
 				<ion-option value="0.5">Ημιόροφος</ion-option>
 				<ion-option value="1">1ος όροφος</ion-option>
