@@ -67,6 +67,10 @@ export class CheckoutPage {
 		this.showCartDetails = !this.showCartDetails;
 	}
 
+	removeCartItem(cartItemBid: number) {
+		console.log(cartItemBid);
+	}
+
 	sendOrder(): void {
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {

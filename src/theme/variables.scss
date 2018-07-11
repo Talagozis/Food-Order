@@ -41,7 +41,8 @@ $colors: (
   success:        #32db64,
   danger:         #f53d3d,
   light:          #f4f4f4,
-  dark:           #222
+  dark:           #222,
+  grey:           #bdbdbd
 );
 
 
@@ -55,9 +56,9 @@ $colors: (
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 $searchbar-md-input-search-icon-color: color($colors, primary, base);
-$text-input-md-highlight-color: #999999;
-$text-input-md-highlight-color-valid: #999999;
-$text-input-md-highlight-color-invalid: #999999;
+$text-input-md-highlight-color: color($colors, grey, base);
+$text-input-md-highlight-color-valid: color($colors, grey, base);
+$text-input-md-highlight-color-invalid: color($colors, grey, base);
 
 
 // App Windows Variables
