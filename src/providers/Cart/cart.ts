@@ -32,6 +32,7 @@ export class CartProvider {
 		return cart;
 	}
 
+
 	public async addCartItem(storeBid: number, cartItem: CartItemViewModel): Promise<void> {
 
 		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
@@ -39,6 +40,7 @@ export class CartProvider {
 		let cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItems.push(cartItem);
+		carts = carts.filter((a: CartViewModel) => a.storeBid !== storeBid);
 		carts.push(cart);
 
 		await this.storage.set(this.CARTS_KEYWORD, carts);
@@ -55,6 +57,20 @@ export class CartProvider {
 
 		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
+
+	public async removeCartItem(storeBid: number, cartItemBid: number): Promise<void> {
+
+		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+
+		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+
+		cart.cartItems = cart.cartItems.filter((a: CartItemViewModel) => a.bid !== cartItemBid);
+		carts = carts.filter((a: CartViewModel) => a.storeBid !== storeBid);
+		carts.push(cart);
+
+		await this.storage.set(this.CARTS_KEYWORD, carts);
+	}
+
 
 	public async addOfferDetails(storeBid: number, cartItemOffer: CartItemOfferViewModel): Promise<void> {
 
