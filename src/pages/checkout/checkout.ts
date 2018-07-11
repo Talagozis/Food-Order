@@ -68,7 +68,7 @@ export class CheckoutPage {
 	}
 
 	removeCartItem(cartItemBid: number) {
-		console.log(cartItemBid);
+		this.cartProvider.removeCartItem(this.store.bid, cartItemBid);
 	}
 
 	sendOrder(): void {
