@@ -32,50 +32,50 @@
 		<ion-list-header text-capitalize>
 			Στοιχεία παραγγελίας
 		</ion-list-header>
-		<ion-item>
-			<ion-label class="required" color="primary" floating>
+		<ion-item margin-bottom>
+			<ion-label class="required" floating>
 				<ion-icon name="person"></ion-icon>
 				<span>Επώνυμο</span>
 			</ion-label>
 			<ion-input type="text" [(ngModel)]="orderDetails.customerForname"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label class="required" color="primary" floating>
+		<ion-item margin-bottom>
+			<ion-label class="required" floating>
 				<ion-icon name="person"></ion-icon>
 				<span>Όνομα</span>
 			</ion-label>
 			<ion-input type="text" [(ngModel)]="orderDetails.customerSurname"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label class="required" color="primary" floating>
+		<ion-item margin-bottom>
+			<ion-label class="required" floating>
 				<ion-icon name="home"></ion-icon>
 				<span>Διεύθυνση & αριθμός</span>
 			</ion-label>
 			<ion-input type="text" [(ngModel)]="orderDetails.customerAddressLine"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label class="required" color="primary" floating>
+		<ion-item margin-bottom>
+			<ion-label class="required" floating>
 				<ion-icon name="call"></ion-icon>
 				<span>Τηλέφωνο</span>
 			</ion-label>
 			<ion-input type="tel" [(ngModel)]="orderDetails.customerPhoneNumber"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label class="required" color="primary" floating>
+		<ion-item margin-bottom>
+			<ion-label class="required" floating>
 				<ion-icon name="call"></ion-icon>
 				<span>Επιβεβαίωση τηλεφώνου</span>
 			</ion-label>
 			<ion-input type="tel" [(ngModel)]="orderDetails.customerPhoneNumberConfirm"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label color="primary" floating>
+		<ion-item margin-bottom>
+			<ion-label floating>
 				<ion-icon name="notifications"></ion-icon>
 				<span>Όνομα στο κουδούνι</span>
 			</ion-label>
 			<ion-input [(ngModel)]="orderDetails.customerDoorName"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label class="required" color="primary">
+		<ion-item margin-bottom>
+			<ion-label class="required">
 				<ion-icon name="list-box"></ion-icon> Όροφος
 			</ion-label>
 			<ion-select [(ngModel)]="orderDetails.customerFloorNumber" okText="ΟΚ" cancelText="ΑΚΥΡΟ">

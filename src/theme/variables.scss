@@ -55,8 +55,9 @@ $colors: (
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 $searchbar-md-input-search-icon-color: color($colors, primary, base);
-
-
+$text-input-md-highlight-color: #999999;
+$text-input-md-highlight-color-valid: #999999;
+$text-input-md-highlight-color-invalid: #999999;
 
 
 // App Windows Variables
@@ -74,7 +75,6 @@ $searchbar-md-input-search-icon-color: color($colors, primary, base);
 // default are overridden.
 
 @import "ionic.theme.default";
-
 
 // Ionicons
 // --------------------------------------------------
