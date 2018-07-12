@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClientExt } from '../http-client/http-client';
 import { ENV } from '@app/env'
-
-
+import 'core-js/es7/object';
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
@@ -16,9 +15,9 @@ export class Api<T> {
 
 	get(endpoint: string, parameters?: object): Observable<T[]> {
 		var x: string = "";
-		if(parameters)
+		if (parameters)
 			x = "?" + Object.entries(parameters).map(([key, val]) => key + "=" + encodeURIComponent(val)).join('&');
-			
+
 		return this.http.get<T[]>(this.url + endpoint + x);
 	}
 
