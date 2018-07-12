@@ -19,7 +19,6 @@ export class StorePage {
 	categories: any[];
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider) {
-		// this.storage.clear();
 	}
 
 	ionViewDidLoad() {

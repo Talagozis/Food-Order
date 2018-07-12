@@ -25,8 +25,11 @@ export class ProductModalPage {
 	info: string;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider) {
+	}
+
+	ionViewDidLoad() {
 		this.storeBid = this.navParams.get("storeBid") as number;
-		
+
 		this.quantity = 1;
 		this.info = '';
 
@@ -62,10 +65,6 @@ export class ProductModalPage {
 
 	}
 
-	ngOnInit() { }
-
-	ionViewDidLoad() { }
-
 	addToCart() {
 		var cartItem: CartItemViewModel = {
 			bid: this.product.bid,
@@ -81,14 +80,13 @@ export class ProductModalPage {
 			})),
 			attributes: this.product.Product_AttributeGroups
 				.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
-				.reduce((a, b) => a.concat(b))
+				.reduce((a, b) => a.concat(b), [])
 				.map(a => ({
 					bid: a.Ingredient.bid,
 					name: a.Ingredient.name,
 					has: true
 				})),
 		};
-		console.log(cartItem);
 
 		this.cartProvider.addCartItem(this.storeBid, cartItem);
 

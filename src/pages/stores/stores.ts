@@ -20,9 +20,7 @@ export class StoresPage {
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
 	}
 
-	ionViewDidLoad() { }
-
-	ngOnInit() {
+	ionViewDidLoad() {
 		this.getStores();
 	}
 

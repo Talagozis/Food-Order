@@ -40,7 +40,7 @@ export class CartProvider {
 		cartItem.identifier = this.generateIdentifier();
 
 		cart.cartItems.push(cartItem);
-		
+
 		await this.addOrUpdateCart(carts, cart);
 	}
 
@@ -60,7 +60,7 @@ export class CartProvider {
 		let cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItems = cart.cartItems.filter((a: CartItemViewModel) => a.identifier !== cartItem.identifier);
-		
+
 		return await this.addOrUpdateCart(carts, cart);
 	}
 
@@ -73,7 +73,7 @@ export class CartProvider {
 		cartItemOffer.identifier = this.generateIdentifier();
 
 		cart.cartItemOffers.push(cartItemOffer);
-		
+
 		await this.addOrUpdateCart(carts, cart);
 	}
 
@@ -93,8 +93,16 @@ export class CartProvider {
 		let cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItemOffers = cart.cartItemOffers.filter((a: CartItemOfferViewModel) => a.identifier !== cartItemOffer.identifier);
-		
+
 		return await this.addOrUpdateCart(carts, cart);
+	}
+
+
+	public async clearCarts(): Promise<void> {
+
+		let carts: CartViewModel[] = new Array<CartViewModel>();
+
+		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
 
 

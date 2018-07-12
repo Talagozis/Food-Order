@@ -28,12 +28,15 @@ export class CheckoutPage {
 	orderDetails: OrderDetails;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
+	}
+
+	ionViewDidLoad() {
 		var storeBid = this.navParams.get('storeId');
-		
+
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
-		this.orderDetails = { 
+		this.orderDetails = {
 			customerSurname: "",
 			customerForename: "",
 			customerAddressLine: "",
@@ -62,15 +65,13 @@ export class CheckoutPage {
 		});
 	}
 
-	ionViewDidLoad() { }
-
 	toggleSectionCartDetails(i) {
 		this.showCartDetails = !this.showCartDetails;
 	}
 
 	removeCartItem(cartItem: CartItemViewModel) {
 		this.cartProvider.removeCartItem(this.store.bid, cartItem)
-			.then(c => {this.cart = c});
+			.then(c => { this.cart = c });
 	}
 
 	sendOrder(): void {

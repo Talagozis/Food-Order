@@ -13,11 +13,9 @@ export class FiltersPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
 	}
 
-	ngOnInit() {
+	ionViewDidLoad() {
 		this.filterViewModels = this.navParams.get('filterViewModels');
 	}
-
-	ionViewDidLoad() { }
 
 	clearFilters() {
 		this.view.dismiss([]);

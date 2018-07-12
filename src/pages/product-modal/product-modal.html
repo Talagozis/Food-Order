@@ -12,50 +12,56 @@
 <ion-content>
 	<ion-grid>
 
-		<ion-row>
-			<ion-col col-10>
-				<p>{{product.name}}</p>
-			</ion-col>
-			<ion-col col-2>
-				<p ion-text color="primary">{{product.price|priceFormat}}</p>
-			</ion-col>
-		</ion-row>
+		<ng-container *ngIf="product">
+			<ion-row>
+				<ion-col col-10>
+					<p>{{product.name}}</p>
+				</ion-col>
+				<ion-col col-2>
+					<p ion-text color="primary">{{product.price|priceFormat}}</p>
+				</ion-col>
+			</ion-row>
+		</ng-container>
 
-		<ion-row *ngFor="let attributeGroup of attributeGroups">
-			<ion-col>
-				<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
-					<ion-list-header text-capitalize>
-						<h4>
-							<strong>{{attributeGroup.description}}</strong>
-						</h4>
-					</ion-list-header>
-					<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
-						<ion-label>
-							<span>{{attribute.Ingredient.name}}</span>
-							<span *ngIf="attributeGroup.showPrice()">+{{attribute.price|priceFormat}}</span>
-						</ion-label>
-						<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
-					</ion-item>
-				</ion-list>
-			</ion-col>
-		</ion-row>
 
-		<ion-row *ngIf="ingredients.length > 0">
-			<ion-col>
-				<ion-list>
-					<ion-list-header text-capitalize>
-						<h4>
-							<strong>Επίλεξε υλικά</strong>
-						</h4>
-					</ion-list-header>
-					<ion-item *ngFor="let ingredient of ingredients">
-						<ion-label>{{ingredient.Ingredient.name}}</ion-label>
-						<ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
-					</ion-item>
-				</ion-list>
-			</ion-col>
-		</ion-row>
+		<ng-container *ngIf="attributeGroups && attributeGroups.length > 0">
+			<ion-row *ngFor="let attributeGroup of attributeGroups">
+				<ion-col>
+					<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
+						<ion-list-header text-capitalize>
+							<h4>
+								<strong>{{attributeGroup.description}}</strong>
+							</h4>
+						</ion-list-header>
+						<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
+							<ion-label>
+								<span>{{attribute.Ingredient.name}}</span>
+								<span *ngIf="attributeGroup.showPrice()">+{{attribute.price|priceFormat}}</span>
+							</ion-label>
+							<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
+						</ion-item>
+					</ion-list>
+				</ion-col>
+			</ion-row>
+		</ng-container>
 
+		<ng-container *ngIf="ingredients && ingredients.length > 0">
+			<ion-row>
+				<ion-col>
+					<ion-list>
+						<ion-list-header text-capitalize>
+							<h4>
+								<strong>Επίλεξε υλικά</strong>
+							</h4>
+						</ion-list-header>
+						<ion-item *ngFor="let ingredient of ingredients">
+							<ion-label>{{ingredient.Ingredient.name}}</ion-label>
+							<ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
+						</ion-item>
+					</ion-list>
+				</ion-col>
+			</ion-row>
+		</ng-container>
 		<ion-row>
 			<ion-col>
 				<ion-textarea type="text" [(ngModel)]="info" placeholder="Παρατηρήσεις & σχόλια"></ion-textarea>

@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ENV } from '@app/env'
+import { CartProvider } from '../../providers/Cart/cart';
 
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html'
 })
 export class HomePage {
-	environment: string;
 	background: string;
 
-	constructor(public navCtrl: NavController) {
-		this.environment = ENV.mode;
+	constructor(public navCtrl: NavController, public cartProvider: CartProvider) {
+	}
+
+	ionViewDidLoad() {
 		this.background = this.chooseBackground();
+		this.cartProvider.clearCarts();
 	}
 
 	chooseBackground() {
