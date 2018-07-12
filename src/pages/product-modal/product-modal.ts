@@ -25,9 +25,10 @@ export class ProductModalPage {
 	info: string;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider) {
+		this.storeBid = this.navParams.get("storeBid") as number;
+		
 		this.quantity = 1;
 		this.info = '';
-		this.storeBid = this.navParams.get("storeBid") as number;
 
 		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
 
@@ -98,8 +99,6 @@ export class ProductModalPage {
 		this.quantity += amount;
 		this.quantity = Math.max(this.quantity, 1);
 	}
-
-
 
 	closeProductModal() {
 		this.navCtrl.pop();

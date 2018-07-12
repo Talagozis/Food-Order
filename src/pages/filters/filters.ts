@@ -17,9 +17,7 @@ export class FiltersPage {
 		this.filterViewModels = this.navParams.get('filterViewModels');
 	}
 
-	ionViewDidLoad() {
-		// console.log('ionViewDidLoad FiltersPage');
-	}
+	ionViewDidLoad() { }
 
 	clearFilters() {
 		this.view.dismiss([]);

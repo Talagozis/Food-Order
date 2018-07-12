@@ -28,6 +28,8 @@ export class CheckoutPage {
 	orderDetails: OrderDetails;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
+		var storeBid = this.navParams.get('storeId');
+		
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
@@ -43,7 +45,6 @@ export class CheckoutPage {
 			info: "",
 		};
 
-		var storeBid = this.navParams.get('storeId');
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
 			this.store = s;
 
@@ -95,7 +96,7 @@ export class CheckoutPage {
 			}
 
 			this.cartProvider.clearCartItem(this.store.bid);
-			this.cartProvider.clearOffersDetails(this.store.bid);
+			this.cartProvider.clearCartItemOffer(this.store.bid);
 
 			this.navCtrl.setRoot('ThankYouPage');
 		});

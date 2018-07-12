@@ -22,13 +22,7 @@ export class StorePage {
 		// this.storage.clear();
 	}
 
-	ionViewDidLoad() {}
-
-	ngOnInit() {
-		this.getStore();
-	}
-
-	getStore(): void {
+	ionViewDidLoad() {
 		var storeBid = this.navParams.get('storeId');
 
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
@@ -54,6 +48,9 @@ export class StorePage {
 		});
 	}
 
+	ngOnInit() {}
+
+	
 	toggleSection(i) {
 		this.categories[i].open = !this.categories[i].open;
 	}

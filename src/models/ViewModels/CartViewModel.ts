@@ -11,7 +11,7 @@ export interface CartItemViewModel {
     totalPrice: number;
     discount: number;
     info: string;
-    identifier: number;
+    identifier?: number;
 
     ingredients: {
         bid: number;
@@ -33,6 +33,7 @@ export interface CartItemOfferViewModel {
     totalPrice: number;
     discount: number;
     info: string;
+    identifier?: number;
 
     products: CartItemViewModel[];
 }
