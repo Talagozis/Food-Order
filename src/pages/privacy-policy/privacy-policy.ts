@@ -11,8 +11,6 @@ export class PrivacyPolicyPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad PrivacyPolicyPage');
-  }
+  ionViewDidLoad() { }
 
 }

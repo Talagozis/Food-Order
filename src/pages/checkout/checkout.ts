@@ -9,7 +9,7 @@ import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { OrderDetails } from '../../models/Entities/Checkout';
 import { CartProvider } from '../../providers/Cart/cart';
-import { CartViewModel } from '../../models/ViewModels/CartViewModel';
+import { CartViewModel, CartItemViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
 
 @IonicPage()
@@ -28,10 +28,15 @@ export class CheckoutPage {
 	orderDetails: OrderDetails;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
+	}
+
+	ionViewDidLoad() {
+		var storeBid = this.navParams.get('storeId');
+
 		this.showCartDetails = false;
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
-		this.orderDetails = { 
+		this.orderDetails = {
 			customerSurname: "",
 			customerForename: "",
 			customerAddressLine: "",
@@ -43,7 +48,6 @@ export class CheckoutPage {
 			info: "",
 		};
 
-		var storeBid = this.navParams.get('storeId');
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
 			this.store = s;
 
@@ -61,10 +65,13 @@ export class CheckoutPage {
 		});
 	}
 
-	ionViewDidLoad() { }
-
 	toggleSectionCartDetails(i) {
 		this.showCartDetails = !this.showCartDetails;
+	}
+
+	removeCartItem(cartItem: CartItemViewModel) {
+		this.cartProvider.removeCartItem(this.store.bid, cartItem)
+			.then(c => { this.cart = c });
 	}
 
 	sendOrder(): void {
@@ -90,7 +97,7 @@ export class CheckoutPage {
 			}
 
 			this.cartProvider.clearCartItem(this.store.bid);
-			this.cartProvider.clearOffersDetails(this.store.bid);
+			this.cartProvider.clearCartItemOffer(this.store.bid);
 
 			this.navCtrl.setRoot('ThankYouPage');
 		});

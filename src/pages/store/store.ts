@@ -19,16 +19,9 @@ export class StorePage {
 	categories: any[];
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider) {
-		// this.storage.clear();
 	}
 
-	ionViewDidLoad() {}
-
-	ngOnInit() {
-		this.getStore();
-	}
-
-	getStore(): void {
+	ionViewDidLoad() {
 		var storeBid = this.navParams.get('storeId');
 
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
@@ -54,6 +47,9 @@ export class StorePage {
 		});
 	}
 
+	ngOnInit() {}
+
+	
 	toggleSection(i) {
 		this.categories[i].open = !this.categories[i].open;
 	}
