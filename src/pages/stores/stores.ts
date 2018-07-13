@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Refresher } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Refresher, LoadingController } from 'ionic-angular';
 import { StoreApi } from 'models/Api/Store';
 
 import { StoreProvider } from '../../providers/store/store';
@@ -17,7 +17,7 @@ export class StoresPage {
 	initialStores: StoreViewModel[];
 	selectedCuisineBids: number[] = [];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public loadingCtrl: LoadingController) {
 	}
 
 	ionViewDidLoad() {
@@ -28,10 +28,14 @@ export class StoresPage {
 		this.getStores();
 		setTimeout(() => {
 			refresher.complete();
-		}, 3000);
+		  }, 0);
 	}
 
 	getStores(): void {
+		let loader = this.loadingCtrl.create({
+			content: "Αναζήτηση καταστημάτων"
+		  });  
+	  	loader.present();
 		this.storeProvider.findAllAvailable((s: StoreApi[]) => {
 					
 			let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
@@ -40,6 +44,7 @@ export class StoresPage {
 
 			this.initialStores = storeViewModels;
 			this.stores = storeViewModels;
+			loader.dismiss();
 		});	
 	}
 
