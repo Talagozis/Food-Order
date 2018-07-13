@@ -7,6 +7,8 @@ import { StoreApi } from '../../models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { ProductProvider } from '../../providers/Product/product';
 import { ProductApi } from '../../models/api/Product';
+import { CartProvider } from '../../providers/Cart/cart';
+import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 
 @IonicPage()
 @Component({
@@ -17,11 +19,22 @@ export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreApi;
 	categories: any[];
+	cart: CartViewModel;
+	cartItemsNumber: number;
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider) {
+	this.cartItemsNumber = 0;
 	}
 
 	ionViewDidLoad() {
+		
+	}
+
+	ngOnInit() {
+		this.getStore();
+	}
+
+	getStore() {
 		let loader = this.loadingCtrl.create({
 			content: "Προϊόντα καταστήματος"
 		});  
@@ -31,6 +44,16 @@ export class StorePage {
 
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
 			this.store = s;
+			this.cartProvider.getByStoreBid(s.bid).then((cart: CartViewModel) => {
+
+				this.cart = cart;
+				this.cartItemsNumber = cart.cartItems.length;
+
+				// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
+				// 	console.log("criteria for order are not meet");
+				// 	return;
+				// }
+			});
 		});
 
 		this.productProvider.findByStoreBid(storeBid).subscribe((p: ProductApi[]) => {
@@ -52,9 +75,6 @@ export class StorePage {
 			loader.dismiss();
 		});
 	}
-
-	ngOnInit() {}
-
 	
 	toggleSection(i) {
 		this.categories[i].open = !this.categories[i].open;
@@ -67,6 +87,7 @@ export class StorePage {
 	}
 
 	onProductModalDidDismiss(): void {
+		this.getStore();
 		// if (!bids) {
 		// 	return;
 		// }
