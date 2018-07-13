@@ -20,10 +20,8 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 	cart: CartViewModel;
-	cartItemsNumber: number;
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider) {
-	this.cartItemsNumber = 0;
 	}
 
 	ionViewDidLoad() {
@@ -47,7 +45,6 @@ export class StorePage {
 			this.cartProvider.getByStoreBid(s.bid).then((cart: CartViewModel) => {
 
 				this.cart = cart;
-				this.cartItemsNumber = cart.cartItems.length;
 
 				// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
 				// 	console.log("criteria for order are not meet");

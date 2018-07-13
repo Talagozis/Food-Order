@@ -13,10 +13,10 @@
 
 	<ion-list class="accordion-list">
 		<ion-list-header no-lines no-padding *ngIf="cart">
-			<button ion-item (click)="toggleSectionCartDetails(showCartDetails)" detail-none [ngClass]="{'section-active': showCartDetails, 'section': !showCartDetails}">
+			<button ion-item class="color-secondary" (click)="toggleSectionCartDetails(showCartDetails)" detail-none [ngClass]="{'section-active': showCartDetails, 'section': !showCartDetails}">
 				<ion-icon item-left name="arrow-forward" *ngIf="!showCartDetails"></ion-icon>
 				<ion-icon item-left name="arrow-down" *ngIf="showCartDetails"></ion-icon>
-				Καλάθι Παραγγελίας
+				Καλάθι Παραγγελίας ({{cart.cartItems.length}}) <ion-icon name="cart"></ion-icon>
 			</button>
 			<ion-list *ngIf="showCartDetails">
 				<ion-item *ngFor="let cartItem of cart.cartItems" detail-none class="child-item" text-wrap>
