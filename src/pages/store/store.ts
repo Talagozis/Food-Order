@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 
 import '../../utils/linqtsExtension';
 
@@ -18,10 +18,15 @@ export class StorePage {
 	store: StoreApi;
 	categories: any[];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController) {
 	}
 
 	ionViewDidLoad() {
+		let loader = this.loadingCtrl.create({
+			content: "Προϊόντα καταστήματος"
+		});  
+		loader.present();
+		  
 		var storeBid = this.navParams.get('storeId');
 
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
@@ -44,6 +49,7 @@ export class StorePage {
 				category.key = tagName;
 				return category;
 			});
+			loader.dismiss();
 		});
 	}
 

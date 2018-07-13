@@ -21,15 +21,12 @@
         <img src="{{store.logo|imageStore}}" class="img-responsive">
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
-
       <div *ngIf="store.isOpen;else isClosed">
         <h2 ion-text color="success" item-right>Ανοιχτό</h2>
       </div>
-
       <ng-template #isClosed>
         <h2 ion-text color="danger" item-right>Κλειστό</h2>
       </ng-template>
-
       <p>{{store.getCuisines()}}</p>
     </ion-item>
   </ion-list>
