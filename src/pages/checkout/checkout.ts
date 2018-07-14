@@ -30,15 +30,10 @@ export class CheckoutPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 	}
 
-	// ionViewCanLeave() {
-	// 	let getStores = this.navParams.get('onDismiss');
-	// 	getStores();
-	// }
-
 	ionViewDidLoad() {
 		var storeBid = this.navParams.get('storeId');
 
-		this.showCartDetails = false;
+		this.showCartDetails = true;
 		this.totalCartPrice = 0.00;
 		this.canSendOrder = false;
 		this.orderDetails = {
@@ -64,7 +59,8 @@ export class CheckoutPage {
 				// 	console.log("criteria for order are not meet");
 				// 	return;
 				// }
-				
+				this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
+				this.showCartDetails = cart.cartItems.length <= 5;
 				this.canSendOrder = true;
 			});
 		});
@@ -76,7 +72,10 @@ export class CheckoutPage {
 
 	removeCartItem(cartItem: CartItemViewModel) {
 		this.cartProvider.removeCartItem(this.store.bid, cartItem)
-			.then(c => { this.cart = c });
+			.then(c => {
+				this.cart = c;
+				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
+			});
 	}
 
 	sendOrder(): void {
