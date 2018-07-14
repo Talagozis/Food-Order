@@ -30,6 +30,11 @@ export class CheckoutPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
 	}
 
+	// ionViewCanLeave() {
+	// 	let getStores = this.navParams.get('onDismiss');
+	// 	getStores();
+	// }
+
 	ionViewDidLoad() {
 		var storeBid = this.navParams.get('storeId');
 

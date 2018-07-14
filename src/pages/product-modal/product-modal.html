@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-navbar color="primary">
-		<ion-title>Λεπτομέρειες</ion-title>
+		<ion-title *ngIf="product">{{product.name}}</ion-title>
 		<ion-buttons end>
 			<button ion-button icon-only (click)="closeProductModal()">
 				<ion-icon name="close"></ion-icon>
@@ -14,11 +14,11 @@
 
 		<ng-container *ngIf="product">
 			<ion-row>
-				<ion-col col-10>
-					<p>{{product.name}}</p>
+				<ion-col col-8>
+					<p>{{product.shortDescription}}</p>
 				</ion-col>
-				<ion-col col-2>
-					<p ion-text color="primary">{{product.price|priceFormat}}</p>
+				<ion-col col-4 text-center>
+					<button ion-button outline>{{product.price|priceFormat}}</button>
 				</ion-col>
 			</ion-row>
 		</ng-container>
@@ -51,7 +51,7 @@
 					<ion-list>
 						<ion-list-header text-capitalize>
 							<h4>
-								<strong>Επίλεξε υλικά</strong>
+								<strong>Επίλεξε επιπλέον υλικά</strong>
 							</h4>
 						</ion-list-header>
 						<ion-item *ngFor="let ingredient of ingredients">
