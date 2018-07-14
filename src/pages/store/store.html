@@ -29,23 +29,6 @@
 <ion-content>
 
 	<div *ngIf="store">
-		<!-- <ion-item no-lines>
-			<ion-fab right top>
-				<button ion-fab color="success">
-					<ion-badge *ngIf="store.isOpen;else isClosed" item-end></ion-badge>Ανοιχτό</button>
-				<ng-template #isClosed>
-					<button ion-fab color="danger">
-						<ion-badge item-end color="danger"></ion-badge>Κλειστό</button>
-				</ng-template>
-			</ion-fab>
-			<ion-thumbnail item-start>
-				<img src="{{store.logo|imageStore}}" class="img-responsive">
-			</ion-thumbnail>
-			<h2>{{store.name}}</h2>
-			<p>
-				Ελάχιστη παραγγελία: {{store.minOrderCost|priceFormat}}
-			</p>
-		</ion-item> -->
 
 		<div padding>
 			<ion-segment [(ngModel)]="storeSegment">
