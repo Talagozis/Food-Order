@@ -72,8 +72,9 @@
 			</ion-list>
 		</div>
 	</div>
-	<ion-fab bottom right>
+	<ion-fab *ngIf="cart && cart.cartItems.length > 0" bottom right>
 		<button ion-fab color="secondary" (click)="navigateToCheckoutPage()">
+			<h4>{{cart.cartItems.length}}</h4>
 			<ion-icon name="cart"></ion-icon>
 		</button>
 	</ion-fab>

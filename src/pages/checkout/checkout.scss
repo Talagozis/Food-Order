@@ -40,4 +40,7 @@ page-checkout {
     .list {
         margin-bottom: 4px;
     }
+    .color-secondary {
+        background-color: color($colors, secondary-light, base) !important;
+    }
 }

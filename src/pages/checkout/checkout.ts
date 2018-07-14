@@ -59,7 +59,7 @@ export class CheckoutPage {
 				// 	console.log("criteria for order are not meet");
 				// 	return;
 				// }
-
+				
 				this.canSendOrder = true;
 			});
 		});
