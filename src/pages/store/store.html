@@ -1,30 +1,34 @@
 <ion-header>
-	<ion-navbar color="primary">
-		<ion-title text-capitalize>
-			Κατάλογος
-		</ion-title>
-	</ion-navbar>
+
+	<div class="store-cover" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (store.cover|imageStore) + ')  center center / cover no-repeat'}">
+		<ion-navbar transparent>
+			<h3 ion-text text-center color="light">{{store.name}}</h3>
+		</ion-navbar>
+		<div *ngIf="store">
+			<ion-row>
+				<ion-col col-4>
+					<ion-thumbnail item-start>
+						<img src="{{store.logo|imageStore}}" class="img-responsive store-logo">
+					</ion-thumbnail>
+				</ion-col>
+				<ion-col col-8>
+					<p ion-text color="light">
+						<ion-icon name="cash"></ion-icon>
+						Ελάχιστη παραγγελία: {{store.minOrderCost|priceFormat}}
+					</p>
+					<p ion-text color="light">
+						<ion-icon name="clock"></ion-icon>
+						Ανοιχτό σήμερα: 12:00 - 02:00
+					</p>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
 </ion-header>
 
 <ion-content>
+
 	<div *ngIf="store">
-		<ion-item no-lines>
-			<ion-fab right top>
-				<button ion-fab color="success">
-					<ion-badge *ngIf="store.isOpen;else isClosed" item-end></ion-badge>Ανοιχτό</button>
-				<ng-template #isClosed>
-					<button ion-fab color="danger">
-						<ion-badge item-end color="danger"></ion-badge>Κλειστό</button>
-				</ng-template>
-			</ion-fab>
-			<ion-thumbnail item-start>
-				<img src="{{store.logo|imageStore}}" class="img-responsive">
-			</ion-thumbnail>
-			<h2>{{store.name}}</h2>
-			<p>
-				Ελάχιστη παραγγελία: {{store.minOrderCost|priceFormat}}
-			</p>
-		</ion-item>
 
 		<div padding>
 			<ion-segment [(ngModel)]="storeSegment">

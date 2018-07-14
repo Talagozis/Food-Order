@@ -9,6 +9,7 @@ import { ProductProvider } from '../../providers/Product/product';
 import { ProductApi } from '../../models/api/Product';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
+import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 
 @IonicPage()
 @Component({
@@ -22,14 +23,17 @@ export class StorePage {
 	cart: CartViewModel;
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider) {
+		this.store = new StoreViewModel({cover: "", minOrderCost: 0});
+	}
+
+	ionViewWillEnter() {
+		this.getStore();
 	}
 
 	ionViewDidLoad() {
-		
 	}
 
 	ngOnInit() {
-		this.getStore();
 	}
 
 	getStore() {
@@ -43,13 +47,7 @@ export class StorePage {
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
 			this.store = s;
 			this.cartProvider.getByStoreBid(s.bid).then((cart: CartViewModel) => {
-
 				this.cart = cart;
-
-				// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
-				// 	console.log("criteria for order are not meet");
-				// 	return;
-				// }
 			});
 		});
 
@@ -99,6 +97,6 @@ export class StorePage {
 	}
 
 	navigateToCheckoutPage() {
-		this.navCtrl.push('CheckoutPage', { storeId: this.store.bid });
+		this.navCtrl.push('CheckoutPage', { storeId: this.store.bid, onDismiss: this.getStore.bind(this) });
 	}
 }
