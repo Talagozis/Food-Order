@@ -1,14 +1,20 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle start>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-searchbar style=" padding-left: 0; padding-right: 0;" placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
-    <ion-buttons end>
-      <button ion-button (click)="openFilters()">
-        <ion-icon name="options"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-row>
+      <ion-col col-2>
+        <button class="header-menu" ion-button menuToggle>
+          <ion-icon class="menu-icon" name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-8>
+        <ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button (click)="openFilters()">
+          <ion-icon name="options"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 

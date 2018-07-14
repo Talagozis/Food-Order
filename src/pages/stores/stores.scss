@@ -1,22 +1,9 @@
 page-stores {
-    #home-logo {
-        width: auto;
-        height: 25px;
+    .header-menu {
+        margin-top: 8px;
     }
-    .white-line {
-        border: 1px solid white;
-    }
-    .black-line {
-        border: 1px solid black;
-    }
-    .no-text-transform {
-        text-transform: none;
-    }
-    .no-padding {
-        padding: 3px;
-    }
-    ion-navbar .navbar-content {
-        padding: 0 10%;
+    .menu-icon {
+        font-size: 30px;
     }
     .pointer {
         cursor: pointer;
