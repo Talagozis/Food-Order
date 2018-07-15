@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="secondary">
     <ion-row>
       <ion-col col-2>
         <button class="header-menu" ion-button menuToggle>
@@ -10,7 +10,7 @@
         <ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
       </ion-col>
       <ion-col col-2>
-        <button ion-button (click)="openFilters()">
+        <button ion-button (click)="openFilters()" color="secondary">
           <ion-icon name="options"></ion-icon>
         </button>
       </ion-col>

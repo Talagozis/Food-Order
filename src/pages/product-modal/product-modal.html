@@ -1,29 +1,30 @@
 <ion-header>
-	<ion-navbar color="primary">
-		<ion-title *ngIf="product">{{product.name}}</ion-title>
-		<ion-buttons end>
-			<button ion-button icon-only (click)="closeProductModal()">
-				<ion-icon name="close"></ion-icon>
-			</button>
-		</ion-buttons>
-	</ion-navbar>
+	<div class="product-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (product.picture|imageProduct) + ')  center center / cover no-repeat'}">
+		<ion-navbar transparent>
+			<h3 ion-text color="light">{{product.name}}</h3>
+			<ion-buttons end>
+				<button ion-button icon-only (click)="closeProductModal()" color="light">
+					<ion-icon name="close"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-navbar>
+		<div *ngIf="product">
+			<ion-row>
+				<ion-col col-4>
+					<p ion-text text-center color="light" class="product-price">
+						{{product.price|priceFormat}}
+					</p>
+				</ion-col>
+				<ion-col col-8>
+					<p ion-text color="light">{{product.shortDescription}}</p>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
 </ion-header>
 
 <ion-content>
 	<ion-grid>
-
-		<ng-container *ngIf="product">
-			<ion-row>
-				<ion-col col-8>
-					<p>{{product.shortDescription}}</p>
-				</ion-col>
-				<ion-col col-4 text-center>
-					<button ion-button outline>{{product.price|priceFormat}}</button>
-				</ion-col>
-			</ion-row>
-		</ng-container>
-
-
 		<ng-container *ngIf="attributeGroups && attributeGroups.length > 0">
 			<ion-row *ngFor="let attributeGroup of attributeGroups">
 				<ion-col>
@@ -44,7 +45,6 @@
 				</ion-col>
 			</ion-row>
 		</ng-container>
-
 		<ng-container *ngIf="ingredients && ingredients.length > 0">
 			<ion-row>
 				<ion-col>
@@ -64,32 +64,29 @@
 		</ng-container>
 		<ion-row>
 			<ion-col>
-				<ion-textarea type="text" [(ngModel)]="info" placeholder="Παρατηρήσεις & σχόλια"></ion-textarea>
+				<ion-textarea type="text" outline [(ngModel)]="info" placeholder="Παρατηρήσεις & σχόλια"></ion-textarea>
 			</ion-col>
 		</ion-row>
-
 	</ion-grid>
 </ion-content>
 
 <ion-footer>
-	<ion-grid>
-		<ion-row>
-			<ion-col col-2>
-				<button ion-button block ion-icon (click)="changeQuantity(-1)">
-					<ion-icon name="remove"></ion-icon>
-				</button>
-			</ion-col>
-			<ion-col col-2>
-				<ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
-			</ion-col>
-			<ion-col col-2>
-				<button ion-button block ion-icon (click)="changeQuantity(+1)">
-					<ion-icon name="add"></ion-icon>
-				</button>
-			</ion-col>
-			<ion-col col-6>
-				<button ion-button block text-capitalize (click)="addToCart()">Προσθήκη</button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+	<ion-row>
+		<ion-col col-2>
+			<button ion-button block ion-icon (click)="changeQuantity(-1)">
+				<ion-icon name="remove"></ion-icon>
+			</button>
+		</ion-col>
+		<ion-col col-2>
+			<ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
+		</ion-col>
+		<ion-col col-2>
+			<button ion-button block ion-icon (click)="changeQuantity(+1)">
+				<ion-icon name="add"></ion-icon>
+			</button>
+		</ion-col>
+		<ion-col col-6>
+			<button ion-button block text-capitalize (click)="addToCart()">Προσθήκη</button>
+		</ion-col>
+	</ion-row>
 </ion-footer>
