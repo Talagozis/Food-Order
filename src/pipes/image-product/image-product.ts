@@ -10,6 +10,6 @@ export class ImageProductPipe implements PipeTransform {
       if (value && /\S/.test(value)) {
         return ENV.IMAGE_URL + "product/" + value;
       } 
-      return '../../assets/imgs/no-image-available-store.png';
+      return '../../assets/imgs/no-image-available-product.png';
   }
 }
