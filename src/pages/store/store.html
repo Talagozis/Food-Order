@@ -1,5 +1,4 @@
 <ion-header>
-
 	<div class="store-cover" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (store.cover|imageStore) + ')  center center / cover no-repeat'}">
 		<ion-navbar transparent>
 			<h3 ion-text text-center color="light">{{store.name}}</h3>
@@ -13,7 +12,7 @@
 				</ion-col>
 				<ion-col col-8>
 					<p ion-text color="light">
-						<ion-icon name="cash" color="secondary-light"></ion-icon>
+						<ion-icon name="cash" color="success"></ion-icon>
 						Ελάχιστη παραγγελία: <strong>{{store.minOrderCost|priceFormat}}</strong>
 					</p>
 					<p ion-text color="light">
@@ -77,8 +76,8 @@
 		</div>
 	</div>
 	<ion-fab *ngIf="cart && cart.cartItems.length > 0" bottom right>
-		<button ion-fab color="secondary" (click)="navigateToCheckoutPage()">
-			<h4>{{cart.cartItems.length}}</h4>
+		<button ion-fab large color="primary" (click)="navigateToCheckoutPage()">
+			{{cart.cartItems.length}}
 			<ion-icon name="cart"></ion-icon>
 		</button>
 	</ion-fab>

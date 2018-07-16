@@ -25,6 +25,7 @@ export class ProductModalPage {
 	info: string;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider) {
+		this.product = new ProductViewModel({picture: "", price: 0});
 	}
 
 	ionViewDidLoad() {

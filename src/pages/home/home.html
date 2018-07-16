@@ -1,20 +1,27 @@
 <ion-header>
   <ion-navbar transparent>
-    <button ion-button menuToggle start color="light">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      <p ion-text color="light">Food Order</p>
-    </ion-title>
+    <ion-row>
+      <ion-col col-2>
+        <button ion-button menuToggle color="light">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-8 text-center>
+        <p ion-text color="light">Food Order</p>
+      </ion-col>
+      <ion-col col-2>
+        <img src="../assets/imgs/homepage-logo.png" width="42" height="42" />
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="{{background}}">
-  <ion-row text-center>
+  <!-- <ion-row text-center>
     <ion-col>
-      <img src="../assets/imgs/homepage-logo.png" width="200px" height="200px" />
+      <h1 ion-text color="secondary-light">Food Order</h1>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
   <!-- OFFERS LIST FOR VERSION 2.0 -->
   <!-- <ion-list>
     <ion-card>
@@ -66,6 +73,6 @@
 
 <ion-footer>
   <ion-toolbar transparent style="padding: 0 5%;">
-    <button text-capitalize ion-button block large color="secondary" class="margin-bottom-percent-15" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
+    <button text-capitalize ion-button block large color="secondary" class="margin-bottom-percent-10" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
   </ion-toolbar>
 </ion-footer>
