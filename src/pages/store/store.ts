@@ -36,6 +36,14 @@ export class StorePage {
 	ngOnInit() {
 	}
 
+	getBackgroundStyle(imagepath){
+		return {
+			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + ')',
+			'background-position': 'center center',
+			'background-size': 'cover',
+		};
+	}
+
 	getStore() {
 		let loader = this.loadingCtrl.create({
 			content: "Προϊόντα καταστήματος"

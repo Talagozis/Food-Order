@@ -1,5 +1,5 @@
 <ion-header>
-	<div class="store-cover" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (store.cover|imageStore) + ')  center center / cover no-repeat'}">
+	<div class="store-cover" [ngStyle]="getBackgroundStyle(store.cover|imageStore)">
 		<ion-navbar transparent>
 			<h3 ion-text text-center color="light">{{store.name}}</h3>
 		</ion-navbar>
