@@ -51,18 +51,19 @@ export class CheckoutPage {
 		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
 			this.store = s;
 
-			this.cartProvider.getByStoreBid(s.bid).then((cart: CartViewModel) => {
+		});
+		
+		this.cartProvider.getByStoreBid(storeBid).then((cart: CartViewModel) => {
 
-				this.cart = cart;
+			this.cart = cart;
 
-				// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
-				// 	console.log("criteria for order are not meet");
-				// 	return;
-				// }
-				this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
-				this.showCartDetails = cart.cartItems.length <= 5;
-				this.canSendOrder = true;
-			});
+			// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
+			// 	console.log("criteria for order are not meet");
+			// 	return;
+			// }
+			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
+			this.showCartDetails = cart.cartItems.length <= 5;
+			this.canSendOrder = true;
 		});
 	}
 
