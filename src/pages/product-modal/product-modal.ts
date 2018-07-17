@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angular';
 
 import '../../utils/linqtsExtension';
 
@@ -24,7 +24,7 @@ export class ProductModalPage {
 	quantity: number;
 	info: string;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, private cartProvider: CartProvider) {
 		this.product = new ProductViewModel({picture: "", price: 0});
 	}
 
@@ -91,7 +91,7 @@ export class ProductModalPage {
 
 		this.cartProvider.addCartItem(this.storeBid, cartItem);
 
-		this.navCtrl.pop();
+		this.viewCtrl.dismiss({isAdded: true});
 	}
 
 	changeQuantity(amount: number) {
@@ -100,6 +100,6 @@ export class ProductModalPage {
 	}
 
 	closeProductModal() {
-		this.navCtrl.pop();
+		this.viewCtrl.dismiss({isAdded: false});
 	}
 }

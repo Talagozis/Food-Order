@@ -15,4 +15,20 @@ page-product-modal {
             margin-right: auto;
         }
     }
+    .ingredients-container {
+        ion-label {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .attributes-container {
+        ion-label {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .name, .price {
+        letter-spacing: -0.7px;
+    }
+
 }

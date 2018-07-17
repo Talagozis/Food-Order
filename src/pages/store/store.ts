@@ -99,16 +99,19 @@ export class StorePage {
 		productModal.present();
 	}
 
-	async onProductModalDidDismiss(): Promise<void> {
+	async onProductModalDidDismiss(data: any): Promise<void> {
+
+		if (!data.isAdded)
+			return;
+		
 		let loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});
 		loader.present();
 
-		var storeBid = this.navParams.get('storeId');
+		var storeBid = this.store.bid;
 
 		await Promise.all([
-			this.initializeStore(storeBid),
 			this.initializeProducts(storeBid),
 			this.initializeCart(storeBid),
 		]);

@@ -26,7 +26,7 @@
 <ion-content>
 	<ion-grid>
 		<ng-container *ngIf="attributeGroups && attributeGroups.length > 0">
-			<ion-row *ngFor="let attributeGroup of attributeGroups">
+			<ion-row class="attributes-container" *ngFor="let attributeGroup of attributeGroups">
 				<ion-col>
 					<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
 						<ion-list-header text-capitalize>
@@ -36,8 +36,8 @@
 						</ion-list-header>
 						<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
 							<ion-label>
-								<span>{{attribute.Ingredient.name}}</span>
-								<span *ngIf="attributeGroup.showPrice()">+{{attribute.price|priceFormat}}</span>
+								<span class="label">{{attribute.Ingredient.name}}</span>
+								<span class="price" *ngIf="attributeGroup.showPrice() && attribute.price > 0">+{{attribute.price|priceFormat}}</span>
 							</ion-label>
 							<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
 						</ion-item>
@@ -46,7 +46,7 @@
 			</ion-row>
 		</ng-container>
 		<ng-container *ngIf="ingredients && ingredients.length > 0">
-			<ion-row>
+			<ion-row class="ingredients-container">
 				<ion-col>
 					<ion-list>
 						<ion-list-header text-capitalize>
@@ -55,7 +55,10 @@
 							</h4>
 						</ion-list-header>
 						<ion-item *ngFor="let ingredient of ingredients">
-							<ion-label>{{ingredient.Ingredient.name}} +{{ingredient.price|priceFormat}}</ion-label>
+							<ion-label>
+								<span class="label">{{ingredient.Ingredient.name}}</span>
+								<span class="price" *ngIf="ingredient.price > 0">+{{ingredient.price|priceFormat}}</span>
+							</ion-label>
 							<ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
 						</ion-item>
 					</ion-list>
