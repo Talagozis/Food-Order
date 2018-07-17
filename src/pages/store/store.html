@@ -58,10 +58,10 @@
 
 			<ion-list *ngSwitchCase="'info'">
 				<ion-item *ngFor="let address of store.Addresses">
-					<ion-icon name="home"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}
+					<ion-icon name="ios-home-outline"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}
 				</ion-item>
 				<ion-item *ngFor="let openHour of store.OpenHours">
-					<ion-icon name="clock"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}
+					<ion-icon name="ios-clock-outline"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}
 				</ion-item>
 			</ion-list>
 
@@ -70,7 +70,7 @@
 					<ion-avatar item-start>
 						<img item-right src="{{contact.contactTypePicture|imageContactType}}" class="img-responsive" style="width: 24px; height: 24px">
 					</ion-avatar>
-					<a center ion-button block href="tel:{{contact.value}}"> {{contact.value}}</a>
+					<a center ion-button block color="light" href="tel:{{contact.value}}"> {{contact.value}}</a>
 				</ion-item>
 			</ion-list>
 		</div>
