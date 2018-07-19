@@ -2,6 +2,8 @@
 
 ## Build status [![start with why](https://talagozis.visualstudio.com/a066a23a-a1df-4857-adce-3a0d1d9c5892/_apis/build/status/6)]
 
+[![Build status](https://talagozis.visualstudio.com/amvrosia/_apis/build/status/Amvrosia-Pwa?branch=production)](https://talagozis.visualstudio.com/amvrosia/_build/latest?definitionId=6&branch=production)]
+
 ## Installation
 
 ### Install Ionic globally
