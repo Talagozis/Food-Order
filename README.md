@@ -1,5 +1,7 @@
 # Foor-Order
 
+## Build status [![start with why](https://talagozis.visualstudio.com/a066a23a-a1df-4857-adce-3a0d1d9c5892/_apis/build/status/6)]
+
 ## Installation
 
 ### Install Ionic globally
