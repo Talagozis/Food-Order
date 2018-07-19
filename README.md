@@ -1,8 +1,11 @@
 # Foor-Order
 
-## Build status [![start with why](https://talagozis.visualstudio.com/a066a23a-a1df-4857-adce-3a0d1d9c5892/_apis/build/status/6)]
+## Build Status
 
-[![Build status](https://talagozis.visualstudio.com/amvrosia/_apis/build/status/Amvrosia-Pwa?branch=production)](https://talagozis.visualstudio.com/amvrosia/_build/latest?definitionId=6&branch=production)]
+|             |Build Status|
+|-------------|:----------:|
+|**Linux/Mac**|![Build status](https://talagozis.visualstudio.com/_apis/public/build/definitions/a066a23a-a1df-4857-adce-3a0d1d9c5892/6/badge)|
+|**Windows**  |![Build status](https://talagozis.visualstudio.com/_apis/public/build/definitions/a066a23a-a1df-4857-adce-3a0d1d9c5892/6/badge)|
 
 ## Installation
 
@@ -57,6 +60,7 @@ ionic cordova platform add ios
 ```bash
 ionic cordova run ios (have simulator or device connected)
 ```
+
 
 # The Ionic Super Starter 🎮
 
