@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Refresher, LoadingController } from 'ionic-angular';
-import { StoreApi } from 'models/Api/Store';
+
+import '../../utils/linqtsExtension';
+
+import { StoreApi } from '../../models/Api/Store';
+import { HubUserApi } from '../../models/api/HubUser';
 
 import { StoreProvider } from '../../providers/store/store';
+import { HubUserProvider } from '../../providers/HubUser/hubUser';
 import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
 import { FilterViewModel } from '../filters/filters';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
@@ -17,7 +22,7 @@ export class StoresPage {
 	initialStores: StoreViewModel[];
 	selectedCuisineBids: number[] = [];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public loadingCtrl: LoadingController) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public hubUserProvider: HubUserProvider, public loadingCtrl: LoadingController) {
 	}
 
 	ionViewDidLoad() {
@@ -28,24 +33,39 @@ export class StoresPage {
 		this.getStores();
 		setTimeout(() => {
 			refresher.complete();
-		  }, 0);
+		}, 0);
 	}
 
-	getStores(): void {
+	 getStores(): void {
 		let loader = this.loadingCtrl.create({
 			content: "Αναζήτηση καταστημάτων"
-		  });  
-	  	loader.present();
-		this.storeProvider.findAllAvailable((s: StoreApi[]) => {
-					
+		});
+		loader.present();
+		this.storeProvider.findAllAvailable(async (s: StoreApi[]) => {
+
+			let hubUsers: HubUserApi[] = await this.hubUserProvider.find().toPromise();
+
 			let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
 				...a,
+				isHubConnected: hubUsers.filter(b => a.AspNetUsers.filter(c => b.bid === c.bid).length > 0).length > 0,
 			}));
+
+			storeViewModels = storeViewModels.ToList().OrderBy(a => !a.isHubConnected).ThenBy(a => Math.random()).ToArray();
+
+			// storeViewModels = storeViewModels.sort((a, b) => {
+			
+			// 	if (a.isHubConnected < b.isHubConnected)
+			// 		return 1;
+			// 	if (a.isHubConnected > b.isHubConnected)
+			// 		return -1;
+				
+			// 	return 0.5 - Math.random()
+			// });
 
 			this.initialStores = storeViewModels;
 			this.stores = storeViewModels;
 			loader.dismiss();
-		});	
+		});
 	}
 
 	navigateToStorePage(store: StoreApi) {

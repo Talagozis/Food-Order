@@ -17,6 +17,7 @@ import { StoreProvider } from '../providers/store/store';
 import { ProductProvider } from '../providers/Product/product';
 import { OrderProvider } from '../providers/Order/order';
 import { CartProvider } from '../providers/Cart/cart';
+import { HubUserProvider } from '../providers/HubUser/hubUser';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CartProvider } from '../providers/Cart/cart';
 		ProductProvider,
 		OrderProvider,
 		CartProvider,
+		HubUserProvider,
 		Api,
 		Rpc,
 		HttpClientExt

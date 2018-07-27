@@ -6,6 +6,7 @@ import { ProductApi } from "./Product";
 import { OfferApi } from "./Offer";
 import { Store_AreaApi } from "./Store_Area";
 import { Product_TagApi } from "./Product_tag";
+import { UserApi } from "./User";
 
 export interface StoreApi {
         name: string;
@@ -48,4 +49,5 @@ export interface StoreApi {
         Offers: OfferApi[];
         Store_Areas: Store_AreaApi[];
         Product_Tags: Product_TagApi[];
-    }
+        AspNetUsers: UserApi[];
+}

@@ -7,8 +7,10 @@ import { OfferApi } from "../../models/api/Offer";
 import { Product_TagApi, TagLevel } from "../../models/api/Product_tag";
 import { Store_AreaApi } from "../../models/api/Store_Area";
 import { StoreViewApi } from "../../models/api/StoreView";
+import { UserApi } from "models/Api/User";
 
 export class StoreViewModel implements StoreApi {
+    bid: number;
     name: string;
     slug: string;
     description: string;
@@ -34,7 +36,6 @@ export class StoreViewModel implements StoreApi {
     isArchived: boolean;
     sendOrderByEmail: boolean;
     sendOrderByPush: boolean;
-    bid: number;
     isOpen: boolean;
     isNew: boolean;
     View: StoreViewApi;
@@ -45,7 +46,10 @@ export class StoreViewModel implements StoreApi {
     Offers: OfferApi[];
     Store_Areas: Store_AreaApi[];
     Product_Tags: Product_TagApi[];
-    
+    AspNetUsers: UserApi[];
+
+    isHubConnected: boolean;
+
     public constructor(init?: Partial<StoreViewModel>) {
         Object.assign(this, init);
     }
