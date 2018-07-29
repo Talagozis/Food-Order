@@ -9,14 +9,10 @@
 			</ion-buttons>
 		</ion-navbar>
 		<div *ngIf="product">
+			<span ion-text color="light">{{product.shortDescription}}</span>
 			<ion-row>
-				<ion-col col-4>
-					<p ion-text text-center color="light" class="product-price">
-						{{product.price|priceFormat}}
-					</p>
-				</ion-col>
-				<ion-col col-8>
-					<p ion-text color="light">{{product.shortDescription}}</p>
+				<ion-col col-12>
+					<button ion-button float-right>{{product.price|priceFormat}}</button>
 				</ion-col>
 			</ion-row>
 		</div>
