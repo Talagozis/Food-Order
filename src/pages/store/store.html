@@ -62,10 +62,29 @@
 
 			<ion-list *ngSwitchCase="'info'">
 				<ion-item *ngFor="let address of store.Addresses">
-					<ion-icon name="ios-home-outline"></ion-icon> {{address.line}}, ΤΚ {{address.zip}}, {{address.city}}
+					<ion-row>
+						<ion-col>
+							{{address.line}}
+						</ion-col>
+						<ion-col>
+							{{address.city}}, ΤΚ {{address.zip}}
+						</ion-col>
+					</ion-row>
 				</ion-item>
 				<ion-item *ngFor="let openHour of store.OpenHours">
-					<ion-icon name="ios-clock-outline"></ion-icon> {{openHour.dayOfWeek|dayNameFormat}}: {{openHour.startTime|date:'shortTime'}} - {{openHour.endTime|date:'shortTime'}}
+					<ion-row>
+						<ion-col col-4>
+							{{openHour.dayOfWeek|dayNameFormat}}
+						</ion-col>
+						<ion-col col-4>
+							<ion-icon name="clock"></ion-icon>
+							<span  ion-text color="primary">{{openHour.startTime|date:'HH:mm'}}</span>
+						</ion-col>
+						<ion-col col-4 >
+							<ion-icon name="clock"></ion-icon>
+							<span ion-text color="primary">{{openHour.endTime|date:'HH:mm'}}</span>
+						</ion-col>
+					</ion-row>
 				</ion-item>
 			</ion-list>
 
