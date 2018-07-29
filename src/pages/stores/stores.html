@@ -28,8 +28,11 @@
       </ion-thumbnail>
       <h2>{{store.name}}</h2>
       <div *ngIf="store.isOpen;else isClosed">
-        <h2 ion-text color="success" item-right>Ανοιχτό <span *ngIf="store.isHubConnected">asd</span></h2>
+        <h2 ion-text color="success" item-right><span *ngIf="store.isHubConnected;else onlyPhone">Ανοιχτό</span></h2>
       </div>
+      <ng-template #onlyPhone>
+        <h2 ion-text color="cyan" item-right>Δές τα τηλέφωνα</h2>
+      </ng-template>
       <ng-template #isClosed>
         <h2 ion-text color="danger" item-right>Κλειστό</h2>
       </ng-template>
