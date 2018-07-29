@@ -12,7 +12,7 @@
 			<span ion-text color="light">{{product.shortDescription}}</span>
 			<ion-row>
 				<ion-col col-12>
-					<button ion-button float-right>{{product.price|priceFormat}}</button>
+					<button ion-button float-right>{{totalPrice|priceFormat}}</button>
 				</ion-col>
 			</ion-row>
 		</div>
@@ -35,7 +35,7 @@
 								<span class="label">{{attribute.Ingredient.name}}</span>
 								<span class="price" *ngIf="attributeGroup.showPrice() && attribute.price > 0">+{{attribute.price|priceFormat}}</span>
 							</ion-label>
-							<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid"></ion-radio>
+							<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid" (ionSelect)="calculateTotalPrice()"></ion-radio>
 						</ion-item>
 					</ion-list>
 				</ion-col>
@@ -55,7 +55,7 @@
 								<span class="label">{{ingredient.Ingredient.name}}</span>
 								<span class="price" *ngIf="ingredient.price > 0">+{{ingredient.price|priceFormat}}</span>
 							</ion-label>
-							<ion-toggle [(ngModel)]="ingredient.isDefault"></ion-toggle>
+							<ion-toggle [(ngModel)]="ingredient.isDefault" (ionChange)="calculateTotalPrice()"></ion-toggle>
 						</ion-item>
 					</ion-list>
 				</ion-col>

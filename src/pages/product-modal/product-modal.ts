@@ -23,6 +23,7 @@ export class ProductModalPage {
 	ingredients: Product_IngredientViewModel[];
 	quantity: number;
 	info: string;
+	totalPrice: number;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, private cartProvider: CartProvider) {
 		this.product = new ProductViewModel({picture: "", price: 0});
@@ -35,6 +36,7 @@ export class ProductModalPage {
 		this.info = '';
 
 		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
+		this.totalPrice = productApi.price;
 
 		this.product = new ProductViewModel({
 			...productApi,
@@ -66,11 +68,28 @@ export class ProductModalPage {
 
 	}
 
+	calculateTotalPrice(): number {
+		let sum = 0;
+		sum += this.product.Product_Ingredients
+			.filter(i => i.isDefault)
+			.map(a => a.price)
+			.reduce((a,b) => a+b, 0);
+		sum += this.product.Product_AttributeGroups
+			.map(b => b.Product_Attributes
+			.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
+			.reduce((a, b) => a.concat(b), [])
+			.map(a => a.price)
+			.reduce((a,b) => a+b, 0);
+		sum += this.product.price;
+		this.totalPrice = sum * this.quantity;
+		return sum;
+	}
+
 	addToCart() {
 		var cartItem: CartItemViewModel = {
 			bid: this.product.bid,
 			name: this.product.name,
-			totalPrice: this.product.price,
+			totalPrice: this.calculateTotalPrice(),
 			quantity: this.quantity,
 			discount: 0,
 			info: this.info,
@@ -97,6 +116,7 @@ export class ProductModalPage {
 	changeQuantity(amount: number) {
 		this.quantity += amount;
 		this.quantity = Math.max(this.quantity, 1);
+		this.calculateTotalPrice();
 	}
 
 	closeProductModal() {
