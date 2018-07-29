@@ -64,25 +64,22 @@
 				<ion-item *ngFor="let address of store.Addresses">
 					<ion-row>
 						<ion-col>
-							{{address.line}}
+							<ion-icon name="clock" color="secondary"></ion-icon>
+							<span>{{address.line}}</span>
 						</ion-col>
 						<ion-col>
-							{{address.city}}, ΤΚ {{address.zip}}
+							<span>{{address.city}}, ΤΚ {{address.zip}}</span>
 						</ion-col>
 					</ion-row>
 				</ion-item>
 				<ion-item *ngFor="let openHour of store.OpenHours">
 					<ion-row>
-						<ion-col col-4>
-							{{openHour.dayOfWeek|dayNameFormat}}
+						<ion-col>
+							<span>{{openHour.dayOfWeek|dayNameFormat}}</span>
 						</ion-col>
-						<ion-col col-4>
-							<ion-icon name="clock"></ion-icon>
-							<span  ion-text color="primary">{{openHour.startTime|date:'HH:mm'}}</span>
-						</ion-col>
-						<ion-col col-4 >
-							<ion-icon name="clock"></ion-icon>
-							<span ion-text color="primary">{{openHour.endTime|date:'HH:mm'}}</span>
+						<ion-col>
+							<ion-icon name="clock" color="secondary"></ion-icon>
+							<span>{{openHour.startTime|date:'HH:mm'}}</span> - <span>{{openHour.endTime|date:'HH:mm'}}</span>
 						</ion-col>
 					</ion-row>
 				</ion-item>
@@ -90,10 +87,16 @@
 
 			<ion-list *ngSwitchCase="'contact'">
 				<ion-item *ngFor="let contact of store.Contacts">
-					<ion-avatar item-start>
-						<img item-right src="{{contact.contactTypePicture|imageContactType}}" class="img-responsive" style="width: 24px; height: 24px">
-					</ion-avatar>
-					<a center ion-button block color="light" href="tel:{{contact.value}}"> {{contact.value}}</a>
+					<ion-row>
+						<ion-col col-4>
+							<ion-avatar item-start>
+								<img src="{{contact.contactTypePicture|imageContactType}}" class="img-responsive" style="width: 32px; height: 32px">
+							</ion-avatar>
+						</ion-col>
+						<ion-col col-8>
+							<a href="tel:{{contact.value}}" ion-button round block color="secondary" >{{contact.value}}</a>
+						</ion-col>
+					</ion-row>
 				</ion-item>
 			</ion-list>
 		</div>
