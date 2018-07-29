@@ -18,7 +18,7 @@ import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 })
 export class StorePage {
 	storeSegment: string = "catalog";
-	store: StoreApi;
+	store: StoreViewModel;
 	categories: any[];
 	cart: CartViewModel;
 
@@ -70,7 +70,7 @@ export class StorePage {
 
 	initializeStore(storeBid: number): Promise<void> {
 		return this.storeProvider.findOne(storeBid).toPromise().then((s: StoreApi) => {
-			this.store = s;
+			this.store = new StoreViewModel({ ...s });
 		});
 		// return Promise.resolve();
 	}

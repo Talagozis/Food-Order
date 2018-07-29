@@ -13,11 +13,15 @@
 				<ion-col col-8>
 					<p ion-text color="light">
 						<ion-icon name="cash" color="success"></ion-icon>
-						Ελάχιστη παραγγελία: <strong>{{store.minOrderCost|priceFormat}}</strong>
+						<span style="letter-spacing: -0.2px;">Ελάχιστη παραγγελία:</span> 
+						<strong>{{store.minOrderCost|priceFormat}}</strong>
 					</p>
 					<p ion-text color="light">
 						<ion-icon name="clock" color="success"></ion-icon>
-						Ανοιχτό σήμερα: <strong>12:00 - 02:00</strong>
+						<span style="letter-spacing: -0.2px;">Ανοιχτό σήμερα:</span>
+						<strong *ngIf="store.OpenHours" style="letter-spacing: -0.2px;">
+							<span>{{store.getTodayOpenHour().startTime|date:'HH:mm'}}</span> - <span>{{store.getTodayOpenHour().endTime|date:'HH:mm'}}</span>
+						</strong>
 					</p>
 				</ion-col>
 			</ion-row>

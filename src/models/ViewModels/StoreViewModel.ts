@@ -57,4 +57,19 @@ export class StoreViewModel implements StoreApi {
     public getCuisines(): string {
         return this.Product_Tags.filter(a => a.level === TagLevel.Cuisine).map(a => a.Tag.name).join(", ");
     }
+
+    public getTodayOpenHour(): OpenHourApi {
+
+        if (!this.OpenHours)
+            return null;
+
+        let openHour: OpenHourApi = this.OpenHours.find(a => a.dayOfWeek == (new Date()).getDay())
+
+        if (!openHour)
+            return null;
+
+        return openHour;
+    }
+
+
 }
