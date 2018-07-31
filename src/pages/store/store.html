@@ -64,7 +64,7 @@
 				<ion-item *ngFor="let address of store.Addresses">
 					<ion-row>
 						<ion-col>
-							<ion-icon name="clock" color="secondary"></ion-icon>
+							<ion-icon name="compass" color="secondary"></ion-icon>
 							<span>{{address.line}}</span>
 						</ion-col>
 						<ion-col>
@@ -94,7 +94,7 @@
 							</ion-avatar>
 						</ion-col>
 						<ion-col col-8>
-							<a href="tel:{{contact.value}}" ion-button round block color="secondary" >{{contact.value}}</a>
+							<a href="tel:{{contact.value}}" ion-button outline round block color="secondary">{{contact.value}}</a>
 						</ion-col>
 					</ion-row>
 				</ion-item>
