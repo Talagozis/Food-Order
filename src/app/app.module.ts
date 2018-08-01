@@ -31,7 +31,10 @@ import { HubUserProvider } from '../providers/HubUser/hubUser';
 		IonicModule.forRoot(MyApp, {
 			backButtonText: '',
 		}),
-		IonicStorageModule.forRoot(),
+		IonicStorageModule.forRoot({
+			name: '__mydb',
+			driverOrder: ['sqlite', 'websql', 'indexeddb']
+		}),
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
