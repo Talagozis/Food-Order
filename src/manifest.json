@@ -7,6 +7,10 @@
 		"src": "assets/imgs/homepage-logo.png",
 		"sizes": "512x512",
 		"type": "image/png"
+	},{
+		"src": "assets/imgs/homepage-logo.png",
+		"sizes": "192x192",
+		"type": "image/png"
 	}],
 	"background_color": "#4e8ef7",
 	"theme_color": "#4e8ef7"
