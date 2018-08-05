@@ -10,4 +10,6 @@ interface IENV {
 	RPC_HEADER_NAME: string;
 	RPC_HEADER_VALUE: string;
 	RPC_URL: string;
+
+	GOOGLE_ANALYTICS_TRACKING_ID: string;
 }
