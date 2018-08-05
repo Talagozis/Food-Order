@@ -36,8 +36,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.1.11",
-    "typescript": "~2.6.2",
-    "@types/google.analytics": "0.0.39"
+    "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
   "config": {
