@@ -26,8 +26,6 @@ export class AnalyticsProvider {
 	}
 
 	trackView(screenName: string): void {
-		console.debug(screenName);
-		console.debug(ga);
 		ga('set', 'page', screenName);
 		ga('send', 'pageview');
 	}
