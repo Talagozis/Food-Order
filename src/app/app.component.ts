@@ -33,18 +33,20 @@ export class MyApp {
 		];
 	}
 
+	ngAfterViewInit() {
+		this.analyticsProvider.startTrackerWithId(ENV.GOOGLE_ANALYTICS_TRACKING_ID).then(() => {
+			this.nav.viewDidEnter.subscribe(view => {
+				this.analyticsProvider.trackView(view.instance.constructor.name);
+			});
+		});
+	  }
+
 	initializeApp() {
 		this.platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.
 			// Here you can do any higher level native things you might need.
 			this.statusBar.styleDefault();
 			this.splashScreen.hide();
-			this.analyticsProvider.startTrackerWithId(ENV.GOOGLE_ANALYTICS_TRACKING_ID).then(() => {
-				this.nav.viewDidEnter.subscribe(view => {
-					console.log("TrackView");
-					this.analyticsProvider.trackView(view.instance.constructor.name);
-				});
-			});
 
 		});
 
