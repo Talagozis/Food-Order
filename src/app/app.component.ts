@@ -39,7 +39,7 @@ export class MyApp {
 				this.analyticsProvider.trackView(view.instance.constructor.name);
 			});
 		});
-	  }
+	}
 
 	initializeApp() {
 		this.platform.ready().then(() => {
