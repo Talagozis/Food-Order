@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ENV } from '@app/env'
+import { AnalyticsProvider } from '../providers/analytics/analytics';
 
 @Component({
 	templateUrl: 'app.html'
@@ -16,7 +17,8 @@ export class MyApp {
 	primaryPages: Array<{ title: string, component: any, icon: string }>;
 	secondaryPages: Array<{ title: string, component: any, icon: string }>;
 
-	constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+
+	constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public analyticsProvider: AnalyticsProvider) {
 		this.initializeApp();
 
 		console.log("Environment variables set to: " + ENV.mode);
@@ -29,6 +31,14 @@ export class MyApp {
 		this.secondaryPages = [
 			{ title: 'Πολιτική Απορρήτου', component: 'PrivacyPolicyPage', icon: 'document' }
 		];
+	}
+
+	ngAfterViewInit() {
+		this.analyticsProvider.startTrackerWithId(ENV.GOOGLE_ANALYTICS_TRACKING_ID).then(() => {
+			this.nav.viewDidEnter.subscribe(view => {
+				this.analyticsProvider.trackView(view.instance.constructor.name);
+			});
+		});
 	}
 
 	initializeApp() {

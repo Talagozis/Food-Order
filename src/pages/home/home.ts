@@ -17,7 +17,7 @@ export class HomePage {
 		this.cartProvider.clearCarts();
 	}
 
-	chooseBackground() {
+	chooseBackground(): string  {
 		var date = new Date();
 		if (date.getHours() >= 5 && date.getHours() <= 12) {
 			return 'background-coffee';

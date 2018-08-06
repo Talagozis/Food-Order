@@ -18,6 +18,7 @@ import { ProductProvider } from '../providers/Product/product';
 import { OrderProvider } from '../providers/Order/order';
 import { CartProvider } from '../providers/Cart/cart';
 import { HubUserProvider } from '../providers/HubUser/hubUser';
+import { AnalyticsProvider } from '../providers/analytics/analytics';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { HubUserProvider } from '../providers/HubUser/hubUser';
 		StatusBar,
 		SplashScreen,
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		AnalyticsProvider,
 		StoreProvider,
 		ProductProvider,
 		OrderProvider,
