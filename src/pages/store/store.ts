@@ -11,7 +11,11 @@ import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 
-@IonicPage()
+@IonicPage({
+	name: 'StorePage',
+	segment: 'store/:storeId',
+	defaultHistory: ['StoresPage']
+})
 @Component({
 	selector: 'page-store',
 	templateUrl: 'store.html',
