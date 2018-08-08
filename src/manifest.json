@@ -1,5 +1,6 @@
 {
 	"name": "Food-Order",
+	"version": "1808081710",
 	"short_name": "Food-Order",
 	"start_url": "index.html",
 	"display": "standalone",
