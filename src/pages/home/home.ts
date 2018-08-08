@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+
 import { CartProvider } from '../../providers/Cart/cart';
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
 
 @Component({
 	selector: 'page-home',
@@ -9,7 +11,11 @@ import { CartProvider } from '../../providers/Cart/cart';
 export class HomePage {
 	background: string;
 
-	constructor(public navCtrl: NavController, public cartProvider: CartProvider) {
+	constructor(public navCtrl: NavController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
+	}
+
+	ionViewDidEnter() {
+		this.analyticsProvider.trackView("/");
 	}
 
 	ionViewDidLoad() {

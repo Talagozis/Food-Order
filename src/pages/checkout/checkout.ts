@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { OrderProvider } from '../../providers/Order/order';
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { CheckoutRpcResponse } from '../../models/Request/CheckoutRpcResponse';
 import { ResponseStatus } from '../../models/Request/Response';
 import { CheckoutRpc } from '../../models/Rpc/Checkout';
@@ -12,7 +13,11 @@ import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
 
-@IonicPage()
+@IonicPage({
+	name: 'CheckoutPage',
+	segment: 'checkout/:storeSlug',
+	defaultHistory: ['StorePage']
+})
 @Component({
 	selector: 'page-checkout',
 	templateUrl: 'checkout.html',
@@ -27,11 +32,16 @@ export class CheckoutPage {
 
 	orderDetails: OrderDetails;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider) {
 	}
 
-	ionViewDidLoad() {
-		var storeBid = this.navParams.get('storeId');
+	ionViewDidEnter() {
+		var storeSlug = this.navParams.get('storeSlug');
+		this.analyticsProvider.trackView("/checkout/" + storeSlug);
+	}
+
+	async ionViewDidLoad() {
+		var storeSlug: string = this.navParams.get('storeSlug');
 
 		this.showCartDetails = true;
 		this.totalCartPrice = 0.00;
@@ -48,19 +58,12 @@ export class CheckoutPage {
 			info: "",
 		};
 
-		this.storeProvider.findOne(storeBid).subscribe((s: StoreApi) => {
-			this.store = s;
-
-		});
+		let store = await this.storeProvider.findBySlug(storeSlug);
 		
-		this.cartProvider.getByStoreBid(storeBid).then((cart: CartViewModel) => {
+		this.store = store;
 
+		this.cartProvider.getByStoreBid(store.bid).then((cart: CartViewModel) => {
 			this.cart = cart;
-
-			// if(!cart.Store || (cart.productsDetails.length === 0 && cart.offersDetails.length === 0)) { // <==  add all checks here
-			// 	console.log("criteria for order are not meet");
-			// 	return;
-			// }
 			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
 			this.showCartDetails = cart.cartItems.length <= 5;
 			this.canSendOrder = true;

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
+
+
 @IonicPage()
 @Component({
   selector: 'page-thank-you',
@@ -8,9 +11,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ThankYouPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private analyticsProvider: AnalyticsProvider) {
   }
 
-  ionViewDidLoad() { }
+  ionViewDidEnter() {
+		this.analyticsProvider.trackView("/thank-you");
+	}
 
 }

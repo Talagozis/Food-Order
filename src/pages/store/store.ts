@@ -3,9 +3,10 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 
 import '../../utils/linqtsExtension';
 
-import { StoreApi } from '../../models/Api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { ProductProvider } from '../../providers/Product/product';
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
+import { StoreApi } from '../../models/Api/Store';
 import { ProductApi } from '../../models/api/Product';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
@@ -26,8 +27,13 @@ export class StorePage {
 	categories: any[];
 	cart: CartViewModel;
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
 		this.store = new StoreViewModel({ cover: "", minOrderCost: 0 });
+	}
+
+	ionViewDidEnter() {
+		var storeSlug = this.navParams.get('storeSlug');
+		this.analyticsProvider.trackView("/store/" + storeSlug);
 	}
 
 	async ionViewDidLoad(): Promise<void> {
@@ -50,7 +56,6 @@ export class StorePage {
 	async ionViewWillEnter(): Promise<void> {
 		await this.initializeCart(this.store.bid);
 	}
-
 
 	initializeProducts(storeBid: number): Promise<void> {
 		return this.productProvider.findByStoreBid(storeBid).toPromise().then((p: ProductApi[]) => {
@@ -123,6 +128,6 @@ export class StorePage {
 	}
 
 	navigateToCheckoutPage() {
-		this.navCtrl.push('CheckoutPage', { storeId: this.store.bid });
+		this.navCtrl.push('CheckoutPage', { storeSlug: this.store.slug });
 	}
 }

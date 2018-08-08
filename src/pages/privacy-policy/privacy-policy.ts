@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
+
 @IonicPage()
 @Component({
   selector: 'page-privacy-policy',
@@ -8,9 +10,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PrivacyPolicyPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private analyticsProvider: AnalyticsProvider) {
   }
 
-  ionViewDidLoad() { }
+  ionViewDidEnter() {
+		this.analyticsProvider.trackView("/privacy-policy");
+	}
 
 }

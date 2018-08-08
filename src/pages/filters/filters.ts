@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { TagApi } from '../../models/api/Tag';
 
 @IonicPage()
@@ -10,7 +12,11 @@ import { TagApi } from '../../models/api/Tag';
 export class FiltersPage {
 	filterViewModels: FilterViewModel[];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, private analyticsProvider: AnalyticsProvider) {
+	}
+
+	ionViewDidEnter() {
+		this.analyticsProvider.trackView("/stores/filters");
 	}
 
 	ionViewDidLoad() {

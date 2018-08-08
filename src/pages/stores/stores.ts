@@ -8,6 +8,7 @@ import { HubUserApi } from '../../models/api/HubUser';
 
 import { StoreProvider } from '../../providers/store/store';
 import { HubUserProvider } from '../../providers/HubUser/hubUser';
+import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
 import { FilterViewModel } from '../filters/filters';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
@@ -22,7 +23,11 @@ export class StoresPage {
 	initialStores: StoreViewModel[];
 	selectedCuisineBids: number[] = [];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public hubUserProvider: HubUserProvider, public loadingCtrl: LoadingController) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public hubUserProvider: HubUserProvider, public loadingCtrl: LoadingController, private analyticsProvider: AnalyticsProvider) {
+	}
+
+	ionViewDidEnter() {
+		this.analyticsProvider.trackView("/stores");
 	}
 
 	ionViewDidLoad() {

@@ -35,9 +35,9 @@ export class MyApp {
 
 	ngAfterViewInit() {
 		this.analyticsProvider.startTrackerWithId(ENV.GOOGLE_ANALYTICS_TRACKING_ID).then(() => {
-			this.nav.viewDidEnter.subscribe(view => {
-				this.analyticsProvider.trackView(view.instance.constructor.name);
-			});
+			// this.nav.viewDidEnter.subscribe(view => {
+			// 	this.analyticsProvider.trackView(view.instance.constructor.name);
+			// });
 		});
 	}
 
