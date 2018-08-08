@@ -14,11 +14,11 @@ self.toolbox.options.cache = {
 // pre-cache our key assets
 self.toolbox.precache(
 	[
-		'./build/main.js',
-		'./build/vendor.js',
-		'./build/main.css',
-		'./build/polyfills.js',
-		'index.html',
+		'./build/main.js?v=20180808',
+		'./build/vendor.js?v=20180808',
+		'./build/main.css?v=20180808',
+		'./build/polyfills.js?v=20180808',
+		'index.html?v=20180808',
 		'manifest.json'
 	]
 );
