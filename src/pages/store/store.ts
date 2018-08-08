@@ -13,7 +13,7 @@ import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 
 @IonicPage({
 	name: 'StorePage',
-	segment: 'store/:storeId',
+	segment: 'store/:storeSlug',
 	defaultHistory: ['StoresPage']
 })
 @Component({
@@ -36,12 +36,12 @@ export class StorePage {
 		});
 		loader.present();
 
-		var storeBid = this.navParams.get('storeId');
+		var storeSlug = this.navParams.get('storeSlug');
+		let store: StoreApi = await this.initializeStore(storeSlug);
 
 		await Promise.all([
-			this.initializeStore(storeBid),
-			this.initializeProducts(storeBid),
-			this.initializeCart(storeBid),
+			this.initializeProducts(store.bid),
+			this.initializeCart(store.bid),
 		]);
 
 		loader.dismiss();
@@ -72,11 +72,10 @@ export class StorePage {
 		});
 	}
 
-	initializeStore(storeBid: number): Promise<void> {
-		return this.storeProvider.findOne(storeBid).toPromise().then((s: StoreApi) => {
-			this.store = new StoreViewModel({ ...s });
-		});
-		// return Promise.resolve();
+	async initializeStore(storeSlug: string): Promise<StoreApi> {
+		let store = await this.storeProvider.findBySlug(storeSlug);
+		this.store = new StoreViewModel({ ...store });
+		return store;
 	}
 
 	initializeCart(storeBid: number): Promise<void> {

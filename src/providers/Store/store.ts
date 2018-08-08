@@ -32,6 +32,11 @@ export class StoreProvider {
 		return this.api.getOne('store', bid)
 	}
 
+	public findBySlug(storeSlug: string): Promise<StoreApi> {
+		return this.api.getOne('store', { "slug": storeSlug }).toPromise();
+	}
+
+
 }
 
 class StoreSubscriptionFilters {

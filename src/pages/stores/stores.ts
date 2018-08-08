@@ -69,7 +69,7 @@ export class StoresPage {
 	}
 
 	navigateToStorePage(store: StoreApi) {
-		this.navCtrl.push('StorePage', { storeId: store.bid });
+		this.navCtrl.push('StorePage', { storeSlug: store.slug, });
 	}
 
 	openFilters() {

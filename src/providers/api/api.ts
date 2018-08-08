@@ -21,9 +21,16 @@ export class Api<T> {
 		return this.http.get<T[]>(this.url + endpoint + x);
 	}
 
-	getOne(endpoint: string, bid: number): Observable<T> {
-		return this.http.get<T>(this.url + endpoint + '/' + bid);
-		//return this.http.get<T>(this.url + '/' + endpoint + '/' + bid.toString());
+	getOne(endpoint: string, parameters: object): Observable<T>;
+	getOne(endpoint: string, bid: number): Observable<T>;
+	getOne(endpoint: string, bidOrParameters: number | object): Observable<T> {
+		if(typeof bidOrParameters == "number") {
+			return this.http.get<T>(this.url + endpoint + '/' + bidOrParameters);
+		} else if(typeof bidOrParameters == "object") {
+			var x: string = "?" + Object.entries(bidOrParameters).map(([key, val]) => key + "=" + encodeURIComponent(val)).join('&');	
+			return this.http.get<T>(this.url + endpoint + x);
+		}
+
 	}
 
 
