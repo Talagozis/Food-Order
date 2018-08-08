@@ -23,8 +23,6 @@ self.toolbox.precache(
 	]
 );
 
-self.toolbox.
-
 // dynamically cache any other local assets
 self.toolbox.router.any('/*', self.toolbox.fastest);
 
