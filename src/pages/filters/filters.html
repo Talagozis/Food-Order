@@ -1,33 +1,35 @@
 <ion-header>
-  <ion-navbar color="secondary">
-    <ion-title text-capitalize>Διάλεξε Κουζίνα</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="closeFilters()">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+	<ion-navbar color="secondary">
+		<ion-title text-capitalize>Διάλεξε Κουζίνα</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="closeFilters()">
+				<ion-icon name="close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let filterViewModel of filterViewModels">
-      <ion-label>{{filterViewModel.Tag.name}}</ion-label>
-      <ion-checkbox [(ngModel)]="filterViewModel.isChecked"></ion-checkbox>
-    </ion-item>
+	<ion-list>
+		<ion-item *ngFor="let filterViewModel of filterViewModels">
+			<ion-label>{{filterViewModel.Tag.name}}</ion-label>
+			<ion-checkbox [(ngModel)]="filterViewModel.isChecked"></ion-checkbox>
+		</ion-item>
 
-  </ion-list>
+	</ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-2>
-        <button ion-button block icon-only color="secondary" (click)="clearFilters()"><ion-icon name="close-circle"></ion-icon></button>
-      </ion-col>
-      <ion-col col-10>
-        <button ion-button block text-capitalize color="secondary" (click)="filterCuisine()">Αναζήτηση</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-2>
+				<button ion-button block icon-only color="secondary" (click)="clearFilters()">
+					<ion-icon name="close-circle"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-10>
+				<button ion-button block text-capitalize color="secondary" (click)="filterCuisine()">Αναζήτηση</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 </ion-footer>

@@ -1,39 +1,41 @@
 <ion-header>
-  <ion-navbar color="secondary">
-    <ion-row>
-      <ion-col col-2>
-        <button class="header-menu" ion-button menuToggle>
-          <ion-icon class="menu-icon" name="menu"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-8>
-        <ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
-      </ion-col>
-      <ion-col col-2 text-right>
-        <button ion-button (click)="openFilters()" color="secondary">
-          <ion-icon name="options"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-navbar>
+	<ion-navbar color="secondary">
+		<ion-row>
+			<ion-col col-2>
+				<button class="header-menu" ion-button menuToggle>
+					<ion-icon class="menu-icon" name="menu"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-8>
+				<ion-searchbar placeholder="Αναζήτηση" (ionInput)="searchStores($event)"></ion-searchbar>
+			</ion-col>
+			<ion-col col-2 text-right>
+				<button ion-button (click)="openFilters()" color="secondary">
+					<ion-icon name="options"></ion-icon>
+				</button>
+			</ion-col>
+		</ion-row>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
+	<ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
 
-  <ion-list>
-    <ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage(store)">
-      <ion-thumbnail item-start>
-        <img src="{{store.logo|imageStore}}" class="img-responsive store-logo">
-      </ion-thumbnail>
-      <h2>{{store.name}}</h2>
-      <div *ngIf="store.isOpen">
-        <span ion-text color="success"><span *ngIf="store.isHubConnected;else onlyPhone">Ανοιχτό</span></span>
-      </div>
-      <ng-template #onlyPhone>
-        <span ion-text color="cyan">Δές τα τηλέφωνα</span>
-      </ng-template>
-      <p>{{store.getCuisines()}}</p>
-    </ion-item>
-  </ion-list>
+	<ion-list>
+		<ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage(store)">
+			<ion-thumbnail item-start>
+				<img src="{{store.logo|imageStore}}" class="img-responsive store-logo">
+			</ion-thumbnail>
+			<h2>{{store.name}}</h2>
+			<div *ngIf="store.isOpen">
+				<span ion-text color="success">
+					<span *ngIf="store.isHubConnected;else onlyPhone">Ανοιχτό</span>
+				</span>
+			</div>
+			<ng-template #onlyPhone>
+				<span ion-text color="cyan">Δές τα τηλέφωνα</span>
+			</ng-template>
+			<p>{{store.getCuisines()}}</p>
+		</ion-item>
+	</ion-list>
 </ion-content>

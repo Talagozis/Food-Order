@@ -2,20 +2,39 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
+import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
+import { StoreProvider } from '../../providers/store/store';
 
 
-@IonicPage()
+@IonicPage({
+	name: 'ThankYouPage',
+	segment: 'thank-you/:storeSlug',
+})
 @Component({
-  selector: 'page-thank-you',
-  templateUrl: 'thank-you.html',
+	selector: 'page-thank-you',
+	templateUrl: 'thank-you.html',
 })
 export class ThankYouPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private analyticsProvider: AnalyticsProvider) {
-  }
+	store: StoreViewModel;
 
-  ionViewDidEnter() {
-		this.analyticsProvider.trackView("/thank-you");
+	constructor(public navCtrl: NavController, public navParams: NavParams, public storeProvider: StoreProvider, private analyticsProvider: AnalyticsProvider) {
+	}
+
+	ionViewDidEnter() {
+		var storeSlug = this.navParams.get('storeSlug');
+		this.analyticsProvider.trackView("/thank-you/" + storeSlug);
+	}
+
+	ionViewDidLoad(): void {
+		var storeSlug = this.navParams.get('storeSlug');
+		this.storeProvider.findBySlug(storeSlug).then(s => {
+			this.store = new StoreViewModel({ ...s });
+		});
+	}
+
+	handleNavigateToStoresPage(): void {
+		this.navCtrl.setRoot('StoresPage');
 	}
 
 }

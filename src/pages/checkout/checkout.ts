@@ -59,7 +59,7 @@ export class CheckoutPage {
 		};
 
 		let store = await this.storeProvider.findBySlug(storeSlug);
-		
+
 		this.store = store;
 
 		this.cartProvider.getByStoreBid(store.bid).then((cart: CartViewModel) => {
@@ -87,13 +87,13 @@ export class CheckoutPage {
 		checkoutRpc.orderDetails = {
 			...this.orderDetails,
 			isTakeAway: false,
-			info: "\$test",
+			// info: "\$test",
 		};
-		checkoutRpc.AspNetUser = { // test user
-			bid: 0
+		checkoutRpc.AspNetUser = { // undefined user
+			bid: undefined
 		} as AspNetUserDetails;
 		checkoutRpc.Store = { // test store
-			bid: 4134222481
+			bid: this.store.bid
 		} as AspNetUserDetails;
 		checkoutRpc.sessionDetals = {}
 
@@ -106,8 +106,7 @@ export class CheckoutPage {
 
 			this.cartProvider.clearCartItem(this.store.bid);
 			this.cartProvider.clearCartItemOffer(this.store.bid);
-
-			this.navCtrl.setRoot('ThankYouPage');
+			this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
 		});
 
 	}

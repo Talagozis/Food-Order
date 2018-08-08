@@ -1,41 +1,42 @@
 <ion-header>
-  <ion-navbar transparent>
-    <ion-row>
-      <ion-col col-2>
-        <button ion-button menuToggle color="light">
-          <ion-icon name="menu"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-8 text-center>
-          <img src="../assets/imgs/homepage-logo.png" width="42" height="42" />
-      </ion-col>
-      <ion-col col-2>
-        
-      </ion-col>
-    </ion-row>
-  </ion-navbar>
+	<ion-navbar transparent>
+		<ion-row>
+			<ion-col col-2>
+				<button ion-button menuToggle color="light">
+					<ion-icon name="menu"></ion-icon>
+				</button>
+			</ion-col>
+			<ion-col col-8 text-center>
+				<img src="../assets/imgs/homepage-logo.png" width="42" height="42" />
+			</ion-col>
+			<ion-col col-2>
+
+			</ion-col>
+		</ion-row>
+	</ion-navbar>
 </ion-header>
 
 <ion-content class="{{background}}">
-  <ion-row text-center>
-    <ion-col>
-      <h1 ion-text color="light">Food Order</h1>
-    </ion-col>
-  </ion-row>
+	<ion-row text-center>
+		<ion-col>
+			<h1 ion-text color="light">Food Order</h1>
+		</ion-col>
+	</ion-row>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar transparent style="padding: 0 5%;">
-    <!-- <div class="footer-content" text-center>
-      <h4 ion-text color="light">Πείνασες;</h4>
-      <h4 ion-text color="light">Παράγγειλε με μόλις 3 βήματα!</h4>
-      <div class="arrow-down"></div>
-    </div> -->
-    <div class="speech-bubble-ds">
-        <h5>Πείνασες;</h5>
-        <h5>Παράγγειλε τώρα με μόλις <strong>3</strong> βήματα!</h5>
-        <div class="speech-bubble-ds-arrow"></div>
-    </div>
-    <button text-capitalize ion-button block large color="secondary" class="margin-bottom-percent-5" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
-  </ion-toolbar>
+	<ion-toolbar transparent style="padding: 0 5%;">
+		<!-- <div class="footer-content" text-center>
+			<h4 ion-text color="light">Πείνασες;</h4>
+			<h4 ion-text color="light">Παράγγειλε με μόλις 3 βήματα!</h4>
+			<div class="arrow-down"></div>
+		</div> -->
+		<div class="speech-bubble-ds">
+			<h5>Πείνασες;</h5>
+			<h5>Παράγγειλε τώρα με μόλις
+				<strong>3</strong> βήματα!</h5>
+			<div class="speech-bubble-ds-arrow"></div>
+		</div>
+		<button text-capitalize ion-button block large color="secondary" class="margin-bottom-percent-5" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
+	</ion-toolbar>
 </ion-footer>

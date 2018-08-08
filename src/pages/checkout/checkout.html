@@ -1,5 +1,5 @@
 <ion-header>
-	<ion-navbar color="primary">
+	<ion-navbar color="secondary">
 		<button ion-button menuToggle start>
 			<ion-icon name="menu"></ion-icon>
 		</button>
@@ -35,14 +35,14 @@
 				<ion-icon name="person"></ion-icon>
 				<span>Επώνυμο</span>
 			</ion-label>
-			<ion-input type="text" [(ngModel)]="orderDetails.customerForname"></ion-input>
+			<ion-input type="text" [(ngModel)]="orderDetails.customerSurname"></ion-input>
 		</ion-item>
 		<ion-item margin-bottom>
 			<ion-label class="required" floating>
 				<ion-icon name="person"></ion-icon>
 				<span>Όνομα</span>
 			</ion-label>
-			<ion-input type="text" [(ngModel)]="orderDetails.customerSurname"></ion-input>
+			<ion-input type="text" [(ngModel)]="orderDetails.customerForename"></ion-input>
 		</ion-item>
 		<ion-item margin-bottom>
 			<ion-label class="required" floating>
@@ -91,6 +91,13 @@
 				<ion-option value="10">Μονοκατοικία</ion-option>
 				<ion-option value="11">Κατάστημα</ion-option>
 			</ion-select>
+		</ion-item>
+		<ion-item margin-bottom>
+			<ion-label floating>
+				<ion-icon name="information-circle"></ion-icon>
+				<span>Παρατηρήσεις παραγγελίας</span>
+			</ion-label>
+			<ion-textarea [(ngModel)]="orderDetails.info"></ion-textarea>
 		</ion-item>
 	</ion-list>
 
