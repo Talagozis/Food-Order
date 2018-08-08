@@ -36,6 +36,6 @@ export enum CheckoutResponseStatus {
     ProductsIngredientsFailed = 34,
     ProductsPriceLessThanMinimumCost = 35,
 
-    OffersFailed = 30,
-    OffersException = 31,
+    OffersFailed = 40,
+    OffersException = 41,
 }

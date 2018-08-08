@@ -113,14 +113,42 @@ export class CheckoutPage {
 
 	handleOrderFailureMessage(c: CheckoutRpcResponse) { // <= More detailed messages
 		let message = '';
-		if (c.checkoutStatus >= 10 && c.checkoutStatus <= 16) {
-			message = 'Υπήρξε πρόβλημα με το κατάστημα.';
-		} else if (c.checkoutStatus >= 20 && c.checkoutStatus <= 27) {
-			message = 'Υπήρξε πρόβλημα με τα στοιχεία σας.';
-		} else if (c.checkoutStatus >= 30 && c.checkoutStatus <= 35) {
-			message = 'Υπήρξε πρόβλημα με τα προϊόντα του καλαθιού.';
-		} else {
-			message = 'Υπήρξε κάποιο πρόβλημα.';
+		switch (true) {
+			case c.checkoutStatus >= 10 && c.checkoutStatus < 20:
+				message = 'Υπήρξε πρόβλημα με το κατάστημα.';
+				break;
+			case c.checkoutStatus == 22:
+				message = 'Παρακαλώ συμπλήρωσε το επώνυμο.';
+				break;
+			case c.checkoutStatus == 23:
+				message = 'Παρακαλώ συμπλήρωσε το όνομα.';
+				break;
+			case c.checkoutStatus == 24:
+				message = 'Παρακαλώ συμπλήρωσε τη διεύθυνση.';
+				break;
+			case c.checkoutStatus == 25:
+				message = 'Παρακαλώ συμπλήρωσε το τηλέφωνο.';
+				break;
+			case c.checkoutStatus == 26:
+				message = 'Η επιβεβαίωση τηλεφώνου απετυχε.';
+				break;
+			case c.checkoutStatus == 27:
+				message = 'Παρακαλώ επίλεξε όροφο.';
+				break;
+			case c.checkoutStatus >= 20 && c.checkoutStatus < 30:
+				message = 'Υπήρξε πρόβλημα με το στοιχεία.';
+				break;
+			case c.checkoutStatus == 32:
+				message = 'Το καλάθι είναι άδειο. Επίλεξε προϊόντα.';
+				break;
+			case c.checkoutStatus == 35:
+				message = 'Η ελάχιστη παραγγελία είναι ' + this.store.minOrderCost + ' ευρώ.';
+				break;
+			case c.checkoutStatus >= 30 && c.checkoutStatus < 50:
+				message = 'Υπήρξε πρόβλημα με το καλάθι σας.';
+				break;
+			default:
+				message = 'Υπήρξε κάποιο πρόβλημα.';
 		}
 		this.presentAlert(message);
 		return;
