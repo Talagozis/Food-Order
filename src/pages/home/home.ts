@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Refresher, LoadingController } from 'ionic-angular';
 
 import { CartProvider } from '../../providers/Cart/cart';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
@@ -11,7 +11,7 @@ import { AnalyticsProvider } from '../../providers/analytics/analytics';
 export class HomePage {
 	background: string;
 
-	constructor(public navCtrl: NavController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public navCtrl: NavController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController) {
 	}
 
 	ionViewDidEnter() {
@@ -21,6 +21,19 @@ export class HomePage {
 	ionViewDidLoad() {
 		this.background = this.chooseBackground();
 		this.cartProvider.clearCarts();
+	}
+
+	doRefresh(refresher: Refresher) {
+		let loader = this.loadingCtrl.create({
+			content: "Αναζήτηση προσφορών"
+		});
+		loader.present();
+		this.background = this.chooseBackground();
+		this.cartProvider.clearCarts();
+		loader.dismiss();
+		setTimeout(() => {
+			refresher.complete();
+		}, 0);
 	}
 
 	chooseBackground(): string  {

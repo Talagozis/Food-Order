@@ -10,33 +10,55 @@
 				<img src="../assets/imgs/homepage-logo.png" width="42" height="42" />
 			</ion-col>
 			<ion-col col-2>
-
+				
 			</ion-col>
 		</ion-row>
 	</ion-navbar>
 </ion-header>
 
 <ion-content class="{{background}}">
-	<ion-row text-center>
+	<ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
+	<ion-item text-wrap class="pointer transparent">
+		<ion-thumbnail item-start>
+			<img src="../assets/imgs/homepage-logo.png" class="img-responsive store-logo">
+		</ion-thumbnail>
+		<h2 ion-text color="light">Pesto κουζίνα</h2>
+		<span ion-text color="light">2+2 Σουβλάκια</span>
+		<button ion-button large round item-end color="secondary">5.80 €</button>
+	</ion-item>
+	<br>
+	<ion-item text-wrap class="pointer transparent">
+		<ion-thumbnail item-start>
+			<img src="../assets/imgs/homepage-logo.png" class="img-responsive store-logo">
+		</ion-thumbnail>
+		<h2 ion-text color="light">Καλύτερος</h2>
+		<span ion-text color="light">3 πίτσες γίγας</span>
+		<button ion-button large round item-end color="secondary">22.00€</button>
+	</ion-item>
+	<br>
+	<ion-item text-wrap class="pointer transparent">
+		<ion-thumbnail item-start>
+			<img src="../assets/imgs/homepage-logo.png" class="img-responsive store-logo">
+		</ion-thumbnail>
+		<h2 ion-text color="light">Parisniko</h2>
+		<span ion-text color="light">1 Κλάμπ Σάντουιτς + 1 Coca Cola</span>
+		<button ion-button large round item-end color="secondary">9.99 €</button>
+	</ion-item>
+	<!-- <ion-row text-center>
 		<ion-col>
 			<h1 ion-text color="light">Food Order</h1>
 		</ion-col>
-	</ion-row>
+	</ion-row> -->
 </ion-content>
 
 <ion-footer>
 	<ion-toolbar transparent style="padding: 0 5%;">
-		<!-- <div class="footer-content" text-center>
-			<h4 ion-text color="light">Πείνασες;</h4>
-			<h4 ion-text color="light">Παράγγειλε με μόλις 3 βήματα!</h4>
-			<div class="arrow-down"></div>
-		</div> -->
-		<div class="speech-bubble-ds">
+		<!-- <div class="speech-bubble-ds">
 			<h5>Πείνασες;</h5>
 			<h5>Παράγγειλε τώρα με μόλις
 				<strong>3</strong> βήματα!</h5>
 			<div class="speech-bubble-ds-arrow"></div>
-		</div>
+		</div> -->
 		<button text-capitalize ion-button block large color="secondary" class="margin-bottom-percent-5" (click)="navigateToStoresPage()">Παράγγειλε τώρα!</button>
 	</ion-toolbar>
 </ion-footer>
