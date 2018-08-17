@@ -10,40 +10,30 @@
 				<img src="../assets/imgs/homepage-logo.png" width="42" height="42" />
 			</ion-col>
 			<ion-col col-2>
-				
+
 			</ion-col>
 		</ion-row>
 	</ion-navbar>
 </ion-header>
 
-<ion-content class="{{background}}">
+<ion-content class="{{background}}" style="position: relative;">
 	<ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
-	<ion-item text-wrap class="pointer transparent">
-		<ion-thumbnail item-start>
-			<img src="../assets/imgs/homepage-logo.png" class="img-responsive store-logo">
-		</ion-thumbnail>
-		<h2 ion-text color="light">Pesto κουζίνα</h2>
-		<span ion-text color="light">2+2 Σουβλάκια</span>
-		<button ion-button large round item-end color="secondary">5.80 €</button>
-	</ion-item>
-	<br>
-	<ion-item text-wrap class="pointer transparent">
-		<ion-thumbnail item-start>
-			<img src="../assets/imgs/homepage-logo.png" class="img-responsive store-logo">
-		</ion-thumbnail>
-		<h2 ion-text color="light">Καλύτερος</h2>
-		<span ion-text color="light">3 πίτσες γίγας</span>
-		<button ion-button large round item-end color="secondary">22.00€</button>
-	</ion-item>
-	<br>
-	<ion-item text-wrap class="pointer transparent">
-		<ion-thumbnail item-start>
-			<img src="../assets/imgs/homepage-logo.png" class="img-responsive store-logo">
-		</ion-thumbnail>
-		<h2 ion-text color="light">Parisniko</h2>
-		<span ion-text color="light">1 Κλάμπ Σάντουιτς + 1 Coca Cola</span>
-		<button ion-button large round item-end color="secondary">9.99 €</button>
-	</ion-item>
+
+	<div class="livedeals">
+		<ion-item text-wrap class="pointer" *ngFor="let liveDeal of liveDeals">
+			<ion-thumbnail item-start>
+				<img src="{{liveDeal.Offer.Store.logo|imageStore}}" class="img-responsive store-logo">
+			</ion-thumbnail>
+			<h2 class="store-name" ion-text color="light">{{liveDeal.Offer.Store.name}}</h2>
+			<span class="offer-name" ion-text color="light">{{liveDeal.Offer.name}}</span>
+			<div class="offer-discount-percent" item-end color="secondary">
+				<span>
+					{{(liveDeal.Offer.totalPrice !== 0 ? liveDeal.Offer.discount / liveDeal.Offer.totalPrice * -100 : 0).toFixed(0)}}
+				</span>
+				<span style="font-size: 14px">%</span>
+			</div> 
+		</ion-item>
+	</div>
 	<!-- <ion-row text-center>
 		<ion-col>
 			<h1 ion-text color="light">Food Order</h1>

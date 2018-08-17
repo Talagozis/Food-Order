@@ -10,6 +10,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { PipesModule } from '../pipes/pipes.module';
+
 import { HttpClientExt } from '../providers/http-client/http-client';
 import { Api } from '../providers/api/api';
 import { Rpc } from '../providers/rpc/rpc';
@@ -19,6 +21,7 @@ import { OrderProvider } from '../providers/Order/order';
 import { CartProvider } from '../providers/Cart/cart';
 import { HubUserProvider } from '../providers/HubUser/hubUser';
 import { AnalyticsProvider } from '../providers/analytics/analytics';
+import { OfferSchedulerProvider } from '../providers/OfferScheduler/offerScheduler';
 
 
 @NgModule({
@@ -36,6 +39,7 @@ import { AnalyticsProvider } from '../providers/analytics/analytics';
 			name: '__mydb',
 			driverOrder: ['sqlite', 'websql', 'indexeddb']
 		}),
+		PipesModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
@@ -52,6 +56,7 @@ import { AnalyticsProvider } from '../providers/analytics/analytics';
 		OrderProvider,
 		CartProvider,
 		HubUserProvider,
+		OfferSchedulerProvider,
 		Api,
 		Rpc,
 		HttpClientExt

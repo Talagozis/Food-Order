@@ -7,7 +7,10 @@ export interface OfferApi {
     description: string;
     shortDescription: string;
     level: OfferLevel | null;
+    totalPrice: number;
     discount: number;
+    finalPrice: number;
+    picture: string;
     newUntilDate: Date | string | null;
     orderNumber: number | null;
     isActive: boolean;
