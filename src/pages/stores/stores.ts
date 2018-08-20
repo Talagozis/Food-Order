@@ -5,11 +5,11 @@ import '../../utils/linqtsExtension';
 
 import { StoreApi } from '../../models/Api/Store';
 import { HubUserApi } from '../../models/api/HubUser';
-
+import { Product_TagApi, TagLevel } from "../../models/Api/Product_Tag2";
 import { StoreProvider } from '../../providers/store/store';
 import { HubUserProvider } from '../../providers/HubUser/hubUser';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
-import { Product_TagApi, TagLevel } from '../../models/api/Product_tag';
+
 import { FilterViewModel } from '../filters/filters';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 

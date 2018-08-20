@@ -1,4 +1,4 @@
-import { TagLevel } from "./Product_tag";
+import { TagLevel } from "./Product_Tag2";
 
 export interface TagApi {
     bid: number;

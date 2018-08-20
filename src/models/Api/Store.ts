@@ -5,8 +5,8 @@ import { StoreContactApi } from "./StoreContact";
 import { ProductApi } from "./Product";
 import { OfferApi } from "./Offer";
 import { Store_AreaApi } from "./Store_Area";
-import { Product_TagApi } from "./Product_tag";
 import { UserApi } from "./User";
+import { Product_TagApi } from "./Product_Tag2";
 
 export interface StoreApi {
         name: string;

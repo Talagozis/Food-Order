@@ -1,6 +1,7 @@
 import { ProductApi } from "../../models/api/Product";
-import { Product_TagApi } from "../../models/api/Product_tag";
 import { OfferGroupApi } from "../../models/api/OfferGroup";
+import { Product_TagApi } from "../../models/Api/Product_Tag2";
+
 import { Product_IngredientViewModel } from "../../models/ViewModels/Product_IngredientViewModel";
 import { Product_AttributeGroupViewModel } from "../../models/ViewModels/Product_AttributeGroupViewModel";
 

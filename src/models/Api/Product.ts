@@ -1,4 +1,4 @@
-import { Product_TagApi } from "./Product_tag";
+import { Product_TagApi } from "./Product_Tag2";
 import { OfferGroupApi } from "./OfferGroup";
 import { Product_IngredientApi } from "./Product_Ingredient";
 import { Product_AttributeGroupApi } from "./Product_AttributeGroup";
