@@ -1,5 +1,7 @@
 import { OfferGroupApi } from "./OfferGroup";
 import { ActiveHourApi } from "./ActiveHour";
+import { OfferSchedulerApi } from "./OfferSchedulerApi";
+import { StoreApi } from "./Store";
 
 export interface OfferApi {
     bid: number;
@@ -20,6 +22,10 @@ export interface OfferApi {
     OfferGroups: OfferGroupApi[];
 
     ActiveHours: ActiveHourApi[];
+
+    OfferShedulers: OfferSchedulerApi[];
+
+    Store: StoreApi;
 }
 
 export enum OfferLevel {

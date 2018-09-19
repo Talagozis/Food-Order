@@ -20,6 +20,12 @@ page-store {
     .pointer {
         cursor: pointer;
     }
+    .cross-out {
+        text-decoration: line-through;
+    }
+    .display-block {
+        display: block;
+    }
     .segment-button {
         background-color: color($colors, light, base) !important;
         color: black !important;
