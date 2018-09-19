@@ -83,6 +83,7 @@ export class CheckoutPage {
 	}
 
 	sendOrder(): void {
+		this.canSendOrder = false;
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {
 			...this.orderDetails,
@@ -106,6 +107,7 @@ export class CheckoutPage {
 
 			this.cartProvider.clearCartItem(this.store.bid);
 			this.cartProvider.clearCartItemOffer(this.store.bid);
+			this.canSendOrder = true;
 			this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
 		});
 
@@ -151,6 +153,7 @@ export class CheckoutPage {
 				message = 'Υπήρξε κάποιο πρόβλημα.';
 		}
 		this.presentAlert(message);
+		this.canSendOrder = true;
 		return;
 	}
 

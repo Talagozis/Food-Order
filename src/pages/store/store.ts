@@ -11,6 +11,8 @@ import { ProductApi } from '../../models/api/Product';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
+import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
+import { OfferApi, OfferLevel } from '../../models/Api/Offer';
 
 @IonicPage({
 	name: 'StorePage',
@@ -24,6 +26,7 @@ import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
+	liveDeals: OfferSchedulerApi[];
 	categories: any[];
 	cart: CartViewModel;
 
@@ -46,6 +49,7 @@ export class StorePage {
 		let store: StoreApi = await this.initializeStore(storeSlug);
 
 		await Promise.all([
+			this.initializeOffers(store.bid),
 			this.initializeProducts(store.bid),
 			this.initializeCart(store.bid),
 		]);
@@ -55,6 +59,42 @@ export class StorePage {
 
 	async ionViewWillEnter(): Promise<void> {
 		await this.initializeCart(this.store.bid);
+	}
+
+	initializeOffers(storeBid: number): Promise<void> {
+		return this.productProvider.findByStoreBid(storeBid).toPromise().then((p: ProductApi[]) => {
+			
+			this.liveDeals = [
+				{
+					description: 'test',
+					info: 'test',
+					isActive: true,
+					endDateTime: new Date(2018, 19, 9),
+					isArchived: false,
+					maxAmount: 10,
+					startDateTime: new Date(2018, 1, 1),
+					bid: 100,
+					usedAmount: 2,
+					usedAmountVirtual: 4,
+					Offer: {
+						bid: 200,
+						discount: 3,
+						finalPrice: 3,
+						isActive: true,
+						level: OfferLevel.LiveDeal,
+						name: 'test offer',
+						totalPrice: 6,
+						shortDescription: 'test short description',
+						Store: {
+							slug: 'prototype',
+							bid: 295462762,
+							name: 'store name',
+							logo: ''
+						} as StoreApi
+					} as OfferApi
+				} as OfferSchedulerApi
+			];
+		});
 	}
 
 	initializeProducts(storeBid: number): Promise<void> {
