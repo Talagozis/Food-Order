@@ -58,7 +58,7 @@ class OfferSubscriptionFilters {
 	}
 
 	public static filterLive(subscription: SubscriptionDelegate): SubscriptionDelegate {
-		return a => subscription(a.filter(b => b.OfferShedulers && b.OfferShedulers.filter(c => c.isActive && c.startDateTime < new Date() && c.endDateTime < new Date()).length > 0));
+		return a => subscription(a.filter(b => b.OfferSchedulers && b.OfferSchedulers.filter(c => c.isActive && new Date(c.startDateTime) <= new Date() && new Date(c.endDateTime) >= new Date()).length > 0));
 	}
 
 }

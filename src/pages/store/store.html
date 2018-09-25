@@ -47,20 +47,20 @@
 			<ion-list *ngSwitchCase="'catalog'" class="accordion-list">
 
 				<ion-list *ngIf="liveDeals && liveDeals.length > 0" class="accordion-list">
-					<ion-list-header *ngFor="let category of categories" no-lines no-padding>
+					<ion-list-header no-lines no-padding>
 						<button ion-item detail-none class="section-active">
 							<ion-icon item-left name="flame"></ion-icon>
 							Ζωντανές προσφορές
 						</button>
 						<ion-list>
 							<ion-item *ngFor="let liveDeal of liveDeals" detail-none class="child-item pointer" text-wrap>
-								<h3 text-capitalize>{{liveDeal.Offer.name}}</h3>
-								<p text-capitalize>{{ liveDeal.Offer.shortDescription }}</p>
+								<h3 text-capitalize>{{liveDeal.name}}</h3>
+								<p text-capitalize>{{ liveDeal.shortDescription }}</p>
 								<div item-end>
-									<button ion-button outline color="dark" class="cross-out display-block">{{liveDeal.Offer.totalPrice|priceFormat}}</button>
-									<button ion-button outline small class="display-block"><strong>{{liveDeal.Offer.finalPrice|priceFormat}}</strong></button>
+									<button ion-button outline color="dark" class="cross-out display-block">{{liveDeal.totalPrice|priceFormat}}</button>
+									<button ion-button outline small class="display-block"><strong>{{liveDeal.finalPrice|priceFormat}}</strong></button>
 									<div>
-										<span>{{liveDeal.endDateTime|countdown|date:'HH:mm:ss'}}</span>
+										<!-- <span>{{liveDeal.endDateTime|countdown|date:'HH:mm:ss'}}</span> -->
 									</div>
 								</div>
 							</ion-item>

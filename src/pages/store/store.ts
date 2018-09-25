@@ -27,7 +27,7 @@ import { OfferProvider } from '../../providers/Offer/offer';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
-	liveDeals: OfferSchedulerApi[];
+	liveDeals: OfferApi[];
 	categories: any[];
 	cart: CartViewModel;
 
@@ -64,9 +64,9 @@ export class StorePage {
 
 	initializeOffers(storeBid: number): Promise<void> {
 
-		return this.offerProvider.findLiveDeals(storeBid, (o: OfferApi[]) => {
-			console.log(o);
-			this.liveDeals = o.filter(a => a.OfferShedulers.length > 0)[0].OfferShedulers;
+		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
+			console.log(offers);
+			this.liveDeals = offers;
 		});
 
 	}
