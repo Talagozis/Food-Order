@@ -13,6 +13,7 @@ import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
 import { OfferApi, OfferLevel } from '../../models/Api/Offer';
+import { OfferProvider } from '../../providers/Offer/offer';
 
 @IonicPage({
 	name: 'StorePage',
@@ -30,7 +31,7 @@ export class StorePage {
 	categories: any[];
 	cart: CartViewModel;
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public offerProvider: OfferProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
 		this.store = new StoreViewModel({ cover: "", minOrderCost: 0 });
 	}
 
@@ -62,39 +63,12 @@ export class StorePage {
 	}
 
 	initializeOffers(storeBid: number): Promise<void> {
-		return this.productProvider.findByStoreBid(storeBid).toPromise().then((p: ProductApi[]) => {
-			
-			this.liveDeals = [
-				{
-					description: 'test',
-					info: 'test',
-					isActive: true,
-					endDateTime: new Date(2018, 19, 9),
-					isArchived: false,
-					maxAmount: 10,
-					startDateTime: new Date(2018, 1, 1),
-					bid: 100,
-					usedAmount: 2,
-					usedAmountVirtual: 4,
-					Offer: {
-						bid: 200,
-						discount: 3,
-						finalPrice: 3,
-						isActive: true,
-						level: OfferLevel.LiveDeal,
-						name: 'test offer',
-						totalPrice: 6,
-						shortDescription: 'test short description',
-						Store: {
-							slug: 'prototype',
-							bid: 295462762,
-							name: 'store name',
-							logo: ''
-						} as StoreApi
-					} as OfferApi
-				} as OfferSchedulerApi
-			];
+
+		return this.offerProvider.findLiveDeals(storeBid, (o: OfferApi[]) => {
+			console.log(o);
+			this.liveDeals = o.filter(a => a.OfferShedulers.length > 0)[0].OfferShedulers;
 		});
+
 	}
 
 	initializeProducts(storeBid: number): Promise<void> {

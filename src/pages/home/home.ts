@@ -27,38 +27,40 @@ export class HomePage {
 		this.background = this.chooseBackground();
 		this.cartProvider.clearCarts();
 		this.offerSchedulerProvider.getLive().subscribe((os) => {
+			console.log(os);
+			this.liveDeals = os.slice(0, 3); // <= add order and ranking
+
 			//TODO DELETE THIS
-			this.liveDeals = [
-				{
-					description: 'test',
-					info: 'test',
-					isActive: true,
-					endDateTime: new Date(2018, 1, 1),
-					isArchived: false,
-					maxAmount: 10,
-					startDateTime: new Date(2018, 1, 1),
-					bid: 100,
-					usedAmount: 2,
-					usedAmountVirtual: 4,
-					Offer: {
-						bid: 200,
-						discount: 3,
-						finalPrice: 3,
-						isActive: true,
-						level: OfferLevel.LiveDeal,
-						name: 'test offer',
-						totalPrice: 6,
-						shortDescription: 'test short description',
-						Store: {
-							slug: 'prototype',
-							bid: 295462762,
-							name: 'store name',
-							logo: ''
-						} as StoreApi
-					} as OfferApi
-				} as OfferSchedulerApi
-			];
-			// this.liveDeals = os.slice(0, 3); // <= add order and ranking
+			// this.liveDeals = [
+			// 	{
+			// 		description: 'test',
+			// 		info: 'test',
+			// 		isActive: true,
+			// 		endDateTime: new Date(2018, 1, 1),
+			// 		isArchived: false,
+			// 		maxAmount: 10,
+			// 		startDateTime: new Date(2018, 1, 1),
+			// 		bid: 100,
+			// 		usedAmount: 2,
+			// 		usedAmountVirtual: 4,
+			// 		Offer: {
+			// 			bid: 200,
+			// 			discount: 3,
+			// 			finalPrice: 3,
+			// 			isActive: true,
+			// 			level: OfferLevel.LiveDeal,
+			// 			name: 'test offer',
+			// 			totalPrice: 6,
+			// 			shortDescription: 'test short description',
+			// 			Store: {
+			// 				slug: 'prototype',
+			// 				bid: 295462762,
+			// 				name: 'store name',
+			// 				logo: ''
+			// 			} as StoreApi
+			// 		} as OfferApi
+			// 	} as OfferSchedulerApi
+			// ];
 		});
 	}
 
