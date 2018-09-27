@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 import { Api } from '../api/api';
 import { OfferApi, OfferLevel } from '../../models/Api/Offer';
-import { Subscription } from 'rxjs/Subscription';
 
 type SubscriptionDelegate = (value: OfferApi[]) => void;
 

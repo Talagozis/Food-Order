@@ -11,9 +11,9 @@ import { ProductApi } from '../../models/api/Product';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
-import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
-import { OfferApi, OfferLevel } from '../../models/Api/Offer';
+import { OfferApi } from '../../models/Api/Offer';
 import { OfferProvider } from '../../providers/Offer/offer';
+import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 
 @IonicPage({
 	name: 'StorePage',
@@ -27,7 +27,7 @@ import { OfferProvider } from '../../providers/Offer/offer';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
-	liveDeals: OfferApi[];
+	liveDeals: OfferViewModel[];
 	categories: any[];
 	cart: CartViewModel;
 
@@ -65,8 +65,7 @@ export class StorePage {
 	initializeOffers(storeBid: number): Promise<void> {
 
 		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
-			console.log(offers);
-			this.liveDeals = offers;
+			this.liveDeals = offers.map(a => new OfferViewModel({ ...a }));
 		});
 
 	}
@@ -107,7 +106,7 @@ export class StorePage {
 		this.categories[i].open = !this.categories[i].open;
 	}
 
-	getBackgroundStyle(imagepath){
+	getBackgroundStyle(imagepath) {
 		return {
 			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + ')',
 			'background-position': 'center center',
@@ -125,7 +124,7 @@ export class StorePage {
 
 		if (!data.isAdded)
 			return;
-		
+
 		let loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});

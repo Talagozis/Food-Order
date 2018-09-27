@@ -5,7 +5,6 @@ import { CartProvider } from '../../providers/Cart/cart';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { OfferSchedulerProvider } from '../../providers/OfferScheduler/offerScheduler';
 import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
-import { OfferApi, OfferLevel } from '../../models/Api/Offer';
 import { StoreApi } from 'models/api/Store';
 
 @Component({
