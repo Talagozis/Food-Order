@@ -20,6 +20,12 @@ page-store {
     .pointer {
         cursor: pointer;
     }
+    .cross-out {
+        text-decoration: line-through;
+    }
+    .display-block {
+        display: block;
+    }
     .segment-button {
         background-color: color($colors, light, base) !important;
         color: black !important;
@@ -58,4 +64,48 @@ page-store {
     .list {
         margin-bottom: 4px;
     }
+
+    .liveDeals-list {
+
+        .details {
+            display: flex; 
+            margin-bottom: 4px;
+
+            .name {
+                font-weight: 600;
+                font-size: 1.1em;
+                color: #313131;
+            }
+            .description {
+                border: 1px solid #e0e0e0;
+                border-radius: 2px;
+                padding: 1px;
+                font-size: 1.3rem
+            }
+
+        }
+        .remains {
+            display: flex;
+
+            .countdown-timer {
+                flex: 1;
+            }
+            .amount { }
+            .countdown-timer-label, .amount-label {
+                color: #666; 
+                font-size: 0.85em;
+            }
+            .countdown-timer-value, .amount-value {
+                font-size: 0.9em;
+                font-weight: 500;
+            }
+
+        }
+
+
+
+    }
+
+
+
 }

@@ -20,7 +20,7 @@
 	<ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
 
 	<div class="livedeals">
-		<ion-item text-wrap class="pointer" *ngFor="let liveDeal of liveDeals">
+		<ion-item text-wrap class="pointer" *ngFor="let liveDeal of liveDeals" (click)="navigateToStorePage(liveDeal.Offer.Store)">
 			<ion-thumbnail item-start>
 				<img src="{{liveDeal.Offer.Store.logo|imageStore}}" class="img-responsive store-logo">
 			</ion-thumbnail>

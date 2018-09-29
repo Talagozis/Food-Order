@@ -11,6 +11,9 @@ import { ProductApi } from '../../models/api/Product';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
+import { OfferApi } from '../../models/Api/Offer';
+import { OfferProvider } from '../../providers/Offer/offer';
+import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 
 @IonicPage({
 	name: 'StorePage',
@@ -24,10 +27,11 @@ import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
+	liveDeals: OfferViewModel[];
 	categories: any[];
 	cart: CartViewModel;
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public offerProvider: OfferProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
 		this.store = new StoreViewModel({ cover: "", minOrderCost: 0 });
 	}
 
@@ -46,6 +50,7 @@ export class StorePage {
 		let store: StoreApi = await this.initializeStore(storeSlug);
 
 		await Promise.all([
+			this.initializeOffers(store.bid),
 			this.initializeProducts(store.bid),
 			this.initializeCart(store.bid),
 		]);
@@ -55,6 +60,14 @@ export class StorePage {
 
 	async ionViewWillEnter(): Promise<void> {
 		await this.initializeCart(this.store.bid);
+	}
+
+	initializeOffers(storeBid: number): Promise<void> {
+
+		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
+			this.liveDeals = offers.map(a => new OfferViewModel({ ...a }));
+		});
+
 	}
 
 	initializeProducts(storeBid: number): Promise<void> {
@@ -93,7 +106,7 @@ export class StorePage {
 		this.categories[i].open = !this.categories[i].open;
 	}
 
-	getBackgroundStyle(imagepath){
+	getBackgroundStyle(imagepath) {
 		return {
 			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + ')',
 			'background-position': 'center center',
@@ -111,7 +124,7 @@ export class StorePage {
 
 		if (!data.isAdded)
 			return;
-		
+
 		let loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});
