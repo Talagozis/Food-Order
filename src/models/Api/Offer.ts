@@ -23,7 +23,7 @@ export interface OfferApi {
 
     ActiveHours: ActiveHourApi[];
 
-    OfferShedulers: OfferSchedulerApi[];
+    OfferSchedulers: OfferSchedulerApi[];
 
     Store: StoreApi;
 }

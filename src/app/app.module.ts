@@ -22,6 +22,7 @@ import { CartProvider } from '../providers/Cart/cart';
 import { HubUserProvider } from '../providers/HubUser/hubUser';
 import { AnalyticsProvider } from '../providers/analytics/analytics';
 import { OfferSchedulerProvider } from '../providers/OfferScheduler/offerScheduler';
+import { OfferProvider } from '../providers/Offer/offer';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { OfferSchedulerProvider } from '../providers/OfferScheduler/offerSchedul
 		CartProvider,
 		HubUserProvider,
 		OfferSchedulerProvider,
+		OfferProvider,
 		Api,
 		Rpc,
 		HttpClientExt

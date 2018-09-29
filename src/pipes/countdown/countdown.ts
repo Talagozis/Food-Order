@@ -1,15 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'countdown',
+	name: 'countdown',
 })
 export class CountdownPipe implements PipeTransform {
-  /**
-   * Takes a value and makes it lowercase.
-   */
-  transform(value: Date, ...args): Date {
-    console.log(new Date().valueOf());
-    console.log(value.valueOf());
-    return new Date(value.valueOf() - new Date().valueOf());
-  }
+
+	
+	transform(value: Date | string, ...args): string {
+		if (typeof value == "string")
+			value = new Date(value);
+
+		// console.log(value);
+		// console.log(new Date());
+
+		var ms: number = value.valueOf() - new Date().valueOf();
+
+		var hours: number = Math.floor(ms / 3600000);
+		var mins: number = Math.floor((ms % 3600000) / 60000);
+
+		var hoursText: string = hours + " ώρες και ";
+		var minsText: string = mins + " λεπτά";
+
+		return hours !== 0 ? hoursText + minsText : minsText;
+	}
 }

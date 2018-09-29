@@ -11,8 +11,9 @@ import { ProductApi } from '../../models/api/Product';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
-import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
-import { OfferApi, OfferLevel } from '../../models/Api/Offer';
+import { OfferApi } from '../../models/Api/Offer';
+import { OfferProvider } from '../../providers/Offer/offer';
+import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 
 @IonicPage({
 	name: 'StorePage',
@@ -26,11 +27,11 @@ import { OfferApi, OfferLevel } from '../../models/Api/Offer';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
-	liveDeals: OfferSchedulerApi[];
+	liveDeals: OfferViewModel[];
 	categories: any[];
 	cart: CartViewModel;
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public offerProvider: OfferProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
 		this.store = new StoreViewModel({ cover: "", minOrderCost: 0 });
 	}
 
@@ -62,39 +63,11 @@ export class StorePage {
 	}
 
 	initializeOffers(storeBid: number): Promise<void> {
-		return this.productProvider.findByStoreBid(storeBid).toPromise().then((p: ProductApi[]) => {
-			
-			this.liveDeals = [
-				{
-					description: 'test',
-					info: 'test',
-					isActive: true,
-					endDateTime: new Date(2018, 19, 9),
-					isArchived: false,
-					maxAmount: 10,
-					startDateTime: new Date(2018, 1, 1),
-					bid: 100,
-					usedAmount: 2,
-					usedAmountVirtual: 4,
-					Offer: {
-						bid: 200,
-						discount: 3,
-						finalPrice: 3,
-						isActive: true,
-						level: OfferLevel.LiveDeal,
-						name: 'test offer',
-						totalPrice: 6,
-						shortDescription: 'test short description',
-						Store: {
-							slug: 'prototype',
-							bid: 295462762,
-							name: 'store name',
-							logo: ''
-						} as StoreApi
-					} as OfferApi
-				} as OfferSchedulerApi
-			];
+
+		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
+			this.liveDeals = offers.map(a => new OfferViewModel({ ...a }));
 		});
+
 	}
 
 	initializeProducts(storeBid: number): Promise<void> {
@@ -133,7 +106,7 @@ export class StorePage {
 		this.categories[i].open = !this.categories[i].open;
 	}
 
-	getBackgroundStyle(imagepath){
+	getBackgroundStyle(imagepath) {
 		return {
 			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + ')',
 			'background-position': 'center center',
@@ -151,7 +124,7 @@ export class StorePage {
 
 		if (!data.isAdded)
 			return;
-		
+
 		let loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});
