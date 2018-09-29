@@ -43,7 +43,7 @@
 		</div>
 
 		<div [ngSwitch]="storeSegment">
-			
+
 			<ion-list *ngSwitchCase="'catalog'" class="accordion-list">
 
 				<ion-list *ngIf="liveDeals && liveDeals.length > 0" class="accordion-list">
@@ -54,32 +54,39 @@
 						</button>
 						<ion-list class="liveDeals-list">
 							<ion-item *ngFor="let liveDeal of liveDeals" detail-none class="child-item pointer" text-wrap>
-								<h3 class="name" text-capitalize>{{liveDeal.name}}</h3>
-								<p text-capitalize>{{ liveDeal.shortDescription }}</p>
-								<div item-end style="text-align: right;">
-									<div color="dark" class="display-block" style="min-height: 22px;">
-										<span style="font-size: 0.8em;">από</span> 
-										<span class="cross-out" style="font-size: 0.85em;">{{liveDeal.totalPrice|priceFormat}}</span>
-									</div>
-									<div color="dark" class="display-block" style="min-height: 22px;">
-										<span style="font-size: 0.9em;">{{(liveDeal.finalPrice/liveDeal.totalPrice*100 - 100).toFixed(0)}}</span><span>%</span>
-									</div>
-									<div small class="display-block" style="min-height: 22px;">
-										<span style="font-size: 0.8em;">μόνο</span> 
-										<span style="font-size: 0.9em; color: #43a047; font-weight: 600;">{{liveDeal.finalPrice|priceFormat}}</span>
-									</div>
+								<div class="details">
 									<div>
-										<!-- <span>{{liveDeal.endDateTime|countdown|date:'HH:mm:ss'}}</span> -->
+										<h3 class="name" text-capitalize>{{liveDeal.name}}</h3>
+										<p class="description" text-capitalize>{{ liveDeal.shortDescription }}</p>
+									</div>
+									<div style="min-width: 75px; text-align: right;">
+										<div color="dark" class="display-block" style="min-height: 22px;">
+											<span style="font-size: 0.8em;">από</span>
+											<span class="cross-out" style="font-size: 0.85em;">{{liveDeal.totalPrice|priceFormat}}</span>
+										</div>
+										<div color="dark" class="display-block" style="min-height: 22px;">
+											<span style="font-size: 0.9em;">{{(liveDeal.finalPrice/liveDeal.totalPrice*100 - 100).toFixed(0)}}</span><span>%</span>
+										</div>
+										<div small class="display-block" style="min-height: 22px;">
+											<span style="font-size: 0.8em;">μόνο</span>
+											<span style="font-size: 0.9em; color: #43a047; font-weight: 600;">{{liveDeal.finalPrice|priceFormat}}</span>
+										</div>
+										<div>
+											<!-- <span>{{liveDeal.endDateTime|countdown|date:'HH:mm:ss'}}</span> -->
+										</div>
 									</div>
 								</div>
-								<div>
-									<span style="color: #666; font-size: 0.85em;">Απομένουν: </span> 
-									<span style="font-size: 0.9em;">{{liveDeal.getCurrentOfferScheduler().endDateTime|countdown}}</span>
+								<div class="remains">
+									<div class="countdown-timer">
+										<span class="countdown-timer-label">Απομένουν: </span>
+										<span class="countdown-timer-value">{{liveDeal.getCurrentOfferScheduler().endDateTime|countdown}}</span>
+									</div>
+									<div class="amount">
+										<span class="amount-label">Τεμάχια: </span>
+										<span class="amount-value">{{liveDeal.getCurrentOfferScheduler().usedAmountVirtual}}</span>
+									</div>
 								</div>
-								<div>
-									<span style="color: #666; font-size: 0.85em;">Τεμάχια: </span> 
-									<span style="font-size: 0.9em;">{{liveDeal.getCurrentOfferScheduler().usedAmountVirtual}}</span>									
-								</div>
+
 							</ion-item>
 						</ion-list>
 					</ion-list-header>
@@ -92,7 +99,8 @@
 						{{category.key}}
 					</button>
 					<ion-list *ngIf="category.open">
-						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap (click)="openModal(product)">
+						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap
+						 (click)="openModal(product)">
 							<h3 text-capitalize>{{product.title}}</h3>
 							<p text-capitalize>{{ product.description }}</p>
 							<button ion-button outline item-end>{{product.price|priceFormat}}</button>

@@ -16,6 +16,6 @@ export class CountdownPipe implements PipeTransform {
 		var hours: string = ("0" + Math.floor(ms / 3600000)).slice(-2);
 		var mins: string = ("0" + Math.floor((ms % 3600000) / 60000)).slice(-2);
 
-		return  hours + ":" + mins;
+		return  hours + " ώρες και " + mins + " λεπτά";
 	}
 }
