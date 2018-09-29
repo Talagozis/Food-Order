@@ -34,7 +34,7 @@ export class OfferViewModel implements OfferApi {
         if (!this.OfferSchedulers || this.OfferSchedulers.length == 0)
             return null;
 
-        let offerSchduler: OfferSchedulerApi = this.OfferSchedulers.filter(a => a.isActive).sort((a, b) => a.endDateTime > b.endDateTime ? 1 : -1)[0];
+        let offerSchduler: OfferSchedulerApi = this.OfferSchedulers.filter(a => a.isActive).sort((a, b) => a.endDateTime < b.endDateTime ? 1 : -1)[0];
 
         if (!offerSchduler)
             return null;

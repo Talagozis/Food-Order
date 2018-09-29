@@ -56,8 +56,12 @@
 							<ion-item *ngFor="let liveDeal of liveDeals" detail-none class="child-item pointer" text-wrap>
 								<div class="details">
 									<div>
-										<h3 class="name" text-capitalize>{{liveDeal.name}}</h3>
-										<p class="description" text-capitalize>{{ liveDeal.shortDescription }}</p>
+										<h3 class="name" text-capitalize>
+											{{liveDeal.name}}
+										</h3>
+										<p class="description" text-capitalize *ngIf="liveDeal.shortDescription">
+											{{ liveDeal.shortDescription }}
+										</p>
 									</div>
 									<div style="min-width: 75px; text-align: right;">
 										<div color="dark" class="display-block" style="min-height: 22px;">
