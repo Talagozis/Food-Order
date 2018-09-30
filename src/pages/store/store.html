@@ -53,13 +53,13 @@
 							Ζωντανές προσφορές
 						</button>
 						<ion-list class="liveDeals-list">
-							<ion-item *ngFor="let liveDeal of liveDeals" detail-none class="child-item pointer" text-wrap>
+							<ion-item *ngFor="let liveDeal of liveDeals" detail-none class="child-item pointer" text-wrap (click)="openOfferModal(liveDeal)">
 								<div class="details">
-									<div>
-										<h3 class="name" text-capitalize>
+									<div style="flex: 1">
+										<h3 class="name">
 											{{liveDeal.name}}
 										</h3>
-										<p class="description" text-capitalize *ngIf="liveDeal.shortDescription">
+										<p class="description" *ngIf="liveDeal.shortDescription">
 											{{ liveDeal.shortDescription }}
 										</p>
 									</div>

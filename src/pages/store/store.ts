@@ -27,7 +27,7 @@ import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
-	liveDeals: OfferViewModel[];
+	liveDeals: OfferApi[];
 	categories: any[];
 	cart: CartViewModel;
 
@@ -65,7 +65,7 @@ export class StorePage {
 	initializeOffers(storeBid: number): Promise<void> {
 
 		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
-			this.liveDeals = offers.map(a => new OfferViewModel({ ...a }));
+			this.liveDeals = offers
 		});
 
 	}
@@ -114,14 +114,13 @@ export class StorePage {
 		};
 	}
 
-	openModal(product) {
+	openModal(product: ProductApi) {
 		let productModal = this.modalCtrl.create('ProductModalPage', { storeBid: this.store.bid, product: product });
 		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
 		productModal.present();
 	}
 
 	async onProductModalDidDismiss(data: any): Promise<void> {
-
 		if (!data.isAdded)
 			return;
 
@@ -133,6 +132,33 @@ export class StorePage {
 		var storeBid = this.store.bid;
 
 		await Promise.all([
+			this.initializeOffers(storeBid),
+			this.initializeProducts(storeBid),
+			this.initializeCart(storeBid),
+		]);
+
+		loader.dismiss();
+	}
+
+	openOfferModal(offer: OfferApi) {
+		let offerModal = this.modalCtrl.create('OfferModalPage', { storeBid: this.store.bid, offer: offer });
+		offerModal.onDidDismiss(this.onOfferModalDidDismiss.bind(this));
+		offerModal.present();
+	}
+
+	async onOfferModalDidDismiss(data: any): Promise<void> {
+		if (!data.isAdded)
+			return;
+
+		let loader = this.loadingCtrl.create({
+			content: "Φόρτωση καταστήματος"
+		});
+		loader.present();
+
+		var storeBid = this.store.bid;
+
+		await Promise.all([
+			this.initializeOffers(storeBid),
 			this.initializeProducts(storeBid),
 			this.initializeCart(storeBid),
 		]);
