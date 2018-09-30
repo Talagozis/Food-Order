@@ -1,36 +1,36 @@
 <ion-header>
-  <div class="product-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%)'}">
-    <ion-navbar transparent>
-      <h3 ion-text color="light">{{offer.name}}</h3>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="closeOfferModal()" color="light">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-    <div *ngIf="offer">
-      <span ion-text color="light">{{offer.shortDescription}}</span>
-      <ion-row>
-        <ion-col col-12>
-          <button ion-button float-right>{{finalPrice|priceFormat}}</button>
-        </ion-col>
-      </ion-row>
-    </div>
-  </div>
+	<div class="product-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%)'}">
+		<ion-navbar transparent>
+			<h3 ion-text color="light">{{offer.name}}</h3>
+			<ion-buttons end>
+				<button ion-button icon-only (click)="closeOfferModal()" color="light">
+					<ion-icon name="close"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-navbar>
+		<div *ngIf="offer">
+			<span ion-text color="light">{{offer.shortDescription}}</span>
+			<ion-row>
+				<ion-col col-12>
+					<button ion-button float-right>{{finalPrice|priceFormat}}</button>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
 </ion-header>
 
 <ion-content>
 	<ion-grid>
-    <ng-container *ngIf="offerGroups && offerGroups.length > 0">
-      <ion-row *ngFor="let offerGroup of offerGroups">
-        <ion-col>
-          <h3>{{offerGroup.description}}</h3>
-          <ion-select *ngFor="let product of offerGroup.Products" okText="ΟΚ" cancelText="ΑΚΥΡΟ">
-            <ion-option value="{{product.id}}">{{product.name}}</ion-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-    </ng-container>
+		<ng-container *ngIf="offerGroups && offerGroups.length > 0">
+			<ion-row *ngFor="let offerGroup of offerGroups">
+				<ion-col>
+					<h3>{{offerGroup.description}}</h3>
+					<ion-select okText="ΟΚ" cancelText="ΑΚΥΡΟ">
+						<ion-option *ngFor="let product of offerGroup.Products" value="{{product.id}}">{{product.name}}</ion-option>
+					</ion-select>
+				</ion-col>
+			</ion-row>
+		</ng-container>
 
 
 

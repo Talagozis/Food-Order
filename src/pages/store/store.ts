@@ -14,6 +14,11 @@ import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 import { OfferApi } from '../../models/Api/Offer';
 import { OfferProvider } from '../../providers/Offer/offer';
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
+import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
+import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
+import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
+import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
+import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
 
 @IonicPage({
 	name: 'StorePage',
@@ -27,7 +32,7 @@ import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
-	liveDeals: OfferApi[];
+	liveDeals: OfferViewModel[];
 	categories: any[];
 	cart: CartViewModel;
 
@@ -63,9 +68,29 @@ export class StorePage {
 	}
 
 	initializeOffers(storeBid: number): Promise<void> {
-
 		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
-			this.liveDeals = offers
+			this.liveDeals = offers.map(a => new OfferViewModel({
+				...a,
+				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
+					...b,
+					Offer: undefined,
+					Products: b.Products.map(c => new ProductViewModel({
+						...c,
+						Product_AttributeGroups: c.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
+							...d,
+							Product: null,
+							Product_Attributes: d.Product_Attributes.map(e => new Product_AttributeViewModel({
+								...e,
+								Product_AttributeGroup: null
+							})),
+						})),
+						Product_Ingredients: c.Product_Ingredients.map(d => new Product_IngredientViewModel({
+							...d,
+							Product: null,
+						})),
+					}))
+				})),
+			}));
 		});
 
 	}

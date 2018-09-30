@@ -71,6 +71,10 @@ page-store {
             display: flex; 
             margin-bottom: 4px;
 
+            .flex-1 {
+                flex: 1;
+            }
+
             .name {
                 font-weight: 600;
                 font-size: 1.1em;

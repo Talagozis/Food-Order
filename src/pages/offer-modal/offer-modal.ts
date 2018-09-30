@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
-import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
-import { OfferApi } from '../../models/Api/Offer';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
-import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
-import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
-import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
 import { CartProvider } from '../../providers/Cart/cart';
 
 import '../../utils/linqtsExtension';
@@ -15,59 +10,40 @@ import '../../utils/linqtsExtension';
 
 @IonicPage()
 @Component({
-  selector: 'page-offer-modal',
-  templateUrl: 'offer-modal.html',
+	selector: 'page-offer-modal',
+	templateUrl: 'offer-modal.html',
 })
 export class OfferModalPage {
-  storeBid: number;
-  offer: OfferViewModel;
-  offerGroups: OfferGroupViewModel[];
+	storeBid: number;
+	offer: OfferViewModel;
+	offerGroups: OfferGroupViewModel[];
 	// attributeGroups: Product_AttributeGroupViewModel[];
 	// ingredients: Product_IngredientViewModel[];
 	quantity: number;
 	info: string;
 	finalPrice: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, private cartProvider: CartProvider) {
-    this.offer = new OfferViewModel({finalPrice: 0});
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private cartProvider: CartProvider) {
+		this.offer = new OfferViewModel({ finalPrice: 0 });
+	}
 
-  ionViewDidLoad() {
+	ionViewDidLoad() {
 		this.storeBid = this.navParams.get("storeBid") as number;
 
 		this.quantity = 1;
 		this.info = '';
 
-    let offerApi: OfferApi = this.navParams.get('offer') as OfferApi;
-    console.log(offerApi);
-    this.finalPrice = offerApi.finalPrice;
-    
-    this.offer = new OfferViewModel({
-      ...offerApi,
-      OfferGroups: offerApi.OfferGroups.map(a => new OfferGroupViewModel({
-        ...a,
-        Offer: null,
-         Products: a.Products.map(b => new ProductViewModel({
-           ...b,
-           Product_AttributeGroups: b.Product_AttributeGroups.map(c => new Product_AttributeGroupViewModel({
-            ...c,
-            Product: null,
-            Product_Attributes: c.Product_Attributes.map(d => new Product_AttributeViewModel({
-              ...d,
-              Product_AttributeGroup: null
-            })),
-          })),
-          Product_Ingredients: b.Product_Ingredients.map(c => new Product_IngredientViewModel({
-            ...c,
-            Product: null,
-          })),
-         }))
-      }))
-    });
+		let offer: OfferViewModel = this.navParams.get('offer') as OfferViewModel;
 
-    this.offerGroups = this.offer.OfferGroups.ToList()
-			.Select(a => { a.Products = a.Products.ToList().OrderBy(b => b.price).ToArray(); return a; })
-			.ToArray();
+		this.finalPrice = offer.finalPrice;
+
+		this.offer = offer;
+
+		this.offerGroups = this.offer.OfferGroups.ToList()
+			.Select(a => {
+				a.Products = a.Products.ToList().OrderBy(b => b.price).ToArray();
+				return a;
+			}).ToArray();
 
 		// this.attributeGroups = this.product.Product_AttributeGroups.ToList()
 		// 	.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
@@ -124,7 +100,7 @@ export class OfferModalPage {
 
 		// this.cartProvider.addCartItem(this.storeBid, cartItem);
 
-		this.viewCtrl.dismiss({isAdded: true});
+		this.viewCtrl.dismiss({ isAdded: true });
 	}
 
 	changeQuantity(amount: number) {
@@ -134,7 +110,7 @@ export class OfferModalPage {
 	}
 
 	closeOfferModal() {
-		this.viewCtrl.dismiss({isAdded: false});
+		this.viewCtrl.dismiss({ isAdded: false });
 	}
 
 }

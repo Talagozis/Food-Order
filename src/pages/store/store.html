@@ -55,7 +55,7 @@
 						<ion-list class="liveDeals-list">
 							<ion-item *ngFor="let liveDeal of liveDeals" detail-none class="child-item pointer" text-wrap (click)="openOfferModal(liveDeal)">
 								<div class="details">
-									<div style="flex: 1">
+									<div class="flex-1">
 										<h3 class="name">
 											{{liveDeal.name}}
 										</h3>
@@ -64,19 +64,17 @@
 										</p>
 									</div>
 									<div style="min-width: 75px; text-align: right;">
+										<div color="dark" class="display-block" style="min-height: 22px; font-size: 1.3em; color: #b71c1c; font-weight: 500;">
+											<span style="font-size: 0.8em;">{{(liveDeal.finalPrice/liveDeal.totalPrice*100 - 100).toFixed(0)}}</span><span
+											 style="font-size: 0.9em;">%</span>
+										</div>
 										<div color="dark" class="display-block" style="min-height: 22px;">
-											<span style="font-size: 0.8em;">από</span>
+											<span style="font-size: 0.8em; color: #666">από</span>
 											<span class="cross-out" style="font-size: 0.85em;">{{liveDeal.totalPrice|priceFormat}}</span>
 										</div>
-										<div color="dark" class="display-block" style="min-height: 22px;">
-											<span style="font-size: 0.9em;">{{(liveDeal.finalPrice/liveDeal.totalPrice*100 - 100).toFixed(0)}}</span><span>%</span>
-										</div>
 										<div small class="display-block" style="min-height: 22px;">
-											<span style="font-size: 0.8em;">μόνο</span>
-											<span style="font-size: 0.9em; color: #43a047; font-weight: 600;">{{liveDeal.finalPrice|priceFormat}}</span>
-										</div>
-										<div>
-											<!-- <span>{{liveDeal.endDateTime|countdown|date:'HH:mm:ss'}}</span> -->
+											<span style="font-size: 0.8em; color: #666">μόνο</span>
+											<span style="font-size: 1em; color: #43a047; font-weight: 600;">{{liveDeal.finalPrice|priceFormat}}</span>
 										</div>
 									</div>
 								</div>
