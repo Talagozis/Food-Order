@@ -1,5 +1,5 @@
 <ion-header>
-	<div class="product-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%)'}">
+	<div class="offer-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%)'}">
 		<ion-navbar transparent>
 			<h3 ion-text color="light">{{offer.name}}</h3>
 			<ion-buttons end>
@@ -22,12 +22,14 @@
 <ion-content>
 	<ion-grid>
 		<ng-container *ngIf="offerGroups && offerGroups.length > 0">
-			<ion-row *ngFor="let offerGroup of offerGroups">
+			<ion-row class="offerGroups-container" *ngFor="let offerGroup of offerGroups">
 				<ion-col>
-					<h3>{{offerGroup.description}}</h3>
-					<ion-select okText="ΟΚ" cancelText="ΑΚΥΡΟ">
-						<ion-option *ngFor="let product of offerGroup.Products" value="{{product.id}}">{{product.name}}</ion-option>
-					</ion-select>
+					<ion-item>
+						<ion-label>{{offerGroup.description}}</ion-label>
+						<ion-select [(ngModel)]="offerGroup.selectedProductBid" okText="ΟΚ" cancelText="ΑΚΥΡΟ">
+							<ion-option *ngFor="let product of offerGroup.Products" value="{{product.id}}">{{product.name}}</ion-option>
+						</ion-select>
+					</ion-item>
 				</ion-col>
 			</ion-row>
 		</ng-container>
