@@ -1,8 +1,8 @@
 import { OfferApi, OfferLevel } from "../../models/api/Offer";
-import { OfferGroupApi } from "../../models/Api/OfferGroup";
 import { ActiveHourApi } from "../../models/Api/ActiveHour";
 import { OfferSchedulerApi } from "../../models/Api/OfferSchedulerApi";
 import { StoreApi } from "../../models/Api/Store";
+import { OfferGroupViewModel } from "./OfferGroupViewModel";
 
 export class OfferViewModel implements OfferApi {
     bid: number;
@@ -19,7 +19,7 @@ export class OfferViewModel implements OfferApi {
     isActive: boolean;
     isArchived: boolean;
     info: string;
-    OfferGroups: OfferGroupApi[];
+    OfferGroups: OfferGroupViewModel[];
     ActiveHours: ActiveHourApi[];
     OfferSchedulers: OfferSchedulerApi[];
     Store: StoreApi;
