@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 
 import { OrderProvider } from '../../providers/Order/order';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
@@ -8,7 +8,7 @@ import { ResponseStatus } from '../../models/Request/Response';
 import { CheckoutRpc } from '../../models/Rpc/Checkout';
 import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import { OrderDetails } from '../../models/Entities/Checkout';
+import { OrderDetails, ApplicationType } from '../../models/Entities/Checkout';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
@@ -32,7 +32,7 @@ export class CheckoutPage {
 
 	orderDetails: OrderDetails;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider) {
 	}
 
 	ionViewDidEnter() {
@@ -54,7 +54,6 @@ export class CheckoutPage {
 			customerPhoneNumberConfirm: "",
 			customerDoorName: "",
 			customerFloorNumber: "",
-			isTakeAway: false,
 			info: "",
 		};
 
@@ -87,7 +86,6 @@ export class CheckoutPage {
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {
 			...this.orderDetails,
-			isTakeAway: false,
 			// info: "\$test",
 		};
 		checkoutRpc.AspNetUser = { // undefined user
@@ -96,7 +94,10 @@ export class CheckoutPage {
 		checkoutRpc.Store = { // test store
 			bid: this.store.bid
 		} as AspNetUserDetails;
-		checkoutRpc.sessionDetals = {}
+		checkoutRpc.sessionDetals = {
+			applicationType: ApplicationType.Pwa,
+			userAgent: this.platform.userAgent(),
+		}
 
 		this.orderProvider.checkout(checkoutRpc).subscribe((c: CheckoutRpcResponse) => {
 
