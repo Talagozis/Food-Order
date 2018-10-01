@@ -101,8 +101,7 @@
 						{{category.key}}
 					</button>
 					<ion-list *ngIf="category.open">
-						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap
-						 (click)="openModal(product)">
+						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap (click)="openModal(product)">
 							<h3 text-capitalize>{{product.title}}</h3>
 							<p text-capitalize>{{ product.description }}</p>
 							<button ion-button outline item-end>{{product.price|priceFormat}}</button>

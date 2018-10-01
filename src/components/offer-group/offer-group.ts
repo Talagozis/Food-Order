@@ -14,11 +14,17 @@ export class OfferGroupComponent {
 	offerGroup: OfferGroupViewModel;
 	selectedProduct: ProductViewModel;
 
+	open: boolean = false;
+
 	constructor() {
 	}
 
-	ionViewDidLoad() {
+	ngOnInit() {
 		console.log(this.offerGroup);
+
+		if(this.offerGroup.Products.length == 1)
+			this.onProductChange(this.offerGroup.Products[0].bid);
+
 	}
 
 	onProductChange(value: number) {
@@ -26,7 +32,9 @@ export class OfferGroupComponent {
 		console.log(this.selectedProduct);
 	}
 
-
+	toggleSection() {
+		this.open = !this.open;
+	}
 
 
 }

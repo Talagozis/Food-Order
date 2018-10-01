@@ -1,29 +1,31 @@
-<ion-row class="offerGroups-container">
-	<ion-col *ngIf="offerGroup.Products">
+<ion-list-header class="offerGroups-container" no-lines no-padding *ngIf="offerGroup.Products">
+	<button ion-item (click)="toggleSection()" detail-none [ngClass]="{'section-active': open, 'section': !open}">
+		<ion-icon item-left name="arrow-forward" *ngIf="!open"></ion-icon>
+		<ion-icon item-left name="arrow-down" *ngIf="open"></ion-icon>
+		<span>{{offerGroup.description}}</span>
+	</button>
+	<ion-list *ngIf="open">
 
-		<ion-row>
-			<ion-item *ngIf="offerGroup.Products.length > 1">
-				<ion-label>{{offerGroup.description}}</ion-label>
-				<ion-select okText="ΟΚ" cancelText="ΑΚΥΡΟ" (ionChange)="onProductChange($event)">
-					<ion-option *ngFor="let product of offerGroup.Products" value="{{product.bid}}">{{product.name}}</ion-option>
+		<ion-row *ngIf="offerGroup.Products.length > 1">
+			<ion-item>
+				<ion-label *ngIf="!selectedProduct">Επίλεξε</ion-label>
+				<ion-select [ngClass]="{'full-width': selectedProduct, '': !selectedProduct}" class="" okText="ΟΚ" cancelText="ΑΚΥΡΟ" (ionChange)="onProductChange($event)">
+					<ion-option *ngFor="let product of offerGroup.Products" [selected]="selectedProduct && selectedProduct.bid === product.bid" value="{{product.bid}}">{{product.name}}</ion-option>
 				</ion-select>
 			</ion-item>
 		</ion-row>
 
-		<ion-row *ngIf="selectedProduct">
-				<h3>{{selectedProduct.name}}</h3>
-		</ion-row>
+		<ion-row *ngIf="selectedProduct" class="selected-product">
 
-		<ion-row *ngIf="selectedProduct">
 			<ion-grid>
 				<ng-container *ngIf="selectedProduct.Product_AttributeGroups && selectedProduct.Product_AttributeGroups.length > 0">
 					<ion-row class="attributes-container" *ngFor="let attributeGroup of selectedProduct.Product_AttributeGroups">
 						<ion-col>
 							<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
 								<ion-list-header text-capitalize>
-									<h4>
+									<span>
 										<strong>{{attributeGroup.description}}</strong>
-									</h4>
+									</span>
 								</ion-list-header>
 								<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
 									<ion-label>
@@ -59,5 +61,5 @@
 			</ion-grid>
 		</ion-row>
 
-	</ion-col>
-</ion-row>
+	</ion-list>
+</ion-list-header>
