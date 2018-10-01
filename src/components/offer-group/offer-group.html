@@ -1,0 +1,63 @@
+<ion-row class="offerGroups-container">
+	<ion-col *ngIf="offerGroup.Products">
+
+		<ion-row>
+			<ion-item *ngIf="offerGroup.Products.length > 1">
+				<ion-label>{{offerGroup.description}}</ion-label>
+				<ion-select okText="ΟΚ" cancelText="ΑΚΥΡΟ" (ionChange)="onProductChange($event)">
+					<ion-option *ngFor="let product of offerGroup.Products" value="{{product.bid}}">{{product.name}}</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-row>
+
+		<ion-row *ngIf="selectedProduct">
+				<h3>{{selectedProduct.name}}</h3>
+		</ion-row>
+
+		<ion-row *ngIf="selectedProduct">
+			<ion-grid>
+				<ng-container *ngIf="selectedProduct.Product_AttributeGroups && selectedProduct.Product_AttributeGroups.length > 0">
+					<ion-row class="attributes-container" *ngFor="let attributeGroup of selectedProduct.Product_AttributeGroups">
+						<ion-col>
+							<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
+								<ion-list-header text-capitalize>
+									<h4>
+										<strong>{{attributeGroup.description}}</strong>
+									</h4>
+								</ion-list-header>
+								<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
+									<ion-label>
+										<span class="label">{{attribute.Ingredient.name}}</span>
+										<span class="price" *ngIf="attributeGroup.showPrice() && attribute.price > 0">+{{attribute.price|priceFormat}}</span>
+									</ion-label>
+									<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid" (ionSelect)="calculateTotalPrice()"></ion-radio>
+								</ion-item>
+							</ion-list>
+						</ion-col>
+					</ion-row>
+				</ng-container>
+				<ng-container *ngIf="selectedProduct.Product_Ingredients && selectedProduct.Product_Ingredients.length > 0">
+					<ion-row class="ingredients-container">
+						<ion-col>
+							<ion-list>
+								<ion-list-header text-capitalize>
+									<h4>
+										<strong>Επίλεξε επιπλέον υλικά</strong>
+									</h4>
+								</ion-list-header>
+								<ion-item *ngFor="let ingredient of selectedProduct.Product_Ingredients">
+									<ion-label>
+										<span class="label">{{ingredient.Ingredient.name}}</span>
+										<span class="price" *ngIf="ingredient.price > 0">+{{ingredient.price|priceFormat}}</span>
+									</ion-label>
+									<ion-toggle [(ngModel)]="ingredient.isDefault" (ionChange)="calculateTotalPrice()"></ion-toggle>
+								</ion-item>
+							</ion-list>
+						</ion-col>
+					</ion-row>
+				</ng-container>
+			</ion-grid>
+		</ion-row>
+
+	</ion-col>
+</ion-row>

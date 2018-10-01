@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
+import { OfferGroupComponent } from "../../components/offer-group/offer-group";
+
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
 import { CartProvider } from '../../providers/Cart/cart';
@@ -33,15 +35,13 @@ export class OfferModalPage {
 		this.quantity = 1;
 		this.info = '';
 
-		let offer: OfferViewModel = this.navParams.get('offer') as OfferViewModel;
+		this.offer = this.navParams.get('offer') as OfferViewModel;
 
-		this.finalPrice = offer.finalPrice;
-
-		this.offer = offer;
+		this.finalPrice = this.offer.finalPrice;
 
 		this.offerGroups = this.offer.OfferGroups.ToList()
 			.Select(a => {
-				a.Products = a.Products.ToList().OrderBy(b => b.price).ToArray();
+				a.Products = a.Products.ToList().OrderBy(b => b.orderNumber).ToArray();
 				return a;
 			}).ToArray();
 
