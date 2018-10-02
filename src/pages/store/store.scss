@@ -37,35 +37,49 @@ page-store {
         font-weight: bold !important;
     }
     .accordion-list {
-        background: color($colors, light);
+        // background: color($colors, light);
         height: 100%;
     }
+    .list-header-md {
+        margin-bottom: 5px;
+    }
     .section {
-        background: white;
+        background: #eeeeee ;
         color: black;
         margin-bottom: 4px;
+        color: #bf360c;
+        font-weight: 600;
+        border-radius: 2px;
     }
     .section-active {
         background: color($colors, primary-light, base);
         color: white;
     }
     .child {
-        background: #e8e7e6;
+        // background: #e8e7e6;
         color: black;
         margin-bottom: 4px;
     }
     .child-item {
-        background: #f3f2f1;
+        // background: #f3f2f1;
         padding: 10px;
     }
     .label {
         margin: 0px;
     }
     .list {
-        margin-bottom: 4px;
+        margin-bottom: 0;
     }
 
     .liveDeals-list {
+
+        &.list-md {
+            .details {
+                .name {
+                    font-size: 1.1em;
+                } 
+            }
+        }
 
         .details {
             display: flex; 
@@ -76,9 +90,9 @@ page-store {
             }
             .name {
                 font-weight: 600;
-                font-size: 1.1em;
                 color: #313131;
             }
+
             .description {
                 // border: 1px solid #e0e0e0;
                 border-radius: 2px;

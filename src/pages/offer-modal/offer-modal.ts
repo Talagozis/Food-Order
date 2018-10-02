@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-import { OfferGroupComponent } from "../../components/offer-group/offer-group";
-
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
 import { CartProvider } from '../../providers/Cart/cart';

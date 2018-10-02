@@ -1,4 +1,4 @@
-<ion-list-header class="offerGroups-container" no-lines no-padding *ngIf="offerGroup.Products">
+<ion-list class="offerGroups-container" no-lines no-padding *ngIf="offerGroup.Products">
 	<button ion-item (click)="toggleSection()" detail-none [ngClass]="{'section-active': open, 'section': !open}">
 		<ion-icon item-left name="arrow-forward" *ngIf="!open"></ion-icon>
 		<ion-icon item-left name="arrow-down" *ngIf="open"></ion-icon>
@@ -23,9 +23,9 @@
 						<ion-col>
 							<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
 								<ion-list-header text-capitalize>
-									<span>
+									<h4>
 										<strong>{{attributeGroup.description}}</strong>
-									</span>
+									</h4>
 								</ion-list-header>
 								<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
 									<ion-label>
@@ -62,4 +62,4 @@
 		</ion-row>
 
 	</ion-list>
-</ion-list-header>
+</ion-list>
