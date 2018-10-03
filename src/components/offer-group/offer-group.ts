@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
 import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
@@ -12,6 +12,11 @@ export class OfferGroupComponent {
 
 	@Input()
 	offerGroup: OfferGroupViewModel;
+
+	@Output() onCalculateTotalPrice: EventEmitter<any> = new EventEmitter();
+	// @Input()
+	// onCalculateTotalPrice: () => number;
+
 	selectedProduct: ProductViewModel;
 
 	open: boolean = false;
@@ -36,5 +41,9 @@ export class OfferGroupComponent {
 		this.open = !this.open;
 	}
 
+	handleCalculateTotalPrice() {
+		if(this.onCalculateTotalPrice)
+			this.onCalculateTotalPrice.emit();
+	}
 
 }

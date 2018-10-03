@@ -56,7 +56,8 @@ export class OfferModalPage {
 
 	}
 
-	calculateTotalPrice(): number {
+	handleCalculateTotalPrice(): number {
+		console.log("gg");
 		let sum = 0;
 		// sum += this.product.Product_Ingredients
 		// 	.filter(i => i.isDefault)
@@ -104,7 +105,7 @@ export class OfferModalPage {
 	changeQuantity(amount: number) {
 		this.quantity += amount;
 		this.quantity = Math.max(this.quantity, 1);
-		this.calculateTotalPrice();
+		this.handleCalculateTotalPrice();
 	}
 
 	closeOfferModal() {

@@ -23,7 +23,7 @@
 	<ion-grid>
 		<ng-container *ngIf="offerGroups && offerGroups.length > 0">
 
-			<offer-group *ngFor="let offerGroup of offerGroups" [offerGroup]="offerGroup"></offer-group>
+			<offer-group *ngFor="let offerGroup of offerGroups" [offerGroup]="offerGroup" (onCalculateTotalPrice)="handleCalculateTotalPrice()" ></offer-group>
 
 		</ng-container>
 	</ion-grid>
