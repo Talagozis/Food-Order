@@ -58,7 +58,9 @@ export class OfferModalPage {
 
 	handleCalculateTotalPrice(): number {
 		console.log("gg");
-		let sum = 0;
+		let selectedProductTotalPrice = this.offerGroups.map(a => a.selectedTotalPrice).reduce((a,b) => a + b, 0);
+		let sum = selectedProductTotalPrice - this.offer.discount;
+		this.finalPrice = sum;
 		// sum += this.product.Product_Ingredients
 		// 	.filter(i => i.isDefault)
 		// 	.map(a => a.price)
