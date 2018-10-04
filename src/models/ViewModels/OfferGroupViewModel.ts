@@ -9,6 +9,7 @@ export class OfferGroupViewModel implements OfferGroupApi {
     Products: ProductViewModel[];
 
     selectedProduct?: ProductViewModel;
+    selectedTotalPrice?: number;
 
     public constructor(init?: Partial<OfferGroupViewModel>) {
         Object.assign(this, init);

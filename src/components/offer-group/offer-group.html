@@ -6,20 +6,26 @@
 	</button>
 	<ion-list *ngIf="open">
 
+		<ion-row *ngIf="offerGroup.Products.length === 1">
+			<ion-item>
+				<h2>{{offerGroup.Products[0].name}}</h2>
+			</ion-item>
+		</ion-row>
+
 		<ion-row *ngIf="offerGroup.Products.length > 1">
 			<ion-item>
-				<ion-label *ngIf="!selectedProduct">Επίλεξε</ion-label>
-				<ion-select [ngClass]="{'full-width': selectedProduct, '': !selectedProduct}" class="" okText="ΟΚ" cancelText="ΑΚΥΡΟ" (ionChange)="onProductChange($event)">
-					<ion-option *ngFor="let product of offerGroup.Products" [selected]="selectedProduct && selectedProduct.bid === product.bid" value="{{product.bid}}">{{product.name}}</ion-option>
+				<ion-label *ngIf="!offerGroup.selectedProduct">Επίλεξε</ion-label>
+				<ion-select [ngClass]="{'full-width': offerGroup.selectedProduct, '': !offerGroup.selectedProduct}" class="" okText="ΟΚ" cancelText="ΑΚΥΡΟ" (ionChange)="onProductChange($event)">
+					<ion-option *ngFor="let product of offerGroup.Products" [selected]="offerGroup.selectedProduct && offerGroup.selectedProduct.bid === product.bid" value="{{product.bid}}">{{product.name}}</ion-option>
 				</ion-select>
 			</ion-item>
 		</ion-row>
 
-		<ion-row *ngIf="selectedProduct" class="selected-product">
+		<ion-row *ngIf="offerGroup.selectedProduct" class="selected-product">
 
 			<ion-grid>
-				<ng-container *ngIf="selectedProduct.Product_AttributeGroups && selectedProduct.Product_AttributeGroups.length > 0">
-					<ion-row class="attributes-container" *ngFor="let attributeGroup of selectedProduct.Product_AttributeGroups">
+				<ng-container *ngIf="offerGroup.selectedProduct.Product_AttributeGroups && offerGroup.selectedProduct.Product_AttributeGroups.length > 0">
+					<ion-row class="attributes-container" *ngFor="let attributeGroup of offerGroup.selectedProduct.Product_AttributeGroups">
 						<ion-col>
 							<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
 								<ion-list-header text-capitalize>
@@ -38,7 +44,7 @@
 						</ion-col>
 					</ion-row>
 				</ng-container>
-				<ng-container *ngIf="selectedProduct.Product_Ingredients && selectedProduct.Product_Ingredients.length > 0">
+				<ng-container *ngIf="offerGroup.selectedProduct.Product_Ingredients && offerGroup.selectedProduct.Product_Ingredients.length > 0">
 					<ion-row class="ingredients-container">
 						<ion-col>
 							<ion-list>
@@ -47,7 +53,7 @@
 										<strong>Επίλεξε επιπλέον υλικά</strong>
 									</h4>
 								</ion-list-header>
-								<ion-item *ngFor="let ingredient of selectedProduct.Product_Ingredients">
+								<ion-item *ngFor="let ingredient of offerGroup.selectedProduct.Product_Ingredients">
 									<ion-label>
 										<span class="label">{{ingredient.Ingredient.name}}</span>
 										<span class="price" *ngIf="ingredient.price > 0">+{{ingredient.price|priceFormat}}</span>
