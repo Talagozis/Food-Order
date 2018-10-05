@@ -19,11 +19,21 @@
 				Καλάθι Παραγγελίας ({{cart.cartItems.length}}) <ion-icon name="cart"></ion-icon>
 			</button>
 			<ion-list *ngIf="showCartDetails">
+				<ion-item *ngFor="let cartItemOffersProduct of cart.getCartItemOffersProducts()" detail-none class="child-item" text-wrap>
+					<h3 item-start><strong>{{cartItemOffer.quantity}}</strong>x</h3>
+					<h3 text-capitalize>{{cartItemOffer.name}}</h3>
+					<h3 item-end>{{cartItemOffer.finalPrice|priceFormat}}</h3>
+					<button ion-button outline item-end color="grey" (click)="removeCartItemOffer(cartItemOffer)">
+						<ion-icon name="trash"></ion-icon>
+					</button>
+				</ion-item>
 				<ion-item *ngFor="let cartItem of cart.cartItems" detail-none class="child-item" text-wrap>
 					<h3 item-start><strong>{{cartItem.quantity}}</strong>x</h3>
 					<h3 text-capitalize>{{cartItem.name}}</h3>
 					<h3 item-end>{{cartItem.totalPrice|priceFormat}}</h3>
-					<button ion-button outline item-end color="grey" (click)="removeCartItem(cartItem)"><ion-icon name="trash"></ion-icon></button>
+					<button ion-button outline item-end color="grey" (click)="removeCartItem(cartItem)">
+						<ion-icon name="trash"></ion-icon>
+					</button>
 				</ion-item>
 			</ion-list>
 		</ion-list-header>

@@ -1,7 +1,17 @@
+import { ProductViewModel } from "../../models/ViewModels/ProductViewModel";
+
 export class CartViewModel {
     storeBid: number;
     cartItems: CartItemViewModel[];
     cartItemOffers: CartItemOfferViewModel[];
+
+    public constructor(init?: Partial<CartViewModel>) {
+        Object.assign(this, init);
+    }
+
+    getCartItemOffersProducts(): ProductViewModel[] {
+        return this.cartItemOffers.reduce((a, b) => a.concat(b.products), []) as ProductViewModel[];
+    }
 }
 
 export interface CartItemViewModel {

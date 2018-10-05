@@ -10,7 +10,7 @@ import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { OrderDetails, ApplicationType } from '../../models/Entities/Checkout';
 import { CartProvider } from '../../providers/Cart/cart';
-import { CartViewModel, CartItemViewModel } from '../../models/ViewModels/CartViewModel';
+import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
 
 @IonicPage({
@@ -63,7 +63,7 @@ export class CheckoutPage {
 
 		this.cartProvider.getByStoreBid(store.bid).then((cart: CartViewModel) => {
 			this.cart = cart;
-			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
+			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + cart.cartItemOffers.reduce((a, b) => a + b.finalPrice, 0);
 			this.showCartDetails = cart.cartItems.length <= 5;
 			this.canSendOrder = true;
 		});
@@ -77,7 +77,15 @@ export class CheckoutPage {
 		this.cartProvider.removeCartItem(this.store.bid, cartItem)
 			.then(c => {
 				this.cart = c;
-				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0);
+				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + c.cartItemOffers.reduce((a, b) => a + b.finalPrice, 0);
+			});
+	}
+
+	removeCartItemOffer(cartItemOffer: CartItemOfferViewModel) {
+		this.cartProvider.removeCartItemOffer(this.store.bid, cartItemOffer)
+			.then(c => {
+				this.cart = c;
+				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + c.cartItemOffers.reduce((a, b) => a + b.finalPrice, 0);
 			});
 	}
 

@@ -126,11 +126,11 @@ export class CartProvider {
 		if (!cart) {
 			console.debug("No cart for this store. It is created now.");
 
-			cart = {
+			cart = new CartViewModel({
 				storeBid: storeBid,
 				cartItems: new Array<CartItemViewModel>(),
 				cartItemOffers: new Array<CartItemOfferViewModel>(),
-			};
+			});
 			carts.push(cart);
 			await this.storage.set(this.CARTS_KEYWORD, carts);
 		}
