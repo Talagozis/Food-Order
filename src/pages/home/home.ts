@@ -26,7 +26,6 @@ export class HomePage {
 		this.background = this.chooseBackground();
 		this.cartProvider.clearCarts();
 		this.offerSchedulerProvider.getLive().subscribe((os) => {
-			console.log(os);
 			this.liveDeals = os.slice(0, 3); // <= add order and ranking
 
 			//TODO DELETE THIS

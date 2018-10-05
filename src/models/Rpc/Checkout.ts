@@ -1,8 +1,10 @@
-import { Checkout, OrderDetails } from "../../models/Entities/Checkout";
+import { Checkout, OrderDetails, OrderDeliveryType, SessionDetails } from "../../models/Entities/Checkout";
 import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from "../../models/ViewModels/CartViewModel";
 import { StoreDetails, AspNetUserDetails, ProductDetails, OfferDetails } from "../../models/Entities/Cart";
 
 export class CheckoutRpc implements Checkout {
+    deliveryType: OrderDeliveryType;
+    sessionDetails: SessionDetails;
     date: Date;
     orderDetails: OrderDetails;
     Store: StoreDetails;
@@ -37,7 +39,4 @@ export class CheckoutRpc implements Checkout {
 
     }
 
-}
-
-export interface SessionDetails {
 }

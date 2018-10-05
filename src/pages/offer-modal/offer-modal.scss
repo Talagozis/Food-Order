@@ -1,14 +1,14 @@
-page-product-modal {
+page-offer-modal {
     ion-header ion-icon.back-button-icon.icon {
         color: color($colors, light, base);
     }
-    .product-picture {
+    .offer-picture {
         height: auto;
         background-position: center;
         background-size: cover;
         padding-top: 5px;
         padding-left: 10px;
-        .product-price {
+        .offer-price {
             box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
             border: 2px solid color($colors, primary, base);
             display: block;
@@ -16,18 +16,25 @@ page-product-modal {
             margin-right: auto;
         }
     }
-    .ingredients-container {
-        ion-label {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
+    // .ingredients-container {
+    //     ion-label {
+    //         display: flex;
+    //         justify-content: space-between;
+    //     }
+    // }
     .attributes-container {
         ion-label {
             display: flex;
             justify-content: space-between;
         }
     }
+    .offerGroups-container {
+        .item-md {
+            padding-left: 6px;
+        }
+    }
+
+
     .name, .price {
         letter-spacing: -0.7px;
     }

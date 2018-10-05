@@ -1,0 +1,51 @@
+offer-group {
+
+    .item-md.item-block .item-inner {
+        border-bottom: none;
+    }
+    .label-md {
+        margin: 0;    
+    }
+    .list-header-ios {
+        color: #757575;
+    }
+
+    ion-select {
+        &.full-width {
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+
+    .section {
+        background: #eeeeee ;
+        color: black;
+        margin-bottom: 4px;
+        color: #bf360c;
+        font-weight: 600;
+        border-radius: 2px;
+    }
+    .section-active {
+        background: color($colors, primary-light, base);
+        color: white;
+    }
+
+    .selected-product {
+        
+        .selected-product-name {
+            font-size: 1.7rem;
+            margin: 10px 15px 0;            
+            color: #bf360c;            
+            font-weight: 600;            
+            width: 100%;            
+            text-align: center;            
+            background-color: #e0e0e0  ;            
+            border-radius: 2px;            
+            margin: 10px 15px 0;            
+            padding: 5px;
+            
+        }
+    }
+
+
+}

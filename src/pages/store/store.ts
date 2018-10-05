@@ -14,6 +14,11 @@ import { StoreViewModel } from '../../models/ViewModels/StoreViewModel';
 import { OfferApi } from '../../models/Api/Offer';
 import { OfferProvider } from '../../providers/Offer/offer';
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
+import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
+import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
+import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
+import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
+import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
 
 @IonicPage({
 	name: 'StorePage',
@@ -63,9 +68,29 @@ export class StorePage {
 	}
 
 	initializeOffers(storeBid: number): Promise<void> {
-
 		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
-			this.liveDeals = offers.map(a => new OfferViewModel({ ...a }));
+			this.liveDeals = offers.map(a => new OfferViewModel({
+				...a,
+				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
+					...b,
+					Offer: undefined,
+					Products: b.Products.map(c => new ProductViewModel({
+						...c,
+						Product_AttributeGroups: c.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
+							...d,
+							Product: null,
+							Product_Attributes: d.Product_Attributes.map(e => new Product_AttributeViewModel({
+								...e,
+								Product_AttributeGroup: null
+							})),
+						})),
+						Product_Ingredients: c.Product_Ingredients.map(d => new Product_IngredientViewModel({
+							...d,
+							Product: null,
+						})),
+					}))
+				})),
+			}));
 		});
 
 	}
@@ -114,14 +139,13 @@ export class StorePage {
 		};
 	}
 
-	openModal(product) {
+	openModal(product: ProductApi) {
 		let productModal = this.modalCtrl.create('ProductModalPage', { storeBid: this.store.bid, product: product });
 		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
 		productModal.present();
 	}
 
 	async onProductModalDidDismiss(data: any): Promise<void> {
-
 		if (!data.isAdded)
 			return;
 
@@ -133,6 +157,33 @@ export class StorePage {
 		var storeBid = this.store.bid;
 
 		await Promise.all([
+			this.initializeOffers(storeBid),
+			this.initializeProducts(storeBid),
+			this.initializeCart(storeBid),
+		]);
+
+		loader.dismiss();
+	}
+
+	openOfferModal(offer: OfferApi) {
+		let offerModal = this.modalCtrl.create('OfferModalPage', { storeBid: this.store.bid, offer: offer });
+		offerModal.onDidDismiss(this.onOfferModalDidDismiss.bind(this));
+		offerModal.present();
+	}
+
+	async onOfferModalDidDismiss(data: any): Promise<void> {
+		if (!data.isAdded)
+			return;
+
+		let loader = this.loadingCtrl.create({
+			content: "Φόρτωση καταστήματος"
+		});
+		loader.present();
+
+		var storeBid = this.store.bid;
+
+		await Promise.all([
+			this.initializeOffers(storeBid),
 			this.initializeProducts(storeBid),
 			this.initializeCart(storeBid),
 		]);
@@ -143,4 +194,13 @@ export class StorePage {
 	navigateToCheckoutPage() {
 		this.navCtrl.push('CheckoutPage', { storeSlug: this.store.slug });
 	}
+
+	getAmountOfCartProducts(): number {
+		var items: number = this.cart.cartItems.length;
+		var itemOffers: number = this.cart.cartItemOffers.reduce((a, b) => a + b.products.length, 0);
+
+		return items + itemOffers;
+	}
+
+
 }

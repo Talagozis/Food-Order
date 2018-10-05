@@ -1,0 +1,71 @@
+<ion-list class="offerGroups-container" no-lines no-padding *ngIf="offerGroup.Products">
+	<button ion-item (click)="toggleSection()" detail-none [ngClass]="{'section-active': open, 'section': !open}">
+		<ion-icon item-left name="arrow-forward" *ngIf="!open"></ion-icon>
+		<ion-icon item-left name="arrow-down" *ngIf="open"></ion-icon>
+		<span>{{offerGroup.description}}</span>
+	</button>
+	<ion-list *ngIf="open">
+
+		<ion-row *ngIf="offerGroup.Products.length === 1">
+			<ion-item>
+				<h2>{{offerGroup.Products[0].name}}</h2>
+			</ion-item>
+		</ion-row>
+
+		<ion-row *ngIf="offerGroup.Products.length > 1">
+			<ion-item>
+				<ion-label *ngIf="!offerGroup.selectedProduct">Επίλεξε</ion-label>
+				<ion-select [ngClass]="{'full-width': offerGroup.selectedProduct, '': !offerGroup.selectedProduct}" class="" okText="ΟΚ" cancelText="ΑΚΥΡΟ" (ionChange)="onProductChange($event)">
+					<ion-option *ngFor="let product of offerGroup.Products" [selected]="offerGroup.selectedProduct && offerGroup.selectedProduct.bid === product.bid" value="{{product.bid}}">{{product.name}}</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-row>
+
+		<ion-row *ngIf="offerGroup.selectedProduct" class="selected-product">
+
+			<ion-grid>
+				<ng-container *ngIf="offerGroup.selectedProduct.Product_AttributeGroups && offerGroup.selectedProduct.Product_AttributeGroups.length > 0">
+					<ion-row class="attributes-container" *ngFor="let attributeGroup of offerGroup.selectedProduct.Product_AttributeGroups">
+						<ion-col>
+							<ion-list radio-group [(ngModel)]="attributeGroup.selectedAttributeBid" name={{attributeGroup.bid}}>
+								<ion-list-header text-capitalize>
+									<h4>
+										<strong>{{attributeGroup.description}}</strong>
+									</h4>
+								</ion-list-header>
+								<ion-item *ngFor="let attribute of attributeGroup.Product_Attributes; let i = index;" item-start>
+									<ion-label>
+										<span class="label">{{attribute.Ingredient.name}}</span>
+										<span class="price" *ngIf="attributeGroup.showPrice() && attribute.price > 0">+{{attribute.price|priceFormat}}</span>
+									</ion-label>
+									<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid" (ionSelect)="handleCalculateTotalPrice()"></ion-radio>
+								</ion-item>
+							</ion-list>
+						</ion-col>
+					</ion-row>
+				</ng-container>
+				<ng-container *ngIf="offerGroup.selectedProduct.Product_Ingredients && offerGroup.selectedProduct.Product_Ingredients.length > 0">
+					<ion-row class="ingredients-container">
+						<ion-col>
+							<ion-list>
+								<ion-list-header text-capitalize>
+									<h4>
+										<strong>Επίλεξε επιπλέον υλικά</strong>
+									</h4>
+								</ion-list-header>
+								<ion-item *ngFor="let ingredient of offerGroup.selectedProduct.Product_Ingredients">
+									<ion-label>
+										<span class="label">{{ingredient.Ingredient.name}}</span>
+										<span class="price" *ngIf="ingredient.price > 0">+{{ingredient.price|priceFormat}}</span>
+									</ion-label>
+									<ion-toggle [(ngModel)]="ingredient.isDefault" (ionChange)="handleCalculateTotalPrice()"></ion-toggle>
+								</ion-item>
+							</ion-list>
+						</ion-col>
+					</ion-row>
+				</ng-container>
+			</ion-grid>
+		</ion-row>
+
+	</ion-list>
+</ion-list>

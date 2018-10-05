@@ -1,0 +1,49 @@
+<ion-header>
+	<div class="offer-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (offer.picture|imageOffer) + ')  center center / cover no-repeat'}">
+		<ion-navbar transparent>
+			<h3 ion-text color="light">{{offer.name}}</h3>
+			<ion-buttons end>
+				<button ion-button icon-only (click)="closeOfferModal()" color="light">
+					<ion-icon name="close"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-navbar>
+		<div *ngIf="offer">
+			<span ion-text color="light">{{offer.shortDescription}}</span>
+			<ion-row>
+				<ion-col col-12>
+					<button ion-button float-right>{{finalPrice|priceFormat}}</button>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ng-container *ngIf="offerGroups && offerGroups.length > 0">
+			<offer-group *ngFor="let offerGroup of offerGroups" [offerGroup]="offerGroup" (onCalculateTotalPrice)="handleCalculateTotalPrice()"></offer-group>
+		</ng-container>
+	</ion-grid>
+</ion-content>
+
+<ion-footer>
+	<ion-row>
+		<ion-col col-2>
+			<button ion-button block ion-icon (click)="changeQuantity(-1)">
+				<ion-icon name="remove"></ion-icon>
+			</button>
+		</ion-col>
+		<ion-col col-2>
+			<ion-input [(ngModel)]="quantity" text-center>{{quantity}}</ion-input>
+		</ion-col>
+		<ion-col col-2>
+			<button ion-button block ion-icon (click)="changeQuantity(+1)">
+				<ion-icon name="add"></ion-icon>
+			</button>
+		</ion-col>
+		<ion-col col-6>
+			<button ion-button block text-capitalize (click)="addToCart()">Προσθήκη</button>
+		</ion-col>
+	</ion-row>
+</ion-footer>

@@ -33,6 +33,10 @@ page-checkout {
     .child-item {
         background: #f3f2f1;
         padding: 10px;
+
+        &.cartItemOffer-total {
+            color: #c62828;
+        }
     }
     .label {
         margin: 0px;

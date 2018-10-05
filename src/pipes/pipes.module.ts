@@ -5,6 +5,7 @@ import { ImageStorePipe } from './image-store/image-store';
 import { ImageContactTypePipe } from './image-contactType/image-contactType';
 import { ImageProductPipe } from './image-product/image-product';
 import { CountdownPipe } from './countdown/countdown';
+import { ImageOfferPipe } from './image-offer/image-offer';
 
 @NgModule({
     declarations: [DayNameFormatPipe,
@@ -12,6 +13,7 @@ import { CountdownPipe } from './countdown/countdown';
         ImageStorePipe,
         ImageContactTypePipe,
         ImageProductPipe,
+        ImageOfferPipe,
         CountdownPipe,
     ],
     imports: [],
@@ -20,6 +22,7 @@ import { CountdownPipe } from './countdown/countdown';
         ImageStorePipe,
         ImageContactTypePipe,
         ImageProductPipe,
+        ImageOfferPipe,
         CountdownPipe,
     ]
 })
