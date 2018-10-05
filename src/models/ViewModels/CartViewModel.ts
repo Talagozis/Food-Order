@@ -2,6 +2,10 @@ export class CartViewModel {
     storeBid: number;
     cartItems: CartItemViewModel[];
     cartItemOffers: CartItemOfferViewModel[];
+
+    public constructor(init?: Partial<CartViewModel>) {
+        Object.assign(this, init);
+    }    
 }
 
 export interface CartItemViewModel {
