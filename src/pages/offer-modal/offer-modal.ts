@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
+import { CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
 import { CartProvider } from '../../providers/Cart/cart';
@@ -57,49 +58,47 @@ export class OfferModalPage {
 	}
 
 	handleCalculateTotalPrice(): number {
-		console.log("gg");
-		let selectedProductTotalPrice = this.offerGroups.map(a => a.selectedTotalPrice).reduce((a,b) => a + b, 0);
+		let selectedProductTotalPrice = this.offerGroups.map(a => a.selectedTotalPrice).reduce((a, b) => a + b, 0);
 		let sum = selectedProductTotalPrice - this.offer.discount;
-		this.finalPrice = sum;
-		// sum += this.product.Product_Ingredients
-		// 	.filter(i => i.isDefault)
-		// 	.map(a => a.price)
-		// 	.reduce((a,b) => a+b, 0);
-		// sum += this.product.Product_AttributeGroups
-		// 	.map(b => b.Product_Attributes
-		// 	.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
-		// 	.reduce((a, b) => a.concat(b), [])
-		// 	.map(a => a.price)
-		// 	.reduce((a,b) => a+b, 0);
-		// sum += this.product.price;
-		// this.finalPrice = sum * this.quantity;
+		this.finalPrice = sum * this.quantity;
+
 		return sum;
 	}
 
 	addToCart() {
-		// var cartItem: CartItemViewModel = {
-		// 	bid: this.product.bid,
-		// 	name: this.product.name,
-		// 	totalPrice: this.calculateTotalPrice(),
-		// 	quantity: this.quantity,
-		// 	discount: 0,
-		// 	info: this.info,
-		// 	ingredients: this.product.Product_Ingredients.map(a => ({
-		// 		bid: a.Ingredient.bid,
-		// 		name: a.Ingredient.name,
-		// 		has: a.isDefault
-		// 	})),
-		// 	attributes: this.product.Product_AttributeGroups
-		// 		.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
-		// 		.reduce((a, b) => a.concat(b), [])
-		// 		.map(a => ({
-		// 			bid: a.Ingredient.bid,
-		// 			name: a.Ingredient.name,
-		// 			has: true
-		// 		})),
-		// };
+		var cartItemOffer: CartItemOfferViewModel = {
+			bid: this.offer.bid,
+			name: this.offer.name,
+			totalPrice: this.offer.totalPrice,
+			finalPrice: this.handleCalculateTotalPrice(),
+			quantity: this.quantity,
+			discount: this.offer.discount,
+			info: this.info,
+			products: this.offer.OfferGroups.map(a => ({
+				bid: a.selectedProduct.bid,
+				name: a.selectedProduct.name,
+				totalPrice: 0,
+				quantity: this.quantity,
+				discount: 0,
+				info: this.info,
+				ingredients: a.selectedProduct.Product_Ingredients.map(a => ({
+					bid: a.Ingredient.bid,
+					name: a.Ingredient.name,
+					has: a.isDefault
+				})),
+				attributes: a.selectedProduct.Product_AttributeGroups
+					.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
+					.reduce((a, b) => a.concat(b), [])
+					.map(a => ({
+						bid: a.Ingredient.bid,
+						name: a.Ingredient.name,
+						has: true
+					})),
+			}) as CartItemViewModel),
 
-		// this.cartProvider.addCartItem(this.storeBid, cartItem);
+		};
+
+		this.cartProvider.addCartItemOffer(this.storeBid, cartItemOffer);
 
 		this.viewCtrl.dismiss({ isAdded: true });
 	}

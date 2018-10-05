@@ -194,4 +194,13 @@ export class StorePage {
 	navigateToCheckoutPage() {
 		this.navCtrl.push('CheckoutPage', { storeSlug: this.store.slug });
 	}
+
+	getAmountOfCartProducts(): number {
+		var items: number = this.cart.cartItems.length;
+		var itemOffers: number = this.cart.cartItemOffers.reduce((a, b) => a + b.products.length, 0);
+
+		return items + itemOffers;
+	}
+
+
 }

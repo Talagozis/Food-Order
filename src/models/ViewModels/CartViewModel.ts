@@ -31,6 +31,7 @@ export interface CartItemOfferViewModel {
     quantity: number;
     name: string;
     totalPrice: number;
+    finalPrice: number;
     discount: number;
     info: string;
     identifier?: number;

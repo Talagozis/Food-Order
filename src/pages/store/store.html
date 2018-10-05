@@ -151,9 +151,9 @@
 			</ion-list>
 		</div>
 	</div>
-	<ion-fab *ngIf="cart && cart.cartItems.length > 0" bottom right>
+	<ion-fab *ngIf="cart && ((cart.cartItems && cart.cartItems.length > 0) || (cart.cartItemOffers && cart.cartItemOffers.length > 0))" bottom right>
 		<button ion-fab large color="primary" (click)="navigateToCheckoutPage()">
-			{{cart.cartItems.length}}
+			{{getAmountOfCartProducts()}}
 			<ion-icon name="cart"></ion-icon>
 		</button>
 	</ion-fab>
