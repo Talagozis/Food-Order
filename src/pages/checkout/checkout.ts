@@ -118,7 +118,7 @@ export class CheckoutPage {
 
 			this.cartProvider.clearCartItem(this.store.bid);
 			this.cartProvider.clearCartItemOffer(this.store.bid);
-			this.canSendOrder = true;
+			// this.canSendOrder = true;
 			this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
 		});
 
