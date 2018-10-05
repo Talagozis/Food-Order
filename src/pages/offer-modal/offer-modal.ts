@@ -77,7 +77,7 @@ export class OfferModalPage {
 			products: this.offer.OfferGroups.map(a => ({
 				bid: a.selectedProduct.bid,
 				name: a.selectedProduct.name,
-				totalPrice: 0,
+				totalPrice: a.selectedTotalPrice,
 				quantity: this.quantity,
 				discount: 0,
 				info: this.info,

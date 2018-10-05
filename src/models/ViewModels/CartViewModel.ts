@@ -5,11 +5,7 @@ export class CartViewModel {
 
     public constructor(init?: Partial<CartViewModel>) {
         Object.assign(this, init);
-    }
-
-    public getCartItemOffersProducts(): any[] {
-        return this.cartItemOffers.reduce((a, b) => a.concat(b.products), []) as any[];
-    }
+    }    
 }
 
 export interface CartItemViewModel {

@@ -38,7 +38,6 @@ export class OfferGroupComponent {
 
 	onProductChange(value: number) {
 		this.offerGroup.selectedProduct = this.offerGroup.Products.find(a => a.bid == value);
-		console.log(this.offerGroup.selectedProduct);
 	}
 
 	toggleSection() {
