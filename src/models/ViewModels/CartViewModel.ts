@@ -1,5 +1,3 @@
-import { ProductViewModel } from "../../models/ViewModels/ProductViewModel";
-
 export class CartViewModel {
     storeBid: number;
     cartItems: CartItemViewModel[];
@@ -9,8 +7,8 @@ export class CartViewModel {
         Object.assign(this, init);
     }
 
-    getCartItemOffersProducts(): ProductViewModel[] {
-        return this.cartItemOffers.reduce((a, b) => a.concat(b.products), []) as ProductViewModel[];
+    public getCartItemOffersProducts(): any[] {
+        return this.cartItemOffers.reduce((a, b) => a.concat(b.products), []) as any[];
     }
 }
 

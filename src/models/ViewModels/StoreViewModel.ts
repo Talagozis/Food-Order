@@ -7,7 +7,7 @@ import { OfferApi } from "../../models/api/Offer";
 import { Product_TagApi, TagLevel } from "../../models/Api/Product_Tag2";
 import { Store_AreaApi } from "../../models/api/Store_Area";
 import { StoreViewApi } from "../../models/api/StoreView";
-import { UserApi } from "models/Api/User";
+import { UserApi } from "../../models/Api/User";
 
 export class StoreViewModel implements StoreApi {
     bid: number;

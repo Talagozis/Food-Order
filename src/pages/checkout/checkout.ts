@@ -60,9 +60,10 @@ export class CheckoutPage {
 		let store = await this.storeProvider.findBySlug(storeSlug);
 
 		this.store = store;
-
+		
 		this.cartProvider.getByStoreBid(store.bid).then((cart: CartViewModel) => {
 			this.cart = cart;
+			console.log(cart);
 			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + cart.cartItemOffers.reduce((a, b) => a + b.finalPrice, 0);
 			this.showCartDetails = cart.cartItems.length <= 5;
 			this.canSendOrder = true;

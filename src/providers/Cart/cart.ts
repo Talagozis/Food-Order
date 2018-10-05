@@ -121,7 +121,7 @@ export class CartProvider {
 
 		carts = await this.validateCarts(carts);
 
-		var cart = carts.find(a => a.storeBid === storeBid);
+		var cart: CartViewModel = carts.find(a => a.storeBid === storeBid);
 
 		if (!cart) {
 			console.debug("No cart for this store. It is created now.");
@@ -131,6 +131,7 @@ export class CartProvider {
 				cartItems: new Array<CartItemViewModel>(),
 				cartItemOffers: new Array<CartItemOfferViewModel>(),
 			});
+			console.log(cart);
 			carts.push(cart);
 			await this.storage.set(this.CARTS_KEYWORD, carts);
 		}
