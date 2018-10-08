@@ -6,9 +6,9 @@
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
+    "build": "ionic-app-scripts build && node ./cache-busting.js",
     "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
+    "ionic:build": "ionic-app-scripts build && node ./cache-busting.js",
     "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.0",
+    "cheerio": "^1.0.0-rc.2",
+    "rev-hash": "^2.0.0",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
