@@ -31,5 +31,7 @@ function environmentPath(env) {
 }
 
 module.exports = function () {
+  useDefaultConfig.prod.output['chunkFilename'] = "[name].[chunkhash].chunk.js";
+  useDefaultConfig.dev.output['chunkFilename'] = "[name].[chunkhash].chunk.js";
   return useDefaultConfig;
 };
