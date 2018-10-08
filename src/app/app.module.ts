@@ -38,7 +38,7 @@ import { OfferProvider } from '../providers/Offer/offer';
 		}),
 		IonicStorageModule.forRoot({
 			name: '__mydb',
-			driverOrder: ['sqlite', 'websql', 'indexeddb']
+			driverOrder: ['sqlite', 'websql', 'indexeddb', 'localstorage']
 		}),
 		PipesModule
 	],

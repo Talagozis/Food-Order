@@ -19,8 +19,8 @@ import { CartItemViewModel } from '../../models/ViewModels/CartViewModel';
 export class ProductModalPage {
 	storeBid: number;
 	product: ProductViewModel;
-	attributeGroups: Product_AttributeGroupViewModel[];
-	ingredients: Product_IngredientViewModel[];
+	attributeGroups: Product_AttributeGroupViewModel[] = [];
+	ingredients: Product_IngredientViewModel[] = [];
 	quantity: number;
 	info: string;
 	totalPrice: number;
