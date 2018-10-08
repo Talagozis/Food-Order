@@ -75,7 +75,7 @@ export class HomePage {
 		}, 0);
 	}
 
-	chooseBackground(): string  {
+	chooseBackground(): string {
 		var date = new Date();
 		if (date.getHours() >= 5 && date.getHours() <= 12) {
 			return 'background-coffee';
