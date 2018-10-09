@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
 import { CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
@@ -24,7 +24,7 @@ export class OfferModalPage {
 	info: string;
 	finalPrice: number;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private cartProvider: CartProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private cartProvider: CartProvider, private alertCtrl: AlertController) {
 		this.offer = new OfferViewModel({ finalPrice: 0 });
 	}
 
@@ -66,6 +66,10 @@ export class OfferModalPage {
 	}
 
 	addToCart() {
+		if (this.offerGroups.filter(a => !a.selectedProduct).length > 0) {
+			this.presentAlert('Επιλέξτε τουλάχιστον ένα προϊόν.');
+			return;
+		}
 		var cartItemOffer: CartItemOfferViewModel = {
 			bid: this.offer.bid,
 			name: this.offer.name,
@@ -113,4 +117,12 @@ export class OfferModalPage {
 		this.viewCtrl.dismiss({ isAdded: false });
 	}
 
+	presentAlert(message: string) {
+		let alert = this.alertCtrl.create({
+			title: 'Η προσθήκη στο καλάθι απέτυχε.',
+			subTitle: message,
+			buttons: ['OK'],
+		});
+		alert.present();
+	}
 }

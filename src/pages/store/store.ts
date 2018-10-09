@@ -195,9 +195,9 @@ export class StorePage {
 		this.navCtrl.push('CheckoutPage', { storeSlug: this.store.slug });
 	}
 
-	getAmountOfCartProducts(): number {
-		var items: number = this.cart.cartItems.length;
-		var itemOffers: number = this.cart.cartItemOffers.reduce((a, b) => a + b.products.length, 0);
+	getAmountOfCartProducts(cart: CartViewModel): number {
+		var items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
+		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
 
 		return items + itemOffers;
 	}
