@@ -16,7 +16,7 @@
 			<button ion-item class="color-secondary" (click)="toggleSectionCartDetails(showCartDetails)" detail-none [ngClass]="{'section-active': showCartDetails, 'section': !showCartDetails}">
 				<ion-icon item-left name="arrow-forward" *ngIf="!showCartDetails"></ion-icon>
 				<ion-icon item-left name="arrow-down" *ngIf="showCartDetails"></ion-icon>
-				Καλάθι Παραγγελίας ({{cart.cartItems.length}}) <ion-icon name="cart"></ion-icon>
+				Καλάθι Παραγγελίας ({{totalCartQuantity}}) <ion-icon name="cart"></ion-icon>
 			</button>
 			<ion-list *ngIf="showCartDetails">
 				<ng-container *ngFor="let cartItemOffer of cart.cartItemOffers">

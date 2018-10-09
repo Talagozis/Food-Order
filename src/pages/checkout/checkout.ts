@@ -28,6 +28,7 @@ export class CheckoutPage {
 	cart: CartViewModel;
 
 	totalCartPrice: number;
+	totalCartQuantity: number;
 	showCartDetails: boolean;
 	canSendOrder: boolean;
 
@@ -46,6 +47,7 @@ export class CheckoutPage {
 
 		this.showCartDetails = true;
 		this.totalCartPrice = 0.00;
+		this.totalCartQuantity = 0.00;
 		this.canSendOrder = false;
 		this.orderDetails = {
 			customerSurname: "",
@@ -66,6 +68,7 @@ export class CheckoutPage {
 			this.cart = cart;
 			console.log(cart);
 			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + cart.cartItemOffers.reduce((a, b) => a + b.finalPrice * b.quantity, 0);
+			this.totalCartQuantity = cart.cartItems.length + cart.cartItemOffers.reduce((a, b) => a + b.products.length, 0);
 			this.showCartDetails = cart.cartItems.length <= 5;
 			this.canSendOrder = true;
 		});
@@ -80,6 +83,7 @@ export class CheckoutPage {
 			.then(c => {
 				this.cart = c;
 				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + c.cartItemOffers.reduce((a, b) => a + b.finalPrice* b.quantity, 0);
+				this.totalCartQuantity = c.cartItems.length + c.cartItemOffers.reduce((a, b) => a + b.products.length, 0);
 			});
 	}
 
@@ -88,6 +92,7 @@ export class CheckoutPage {
 			.then(c => {
 				this.cart = c;
 				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + c.cartItemOffers.reduce((a, b) => a + b.finalPrice * b.quantity, 0);
+				this.totalCartQuantity = c.cartItems.length + c.cartItemOffers.reduce((a, b) => a + b.products.length, 0);
 			});
 	}
 
