@@ -179,6 +179,13 @@ export class CheckoutPage {
 
     getCartItemOffersProducts(cartItemOffers: CartItemOffer[]): any[] {
         return cartItemOffers.reduce((a, b) => a.concat(b.products), []) as any[];
-    }
+	}
+	
+	getAmountOfCartProducts(cart: CartViewModel): number {
+		var items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
+		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
+
+		return items + itemOffers;
+	}
 
 }

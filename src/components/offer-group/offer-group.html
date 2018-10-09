@@ -38,7 +38,7 @@
 										<span class="label">{{attribute.Ingredient.name}}</span>
 										<span class="price" *ngIf="attributeGroup.showPrice() && attribute.price > 0">+{{attribute.price|priceFormat}}</span>
 									</ion-label>
-									<ion-radio [value]="attribute.Ingredient.bid" [checked]="attributeGroup.Product_Attributes[0].bid" (ionSelect)="handleCalculateTotalPrice()"></ion-radio>
+									<ion-radio [value]="attribute.Ingredient.bid" (ionSelect)="handleCalculateTotalPrice()"></ion-radio>
 								</ion-item>
 							</ion-list>
 						</ion-col>
