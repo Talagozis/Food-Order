@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
+import '../../utils/linqtsExtension';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
 
 @Component({
@@ -33,11 +33,23 @@ export class OfferGroupComponent {
 		this.offerGroup.selectedTotalPrice = this.calculateTotalPrice();
 		if (this.offerGroup.Products.length == 1)
 			this.onProductChange(this.offerGroup.Products[0].bid);
-
+		
 	}
 
 	onProductChange(value: number) {
 		this.offerGroup.selectedProduct = this.offerGroup.Products.find(a => a.bid == value);
+
+		//Prepare order and selection
+		this.offerGroup.selectedProduct.Product_AttributeGroups = this.offerGroup.selectedProduct.Product_AttributeGroups.ToList()
+			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
+			.ToArray();
+
+		this.offerGroup.selectedProduct.Product_Ingredients = this.offerGroup.selectedProduct.Product_Ingredients.ToList().OrderBy(b => !b.isDefault).ThenBy(b => b.price).ToArray();
+
+		for (let i = 0; i < this.offerGroup.selectedProduct.Product_AttributeGroups.length; i++) {
+			if (this.offerGroup.selectedProduct.Product_AttributeGroups[i].Product_Attributes.length > 0)
+			this.offerGroup.selectedProduct.Product_AttributeGroups[i].selectedAttributeBid = this.offerGroup.selectedProduct.Product_AttributeGroups[i].Product_Attributes[0].Ingredient.bid;
+		}
 	}
 
 	toggleSection() {

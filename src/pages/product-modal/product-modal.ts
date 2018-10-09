@@ -55,6 +55,7 @@ export class ProductModalPage {
 
 		});
 
+		//Prepare order and selection
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
 			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
 			.ToArray();
