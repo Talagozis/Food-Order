@@ -7,12 +7,17 @@ export class Product_IngredientViewModel implements Product_IngredientApi {
 	isDefault: boolean;
 	orderNumber?: number;
 	maxAmount: number;
+
+	amount?: number;
 	
 	Product: ProductViewModel;
 	Ingredient: IngredientViewModel;
 
 	public constructor(init?: Partial<Product_IngredientViewModel>) {
-        Object.assign(this, init);
+		Object.assign(this, init);
+		
+		if(!this.amount)
+			this.amount = 1;
 	}
 	
 }

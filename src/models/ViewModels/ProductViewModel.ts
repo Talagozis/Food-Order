@@ -25,7 +25,7 @@ export class ProductViewModel implements ProductApi {
 
     public getDefaultPrice(): number {
         let sum = this.price;
-        sum += this.Product_Ingredients.filter(a => a.isDefault).reduce((a, b) => a + b.price, 0);
+        sum += this.Product_Ingredients.filter(a => a.isDefault).reduce((a, b) => a + b.price * b.amount, 0);
         sum += this.Product_AttributeGroups
             .reduce((a, b) => a.concat(b.Product_Attributes), [] as Product_AttributeViewModel[])
             .filter(a => a.isDefault).reduce((a, b) => a + b.price, 0);
