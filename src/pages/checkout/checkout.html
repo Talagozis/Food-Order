@@ -23,21 +23,21 @@
 					<ion-item detail-none class="child-item cartItemOffer" text-wrap *ngFor="let cartItemOffersProduct of cartItemOffer.products">
 						<h3 item-start><strong>{{cartItemOffer.quantity}}</strong>x</h3>
 						<h3 text-capitalize>{{cartItemOffersProduct.name}}</h3>
-						<h3 item-end>{{cartItemOffersProduct.totalPrice|priceFormat}}</h3>
+						<h3 item-end>{{(cartItemOffersProduct.totalPrice * cartItemOffer.quantity)|priceFormat}}</h3>
 						<!-- <button ion-button outline item-end color="grey" (click)="removeCartItemOffer(cartItemOffersProduct)">
 							<ion-icon name="trash"></ion-icon>
 						</button> -->
 					</ion-item>
 					<ion-item detail-none class="child-item cartItemOffer-total" text-wrap>
-							<h3 item-start><strong>{{cartItemOffer.quantity}}</strong>x</h3>
-							<h3 text-capitalize>{{cartItemOffer.name}}</h3>
-							<h3 item-end>{{-cartItemOffer.discount|priceFormat}}</h3>
-							<button ion-button outline item-end color="grey" (click)="removeCartItemOffer(cartItemOffer)">
-								<ion-icon name="trash"></ion-icon>
-							</button>
-						</ion-item>
+						<h3 item-start><strong>{{cartItemOffer.quantity}}</strong>x</h3>
+						<h3 text-capitalize>{{cartItemOffer.name}}</h3>
+						<h3 item-end>{{-(cartItemOffer.discount * cartItemOffer.quantity)|priceFormat}}</h3>
+						<button ion-button outline item-end color="grey" (click)="removeCartItemOffer(cartItemOffer)">
+							<ion-icon name="trash"></ion-icon>
+						</button>
+					</ion-item>
 				</ng-container>
-				<ion-item detail-none class="child-item cartItem" text-wrap *ngFor="let cartItem of cart.cartItems" >
+				<ion-item *ngFor="let cartItem of cart.cartItems" detail-none class="child-item cartItem" text-wrap>
 					<h3 item-start><strong>{{cartItem.quantity}}</strong>x</h3>
 					<h3 text-capitalize>{{cartItem.name}}</h3>
 					<h3 item-end>{{cartItem.totalPrice|priceFormat}}</h3>
@@ -84,6 +84,15 @@
 				<span>Επιβεβαίωση τηλεφώνου</span>
 			</ion-label>
 			<ion-input type="tel" [(ngModel)]="orderDetails.customerPhoneNumberConfirm"></ion-input>
+		</ion-item>
+		<ion-item margin-bottom>
+			<ion-label class="required" *ngIf="!deliveryType">
+				<ion-icon name="list-box"></ion-icon> Τρόπος παραγγελίας
+			</ion-label>
+			<ion-select [(ngModel)]="deliveryType" okText="ΟΚ" cancelText="ΑΚΥΡΟ" [ngClass]="{'selected-deliveryType' : deliveryType}">
+				<ion-option value="1">Διανομή στην διεύθυνση</ion-option>
+				<ion-option value="2">Παραλαβή από το κατάστημα</ion-option>
+			</ion-select>
 		</ion-item>
 		<ion-item margin-bottom>
 			<ion-label floating>

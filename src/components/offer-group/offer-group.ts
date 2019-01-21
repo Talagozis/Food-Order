@@ -11,7 +11,8 @@ export class OfferGroupComponent {
 	@Input()
 	offerGroup: OfferGroupViewModel;
 
-	@Output() onCalculateTotalPrice: EventEmitter<any> = new EventEmitter();
+	@Output()
+	onCalculateTotalPrice: EventEmitter<any> = new EventEmitter();
 
 
 	open: boolean = false;
@@ -33,7 +34,7 @@ export class OfferGroupComponent {
 		this.offerGroup.selectedTotalPrice = this.calculateTotalPrice();
 		if (this.offerGroup.Products.length == 1)
 			this.onProductChange(this.offerGroup.Products[0].bid);
-		
+
 	}
 
 	onProductChange(value: number) {
@@ -48,8 +49,10 @@ export class OfferGroupComponent {
 
 		for (let i = 0; i < this.offerGroup.selectedProduct.Product_AttributeGroups.length; i++) {
 			if (this.offerGroup.selectedProduct.Product_AttributeGroups[i].Product_Attributes.length > 0)
-			this.offerGroup.selectedProduct.Product_AttributeGroups[i].selectedAttributeBid = this.offerGroup.selectedProduct.Product_AttributeGroups[i].Product_Attributes[0].Ingredient.bid;
+				this.offerGroup.selectedProduct.Product_AttributeGroups[i].selectedAttributeBid = this.offerGroup.selectedProduct.Product_AttributeGroups[i].Product_Attributes[0].Ingredient.bid;
 		}
+
+		this.handleCalculateTotalPrice();
 	}
 
 	toggleSection() {
@@ -63,23 +66,18 @@ export class OfferGroupComponent {
 	}
 
 	calculateTotalPrice(): number {
-		let sum = 0;
+		let sum = Math.max.apply(null, this.offerGroup.Products.map(a => a.price)) || 0;
 		if (this.offerGroup.selectedProduct) {
 			sum += this.offerGroup.selectedProduct.Product_Ingredients
 				.filter(i => i.isDefault)
-				.map(a => a.price)
+				.map(a => a.price * a.amount)
 				.reduce((a, b) => a + b, 0);
 			sum += this.offerGroup.selectedProduct.Product_AttributeGroups
 				.map(b => b.Product_Attributes
 					.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
 				.reduce((a, b) => a.concat(b), [])
-				.map(a => a.price)
-				.reduce((a, b) => a + b, 0);
-			sum += this.offerGroup.selectedProduct.price;
-		} else {
-			sum += Math.min.apply(null, this.offerGroup.Products.map(a => a.price)) || 0;
+				.reduce((a, b) => a + b.price, 0);
 		}
-
 		return sum;
 	}
 

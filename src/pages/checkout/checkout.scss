@@ -47,4 +47,10 @@ page-checkout {
     .color-secondary {
         background-color: color($colors, secondary-light, base) !important;
     }
+
+    .selected-deliveryType {
+        max-width: 100%;
+        width: 100%;
+    }
+
 }
