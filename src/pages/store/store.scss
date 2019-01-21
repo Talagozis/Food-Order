@@ -119,6 +119,37 @@ page-store {
 
     }
 
+    .deals-list {
+
+        &.list-md {
+            .details {
+                .name {
+                    font-size: 1.1em;
+                } 
+            }
+        }
+
+        .details {
+            display: flex; 
+            margin-bottom: 4px;
+
+            .flex-1 {
+                flex: 1;
+            }
+            .name {
+                font-weight: 600;
+                color: #313131;
+            }
+
+            .description {
+                // border: 1px solid #e0e0e0;
+                border-radius: 2px;
+                padding: 3px;
+                font-size: 1.3rem
+            }
+        }
+
+    }
 
 
 }

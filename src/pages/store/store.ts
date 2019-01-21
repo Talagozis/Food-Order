@@ -19,6 +19,9 @@ import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
 import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
 import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
 import { Product_IngredientViewModel } from '../../models/ViewModels/Product_IngredientViewModel';
+import { Product_AttributeApi } from '../../models/Api/Product_Attribute';
+import { Product_IngredientApi } from '../../models/Api/Product_Ingredient';
+import { CategoryViewModel } from '../../models/ViewModels/CategoryViewModel';
 
 @IonicPage({
 	name: 'StorePage',
@@ -32,8 +35,10 @@ import { Product_IngredientViewModel } from '../../models/ViewModels/Product_Ing
 export class StorePage {
 	storeSegment: string = "catalog";
 	store: StoreViewModel;
+	deals: OfferViewModel[];
 	liveDeals: OfferViewModel[];
-	categories: any[];
+	categories: CategoryViewModel[];
+	categoryDeal: { open: boolean };
 	cart: CartViewModel;
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public storeProvider: StoreProvider, public productProvider: ProductProvider, public offerProvider: OfferProvider, public loadingCtrl: LoadingController, public cartProvider: CartProvider, private analyticsProvider: AnalyticsProvider) {
@@ -68,6 +73,32 @@ export class StorePage {
 	}
 
 	initializeOffers(storeBid: number): Promise<void> {
+		this.categoryDeal = { open: false };
+		this.offerProvider.findDeals(storeBid, (offers: OfferApi[]) => {
+			this.deals = offers.map(a => new OfferViewModel({
+				...a,
+				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
+					...b,
+					Offer: undefined,
+					Products: b.Products.map(c => new ProductViewModel({
+						...c,
+						Product_AttributeGroups: c.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
+							...d,
+							Product: null,
+							Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
+								...e,
+								Product_AttributeGroup: null
+							})),
+						})),
+						Product_Ingredients: c.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
+							...d,
+							Product: null,
+						})),
+					}))
+				})),
+			}));
+		});
+		
 		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
 			this.liveDeals = offers.map(a => new OfferViewModel({
 				...a,
@@ -79,12 +110,12 @@ export class StorePage {
 						Product_AttributeGroups: c.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
 							...d,
 							Product: null,
-							Product_Attributes: d.Product_Attributes.map(e => new Product_AttributeViewModel({
+							Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
 								...e,
 								Product_AttributeGroup: null
 							})),
 						})),
-						Product_Ingredients: c.Product_Ingredients.map(d => new Product_IngredientViewModel({
+						Product_Ingredients: c.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
 							...d,
 							Product: null,
 						})),
@@ -92,7 +123,6 @@ export class StorePage {
 				})),
 			}));
 		});
-
 	}
 
 	initializeProducts(storeBid: number): Promise<void> {
@@ -106,12 +136,28 @@ export class StorePage {
 					.filter(b => b.level === 2 || b.level === 3)
 					.sort(b => b.level === 3 ? 1 : b.level === 2 ? -1 : 0)[0].Tag.name, b => b
 			);
+			console.log(categories);
 			this.categories = Object.keys(categories).map((tagName: string) => {
-				let category = categories[tagName]
-					.sort((a, b) => a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1);
+				let category = categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
+					...a,
+					OfferGroups: null,
+					Product_AttributeGroups: a.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
+						...d,
+						Product: null,
+						Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
+							...e,
+							Product_AttributeGroup: null
+						})),
+					})),
+					Product_Ingredients: a.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
+						...d,
+						Product: null,
+					})),
+				}));
 				category.key = tagName;
 				return category;
 			});
+			console.log(this.categories);
 		});
 	}
 
@@ -127,11 +173,15 @@ export class StorePage {
 		});
 	}
 
-	toggleSection(i) {
+	toggleSection(i: number) {
 		this.categories[i].open = !this.categories[i].open;
 	}
 
-	getBackgroundStyle(imagepath) {
+	toggleSectionDeal() {
+		this.categoryDeal.open = !this.categoryDeal.open;
+	}
+
+	getBackgroundStyle(imagepath: string) {
 		return {
 			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + ')',
 			'background-position': 'center center',
@@ -203,4 +253,21 @@ export class StorePage {
 	}
 
 
+	sortProducts(a: ProductApi, b: ProductApi): number {
+		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1
+	}
+
+	sortIngredients(a: Product_IngredientApi, b: Product_IngredientApi): number {
+		var sumA = (!a.isDefault ? 4 : 0) + (!a.orderNumber ? 2 : 0) + (Number(a.orderNumber) > Number(b.orderNumber) ? 1 : 0);
+		var sumB = (!b.isDefault ? 4 : 0) + (!b.orderNumber ? 2 : 0) + (Number(b.orderNumber) > Number(a.orderNumber) ? 1 : 0);
+	
+		return sumA > sumB ? 1 : (sumA < sumB ? -1 : 0);
+	}
+	
+	sortAttributes(a: Product_AttributeApi, b: Product_AttributeApi): number {	
+		var sumA = (!a.isDefault ? 4 : 0) + (!a.orderNumber ? 2 : 0) + (Number(a.orderNumber) > Number(b.orderNumber) ? 1 : 0);
+		var sumB = (!b.isDefault ? 4 : 0) + (!b.orderNumber ? 2 : 0) + (Number(b.orderNumber) > Number(a.orderNumber) ? 1 : 0);
+	
+		return sumA > sumB ? 1 : (sumA < sumB ? -1 : 0);
+	}
 }

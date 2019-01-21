@@ -5,7 +5,6 @@ import { StoreDetails, AspNetUserDetails, ProductDetails, OfferDetails } from ".
 export class CheckoutRpc implements Checkout {
     deliveryType: OrderDeliveryType;
     sessionDetails: SessionDetails;
-    date: Date;
     orderDetails: OrderDetails;
     Store: StoreDetails;
     AspNetUser: AspNetUserDetails;
@@ -14,7 +13,6 @@ export class CheckoutRpc implements Checkout {
     sessionDetals: SessionDetails
 
     public constructor(cart: CartViewModel) {
-        this.date = new Date();
         this.Store = {
             bid: cart.storeBid
         };

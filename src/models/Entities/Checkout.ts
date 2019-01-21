@@ -1,7 +1,6 @@
 import { Cart } from "models/Entities/Cart";
 
 export interface Checkout extends Cart{
-    date: Date;
     deliveryType: OrderDeliveryType;
     orderDetails: OrderDetails;
     sessionDetails: SessionDetails;
@@ -18,20 +17,17 @@ export interface OrderDetails {
     info?: string;
 }
 
-export interface SessionDetails
-{
+export interface SessionDetails {
     applicationType: ApplicationType;
     userAgent: string;
 }
 
-export enum OrderDeliveryType
-{
+export enum OrderDeliveryType {
     Delivery = 1,
     Takeaway = 2,
 }
 
-export enum ApplicationType
-{
+export enum ApplicationType {
     Web = 1,
     Pwa = 2,
     Android = 3,

@@ -5,6 +5,9 @@ import { IngredientViewModel } from "../../models/ViewModels/IngredientViewModel
 export class Product_IngredientViewModel implements Product_IngredientApi {
 	price: number;
 	isDefault: boolean;
+	orderNumber?: number;
+	maxAmount: number;
+	
 	Product: ProductViewModel;
 	Ingredient: IngredientViewModel;
 

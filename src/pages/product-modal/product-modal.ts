@@ -36,7 +36,6 @@ export class ProductModalPage {
 		this.info = '';
 
 		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
-		this.totalPrice = productApi.price;
 
 		this.product = new ProductViewModel({
 			...productApi,
@@ -52,8 +51,8 @@ export class ProductModalPage {
 				...a,
 				Product: null,
 			})),
-
 		});
+		this.totalPrice = this.product.getDefaultPrice();
 
 		//Prepare order and selection
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
@@ -82,6 +81,8 @@ export class ProductModalPage {
 			.map(a => a.price)
 			.reduce((a,b) => a+b, 0);
 		sum += this.product.price;
+
+		sum = this.product.getDefaultPrice();
 		this.totalPrice = sum * this.quantity;
 		return sum;
 	}
