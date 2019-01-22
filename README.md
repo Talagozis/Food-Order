@@ -9,6 +9,12 @@
 
 ## Installation
 
+### Install Cordova globally
+
+```bash
+npm install -g cordova
+```
+
 ### Install Ionic globally
 
 ```bash
