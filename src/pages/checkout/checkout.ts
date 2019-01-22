@@ -8,7 +8,7 @@ import { ResponseStatus } from '../../models/Request/Response';
 import { CheckoutRpc } from '../../models/Rpc/Checkout';
 import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import { OrderDetails, ApplicationType } from '../../models/Entities/Checkout';
+import { OrderDetails, ApplicationType, OrderDeliveryType } from '../../models/Entities/Checkout';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
@@ -32,6 +32,7 @@ export class CheckoutPage {
 	canSendOrder: boolean;
 
 	orderDetails: OrderDetails;
+	deliveryType: OrderDeliveryType;
 
 	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider) {
 	}
@@ -61,7 +62,7 @@ export class CheckoutPage {
 		let store = await this.storeProvider.findBySlug(storeSlug);
 
 		this.store = store;
-		
+
 		this.cartProvider.getByStoreBid(store.bid).then((cart: CartViewModel) => {
 			this.cart = cart;
 			console.log(cart);
@@ -79,7 +80,7 @@ export class CheckoutPage {
 		this.cartProvider.removeCartItem(this.store.bid, cartItem)
 			.then(c => {
 				this.cart = c;
-				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + c.cartItemOffers.reduce((a, b) => a + b.finalPrice* b.quantity, 0);
+				this.totalCartPrice = c.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + c.cartItemOffers.reduce((a, b) => a + b.finalPrice * b.quantity, 0);
 			});
 	}
 
@@ -98,10 +99,11 @@ export class CheckoutPage {
 			...this.orderDetails,
 			// info: "\$test",
 		};
+		checkoutRpc.deliveryType = this.deliveryType;
 		checkoutRpc.AspNetUser = { // undefined user
 			bid: undefined
 		} as AspNetUserDetails;
-		checkoutRpc.Store = { // test store
+		checkoutRpc.Store = {
 			bid: this.store.bid
 		} as AspNetUserDetails;
 		checkoutRpc.sessionDetals = {
@@ -177,8 +179,15 @@ export class CheckoutPage {
 		alert.present();
 	}
 
-    getCartItemOffersProducts(cartItemOffers: CartItemOffer[]): any[] {
-        return cartItemOffers.reduce((a, b) => a.concat(b.products), []) as any[];
-    }
+	getCartItemOffersProducts(cartItemOffers: CartItemOffer[]): any[] {
+		return cartItemOffers.reduce((a, b) => a.concat(b.products), []) as any[];
+	}
+
+	getAmountOfCartProducts(cart: CartViewModel): number {
+		var items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
+		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
+
+		return items + itemOffers;
+	}
 
 }

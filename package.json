@@ -35,7 +35,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.2.0",
+    "@ionic/app-scripts": "^3.2.1",
     "cheerio": "^1.0.0-rc.2",
     "rev-hash": "^2.0.0",
     "typescript": "~2.6.2"

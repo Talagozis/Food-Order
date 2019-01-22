@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import '../../utils/linqtsExtension';
 
@@ -25,8 +25,8 @@ export class ProductModalPage {
 	info: string;
 	totalPrice: number;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, private cartProvider: CartProvider) {
-		this.product = new ProductViewModel({picture: "", price: 0});
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private cartProvider: CartProvider) {
+		this.product = new ProductViewModel({ picture: "", price: 0 });
 	}
 
 	ionViewDidLoad() {
@@ -36,7 +36,6 @@ export class ProductModalPage {
 		this.info = '';
 
 		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
-		this.totalPrice = productApi.price;
 
 		this.product = new ProductViewModel({
 			...productApi,
@@ -50,13 +49,15 @@ export class ProductModalPage {
 			})),
 			Product_Ingredients: productApi.Product_Ingredients.map(a => new Product_IngredientViewModel({
 				...a,
-				Product: null,
+				amount: 1,
+				Product: null,				
 			})),
-
 		});
+		this.totalPrice = this.product.getDefaultPrice();
 
+		//Prepare order and selection
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
-			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderBy(b => b.price).ToArray(); return a; })
+			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderByDescending(b => b.isDefault).ThenBy(a => a.price).ToArray(); return a; })
 			.ToArray();
 
 		this.ingredients = this.product.Product_Ingredients.ToList().OrderBy(b => !b.isDefault).ThenBy(b => b.price).ToArray();
@@ -72,15 +73,15 @@ export class ProductModalPage {
 		let sum = 0;
 		sum += this.product.Product_Ingredients
 			.filter(i => i.isDefault)
-			.map(a => a.price)
-			.reduce((a,b) => a+b, 0);
+			.map(a => a.price * a.amount)
+			.reduce((a, b) => a + b, 0);
 		sum += this.product.Product_AttributeGroups
 			.map(b => b.Product_Attributes
-			.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
+				.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
 			.reduce((a, b) => a.concat(b), [])
-			.map(a => a.price)
-			.reduce((a,b) => a+b, 0);
+			.reduce((a, b) => a + b.price, 0);
 		sum += this.product.price;
+
 		this.totalPrice = sum * this.quantity;
 		return sum;
 	}
@@ -110,7 +111,7 @@ export class ProductModalPage {
 
 		this.cartProvider.addCartItem(this.storeBid, cartItem);
 
-		this.viewCtrl.dismiss({isAdded: true});
+		this.viewCtrl.dismiss({ isAdded: true });
 	}
 
 	changeQuantity(amount: number) {
@@ -120,6 +121,6 @@ export class ProductModalPage {
 	}
 
 	closeProductModal() {
-		this.viewCtrl.dismiss({isAdded: false});
+		this.viewCtrl.dismiss({ isAdded: false });
 	}
 }

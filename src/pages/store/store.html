@@ -92,6 +92,38 @@
 					</ion-list>
 				</ion-list>
 
+				<ion-list *ngIf="deals && deals.length > 0" class="accordion-list">
+					<button ion-item (click)="toggleSectionDeal()" detail-none [ngClass]="{'section-active': categoryDeal.open, 'section': !categoryDeal.open}">
+						<ion-icon item-left name="arrow-forward" *ngIf="!categoryDeal.open"></ion-icon>
+						<ion-icon item-left name="arrow-down" *ngIf="categoryDeal.open"></ion-icon>
+						Προσφορές
+					</button>
+					<ion-list class="deals-list" *ngIf="categoryDeal.open">
+						<ion-item *ngFor="let deal of deals" detail-none class="child-item pointer" text-wrap (click)="openOfferModal(deal)">
+							<div class="details">
+								<div class="flex-1">
+									<h3 class="name">
+										{{deal.name}}
+									</h3>
+									<p class="description" *ngIf="deal.shortDescription">
+										{{ deal.shortDescription }}
+									</p>
+								</div>
+								<div style="min-width: 75px; text-align: right;">
+									<div color="dark" class="display-block" style="min-height: 22px;">
+										<span style="font-size: 0.8em; color: #666">από</span>
+										<span class="cross-out" style="font-size: 0.85em;">{{deal.totalPrice|priceFormat}}</span>
+									</div>
+									<div small class="display-block" style="min-height: 22px;">
+										<span style="font-size: 0.8em; color: #666">μόνο</span>
+										<span style="font-size: 1.05em; color: #43a047; font-weight: 600;">{{deal.finalPrice|priceFormat}}</span>
+									</div>
+								</div>
+							</div>
+						</ion-item>
+					</ion-list>
+				</ion-list>
+
 				<ion-list-header *ngFor="let category of categories; let i = index" no-lines no-padding>
 					<button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': category.open, 'section': !category.open}">
 						<ion-icon item-left name="arrow-forward" *ngIf="!category.open"></ion-icon>
@@ -101,9 +133,9 @@
 					<ion-list *ngIf="category.open">
 						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap
 						 (click)="openModal(product)">
-							<h3 text-capitalize>{{product.title}}</h3>
+							<h3 text-capitalize>{{ product.title }}</h3>
 							<p text-capitalize>{{ product.description }}</p>
-							<button ion-button outline item-end>{{product.price|priceFormat}}</button>
+							<button ion-button outline item-end>{{ product.getDefaultPrice()|priceFormat }}</button>
 						</ion-item>
 					</ion-list>
 				</ion-list-header>
@@ -153,7 +185,7 @@
 	</div>
 	<ion-fab *ngIf="cart && ((cart.cartItems && cart.cartItems.length > 0) || (cart.cartItemOffers && cart.cartItemOffers.length > 0))" bottom right>
 		<button ion-fab large color="primary" (click)="navigateToCheckoutPage()">
-			{{getAmountOfCartProducts()}}
+			{{getAmountOfCartProducts(cart)}}
 			<ion-icon name="cart"></ion-icon>
 		</button>
 	</ion-fab>
