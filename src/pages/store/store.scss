@@ -20,6 +20,16 @@ page-store {
     .pointer {
         cursor: pointer;
     }
+    .background-pattern {
+        background: linear-gradient(rgba(244,244,244, 0.11), rgba(244,244,244, 0.11)), url('../assets/imgs/sayagata2.png');
+        
+        ion-item {
+            background-color: inherit;
+        }
+        ion-list-header, ion-list {
+            background-color: inherit;
+        }
+    }
     .cross-out {
         text-decoration: line-through;
     }
@@ -145,11 +155,32 @@ page-store {
                 // border: 1px solid #e0e0e0;
                 border-radius: 2px;
                 padding: 3px;
-                font-size: 1.3rem
+                font-size: 1.3rem;
             }
         }
 
     }
 
+    .product-list {
+        .details {
+            display: flex; 
+            margin-bottom: 4px;
+
+            .flex-1 {
+                flex: 1;
+            }
+            .name {
+                font-weight: 600;
+                color: #313131;
+            }
+
+            .description {
+                // border: 1px solid #e0e0e0;
+                border-radius: 2px;
+                padding: 3px;
+                font-size: 1.3rem
+            }
+        }
+    }
 
 }

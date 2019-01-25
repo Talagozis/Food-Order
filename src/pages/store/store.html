@@ -28,25 +28,24 @@
 			</ion-row>
 		</div>
 	</div>
+
+	<div>
+		<ion-segment [(ngModel)]="storeSegment">
+			<ion-segment-button value="catalog" text-capitalize>Κατάλογος</ion-segment-button>
+			<ion-segment-button value="contact" text-capitalize>Τηλέφωνα</ion-segment-button>
+			<ion-segment-button value="info" text-capitalize>Πληροφορίες</ion-segment-button>
+		</ion-segment>
+	</div>
+
 </ion-header>
 
-<ion-content>
+<ion-content class="background-pattern" style="margin-top: 10px;">
 
 	<div *ngIf="store">
-
-		<div padding>
-			<ion-segment [(ngModel)]="storeSegment">
-				<ion-segment-button value="catalog" text-capitalize>Κατάλογος</ion-segment-button>
-				<ion-segment-button value="info" text-capitalize>Πληροφορίες</ion-segment-button>
-				<ion-segment-button value="contact" text-capitalize>Επικοινωνία</ion-segment-button>
-			</ion-segment>
-		</div>
-
 		<div [ngSwitch]="storeSegment">
 
 			<ion-list *ngSwitchCase="'catalog'" class="accordion-list">
-
-				<ion-list *ngIf="liveDeals && liveDeals.length > 0" class="accordion-list">
+				<ion-list-header *ngIf="liveDeals && liveDeals.length > 0" class="accordion-list" no-lines no-padding>
 					<button ion-item detail-none class="section-active">
 						<ion-icon item-left name="flame"></ion-icon>
 						Ζωντανές προσφορές
@@ -59,7 +58,7 @@
 										{{liveDeal.name}}
 									</h3>
 									<p class="description" *ngIf="liveDeal.shortDescription">
-										{{ liveDeal.shortDescription }}
+										{{ liveDeal.shortDescription.length < 73 ? liveDeal.shortDescription : (liveDeal.shortDescription | slice:0:73) + '...' }}
 									</p>
 								</div>
 								<div style="min-width: 75px; text-align: right;">
@@ -90,9 +89,9 @@
 
 						</ion-item>
 					</ion-list>
-				</ion-list>
+				</ion-list-header>
 
-				<ion-list *ngIf="deals && deals.length > 0" class="accordion-list">
+				<ion-list-header *ngIf="deals && deals.length > 0" class="accordion-list" no-lines no-padding>
 					<button ion-item (click)="toggleSectionDeal()" detail-none [ngClass]="{'section-active': categoryDeal.open, 'section': !categoryDeal.open}">
 						<ion-icon item-left name="arrow-forward" *ngIf="!categoryDeal.open"></ion-icon>
 						<ion-icon item-left name="arrow-down" *ngIf="categoryDeal.open"></ion-icon>
@@ -106,7 +105,7 @@
 										{{deal.name}}
 									</h3>
 									<p class="description" *ngIf="deal.shortDescription">
-										{{ deal.shortDescription }}
+										{{ deal.shortDescription.length < 73 ? deal.shortDescription : (deal.shortDescription | slice:0:73) + '...' }}
 									</p>
 								</div>
 								<div style="min-width: 75px; text-align: right;">
@@ -122,7 +121,7 @@
 							</div>
 						</ion-item>
 					</ion-list>
-				</ion-list>
+				</ion-list-header>
 
 				<ion-list-header *ngFor="let category of categories; let i = index" no-lines no-padding>
 					<button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': category.open, 'section': !category.open}">
@@ -130,29 +129,45 @@
 						<ion-icon item-left name="arrow-down" *ngIf="category.open"></ion-icon>
 						{{category.key}}
 					</button>
-					<ion-list *ngIf="category.open">
+					<ion-list class="product-list" *ngIf="category.open">
 						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap
 						 (click)="openModal(product)">
-							<h3 text-capitalize>{{ product.title }}</h3>
-							<p text-capitalize>{{ product.description }}</p>
-							<button ion-button outline item-end>{{ product.getDefaultPrice()|priceFormat }}</button>
+							<div class="details">
+								<div class="flex-1">
+									<h3 class="name">
+										{{product.name}}
+									</h3>
+									<p class="description" *ngIf="product.shortDescription">
+										{{ product.shortDescription.length < 73 ? product.shortDescription : (product.shortDescription | slice:0:73) + '...' }}
+									</p>
+								</div>
+								<div style="min-width: 75px; text-align: right;">
+									<button ion-button outline item-end>{{ product.getDefaultPrice()|priceFormat }}</button>
+								</div>
+							</div>
 						</ion-item>
 					</ion-list>
 				</ion-list-header>
 			</ion-list>
 
-			<ion-list *ngSwitchCase="'info'">
-				<ion-item *ngFor="let address of store.Addresses">
+			<ion-list *ngSwitchCase="'contact'">
+				<ion-item *ngFor="let contact of store.Contacts">
 					<ion-row>
-						<ion-col>
-							<ion-icon name="compass" color="secondary"></ion-icon>
-							<span>{{address.line}}</span>
+						<ion-col col-4>
+							<ion-avatar item-start>
+								<img src="{{contact.contactTypePicture|imageContactType}}" class="img-responsive" style="width: 32px; height: 32px">
+							</ion-avatar>
 						</ion-col>
-						<ion-col>
-							<span>{{address.city}}, ΤΚ {{address.zip}}</span>
+						<ion-col col-8>
+							<a href="tel:{{contact.value}}" ion-button block color="secondary">{{contact.value}}</a>
 						</ion-col>
 					</ion-row>
 				</ion-item>
+			</ion-list>
+
+			<ion-list *ngSwitchCase="'info'" style="margin-bottom: 30px;">
+
+				<h3 ion-text text-center>Ωράριο</h3>
 				<ion-item *ngFor="let openHour of store.OpenHours">
 					<ion-row>
 						<ion-col>
@@ -165,25 +180,26 @@
 						</ion-col>
 					</ion-row>
 				</ion-item>
-			</ion-list>
 
-			<ion-list *ngSwitchCase="'contact'">
-				<ion-item *ngFor="let contact of store.Contacts">
+				<h3 ion-text text-center>Διεύθυνση</h3>
+				<ion-item *ngFor="let address of store.Addresses">
 					<ion-row>
-						<ion-col col-4>
-							<ion-avatar item-start>
-								<img src="{{contact.contactTypePicture|imageContactType}}" class="img-responsive" style="width: 32px; height: 32px">
-							</ion-avatar>
+						<ion-col>
+							<ion-icon name="compass" color="secondary"></ion-icon>
+							<span>{{address.line}}</span>
 						</ion-col>
-						<ion-col col-8>
-							<a href="tel:{{contact.value}}" ion-button outline round block color="secondary">{{contact.value}}</a>
+						<ion-col>
+							<span>{{address.city}}, ΤΚ {{address.zip}}</span>
 						</ion-col>
 					</ion-row>
 				</ion-item>
+
 			</ion-list>
+
 		</div>
 	</div>
-	<ion-fab *ngIf="cart && ((cart.cartItems && cart.cartItems.length > 0) || (cart.cartItemOffers && cart.cartItemOffers.length > 0))" bottom right>
+	<ion-fab *ngIf="cart && ((cart.cartItems && cart.cartItems.length > 0) || (cart.cartItemOffers && cart.cartItemOffers.length > 0))"
+	 bottom right>
 		<button ion-fab large color="primary" (click)="navigateToCheckoutPage()">
 			{{getAmountOfCartProducts(cart)}}
 			<ion-icon name="cart"></ion-icon>

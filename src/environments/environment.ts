@@ -1,5 +1,5 @@
 export const ENV: IENV = {
-	mode: 'Production',
+	mode: 'Empty',
 	IMAGE_URL: "",
 	API_HEADER_NAME: "",
 	API_HEADER_VALUE: "",

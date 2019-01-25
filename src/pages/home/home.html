@@ -7,7 +7,7 @@
 				</button>
 			</ion-col>
 			<ion-col col-8 text-center>
-				<img src="../assets/imgs/homepage-logo.png" width="42" height="42" />
+				<img src="assets/imgs/homepage-logo.png" width="42" height="42" />
 			</ion-col>
 			<ion-col col-2>
 
@@ -24,8 +24,8 @@
 			<ion-thumbnail item-start>
 				<img src="{{liveDeal.Offer.Store.logo|imageStore}}" class="img-responsive store-logo">
 			</ion-thumbnail>
-			<h2 class="store-name" ion-text color="light">{{liveDeal.Offer.Store.name}}</h2>
-			<span class="offer-name" ion-text color="light">{{liveDeal.Offer.name}}</span>
+			<h2 class="store-name" ion-text color="dark">{{liveDeal.Offer.Store.name}}</h2>
+			<span class="offer-name" ion-text color="dark">{{liveDeal.Offer.name}}</span>
 			<div class="offer-discount-percent" item-end color="secondary">
 				<span>
 					{{(liveDeal.Offer.totalPrice !== 0 ? liveDeal.Offer.discount / liveDeal.Offer.totalPrice * -100 : 0).toFixed(0)}}
