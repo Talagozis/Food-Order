@@ -148,6 +148,30 @@
 						</ion-item>
 					</ion-list>
 				</ion-list-header>
+
+				<ng-container *ngIf="!categories">
+					<ng-container *ngFor="let number of [0,1,2,3]" >
+						<ion-list-header class="accordion-list" no-lines no-padding>
+							<button ion-item detail-none class="section">
+								<ion-icon item-left name="arrow-forward"></ion-icon>
+								<span style="background-color: #ffab91; display: inline-block; border-radius: 1px; height: 1.7rem; width: 35%; max-width: 100px;"></span>
+							</button>
+						</ion-list-header>
+						<ion-list-header class="accordion-list" no-lines no-padding>
+							<button ion-item detail-none class="section">
+								<ion-icon item-left name="arrow-forward"></ion-icon>
+								<span style="background-color: #ffab91; display: inline-block; border-radius: 1px; height: 1.7rem; width: 30%; max-width: 90px;"></span>
+							</button>
+						</ion-list-header>
+						<ion-list-header class="accordion-list" no-lines no-padding>
+							<button ion-item detail-none class="section">
+								<ion-icon item-left name="arrow-forward"></ion-icon>
+								<span style="background-color: #ffab91; display: inline-block; border-radius: 1px; height: 1.7rem; width: 32%; max-width: 120px;"></span>
+							</button>
+						</ion-list-header>
+					</ng-container>
+				</ng-container>
+
 			</ion-list>
 
 			<ion-list *ngSwitchCase="'contact'">
