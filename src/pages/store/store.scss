@@ -80,7 +80,10 @@ page-store {
     .list {
         margin-bottom: 0;
     }
-
+    .list-header-ios {
+        letter-spacing: 0.05rem;
+        text-transform: none;
+    }
     .liveDeals-list {
 
         &.list-md {

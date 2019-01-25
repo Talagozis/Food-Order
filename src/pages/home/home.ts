@@ -7,8 +7,6 @@ import { OfferSchedulerProvider } from '../../providers/OfferScheduler/offerSche
 import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
 import { StoreApi } from 'models/api/Store';
 
-import { ENV } from '@app/env'
-
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html'
@@ -62,7 +60,6 @@ export class HomePage {
 			// 	} as OfferSchedulerApi
 			// ];
 		});
-		alert(ENV.mode + " Environment");
 	}
 
 	doRefresh(refresher: Refresher) {

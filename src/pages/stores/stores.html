@@ -51,10 +51,14 @@
 					<span style="background-color: #c8e6c9; display: inline-block; height: 1.7rem; width: 25%;"></span>
 				</span>
 			</div>
-			<ng-template #onlyPhone>
-				<span ion-text color="cyan">Δές τα τηλέφωνα</span>
-			</ng-template>
 			<p style="background-color: #e0e0e0; display: inline-block; height: 1.6rem; width: 95%;"></p>
+		</ion-item>
+		<ion-item class="pointer" *ngFor="let number of [0]">
+			<ion-thumbnail item-start>
+				<img class="img-responsive store-logo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="background-color: #bdbdbd;">
+			</ion-thumbnail>
+			<h2 style="background-color: #e0e0e0; display: inline-block; height: 1.9rem; width: 65%;"></h2>
+
 		</ion-item>
 	</ion-list>
 
