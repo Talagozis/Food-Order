@@ -41,7 +41,7 @@ export class StoresPage {
 		}, 0);
 	}
 
-	 getStores(): void {
+	getStores(): void {
 		let loader = this.loadingCtrl.create({
 			content: "Αναζήτηση καταστημάτων"
 		});
@@ -58,12 +58,12 @@ export class StoresPage {
 			storeViewModels = storeViewModels.ToList().OrderBy(a => !a.isHubConnected).ThenBy(a => Math.random()).ToArray();
 
 			// storeViewModels = storeViewModels.sort((a, b) => {
-			
+
 			// 	if (a.isHubConnected < b.isHubConnected)
 			// 		return 1;
 			// 	if (a.isHubConnected > b.isHubConnected)
 			// 		return -1;
-				
+
 			// 	return 0.5 - Math.random()
 			// });
 
@@ -78,15 +78,10 @@ export class StoresPage {
 	}
 
 	openFilters() {
-		let cuisines: Product_TagApi[] = this.initialStores.map(
-			a => a.Product_Tags
-		).reduce(
-			(a, b) => a.concat(b)
-			).filter(
-			(pt) => pt.level == TagLevel.Cuisine
-			).filter(
-			(obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos
-			);
+		let cuisines: Product_TagApi[] = this.initialStores.map(a => a.Product_Tags)
+		.reduce((a: Product_TagApi[], b: Product_TagApi[]) => a.concat(b), [])
+		.filter(pt => pt.level === TagLevel.Cuisine)
+		.filter((obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos);
 
 		let filterViewModels = cuisines.map<FilterViewModel>(a => ({
 			Tag: a.Tag,
@@ -101,18 +96,16 @@ export class StoresPage {
 	searchStores(event: any) {
 		let val = event.target.value;
 		if (val && val.trim() != '') {
-			this.stores = this.initialStores.filter((s) => {
-				return (s.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-			})
+			this.stores = this.initialStores.filter((s) => s.name.toLowerCase().indexOf(val.toLowerCase()) > -1)
 		} else {
 			this.stores = this.initialStores;
 		}
 	}
 
 	onFilterModalDidDismiss(bids: number[]): void {
-		if (!bids) {
+		if (!bids)
 			return;
-		}
+
 		this.selectedCuisineBids = bids;
 		if (bids.length == 0) {
 			this.stores = this.initialStores;

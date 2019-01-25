@@ -111,10 +111,10 @@ export class CheckoutPage {
 			userAgent: this.platform.userAgent(),
 		}
 
-		this.orderProvider.checkout(checkoutRpc).subscribe((c: CheckoutRpcResponse) => {
+		this.orderProvider.checkout(checkoutRpc).subscribe((checkoutRpcResponse: CheckoutRpcResponse) => {
 
-			if (!c || c.status !== ResponseStatus.Success) {
-				this.handleOrderFailureMessage(c);
+			if (!checkoutRpcResponse || checkoutRpcResponse.status !== ResponseStatus.Success) {
+				this.handleOrderFailureMessage(checkoutRpcResponse);
 				return;
 			}
 
