@@ -99,7 +99,7 @@ export class StorePage {
 			}));
 		});
 		
-		return this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
+		this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
 			this.liveDeals = offers.map(a => new OfferViewModel({
 				...a,
 				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
@@ -123,6 +123,7 @@ export class StorePage {
 				})),
 			}));
 		});
+		return;
 	}
 
 	initializeProducts(storeBid: number): Promise<void> {

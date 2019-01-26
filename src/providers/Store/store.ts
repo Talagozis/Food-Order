@@ -14,18 +14,18 @@ export class StoreProvider {
 
 	public findAllAvailable(subscription: SubscriptionDelegate): Subscription {
 
-		subscription = StoreSubscriptionFilters.filterOpen(subscription);
-		subscription = StoreSubscriptionFilters.filterActive(subscription);
+		// subscription = StoreSubscriptionFilters.filterOpen(subscription);
+		// subscription = StoreSubscriptionFilters.filterActive(subscription);
 		subscription = StoreSubscriptionFilters.filterCanOrderOnline(subscription);
 		subscription = StoreSubscriptionFilters.filterHasDeliveryOrTakeaway(subscription);
 		subscription = StoreSubscriptionFilters.filterSendOrderByPushOrEmail(subscription);
 
-		return this.find().subscribe(subscription);
+		return this.find({ "isActive": true, "isOpen": true }).subscribe(subscription);
 	}
 
 
-	private find(): Observable<StoreApi[]> {
-		return this.api.get('store')
+	private find(parameters?: object): Observable<StoreApi[]> {
+		return this.api.get('store', parameters)
 	}
 
 	public findOne(bid: number): Observable<StoreApi> {
@@ -41,13 +41,13 @@ export class StoreProvider {
 
 class StoreSubscriptionFilters {
 
-	public static filterOpen(subscription: SubscriptionDelegate): SubscriptionDelegate {
-		return a => subscription(a.filter(b => b.isOpen));
-	}
+	// public static filterOpen(subscription: SubscriptionDelegate): SubscriptionDelegate {
+	// 	return a => subscription(a.filter(b => b.isOpen));
+	// }
 
-	public static filterActive(subscription: SubscriptionDelegate): SubscriptionDelegate {
-		return a => subscription(a.filter(b => b.isActive));
-	}
+	// public static filterActive(subscription: SubscriptionDelegate): SubscriptionDelegate {
+	// 	return a => subscription(a.filter(b => b.isActive));
+	// }
 
 	public static filterCanOrderOnline(subscription: SubscriptionDelegate): SubscriptionDelegate {
 		return a => subscription(a.filter(b => b.canOrderOnline));
