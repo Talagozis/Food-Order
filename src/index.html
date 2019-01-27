@@ -28,13 +28,17 @@
 
 
 	<!-- un-comment this code to enable service worker-->
-	<!--<script>
+	<script>
 		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('service-worker.js')
-				.then(() => console.log('service worker installed'))
-				.catch(err => console.error('Error', err));
+			if (navigator.serviceWorker.controller) {
+				console.log('[PWA Builder] active service worker found, no need to register')
+			} else {
+				navigator.serviceWorker.register('service-worker.js')
+					.then(() => console.log('[PWA Builder] service worker installed'))
+					.catch(err => console.error('[PWA Builder]  Error: ', err));
+			}
 		}
-	</script>-->
+	</script>
 
 	<link href="build/main.css" rel="stylesheet">
 
