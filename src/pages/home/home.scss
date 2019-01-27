@@ -47,6 +47,7 @@ page-home {
         }
 
         .store-name {
+            
         }
 
         .offer-name {
@@ -54,12 +55,12 @@ page-home {
         }
 
         .text-ios.offer-name {
-            font-size: 90%;;
+            font-size: 1.4rem;
         }
 
-        .offer-discount-percent {
-            color: #f44336;
-            font-weight: bold;
+        .offer-totalPrice {
+            color: #66bb6a;
+            font-weight: 600;
         }
 
         // .transparent {

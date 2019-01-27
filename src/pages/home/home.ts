@@ -4,8 +4,15 @@ import { NavController, Refresher, LoadingController } from 'ionic-angular';
 import { CartProvider } from '../../providers/Cart/cart';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { OfferSchedulerProvider } from '../../providers/OfferScheduler/offerScheduler';
-import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
-import { StoreApi } from 'models/api/Store';
+import { OfferProvider } from '../../providers/Offer/offer';
+// import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
+import { StoreApi } from '../../models/api/Store';
+import { OfferApi } from '../../models/Api/Offer';
+import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
+import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
+import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
+import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
+import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
 
 @Component({
 	selector: 'page-home',
@@ -13,9 +20,10 @@ import { StoreApi } from 'models/api/Store';
 })
 export class HomePage {
 	background: string;
-	liveDeals: OfferSchedulerApi[];
+	// liveDeals: OfferSchedulerApi[];
+	liveDeals: OfferViewModel[];
 
-	constructor(public navCtrl: NavController, public cartProvider: CartProvider, public offerSchedulerProvider: OfferSchedulerProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController) {
+	constructor(public navCtrl: NavController, public cartProvider: CartProvider, public offerProvider: OfferProvider, public offerSchedulerProvider: OfferSchedulerProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController) {
 	}
 
 	ionViewDidEnter() {
@@ -25,41 +33,53 @@ export class HomePage {
 	ionViewDidLoad() {
 		this.background = this.chooseBackground();
 		this.cartProvider.clearCarts();
-		this.offerSchedulerProvider.getLive().subscribe((os) => {
-			this.liveDeals = os.slice(0, 3); // <= add order and ranking
 
-			//TODO DELETE THIS
-			// this.liveDeals = [
-			// 	{
-			// 		description: 'test',
-			// 		info: 'test',
-			// 		isActive: true,
-			// 		endDateTime: new Date(2018, 1, 1),
-			// 		isArchived: false,
-			// 		maxAmount: 10,
-			// 		startDateTime: new Date(2018, 1, 1),
-			// 		bid: 100,
-			// 		usedAmount: 2,
-			// 		usedAmountVirtual: 4,
-			// 		Offer: {
-			// 			bid: 200,
-			// 			discount: 3,
-			// 			finalPrice: 3,
-			// 			isActive: true,
-			// 			level: OfferLevel.LiveDeal,
-			// 			name: 'test offer',
-			// 			totalPrice: 6,
-			// 			shortDescription: 'test short description',
-			// 			Store: {
-			// 				slug: 'prototype',
-			// 				bid: 295462762,
-			// 				name: 'store name',
-			// 				logo: ''
-			// 			} as StoreApi
-			// 		} as OfferApi
-			// 	} as OfferSchedulerApi
-			// ];
+		this.offerProvider.findLiveDeals(undefined, (offers: OfferApi[]) => {
+			this.liveDeals = offers.map(a => new OfferViewModel({
+				...a,
+				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
+					...b,
+					Offer: undefined,
+					Products: undefined
+				})),
+			})).slice(0, 3);
 		});
+
+		// this.offerSchedulerProvider.getLive().subscribe((os) => {
+		// 	this.liveDeals = os.slice(0, 3); // <= add order and ranking
+
+		// 	//TODO DELETE THIS
+		// 	// this.liveDeals = [
+		// 	// 	{
+		// 	// 		description: 'test',
+		// 	// 		info: 'test',
+		// 	// 		isActive: true,
+		// 	// 		endDateTime: new Date(2018, 1, 1),
+		// 	// 		isArchived: false,
+		// 	// 		maxAmount: 10,
+		// 	// 		startDateTime: new Date(2018, 1, 1),
+		// 	// 		bid: 100,
+		// 	// 		usedAmount: 2,
+		// 	// 		usedAmountVirtual: 4,
+		// 	// 		Offer: {
+		// 	// 			bid: 200,
+		// 	// 			discount: 3,
+		// 	// 			finalPrice: 3,
+		// 	// 			isActive: true,
+		// 	// 			level: OfferLevel.LiveDeal,
+		// 	// 			name: 'test offer',
+		// 	// 			totalPrice: 6,
+		// 	// 			shortDescription: 'test short description',
+		// 	// 			Store: {
+		// 	// 				slug: 'prototype',
+		// 	// 				bid: 295462762,
+		// 	// 				name: 'store name',
+		// 	// 				logo: ''
+		// 	// 			} as StoreApi
+		// 	// 		} as OfferApi
+		// 	// 	} as OfferSchedulerApi
+		// 	// ];
+		// });
 	}
 
 	doRefresh(refresher: Refresher) {

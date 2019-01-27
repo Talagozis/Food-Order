@@ -10,6 +10,10 @@ export class OfferProvider {
 
 	constructor(public api: Api<OfferApi>) { }
 
+	private find(parameters?: object): Promise<OfferApi[]> {
+		return this.api.get('offer', { ...parameters, "isActive": true }).toPromise();
+	}
+	
 	private findByStoreBid(storeBid: number, parameters?: object): Promise<OfferApi[]> {
 		return this.api.get('offer', { ...parameters, "storeBid": storeBid, "isActive": true }).toPromise();
 	}
@@ -32,11 +36,16 @@ export class OfferProvider {
 
 	public findLiveDeals(storeBid: number, subscription: SubscriptionDelegate): Promise<void> {
 
+		if(storeBid) {
+			return this.findByStoreBid(storeBid, { "level": OfferLevel.LiveDeal, "offerSchedulerDateTime": (new Date).toJSON() }).then(subscription);
+		}
+		else {
+			return this.find({ "level": OfferLevel.LiveDeal, "offerSchedulerDateTime": (new Date).toJSON() }).then(subscription);
+		}
 		// subscription = OfferSubscriptionFilters.filterActive(subscription);
 		// subscription = OfferSubscriptionFilters.filterByLevel(subscription, OfferLevel.LiveDeal);
 		// subscription = OfferSubscriptionFilters.filterLive(subscription);
 
-		return this.findByStoreBid(storeBid, { "level": OfferLevel.LiveDeal, "offerSchedulerDateTime": (new Date).toJSON() }).then(subscription);
 	}
 
 
@@ -45,18 +54,18 @@ export class OfferProvider {
 
 }
 
-class OfferSubscriptionFilters {
+// class OfferSubscriptionFilters {
 
-	// public static filterActive(subscription: SubscriptionDelegate): SubscriptionDelegate {
-	// 	return a => subscription(a.filter(b => b.isActive));
-	// }
+// 	public static filterActive(subscription: SubscriptionDelegate): SubscriptionDelegate {
+// 		return a => subscription(a.filter(b => b.isActive));
+// 	}
 
-	// public static filterByLevel(subscription: SubscriptionDelegate, level: OfferLevel): SubscriptionDelegate {
-	// 	return a => subscription(a.filter(b => b.level == level));
-	// }
+// 	public static filterByLevel(subscription: SubscriptionDelegate, level: OfferLevel): SubscriptionDelegate {
+// 		return a => subscription(a.filter(b => b.level == level));
+// 	}
 
-	// public static filterLive(subscription: SubscriptionDelegate): SubscriptionDelegate {
-	// 	return a => subscription(a.filter(b => b.OfferSchedulers && b.OfferSchedulers.filter(c => c.isActive && new Date(c.startDateTime) <= new Date() && new Date(c.endDateTime) >= new Date()).length > 0));
-	// }
+// 	public static filterLive(subscription: SubscriptionDelegate): SubscriptionDelegate {
+// 		return a => subscription(a.filter(b => b.OfferSchedulers && b.OfferSchedulers.filter(c => c.isActive && new Date(c.startDateTime) <= new Date() && new Date(c.endDateTime) >= new Date()).length > 0));
+// 	}
 
-}
+// }

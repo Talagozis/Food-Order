@@ -20,17 +20,17 @@
 	<ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
 
 	<div class="livedeals">
-		<ion-item text-wrap class="pointer" *ngFor="let liveDeal of liveDeals" (click)="navigateToStorePage(liveDeal.Offer.Store)">
+		<ion-item text-wrap class="pointer" *ngFor="let liveDeal of liveDeals" (click)="navigateToStorePage(liveDeal.Store)">
 			<ion-thumbnail item-start>
-				<img src="{{liveDeal.Offer.Store.logo|imageStore}}" class="img-responsive store-logo">
+				<img src="{{liveDeal.Store.logo|imageStore}}" class="img-responsive store-logo">
 			</ion-thumbnail>
-			<h2 class="store-name" ion-text color="dark">{{liveDeal.Offer.Store.name}}</h2>
-			<span class="offer-name" ion-text color="dark">{{liveDeal.Offer.name}}</span>
-			<div class="offer-discount-percent" item-end color="secondary">
-				<span>
-					{{(liveDeal.Offer.totalPrice !== 0 ? liveDeal.Offer.discount / liveDeal.Offer.totalPrice * -100 : 0).toFixed(0)}}
-				</span>
-				<span style="font-size: 14px">%</span>
+			<span class="offer-name" ion-text color="light">
+				{{liveDeal.name}}
+			</span>
+			<div class="offer-totalPrice" item-end color="secondary">
+				<span style="font-size: 0.8em; color: #f4f4f4;">μόνο</span>
+				<br/>
+				<span>{{liveDeal.finalPrice|priceFormat}}</span>
 			</div> 
 		</ion-item>
 	</div>
