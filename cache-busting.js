@@ -40,6 +40,12 @@ var jsVendorNewFileName = `vendor.${jsVendorFileHash}.js`;
 var jsVendorNewPath = path.join(buildDir, jsVendorNewFileName);
 var jsVendorNewRelativePath = path.join('build', jsVendorNewFileName);
 
+var manifestPath = path.join(wwwRootDir, 'manifest.json');
+var manifestFileHash = revHash(fs.readFileSync(manifestPath));
+var manifestNewFileName = `manifest.${manifestFileHash}.json`;
+var manifestNewPath = path.join(wwwRootDir, manifestNewFileName);
+var manifestNewRelativePath = path.join('.', manifestNewFileName);
+
 // rename main.css to main.[hash].css
 fs.renameSync(cssPath, cssNewPath);
 
@@ -52,9 +58,13 @@ fs.renameSync(jsPolyfillsPath, jsPolyfillsNewPath);
 // rename vendor.js to vendor.[hash].js
 fs.renameSync(jsVendorPath, jsVendorNewPath);
 
+// rename manifest.json to manifest.[hash].json
+fs.renameSync(manifestPath, manifestNewPath);
+
 // update index.html to load main.[hash].css
 $ = cheerio.load(fs.readFileSync(indexPath, 'utf-8'));
 
+$('head link[href="manifest.json"]').attr('href', manifestNewRelativePath);
 $('head link[href="build/main.css"]').attr('href', cssNewRelativePath);
 $('body script[src="build/main.js"]').attr('src', jsNewRelativePath);
 $('body script[src="build/polyfills.js"]').attr('src', jsPolyfillsNewRelativePath);

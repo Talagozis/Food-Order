@@ -5,14 +5,10 @@ import { CartProvider } from '../../providers/Cart/cart';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { OfferSchedulerProvider } from '../../providers/OfferScheduler/offerScheduler';
 import { OfferProvider } from '../../providers/Offer/offer';
-// import { OfferSchedulerApi } from '../../models/Api/OfferSchedulerApi';
 import { StoreApi } from '../../models/api/Store';
 import { OfferApi } from '../../models/Api/Offer';
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
-import { ProductViewModel } from '../../models/ViewModels/ProductViewModel';
-import { Product_AttributeGroupViewModel } from '../../models/ViewModels/Product_AttributeGroupViewModel';
-import { Product_AttributeViewModel } from '../../models/ViewModels/Product_AttributeViewModel';
 
 @Component({
 	selector: 'page-home',

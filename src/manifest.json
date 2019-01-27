@@ -2,7 +2,7 @@
 	"name": "Food-Order",
 	"version": "1808081710",
 	"short_name": "Food-Order",
-	"start_url": "index.html",
+	"start_url": "/?utm_source=a2hs",
 	"display": "standalone",
 	"icons": [{
 		"src": "assets/imgs/homepage-logo.png",
@@ -14,5 +14,6 @@
 		"type": "image/png"
 	}],
 	"background_color": "#0d0d0d",
-	"theme_color": "#0d0d0d"
+	"theme_color": "#0d0d0d",
+	"prefer_related_applications": false
 }
