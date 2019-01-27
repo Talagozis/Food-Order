@@ -8,7 +8,7 @@
 importScripts('./build/sw-toolbox.js');
 
 self.toolbox.options.cache = {
-	name: 'ionic-cache-v1808081725'
+	name: 'ionic-cache-v1901271754'
 };
 
 // pre-cache our key assets
@@ -25,6 +25,7 @@ self.toolbox.precache(
 
 // dynamically cache local index.html asset
 self.toolbox.router.any(/index.html$/, self.toolbox.fastest);
+self.toolbox.router.any(/^((?!^\/\?).)*$/mgi, self.toolbox.fastest);
 
 // dynamically cache any other local assets
 self.toolbox.router.any(/^((?!index.html).)*$/mgi, self.toolbox.fastest);
