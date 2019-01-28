@@ -8,7 +8,7 @@
 importScripts('./build/sw-toolbox.js');
 
 self.toolbox.options.cache = {
-	name: 'ionic-cache-v1901281143'
+	name: 'ionic-cache-v1901281143a'
 };
 // self.toolbox.options.debug = true;
 
@@ -43,3 +43,9 @@ self.toolbox.router.get(/^.*(\.js|\.css).*$/, self.toolbox.cacheFirst)
 // for any other requests go to the network, cache,
 // and then only use that cached resource if your user goes offline
 self.toolbox.router.default = self.toolbox.networkFirst;
+
+
+self.addEventListener('message', function (event) {
+	if (event.data === 'skipWaiting')
+		self.skipWaiting();
+});

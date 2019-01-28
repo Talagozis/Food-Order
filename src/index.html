@@ -22,12 +22,12 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="mobile-web-app-capable" content="yes">
-	
+
 	<link rel="apple-touch-icon" href="assets/icon/icon-128x128.png">
 	<link rel="apple-touch-icon-precomposed" href="assets/icon/icon-128x128.png">
 	<link rel="shortcut icon" href="assets/icon/icon-128x128.png">
 
-	
+
 	<!-- cordova.js required for cordova apps (remove if not needed) -->
 	<!-- 
 		<script src="cordova.js"></script>
@@ -37,14 +37,45 @@
 
 	<!-- un-comment this code to enable service worker-->
 	<script>
-		if ('serviceWorker' in navigator) {
-			if (navigator.serviceWorker.controller) {
-				console.log('[PWA Builder] active service worker found, no need to register')
-			} else {
-				navigator.serviceWorker.register('service-worker.js')
-					.then(() => console.log('[PWA Builder] service worker installed'))
-					.catch(err => console.error('[PWA Builder]  Error: ', err));
+
+		function promptUserToRefresh(reg) {
+			// this is just an example
+			// don't use window.confirm in real life; it's terrible
+			if (window.confirm("New version available! OK to refresh?")) {
+				reg.waiting.postMessage('skipWaiting');
 			}
+		}
+
+		function listenForWaitingServiceWorker(reg, callback) {
+			function awaitStateChange() {
+				reg.installing.addEventListener('statechange', function () {
+					if (this.state === 'installed') callback(reg);
+				});
+			}
+			if (!reg) return;
+			if (reg.waiting) return callback(reg);
+			if (reg.installing) awaitStateChange();
+			reg.addEventListener('updatefound', awaitStateChange);
+		}
+
+		if ('serviceWorker' in navigator) {
+			if (navigator.serviceWorker.controller)
+				console.log('[PWA Builder] active service worker found, no need to register')
+			else 
+				console.log('[PWA Builder] service worker installed');
+
+			navigator.serviceWorker.register('service-worker.js')
+				.then(reg => {
+					listenForWaitingServiceWorker(reg, promptUserToRefresh);
+				})
+				.catch(err => console.error('[PWA Builder]  Error: ', err));
+
+			let refreshing;
+			navigator.serviceWorker.addEventListener('controllerchange', function () {
+				if (refreshing) return;
+				refreshing = true;
+				window.location.reload();
+			});
 		}
 	</script>
 
