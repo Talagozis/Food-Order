@@ -30,7 +30,7 @@ export class MyApp {
 
 		this.secondaryPages = [
 			{ title: 'Πολιτική Απορρήτου', component: 'PrivacyPolicyPage', icon: 'document' },
-			{ title: ENV.mode + " v:271533", component: '', icon: '' },
+			{ title: ENV.mode + " v:190128", component: '', icon: '' },
 			
 		];
 	}

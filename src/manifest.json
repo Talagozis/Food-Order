@@ -1,7 +1,7 @@
 {
-	"version": "1808081710",
-	"name": "Food-Order",
-	"short_name": "Food-Order",
+	"version": "1.190128.2030",
+	"name": "SerresDelivery.gr",
+	"short_name": "SerresDelivery.gr",
 	"description": "Food delivery app for Serres.",
 	"start_url": "/?utm_source=a2hs",
 	"display": "standalone",

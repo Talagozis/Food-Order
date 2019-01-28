@@ -7,10 +7,13 @@
 'use strict';
 importScripts('./build/sw-toolbox.js');
 
-self.toolbox.options.cache = {
-	name: 'ionic-cache-v1901281143a'
-};
+
 // self.toolbox.options.debug = true;
+
+
+self.toolbox.options.cache = {
+	name: 'ionic-cache-v1901282020a'
+};
 
 // pre-cache our key assets
 self.toolbox.precache(
@@ -31,6 +34,9 @@ self.toolbox.router.post(/.*/, self.toolbox.networkOnly)
 self.toolbox.router.get(/\/\?utm_source=a2hs$/mi, self.toolbox.networkOnly)
 
 // get api
+self.toolbox.router.get(/^.*\/api\/v.\/store.*$/gmi, self.toolbox.fastest, { cache: { name: "apiStore", maxAgeSeconds: 50 }})
+self.toolbox.router.get(/^.*\/api\/v.\/product.*$/gmi, self.toolbox.fastest, { cache: { name: "apiProduct", maxAgeSeconds: 60*60*24 }})
+self.toolbox.router.get(/^.*\/api\/v.\/hubuser.*$/gmi, self.toolbox.networkOnly)
 self.toolbox.router.get(/^.*\/api\/v.\/.*$/gmi, self.toolbox.networkOnly)
 
 // get google analytics
