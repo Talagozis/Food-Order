@@ -8,7 +8,16 @@
 importScripts('./build/sw-toolbox.js');
 
 
-// self.toolbox.options.debug = true;
+var customFastestHandler = function (request, values, options) {	
+	var x =  fetch(request).then(function(response) {
+		for (var p of response.headers) {
+			console.log(p);
+		}
+	});
+	return self.toolbox.fastest(request, values, options);
+};
+
+self.toolbox.options.debug = true;
 
 
 self.toolbox.options.cache = {
@@ -35,7 +44,7 @@ self.toolbox.router.get(/\/\?utm_source=a2hs$/mi, self.toolbox.networkOnly)
 
 // get api
 self.toolbox.router.get(/^.*\/api\/v.\/store.*$/gmi, self.toolbox.fastest, { cache: { name: "apiStore", maxAgeSeconds: 50 }})
-self.toolbox.router.get(/^.*\/api\/v.\/product.*$/gmi, self.toolbox.fastest, { cache: { name: "apiProduct", maxAgeSeconds: 60*60*24 }})
+self.toolbox.router.get(/^.*\/api\/v.\/product.*$/gmi, self.toolbox.fastest, { cache: { name: "apiProduct", maxAgeSeconds: 60 * 60 * 10 } })
 self.toolbox.router.get(/^.*\/api\/v.\/hubuser.*$/gmi, self.toolbox.networkOnly)
 self.toolbox.router.get(/^.*\/api\/v.\/.*$/gmi, self.toolbox.networkOnly)
 
