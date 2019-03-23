@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Platform, LoadingController } from 'ionic-angular';
 
 import { OrderProvider } from '../../providers/Order/order';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
@@ -34,7 +34,7 @@ export class CheckoutPage {
 	orderDetails: OrderDetails;
 	deliveryType: OrderDeliveryType;
 
-	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController) {
 	}
 
 	ionViewDidEnter() {
@@ -93,36 +93,37 @@ export class CheckoutPage {
 	}
 
 	sendOrder(): void {
-		this.canSendOrder = false;
-		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
-		checkoutRpc.orderDetails = {
-			...this.orderDetails,
-			// info: "\$test",
-		};
-		checkoutRpc.deliveryType = this.deliveryType;
-		checkoutRpc.AspNetUser = { // undefined user
-			bid: undefined
-		} as AspNetUserDetails;
-		checkoutRpc.Store = {
-			bid: this.store.bid
-		} as AspNetUserDetails;
-		checkoutRpc.sessionDetals = {
-			applicationType: ApplicationType.Pwa,
-			userAgent: this.platform.userAgent(),
-		}
+		this.showConfirmationLoading();
+		// this.canSendOrder = false;
+		// let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
+		// checkoutRpc.orderDetails = {
+		// 	...this.orderDetails,
+		// 	// info: "\$test",
+		// };
+		// checkoutRpc.deliveryType = this.deliveryType;
+		// checkoutRpc.AspNetUser = { // undefined user
+		// 	bid: undefined
+		// } as AspNetUserDetails;
+		// checkoutRpc.Store = {
+		// 	bid: this.store.bid
+		// } as AspNetUserDetails;
+		// checkoutRpc.sessionDetals = {
+		// 	applicationType: ApplicationType.Pwa,
+		// 	userAgent: this.platform.userAgent(),
+		// }
 
-		this.orderProvider.checkout(checkoutRpc).subscribe((checkoutRpcResponse: CheckoutRpcResponse) => {
+		// this.orderProvider.checkout(checkoutRpc).subscribe((checkoutRpcResponse: CheckoutRpcResponse) => {
 
-			if (!checkoutRpcResponse || checkoutRpcResponse.status !== ResponseStatus.Success) {
-				this.handleOrderFailureMessage(checkoutRpcResponse);
-				return;
-			}
+		// 	if (!checkoutRpcResponse || checkoutRpcResponse.status !== ResponseStatus.Success) {
+		// 		this.handleOrderFailureMessage(checkoutRpcResponse);
+		// 		return;
+		// 	}
 
-			this.cartProvider.clearCartItem(this.store.bid);
-			this.cartProvider.clearCartItemOffer(this.store.bid);
-			// this.canSendOrder = true;
-			this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
-		});
+		// 	this.cartProvider.clearCartItem(this.store.bid);
+		// 	this.cartProvider.clearCartItemOffer(this.store.bid);
+		// 	// this.canSendOrder = true;
+		// 	this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
+		// });
 
 	}
 
@@ -190,4 +191,19 @@ export class CheckoutPage {
 		return items + itemOffers;
 	}
 
+	showConfirmationLoading() {
+		let loading = this.loadingCtrl.create({
+		  spinner: 'hide',
+		  content: `<img src="../../assets/imgs/spinner.gif">
+					<br />
+					<p>Επιβεβαίωση από κατάστημα<p>`,
+		  duration: 5000
+		});
+	  
+		loading.onDidDismiss(() => {
+		  console.log('Dismissed loading');
+		});
+	  
+		loading.present();
+	  }
 }
