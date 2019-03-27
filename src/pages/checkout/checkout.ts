@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Platform, LoadingController } from 'ionic-angular';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { OrderProvider } from '../../providers/Order/order';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { CheckoutRpcResponse } from '../../models/Request/CheckoutRpcResponse';
-import { ResponseStatus } from '../../models/Request/Response';
-import { CheckoutRpc } from '../../models/Rpc/Checkout';
+// import { ResponseStatus } from '../../models/Request/Response';
+// import { CheckoutRpc } from '../../models/Rpc/Checkout';
 import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
 import { OrderDetails, ApplicationType, OrderDeliveryType } from '../../models/Entities/Checkout';
@@ -13,6 +13,7 @@ import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
 import { CartItemOffer } from '../../models/Api/CartItemOffer';
+import { ENV } from '@app/env';
 
 @IonicPage({
 	name: 'CheckoutPage',
@@ -34,7 +35,7 @@ export class CheckoutPage {
 	orderDetails: OrderDetails;
 	deliveryType: OrderDeliveryType;
 
-	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController) {
+	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController, private sanitizer: DomSanitizer) {
 	}
 
 	ionViewDidEnter() {
@@ -192,12 +193,20 @@ export class CheckoutPage {
 	}
 
 	showConfirmationLoading() {
+		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
+			`<div class="checkoutAccepting">
+				<h3>Αναμονή αποδοχής παραγγελίας...</h3> 
+				<div class="spinning-image" style="background-image: url(${ENV.IMAGE_URL + "image/store/" + this.store.logo});">
+					<div></div>
+				</div> 
+				<p>Η παραγγελίας απεστάλη επιτυχώς. Παρακαλώ περιμένετε για την αποδοχή της από το κατάστημα.</p>
+			</div>`
+			);
+
 		let loading = this.loadingCtrl.create({
 		  spinner: 'hide',
-		  content: `<img src="../../assets/imgs/spinner.gif">
-					<br />
-					<p>Επιβεβαίωση από κατάστημα<p>`,
-		  duration: 5000
+		  content: safeHtml,
+		  duration: 500000
 		});
 	  
 		loading.onDidDismiss(() => {
@@ -205,5 +214,6 @@ export class CheckoutPage {
 		});
 	  
 		loading.present();
-	  }
+	}
+	
 }
