@@ -5,11 +5,18 @@
 	"description": "Food delivery app for Serres.",
 	"start_url": "/?utm_source=a2hs",
 	"display": "standalone",
-	"icons": [
+	"icons": [		
+		{
+			"src": "assets/icon/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"density": "4.0"
+		},
 		{
 			"src": "assets/icon/icon-512x512.png",
 			"sizes": "512x512",
-			"type": "image/png"
+			"type": "image/png",
+			"density": "10.5"
 		}
 	],
 	"background_color": "#0d0d0d",
