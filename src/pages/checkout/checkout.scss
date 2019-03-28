@@ -54,3 +54,44 @@ page-checkout {
     }
 
 }
+.checkoutAccepting {
+    .spinning-image {
+        background-position: center center; 
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 192px;
+        margin: 20px;
+        border-radius: 7px;
+
+        div {
+            height: 100%;
+            width: 100%;
+            background-image: url("../../assets/imgs/spinner.svg"), linear-gradient(to top, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.6) 80%);
+            background-position: center center;
+            background-repeat: no-repeat;
+            border-radius: 7px;
+        }
+
+    }
+    h3 {
+        text-align: center;
+        font-size: 1.7rem;
+        font-weight: 700;
+    }
+    p {
+        text-align: center;
+    }
+
+}
+
+.checkoutAcceptingFailed {
+    h3 {
+        text-align: center;
+        font-size: 1.7rem;
+        font-weight: 700;
+    }
+    p {
+        text-align: center;
+    }
+}
+

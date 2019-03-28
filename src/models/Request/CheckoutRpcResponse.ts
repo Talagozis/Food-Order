@@ -2,6 +2,7 @@ import { RpcResponse } from "../../models/Request/ResponseRpc";
 
 export interface CheckoutRpcResponse extends RpcResponse {
     checkoutStatus: CheckoutResponseStatus;
+    orderBid?: number;
 }
 
 export enum CheckoutResponseStatus {

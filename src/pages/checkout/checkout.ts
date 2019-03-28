@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Platform } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { OrderProvider } from '../../providers/Order/order';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { CheckoutRpcResponse } from '../../models/Request/CheckoutRpcResponse';
@@ -13,6 +13,7 @@ import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
 import { CartItemOffer } from '../../models/Api/CartItemOffer';
+import { ENV } from '@app/env';
 
 @IonicPage({
 	name: 'CheckoutPage',
@@ -34,7 +35,7 @@ export class CheckoutPage {
 	orderDetails: OrderDetails;
 	deliveryType: OrderDeliveryType;
 
-	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider) {
+	constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private cartProvider: CartProvider, public storeProvider: StoreProvider, public orderProvider: OrderProvider, private analyticsProvider: AnalyticsProvider, public loadingCtrl: LoadingController, private sanitizer: DomSanitizer) {
 	}
 
 	ionViewDidEnter() {
@@ -42,7 +43,7 @@ export class CheckoutPage {
 		this.analyticsProvider.trackView("/checkout/" + storeSlug);
 	}
 
-	async ionViewDidLoad() {
+	async ionViewDidLoad(): Promise<void> {
 		var storeSlug: string = this.navParams.get('storeSlug');
 
 		this.showCartDetails = true;
@@ -92,8 +93,9 @@ export class CheckoutPage {
 			});
 	}
 
-	sendOrder(): void {
+	async sendOrder(): Promise<void> {
 		this.canSendOrder = false;
+
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {
 			...this.orderDetails,
@@ -104,26 +106,40 @@ export class CheckoutPage {
 			bid: undefined
 		} as AspNetUserDetails;
 		checkoutRpc.Store = {
-			bid: this.store.bid
+			bid: this.store.bid,
 		} as AspNetUserDetails;
 		checkoutRpc.sessionDetals = {
 			applicationType: ApplicationType.Pwa,
 			userAgent: this.platform.userAgent(),
 		}
 
-		this.orderProvider.checkout(checkoutRpc).subscribe((checkoutRpcResponse: CheckoutRpcResponse) => {
+		let checkoutRpcResponse: CheckoutRpcResponse = await this.orderProvider.checkout(checkoutRpc).toPromise(); 
 
-			if (!checkoutRpcResponse || checkoutRpcResponse.status !== ResponseStatus.Success) {
-				this.handleOrderFailureMessage(checkoutRpcResponse);
-				return;
-			}
+		if (!checkoutRpcResponse || checkoutRpcResponse.status !== ResponseStatus.Success) {
+			this.handleOrderFailureMessage(checkoutRpcResponse);
+			return;
+		}
 
-			this.cartProvider.clearCartItem(this.store.bid);
-			this.cartProvider.clearCartItemOffer(this.store.bid);
-			// this.canSendOrder = true;
-			this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
-		});
+		let showConfirmationLoading: Loading = this.showConfirmationLoading();
+		
+		let isAccepted: boolean = false;
+		let isPrinted: boolean = false;
+		await Promise.all([
+			new Promise(resolve => setTimeout(resolve, 2 * 1000)),
+			this.orderProvider.checkOrderIsAccepted({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isAccepted = true).catch(e => isAccepted = false),
+			this.orderProvider.checkOrderIsPrinted({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isPrinted = true).catch(e => isPrinted = false),
+		]);
+		showConfirmationLoading.dismiss();
 
+		if(!isAccepted || !isPrinted) {
+			this.showFailedConfirmationLoading();
+			this.canSendOrder = true;
+			return;
+		}
+
+		this.cartProvider.clearCartItem(this.store.bid);
+		this.cartProvider.clearCartItemOffer(this.store.bid);
+		this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
 	}
 
 	handleOrderFailureMessage(c: CheckoutRpcResponse) { // <= More detailed messages
@@ -188,6 +204,51 @@ export class CheckoutPage {
 		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
 
 		return items + itemOffers;
+	}
+
+	showConfirmationLoading(): Loading {
+		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
+			`<div class="checkoutAccepting">
+				<h3>Αναμονή αποδοχής παραγγελίας...</h3> 
+				<div class="spinning-image" style="background-image: url(${ENV.IMAGE_URL + "image/store/" + this.store.logo});">
+					<div></div>
+				</div> 
+				<p>Η παραγγελίας απεστάλη επιτυχώς. Παρακαλώ περιμένετε για την αποδοχή της από το κατάστημα.</p>
+			</div>`
+		);
+
+		let loading: Loading = this.loadingCtrl.create({
+		  spinner: 'hide',
+		  content: safeHtml
+		});
+		
+		loading.present();
+
+		return loading;
+	}
+	
+	showFailedConfirmationLoading(): Loading {
+		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
+			`<div class="checkoutAcceptingFailed">
+				<h3>Ουπς..!</h3> 
+				<p>Υπήρξε κάποιο πρόβλημα επικοινωνίας με το κατάστημα. Παρακαλώ χρησιμοποίησε το τηλέφωνο.</p>
+				<p>
+					<span style="font-size: 0.85em;">Τηλ. καταστήματος:</span>
+					<span style="font-size: 0.9em; font-weight: 600;">${this.store.Contacts.find(a => a.ContactType.name === "Σταθερό τηλέφωνο").value}</span>
+				</p>
+			</div>
+			`
+		);
+
+		let loading: Loading = this.loadingCtrl.create({
+		  spinner: 'hide',
+		  content: safeHtml,
+		  enableBackdropDismiss: true
+		});
+		
+		loading.present();
+
+		return loading;
 	}
 
 }
