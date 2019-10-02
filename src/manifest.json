@@ -5,21 +5,51 @@
 	"description": "Food delivery app for Serres.",
 	"start_url": "/?utm_source=a2hs",
 	"display": "standalone",
-	"icons": [		
-		{
-			"src": "assets/icon/icon-192x192.png",
-			"sizes": "192x192",
-			"type": "image/png",
-			"density": "4.0"
-		},
-		{
-			"src": "assets/icon/icon-512x512.png",
-			"sizes": "512x512",
-			"type": "image/png",
-			"density": "10.5"
-		}
-	],
+	"orientation": "portrait",
+	"scope": "/",
 	"background_color": "#0d0d0d",
 	"theme_color": "#0d0d0d",
-	"prefer_related_applications": false
+	"prefer_related_applications": false,
+	"icons": [
+		{
+			"src": "assets/icon/icon-72x72.png?t=20191002",
+			"sizes": "72x72",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-96x96.png?t=20191002",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-128x128.png?t=20191002",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-144x144.png?t=20191002",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-152x152.png?t=20191002",
+			"sizes": "152x152",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-192x192.png?t=20191002",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-384x384.png?t=20191002",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "assets/icon/icon-512x512.png?t=20191002",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
 }
