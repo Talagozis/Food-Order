@@ -108,7 +108,7 @@ export class CheckoutPage {
 		checkoutRpc.Store = {
 			bid: this.store.bid,
 		} as AspNetUserDetails;
-		checkoutRpc.sessionDetals = {
+		checkoutRpc.sessionDetails = {
 			applicationType: ApplicationType.Pwa,
 			userAgent: this.platform.userAgent(),
 		}

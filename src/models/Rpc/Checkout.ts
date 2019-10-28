@@ -10,7 +10,6 @@ export class CheckoutRpc implements Checkout {
     AspNetUser: AspNetUserDetails;
     productsDetails: ProductDetails[];
     offersDetails: OfferDetails[];
-    sessionDetals: SessionDetails
 
     public constructor(cart: CartViewModel) {
         this.Store = {
