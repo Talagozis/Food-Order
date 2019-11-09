@@ -21,7 +21,7 @@ self.toolbox.options.debug = true;
 
 
 self.toolbox.options.cache = {
-	name: 'ionic-cache-v1901282020a'
+	name: 'ionic-cache-v1911091646a'
 };
 
 // pre-cache our key assets
