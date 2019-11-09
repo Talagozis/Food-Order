@@ -22,6 +22,7 @@ import { Product_IngredientViewModel } from '../../models/ViewModels/Product_Ing
 import { Product_AttributeApi } from '../../models/Api/Product_Attribute';
 import { Product_IngredientApi } from '../../models/Api/Product_Ingredient';
 import { CategoryViewModel } from '../../models/ViewModels/CategoryViewModel';
+import { List } from 'linqts';
 
 @IonicPage({
 	name: 'StorePage',
@@ -72,9 +73,9 @@ export class StorePage {
 		await this.initializeCart(this.store.bid);
 	}
 
-	initializeOffers(storeBid: number): Promise<void> {
+	private async initializeOffers(storeBid: number): Promise<void> {
 		this.categoryDeal = { open: false };
-		this.offerProvider.findDeals(storeBid, (offers: OfferApi[]) => {
+		await this.offerProvider.findDeals(storeBid, (offers: OfferApi[]) => {
 			this.deals = offers.map(a => new OfferViewModel({
 				...a,
 				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
@@ -99,7 +100,7 @@ export class StorePage {
 			}));
 		});
 		
-		this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
+		await this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
 			this.liveDeals = offers.map(a => new OfferViewModel({
 				...a,
 				OfferGroups: a.OfferGroups.map(b => new OfferGroupViewModel({
@@ -123,55 +124,49 @@ export class StorePage {
 				})),
 			}));
 		});
-		return;
 	}
 
-	initializeProducts(storeBid: number): Promise<void> {
-		return this.productProvider.findByStoreBid(storeBid).toPromise().then((p: ProductApi[]) => {
-			var products = p.ToList();
-			products = products.Where(a => a.isActive);
-			products = products.Where(a => a.Product_Tags.filter(b => b.level === 2 || b.level === 3).length > 0);
-			products = products.OrderBy(a => a.orderNumber);
-			var categories = products.GroupBy(a =>
-				a.Product_Tags
-					.filter(b => b.level === 2 || b.level === 3)
-					.sort(b => b.level === 3 ? 1 : b.level === 2 ? -1 : 0)[0].Tag.name, b => b
-			);
-			console.log(categories);
-			this.categories = Object.keys(categories).map((tagName: string) => {
-				let category = categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
-					...a,
-					OfferGroups: null,
-					Product_AttributeGroups: a.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
-						...d,
-						Product: null,
-						Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
-							...e,
-							Product_AttributeGroup: null
-						})),
+	private async initializeProducts(storeBid: number): Promise<void> {
+		let products: List<ProductApi> = (await this.productProvider.findByStoreBid(storeBid).toPromise()).ToList();
+		products = products.Where(a => a.isActive);
+		products = products.Where(a => a.Product_Tags.filter(b => b.level === 2 || b.level === 3).length > 0);
+		products = products.OrderBy(a => a.orderNumber);
+		var categories = products.GroupBy(a =>
+			a.Product_Tags
+				.filter(b => b.level === 2 || b.level === 3)
+				.sort(b => b.level === 3 ? 1 : b.level === 2 ? -1 : 0)[0].Tag.name, b => b
+		);
+		
+		this.categories = Object.keys(categories).map((tagName: string) => {
+			let category = categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
+				...a,
+				OfferGroups: null,
+				Product_AttributeGroups: a.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
+					...d,
+					Product: null,
+					Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
+						...e,
+						Product_AttributeGroup: null
 					})),
-					Product_Ingredients: a.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
-						...d,
-						Product: null,
-					})),
-				}));
-				category.key = tagName;
-				return category;
-			});
-			console.log(this.categories);
+				})),
+				Product_Ingredients: a.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
+					...d,
+					Product: null,
+				})),
+			}));
+			category.key = tagName;
+			return category;
 		});
 	}
 
-	async initializeStore(storeSlug: string): Promise<StoreApi> {
+	private async initializeStore(storeSlug: string): Promise<StoreApi> {
 		let store = await this.storeProvider.findBySlug(storeSlug);
 		this.store = new StoreViewModel({ ...store });
 		return store;
 	}
 
-	initializeCart(storeBid: number): Promise<void> {
-		return this.cartProvider.getByStoreBid(storeBid).then((cart: CartViewModel) => {
-			this.cart = cart;
-		});
+	private async initializeCart(storeBid: number): Promise<void> {
+		this.cart = await this.cartProvider.getByStoreBid(storeBid);
 	}
 
 	toggleSection(i: number) {
@@ -190,10 +185,10 @@ export class StorePage {
 		};
 	}
 
-	openModal(product: ProductApi) {
+	async openModal(product: ProductApi) {
 		let productModal = this.modalCtrl.create('ProductModalPage', { storeBid: this.store.bid, product: product });
 		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
-		productModal.present();
+		await productModal.present();
 	}
 
 	async onProductModalDidDismiss(data: any): Promise<void> {
@@ -216,10 +211,10 @@ export class StorePage {
 		loader.dismiss();
 	}
 
-	openOfferModal(offer: OfferApi) {
+	async openOfferModal(offer: OfferApi) {
 		let offerModal = this.modalCtrl.create('OfferModalPage', { storeBid: this.store.bid, offer: offer });
 		offerModal.onDidDismiss(this.onOfferModalDidDismiss.bind(this));
-		offerModal.present();
+		await offerModal.present();
 	}
 
 	async onOfferModalDidDismiss(data: any): Promise<void> {
@@ -242,8 +237,8 @@ export class StorePage {
 		loader.dismiss();
 	}
 
-	navigateToCheckoutPage() {
-		this.navCtrl.push('CheckoutPage', { storeSlug: this.store.slug });
+	async navigateToCheckoutPage() {
+		await this.navCtrl.push('CheckoutPage', { storeSlug: this.store.slug });
 	}
 
 	getAmountOfCartProducts(cart: CartViewModel): number {
