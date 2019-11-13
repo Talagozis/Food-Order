@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { CartViewModel, CartItemViewModel } from 'models/ViewModels/CartViewModel';
+import { StoreApi } from 'models/Api/Store';
 
 declare var ga: Function;
 
@@ -6,7 +8,7 @@ declare var ga: Function;
 export class AnalyticsProvider {
 	constructor() { }
 
-	async startTrackerWithId(id: string): Promise<void> {
+	public async startTrackerWithId(id: string): Promise<void> {
 
 		this.functionD(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
@@ -17,7 +19,7 @@ export class AnalyticsProvider {
 		});
 		ga('set', 'checkProtocolTask', null);
 		ga('set', 'transportUrl', 'https://www.google-analytics.com/collect');
-		ga(function (tracker) {
+		ga((tracker) => {
 			if (!localStorage.getItem('ga:clientId')) {
 				localStorage.setItem('ga:clientId', tracker.get('clientId'));
 			}
@@ -25,12 +27,12 @@ export class AnalyticsProvider {
 
 	}
 
-	trackView(screenName: string): void {
+	public trackView(screenName: string): void {
 		ga('set', 'page', screenName);
 		ga('send', 'pageview');
 	}
 
-	trackEvent(category, action, label?, value?): void {
+	public trackEvent(category, action, label?, value?): void {
 		ga('send', 'event', {
 			eventCategory: category,
 			eventLabel: label,
@@ -39,11 +41,27 @@ export class AnalyticsProvider {
 		});
 	}
 
+	public trackPurchase(transactionΙd: string, totalPrice: number, store: StoreApi, cart: CartViewModel): void {
+		ga('event', 'purchase', {
+			transaction_id: transactionΙd,
+			affiliation: "mobile.serresdelivery.gr",
+			value: totalPrice,
+			currency: "EUR",
+			items: cart.cartItems.concat(cart.cartItemOffers.reduce<CartItemViewModel[]>((a, b) => b.products.concat(a), [])).map(a => ({
+				id: a.bid,
+				name: a.name,
+				brand: store.name,
+				category: "Food",
+				quantity: a.quantity,
+				price: a.totalPrice
+			}))
+		});
+	}
 
-	functionD(i, s, o, g, r, a?, m?) {
+	private functionD(i, s, o, g, r, a?, m?) {
 		i['GoogleAnalyticsObject'] = r;
 		i[r] = i[r] || function () {
-			(i[r].q = i[r].q || []).push(arguments)
+			(i[r].q = i[r].q || []).push(arguments);
 		};
 		i[r].l = new Date();
 		a = s.createElement(o);
