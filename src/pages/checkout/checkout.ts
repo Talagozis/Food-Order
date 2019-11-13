@@ -136,7 +136,7 @@ export class CheckoutPage {
 			return;
 		}
 
-		this.analyticsProvider.trackPurchase("", this.totalCartPrice, this.store, this.cart);
+		this.analyticsProvider.trackPurchase(checkoutRpcResponse.orderBid.toString(), this.totalCartPrice, this.store, this.cart);
 
 		await this.cartProvider.clearCartItem(this.store.bid);
 		await this.cartProvider.clearCartItemOffer(this.store.bid);
