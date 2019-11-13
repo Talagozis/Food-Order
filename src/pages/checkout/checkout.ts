@@ -12,7 +12,6 @@ import { OrderDetails, ApplicationType, OrderDeliveryType } from '../../models/E
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
-import { CartItemOffer } from '../../models/Api/CartItemOffer';
 import { ENV } from '@app/env';
 
 @IonicPage({
@@ -73,11 +72,11 @@ export class CheckoutPage {
 		});
 	}
 
-	toggleSectionCartDetails(i) {
+	public toggleSectionCartDetails(i) {
 		this.showCartDetails = !this.showCartDetails;
 	}
 
-	removeCartItem(cartItem: CartItemViewModel) {
+	public removeCartItem(cartItem: CartItemViewModel) {
 		this.cartProvider.removeCartItem(this.store.bid, cartItem)
 			.then(c => {
 				this.cart = c;
@@ -85,7 +84,7 @@ export class CheckoutPage {
 			});
 	}
 
-	removeCartItemOffer(cartItemOffer: CartItemOfferViewModel) {
+	public removeCartItemOffer(cartItemOffer: CartItemOfferViewModel) {
 		this.cartProvider.removeCartItemOffer(this.store.bid, cartItemOffer)
 			.then(c => {
 				this.cart = c;
@@ -93,7 +92,7 @@ export class CheckoutPage {
 			});
 	}
 
-	async sendOrder(): Promise<void> {
+	public async sendOrder(): Promise<void> {
 		this.canSendOrder = false;
 
 		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
@@ -125,11 +124,11 @@ export class CheckoutPage {
 		let isAccepted: boolean = false;
 		let isPrinted: boolean = false;
 		await Promise.all([
-			new Promise(resolve => setTimeout(resolve, 2 * 1000)),
+			new Promise(resolve => setTimeout(resolve, 2 * 800)),
 			this.orderProvider.checkOrderIsAccepted({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isAccepted = true).catch(e => isAccepted = false),
 			this.orderProvider.checkOrderIsPrinted({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isPrinted = true).catch(e => isPrinted = false),
 		]);
-		showConfirmationLoading.dismiss();
+		await showConfirmationLoading.dismiss();
 
 		if(!isAccepted || !isPrinted) {
 			this.showFailedConfirmationLoading();
@@ -137,12 +136,14 @@ export class CheckoutPage {
 			return;
 		}
 
-		this.cartProvider.clearCartItem(this.store.bid);
-		this.cartProvider.clearCartItemOffer(this.store.bid);
-		this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
+		this.analyticsProvider.trackPurchase("", this.totalCartPrice, this.store, this.cart);
+
+		await this.cartProvider.clearCartItem(this.store.bid);
+		await this.cartProvider.clearCartItemOffer(this.store.bid);
+		await this.navCtrl.setRoot('ThankYouPage', { storeSlug: this.store.slug });
 	}
 
-	handleOrderFailureMessage(c: CheckoutRpcResponse) { // <= More detailed messages
+	private handleOrderFailureMessage(c: CheckoutRpcResponse) { // <= More detailed messages
 		let message = '';
 		switch (true) {
 			case c.checkoutStatus >= 10 && c.checkoutStatus < 20:
@@ -186,7 +187,7 @@ export class CheckoutPage {
 		return;
 	}
 
-	presentAlert(message: string) {
+	private presentAlert(message: string) {
 		let alert = this.alertCtrl.create({
 			title: 'Η παραγγελία απέτυχε.',
 			subTitle: message,
@@ -195,18 +196,14 @@ export class CheckoutPage {
 		alert.present();
 	}
 
-	getCartItemOffersProducts(cartItemOffers: CartItemOffer[]): any[] {
-		return cartItemOffers.reduce((a, b) => a.concat(b.products), []) as any[];
-	}
-
-	getAmountOfCartProducts(cart: CartViewModel): number {
+	public getAmountOfCartProducts(cart: CartViewModel): number {
 		var items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
 		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
 
 		return items + itemOffers;
 	}
 
-	showConfirmationLoading(): Loading {
+	private showConfirmationLoading(): Loading {
 		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
 			`<div class="checkoutAccepting">
 				<h3>Αναμονή αποδοχής παραγγελίας...</h3> 
@@ -227,7 +224,7 @@ export class CheckoutPage {
 		return loading;
 	}
 	
-	showFailedConfirmationLoading(): Loading {
+	private showFailedConfirmationLoading(): Loading {
 		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
 			`<div class="checkoutAcceptingFailed">
 				<h3>Ουπς..!</h3> 
