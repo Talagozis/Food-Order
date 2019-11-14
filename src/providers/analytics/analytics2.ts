@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CartViewModel, CartItemViewModel } from 'models/ViewModels/CartViewModel';
 import { StoreApi } from 'models/Api/Store';
-import { ENV } from '@app/env';
 
-declare var ga: Function;
-declare var gtag: Function;
+// declare 
 
 @Injectable()
-export class AnalyticsProvider {
+export class Analytics2Provider {
 	constructor() { }
 
 	public async startTrackerWithId(id: string): Promise<void> {
-		
+		var ga: Function;
 		this.functionD(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
 		ga('create', {
