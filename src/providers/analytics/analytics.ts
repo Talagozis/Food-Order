@@ -1,51 +1,61 @@
 import { Injectable } from '@angular/core';
-import { CartViewModel, CartItemViewModel } from 'models/ViewModels/CartViewModel';
-import { StoreApi } from 'models/Api/Store';
+import { StoreApi } from '../../models/Api/Store';
+import { CartItemViewModel, CartViewModel } from '../../models/ViewModels/CartViewModel';
 import { ENV } from '@app/env';
 
-declare var ga: Function;
-declare var gtag: Function;
+declare global {
+	interface Window {
+		gtag: Function;
+		dataLayer: Array<any>;
+	}
+}
+
 
 @Injectable()
 export class AnalyticsProvider {
 	constructor() { }
 
 	public async startTrackerWithId(id: string): Promise<void> {
-		
-		this.functionD(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+		var script = document.createElement('script');
+		script.async = true;
+		script.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+		document.body.appendChild(script);
 
-		ga('create', {
-			storage: 'none',
-			trackingId: id,
-			clientId: localStorage.getItem('ga:clientId')
+		window.dataLayer = window.dataLayer || [];
+		window.gtag = function () { window.dataLayer.push(arguments) };
+
+		window.gtag('js', new Date());
+		window.gtag('config', id, {
+			custom_map: {
+				dimension19: localStorage.getItem('ga:clientId')
+			}
 		});
-		ga('set', 'checkProtocolTask', null);
-		ga('set', 'transportUrl', 'https://www.google-analytics.com/collect');
-		ga('require', 'ecommerce');
-		ga((tracker) => {
+
+		window.gtag((tracker) => {
 			if (!localStorage.getItem('ga:clientId')) {
 				localStorage.setItem('ga:clientId', tracker.get('clientId'));
 			}
 		});
-
 	}
 
-	public trackView(screenName: string): void {
-		ga('set', 'page', screenName);
-		ga('send', 'pageview');
+	public trackView(pagePath: string, pageTitle?: string, pageLocation?: string): void {
+		window.gtag('config', ENV.GOOGLE_ANALYTICS_TRACKING_ID, {
+			page_path: pagePath,
+			page_title: pageTitle,
+			page_location: pageLocation
+		});
 	}
 
 	public trackEvent(category, action, label?, value?): void {
-		ga('send', 'event', {
+		window.gtag('event', action, {
 			eventCategory: category,
 			eventLabel: label,
-			eventAction: action,
 			eventValue: value
 		});
 	}
 
 	public trackPurchase(transactionΙd: string, totalPrice: number, store: StoreApi, cart: CartViewModel): void {
-		ga('event', 'purchase', {
+		window.gtag('event', 'purchase', {
 			transaction_id: transactionΙd,
 			affiliation: "mobile.serresdelivery.gr",
 			value: totalPrice,
@@ -60,18 +70,4 @@ export class AnalyticsProvider {
 			}))
 		});
 	}
-
-	private functionD(window: Window, document: Document, stript: string, url: string, ga: string, a?, m?) {
-		window['GoogleAnalyticsObject'] = ga;
-		window[ga] = window[ga] || function () {
-			(window[ga].q = window[ga].q || []).push(arguments);
-		};
-		window[ga].l = new Date();
-		a = document.createElement(stript);
-		m = document.getElementsByTagName(stript)[0];
-		a.async = 1;
-		a.src = url;
-		m.parentNode.insertBefore(a, m);
-	}
-
 }
