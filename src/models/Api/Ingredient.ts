@@ -1,9 +1,9 @@
 export interface IngredientApi {
-    bid: number;
+	bid: number;
 
-    name: string;
-    description: string;
+	name: string;
+	description: string;
 
-    numberOfIngredients: number;
-    numberOfAttributes: number;
+	numberOfIngredients: number;
+	numberOfAttributes: number;
 }

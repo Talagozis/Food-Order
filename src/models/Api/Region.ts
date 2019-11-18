@@ -1,6 +1,6 @@
 export interface RegionApi {
-    bid: number;
+	bid: number;
 
-    name: string;
-    slug: string;
+	name: string;
+	slug: string;
 }

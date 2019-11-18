@@ -42,13 +42,13 @@ export class StoresPage {
 	}
 
 	getStores(): void {
-		let loader = this.loadingCtrl.create({
+		const loader = this.loadingCtrl.create({
 			content: "Αναζήτηση καταστημάτων"
 		});
 		loader.present();
 		this.storeProvider.findAllAvailable(async (s: StoreApi[]) => {
 
-			let hubUsers: HubUserApi[] = await this.hubUserProvider.find().toPromise();
+			const hubUsers: HubUserApi[] = await this.hubUserProvider.find().toPromise();
 
 			let storeViewModels: StoreViewModel[] = s.map(a => new StoreViewModel({
 				...a,
@@ -78,36 +78,37 @@ export class StoresPage {
 	}
 
 	openFilters() {
-		let cuisines: Product_TagApi[] = this.initialStores.map(a => a.Product_Tags)
-		.reduce((a: Product_TagApi[], b: Product_TagApi[]) => a.concat(b), [])
-		.filter(pt => pt.level === TagLevel.Cuisine)
-		.filter((obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos);
+		const cuisines: Product_TagApi[] = this.initialStores.map(a => a.Product_Tags)
+			.reduce((a: Product_TagApi[], b: Product_TagApi[]) => a.concat(b), [])
+			.filter(pt => pt.level === TagLevel.Cuisine)
+			.filter((obj, pos, arr) => arr.map(mapObj => mapObj.Tag.name).indexOf(obj.Tag.name) === pos);
 
-		let filterViewModels = cuisines.map<FilterViewModel>(a => ({
+		const filterViewModels = cuisines.map<FilterViewModel>(a => ({
 			Tag: a.Tag,
 			isChecked: this.selectedCuisineBids.indexOf(a.Tag.bid) > -1
-		}))
+		}));
 
-		let filtersModal = this.modalCtrl.create('FiltersPage', { filterViewModels: filterViewModels });
+		const filtersModal = this.modalCtrl.create('FiltersPage', { filterViewModels });
 		filtersModal.onDidDismiss(this.onFilterModalDidDismiss.bind(this));
 		filtersModal.present();
 	}
 
 	searchStores(event: any) {
-		let val = event.target.value;
-		if (val && val.trim() != '') {
-			this.stores = this.initialStores.filter((s) => s.name.toLowerCase().indexOf(val.toLowerCase()) > -1)
+		const val = event.target.value;
+		if (val && val.trim() !== '') {
+			this.stores = this.initialStores.filter((s) => s.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
 		} else {
 			this.stores = this.initialStores;
 		}
 	}
 
 	onFilterModalDidDismiss(bids: number[]): void {
-		if (!bids)
+		if (!bids) {
 			return;
+		}
 
 		this.selectedCuisineBids = bids;
-		if (bids.length == 0) {
+		if (bids.length === 0) {
 			this.stores = this.initialStores;
 			return;
 		}

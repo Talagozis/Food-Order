@@ -3,21 +3,21 @@ import { OfferViewModel } from "./OfferViewModel";
 import { ProductViewModel } from "./ProductViewModel";
 
 export class OfferGroupViewModel implements OfferGroupApi {
-    bid: number;
-    description: string;
-    Offer: OfferViewModel;
-    Products: ProductViewModel[];
+	bid: number;
+	description: string;
+	Offer: OfferViewModel;
+	Products: ProductViewModel[];
 
-    selectedProduct?: ProductViewModel;
-    selectedTotalPrice?: number;
+	selectedProduct?: ProductViewModel;
+	selectedTotalPrice?: number;
 
-    public constructor(init?: Partial<OfferGroupViewModel>) {
-        Object.assign(this, init);
-    }
+	public constructor(init?: Partial<OfferGroupViewModel>) {
+		Object.assign(this, init);
+	}
 
-    
-    // public showPrice(): boolean	{
-    // 	return this.Product_Attributes.map(a => a.price).reduce((a, b) => a + b) > 0;
-    // }
+
+	// public showPrice(): boolean	{
+	// 	return this.Product_Attributes.map(a => a.price).reduce((a, b) => a + b) > 0;
+	// }
 
 }

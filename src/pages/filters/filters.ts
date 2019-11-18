@@ -32,8 +32,8 @@ export class FiltersPage {
 	}
 
 	filterCuisine() {
-		let bids = [];
-		for (let filterViewModel of this.filterViewModels) {
+		const bids = [];
+		for (const filterViewModel of this.filterViewModels) {
 			if (filterViewModel.isChecked) {
 				bids.push(filterViewModel.Tag.bid);
 			}

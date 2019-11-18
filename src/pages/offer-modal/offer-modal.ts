@@ -58,8 +58,8 @@ export class OfferModalPage {
 	}
 
 	handleCalculateTotalPrice(): number {
-		let selectedProductTotalPrice = this.offerGroups.map(a => a.selectedTotalPrice).reduce((a, b) => a + b, 0);
-		let sum = selectedProductTotalPrice - this.offer.discount;
+		const selectedProductTotalPrice = this.offerGroups.map(a => a.selectedTotalPrice).reduce((a, b) => a + b, 0);
+		const sum = selectedProductTotalPrice - this.offer.discount;
 		this.finalPrice = sum * this.quantity;
 
 		return sum;
@@ -70,7 +70,7 @@ export class OfferModalPage {
 			this.presentAlert('Επιλέξτε τουλάχιστον ένα προϊόν.');
 			return;
 		}
-		var cartItemOffer: CartItemOfferViewModel = {
+		const cartItemOffer: CartItemOfferViewModel = {
 			bid: this.offer.bid,
 			name: this.offer.name,
 			totalPrice: this.offer.totalPrice,
@@ -85,17 +85,17 @@ export class OfferModalPage {
 				quantity: 1,
 				discount: 0,
 				info: this.info,
-				ingredients: a.selectedProduct.Product_Ingredients.map(a => ({
-					bid: a.Ingredient.bid,
-					name: a.Ingredient.name,
-					has: a.isDefault
+				ingredients: a.selectedProduct.Product_Ingredients.map(c => ({
+					bid: c.Ingredient.bid,
+					name: c.Ingredient.name,
+					has: c.isDefault
 				})),
 				attributes: a.selectedProduct.Product_AttributeGroups
-					.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
-					.reduce((a, b) => a.concat(b), [])
-					.map(a => ({
-						bid: a.Ingredient.bid,
-						name: a.Ingredient.name,
+					.map(b => b.Product_Attributes.filter(c => c.Ingredient.bid === b.selectedAttributeBid))
+					.reduce((c, d) => c.concat(d), [])
+					.map(e => ({
+						bid: e.Ingredient.bid,
+						name: e.Ingredient.name,
 						has: true
 					})),
 			}) as CartItemViewModel),
@@ -118,7 +118,7 @@ export class OfferModalPage {
 	}
 
 	presentAlert(message: string) {
-		let alert = this.alertCtrl.create({
+		const alert = this.alertCtrl.create({
 			title: 'Η προσθήκη στο καλάθι απέτυχε.',
 			subTitle: message,
 			buttons: ['OK'],

@@ -1,9 +1,9 @@
 import { RegionApi } from "./Region";
 
 export interface AreaApi {
-    bid: number;
+	bid: number;
 
-    zipCode: string;
+	zipCode: string;
 
-    Region: RegionApi;
+	Region: RegionApi;
 }

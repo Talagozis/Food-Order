@@ -11,7 +11,7 @@ export class HubUserProvider {
 	constructor(public api: Api<HubUserApi>) { }
 
 	public find(): Observable<HubUserApi[]> {
-		return this.api.get('hubUser')
+		return this.api.get('hubUser');
 	}
 
 }

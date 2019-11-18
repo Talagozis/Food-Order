@@ -4,24 +4,24 @@ import { Product_IngredientApi } from "./Product_Ingredient";
 import { Product_AttributeGroupApi } from "./Product_AttributeGroup";
 
 export interface ProductApi {
-    bid: number;
+	bid: number;
 
-    name: string;
-    title: string;
-    description: string;
-    shortDescription: string;
-    price: number;
-    picture: string;
-    newUntilDate: Date | string | null;
-    orderNumber: number | null;
-    isActive: boolean;
-    isArchived: boolean;
+	name: string;
+	title: string;
+	description: string;
+	shortDescription: string;
+	price: number;
+	picture: string;
+	newUntilDate: Date | string | null;
+	orderNumber: number | null;
+	isActive: boolean;
+	isArchived: boolean;
 
-    Product_Tags: Product_TagApi[];
+	Product_Tags: Product_TagApi[];
 
-    OfferGroups: OfferGroupApi[];
+	OfferGroups: OfferGroupApi[];
 
-    Product_AttributeGroups: Product_AttributeGroupApi[];
+	Product_AttributeGroups: Product_AttributeGroupApi[];
 
-    Product_Ingredients: Product_IngredientApi[];
+	Product_Ingredients: Product_IngredientApi[];
 }

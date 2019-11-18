@@ -5,7 +5,7 @@ import { ENV } from '@app/env';
 
 declare global {
 	interface Window {
-		gtag: Function;
+		gtag: (name: string | any, action?: string | Date, obj?: object) => void;
 		dataLayer: Array<any>;
 	}
 }
@@ -16,13 +16,15 @@ export class AnalyticsProvider {
 	constructor() { }
 
 	public async startTrackerWithId(id: string): Promise<void> {
-		var script = document.createElement('script');
+		const script = document.createElement('script');
 		script.async = true;
 		script.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
 		document.body.appendChild(script);
 
 		window.dataLayer = window.dataLayer || [];
-		window.gtag = function () { window.dataLayer.push(arguments) };
+		window.gtag = function() {
+			window.dataLayer.push(arguments);
+		};
 
 		window.gtag('js', new Date());
 		window.gtag('config', id, {
@@ -46,7 +48,7 @@ export class AnalyticsProvider {
 		});
 	}
 
-	public trackEvent(category, action, label?, value?): void {
+	public trackEvent(category: string, action: string, label?: string, value?: string): void {
 		window.gtag('event', action, {
 			eventCategory: category,
 			eventLabel: label,

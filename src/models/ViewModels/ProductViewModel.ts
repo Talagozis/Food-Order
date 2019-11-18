@@ -23,16 +23,16 @@ export class ProductViewModel implements ProductApi {
 	Product_AttributeGroups: Product_AttributeGroupViewModel[];
 	Product_Ingredients: Product_IngredientViewModel[];
 
-    public getDefaultPrice(): number {
-        let sum = this.price;
-        sum += this.Product_Ingredients.filter(a => a.isDefault).reduce((a, b) => a + b.price * b.amount, 0);
-        sum += this.Product_AttributeGroups
-            .reduce((a, b) => a.concat(b.Product_Attributes), [] as Product_AttributeViewModel[])
-            .filter(a => a.isDefault).reduce((a, b) => a + b.price, 0);
-        return sum;
-    }
+	public getDefaultPrice(): number {
+		let sum = this.price;
+		sum += this.Product_Ingredients.filter(a => a.isDefault).reduce((a, b) => a + b.price * b.amount, 0);
+		sum += this.Product_AttributeGroups
+			.reduce((a, b) => a.concat(b.Product_Attributes), [] as Product_AttributeViewModel[])
+			.filter(a => a.isDefault).reduce((a, b) => a + b.price, 0);
+		return sum;
+	}
 
-	public constructor(init?:Partial<ProductViewModel>) {
-        Object.assign(this, init);
-    }
+	public constructor(init?: Partial<ProductViewModel>) {
+		Object.assign(this, init);
+	}
 }

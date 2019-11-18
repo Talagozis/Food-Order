@@ -8,4 +8,4 @@ export const ENV: IENV = {
 	RPC_HEADER_VALUE: "",
 	RPC_URL: "",
 	GOOGLE_ANALYTICS_TRACKING_ID: "",
-}
+};

@@ -3,11 +3,11 @@ import { IonicPageModule } from 'ionic-angular';
 import { PrivacyPolicyPage } from './privacy-policy';
 
 @NgModule({
-  declarations: [
-    PrivacyPolicyPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(PrivacyPolicyPage),
-  ],
+	declarations: [
+		PrivacyPolicyPage,
+	],
+	imports: [
+		IonicPageModule.forChild(PrivacyPolicyPage),
+	],
 })
-export class PrivacyPolicyPageModule {}
+export class PrivacyPolicyPageModule { }

@@ -38,12 +38,12 @@ export class CheckoutPage {
 	}
 
 	ionViewDidEnter() {
-		var storeSlug = this.navParams.get('storeSlug');
+		const storeSlug = this.navParams.get('storeSlug');
 		this.analyticsProvider.trackView("/checkout/" + storeSlug);
 	}
 
 	async ionViewDidLoad(): Promise<void> {
-		var storeSlug: string = this.navParams.get('storeSlug');
+		const storeSlug: string = this.navParams.get('storeSlug');
 
 		this.showCartDetails = true;
 		this.totalCartPrice = 0.00;
@@ -59,7 +59,7 @@ export class CheckoutPage {
 			info: "",
 		};
 
-		let store = await this.storeProvider.findBySlug(storeSlug);
+		const store = await this.storeProvider.findBySlug(storeSlug);
 
 		this.store = store;
 
@@ -95,7 +95,7 @@ export class CheckoutPage {
 	public async sendOrder(): Promise<void> {
 		this.canSendOrder = false;
 
-		let checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
+		const checkoutRpc: CheckoutRpc = new CheckoutRpc(this.cart);
 		checkoutRpc.orderDetails = {
 			...this.orderDetails,
 			// info: "\$test",
@@ -110,17 +110,17 @@ export class CheckoutPage {
 		checkoutRpc.sessionDetails = {
 			applicationType: ApplicationType.Pwa,
 			userAgent: this.platform.userAgent(),
-		}
+		};
 
-		let checkoutRpcResponse: CheckoutRpcResponse = await this.orderProvider.checkout(checkoutRpc).toPromise(); 
+		const checkoutRpcResponse: CheckoutRpcResponse = await this.orderProvider.checkout(checkoutRpc).toPromise();
 
 		if (!checkoutRpcResponse || checkoutRpcResponse.status !== ResponseStatus.Success) {
 			this.handleOrderFailureMessage(checkoutRpcResponse);
 			return;
 		}
 
-		let showConfirmationLoading: Loading = this.showConfirmationLoading();
-		
+		const showConfirmationLoading: Loading = this.showConfirmationLoading();
+
 		let isAccepted: boolean = false;
 		let isPrinted: boolean = false;
 		await Promise.all([
@@ -130,7 +130,7 @@ export class CheckoutPage {
 		]);
 		await showConfirmationLoading.dismiss();
 
-		if(!isAccepted || !isPrinted) {
+		if (!isAccepted || !isPrinted) {
 			this.showFailedConfirmationLoading();
 			this.canSendOrder = true;
 			return;
@@ -149,31 +149,31 @@ export class CheckoutPage {
 			case c.checkoutStatus >= 10 && c.checkoutStatus < 20:
 				message = 'Υπήρξε πρόβλημα με το κατάστημα.';
 				break;
-			case c.checkoutStatus == 22:
+			case c.checkoutStatus === 22:
 				message = 'Παρακαλώ συμπλήρωσε το επώνυμο.';
 				break;
-			case c.checkoutStatus == 23:
+			case c.checkoutStatus === 23:
 				message = 'Παρακαλώ συμπλήρωσε το όνομα.';
 				break;
-			case c.checkoutStatus == 24:
+			case c.checkoutStatus === 24:
 				message = 'Παρακαλώ συμπλήρωσε τη διεύθυνση.';
 				break;
-			case c.checkoutStatus == 25:
+			case c.checkoutStatus === 25:
 				message = 'Παρακαλώ συμπλήρωσε το τηλέφωνο.';
 				break;
-			case c.checkoutStatus == 26:
+			case c.checkoutStatus === 26:
 				message = 'Η επιβεβαίωση τηλεφώνου απετυχε.';
 				break;
-			case c.checkoutStatus == 27:
+			case c.checkoutStatus === 27:
 				message = 'Παρακαλώ επίλεξε όροφο.';
 				break;
 			case c.checkoutStatus >= 20 && c.checkoutStatus < 30:
 				message = 'Υπήρξε πρόβλημα με το στοιχεία.';
 				break;
-			case c.checkoutStatus == 32:
+			case c.checkoutStatus === 32:
 				message = 'Το καλάθι είναι άδειο. Επίλεξε προϊόντα.';
 				break;
-			case c.checkoutStatus == 35:
+			case c.checkoutStatus === 35:
 				message = 'Η ελάχιστη παραγγελία είναι ' + this.store.minOrderCost + ' ευρώ.';
 				break;
 			case c.checkoutStatus >= 30 && c.checkoutStatus < 50:
@@ -188,7 +188,7 @@ export class CheckoutPage {
 	}
 
 	private presentAlert(message: string) {
-		let alert = this.alertCtrl.create({
+		const alert = this.alertCtrl.create({
 			title: 'Η παραγγελία απέτυχε.',
 			subTitle: message,
 			buttons: ['OK'],
@@ -197,37 +197,37 @@ export class CheckoutPage {
 	}
 
 	public getAmountOfCartProducts(cart: CartViewModel): number {
-		var items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
-		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
+		const items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
+		const itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((c, d) => c + d.quantity, 0), 0);
 
 		return items + itemOffers;
 	}
 
 	private showConfirmationLoading(): Loading {
-		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
+		const safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
 			`<div class="checkoutAccepting">
-				<h3>Αναμονή αποδοχής παραγγελίας...</h3> 
+				<h3>Αναμονή αποδοχής παραγγελίας...</h3>
 				<div class="spinning-image" style="background-image: url(${ENV.IMAGE_URL + "image/store/" + this.store.logo});">
 					<div></div>
-				</div> 
+				</div>
 				<p>Η παραγγελίας απεστάλη επιτυχώς. Παρακαλώ περιμένετε για την αποδοχή της από το κατάστημα.</p>
 			</div>`
 		);
 
-		let loading: Loading = this.loadingCtrl.create({
-		  spinner: 'hide',
-		  content: safeHtml
+		const loading: Loading = this.loadingCtrl.create({
+			spinner: 'hide',
+			content: safeHtml
 		});
-		
+
 		loading.present();
 
 		return loading;
 	}
-	
+
 	private showFailedConfirmationLoading(): Loading {
-		let safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
+		const safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
 			`<div class="checkoutAcceptingFailed">
-				<h3>Ουπς..!</h3> 
+				<h3>Ουπς..!</h3>
 				<p>Υπήρξε κάποιο πρόβλημα επικοινωνίας με το κατάστημα. Παρακαλώ χρησιμοποίησε το τηλέφωνο.</p>
 				<p>
 					<span style="font-size: 0.85em;">Τηλ. καταστήματος:</span>
@@ -237,12 +237,12 @@ export class CheckoutPage {
 			`
 		);
 
-		let loading: Loading = this.loadingCtrl.create({
-		  spinner: 'hide',
-		  content: safeHtml,
-		  enableBackdropDismiss: true
+		const loading: Loading = this.loadingCtrl.create({
+			spinner: 'hide',
+			content: safeHtml,
+			enableBackdropDismiss: true
 		});
-		
+
 		loading.present();
 
 		return loading;

@@ -79,7 +79,7 @@ export class HomePage {
 	}
 
 	doRefresh(refresher: Refresher) {
-		let loader = this.loadingCtrl.create({
+		const loader = this.loadingCtrl.create({
 			content: "Αναζήτηση προσφορών"
 		});
 		loader.present();
@@ -92,7 +92,7 @@ export class HomePage {
 	}
 
 	chooseBackground(): string {
-		var date = new Date();
+		const date = new Date();
 		if (date.getHours() >= 5 && date.getHours() <= 12) {
 			return 'background-coffee';
 		}

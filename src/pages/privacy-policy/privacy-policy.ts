@@ -5,15 +5,15 @@ import { AnalyticsProvider } from '../../providers/analytics/analytics';
 
 @IonicPage()
 @Component({
-  selector: 'page-privacy-policy',
-  templateUrl: 'privacy-policy.html',
+	selector: 'page-privacy-policy',
+	templateUrl: 'privacy-policy.html',
 })
 export class PrivacyPolicyPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private analyticsProvider: AnalyticsProvider) {
-  }
+	constructor(public navCtrl: NavController, public navParams: NavParams, private analyticsProvider: AnalyticsProvider) {
+	}
 
-  ionViewDidEnter() {
+	ionViewDidEnter() {
 		this.analyticsProvider.trackView("/privacy-policy");
 	}
 

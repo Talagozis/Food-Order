@@ -9,15 +9,16 @@ export class Product_IngredientViewModel implements Product_IngredientApi {
 	maxAmount: number;
 
 	amount?: number;
-	
+
 	Product: ProductViewModel;
 	Ingredient: IngredientViewModel;
 
 	public constructor(init?: Partial<Product_IngredientViewModel>) {
 		Object.assign(this, init);
-		
-		if(!this.amount)
+
+		if (!this.amount) {
 			this.amount = 1;
+		}
 	}
-	
+
 }

@@ -15,15 +15,15 @@ export class OrderProvider {
 	constructor(public rpc: Rpc<CheckoutRpcResponse>) { }
 
 	public checkout(checkoutRpc: CheckoutRpc): Observable<CheckoutRpcResponse> {
-		return this.rpc.post('order/checkout', checkoutRpc)
+		return this.rpc.post('order/checkout', checkoutRpc);
 	}
 
 	public checkOrderIsAccepted(checkOrderIsAcceptedRpc: CheckOrderIsAcceptedRpc): Observable<RpcResponse> {
-		return this.rpc.post('order/checkOrderIsAccepted', checkOrderIsAcceptedRpc)
+		return this.rpc.post('order/checkOrderIsAccepted', checkOrderIsAcceptedRpc);
 	}
 
 	public checkOrderIsPrinted(checkOrderIsPrintedRpc: CheckOrderIsPrintedRpc): Observable<RpcResponse> {
-		return this.rpc.post('order/checkOrderIsPrinted', checkOrderIsPrintedRpc)
+		return this.rpc.post('order/checkOrderIsPrinted', checkOrderIsPrintedRpc);
 	}
 
 }

@@ -1,6 +1,6 @@
 import { List } from "linqts";
 
-export { }
+export { };
 
 declare global {
 	interface Array<T> {
@@ -9,7 +9,7 @@ declare global {
 }
 
 if (!Array.prototype.ToList) {
-	Array.prototype.ToList = function () {
+	Array.prototype.ToList = function() {
 		return new List<any>(this);
-	}
+	};
 }

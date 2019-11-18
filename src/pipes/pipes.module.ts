@@ -8,22 +8,22 @@ import { CountdownPipe } from './countdown/countdown';
 import { ImageOfferPipe } from './image-offer/image-offer';
 
 @NgModule({
-    declarations: [DayNameFormatPipe,
-        PriceFormatPipe,
-        ImageStorePipe,
-        ImageContactTypePipe,
-        ImageProductPipe,
-        ImageOfferPipe,
-        CountdownPipe,
-    ],
-    imports: [],
-    exports: [DayNameFormatPipe,
-        PriceFormatPipe,
-        ImageStorePipe,
-        ImageContactTypePipe,
-        ImageProductPipe,
-        ImageOfferPipe,
-        CountdownPipe,
-    ]
+	declarations: [DayNameFormatPipe,
+		PriceFormatPipe,
+		ImageStorePipe,
+		ImageContactTypePipe,
+		ImageProductPipe,
+		ImageOfferPipe,
+		CountdownPipe,
+	],
+	imports: [],
+	exports: [DayNameFormatPipe,
+		PriceFormatPipe,
+		ImageStorePipe,
+		ImageContactTypePipe,
+		ImageProductPipe,
+		ImageOfferPipe,
+		CountdownPipe,
+	]
 })
 export class PipesModule { }

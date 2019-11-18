@@ -4,12 +4,12 @@ import { ProductModalPage } from './product-modal';
 import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
-  declarations: [
-    ProductModalPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(ProductModalPage),
-    PipesModule
-  ],
+	declarations: [
+		ProductModalPage,
+	],
+	imports: [
+		IonicPageModule.forChild(ProductModalPage),
+		PipesModule
+	],
 })
-export class ProductModalPageModule {}
+export class ProductModalPageModule { }
