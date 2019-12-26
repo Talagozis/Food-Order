@@ -187,3 +187,16 @@ page-store {
     }
 
 }
+
+.mock {
+    &.bg-pink {
+        background-color: #ffab91;
+    }
+    &.inline-block {
+        display: inline-block;
+    }
+    &.border-radius {
+        border-radius: 1px;
+    }
+}
+
