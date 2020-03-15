@@ -1,4 +1,5 @@
-import { ApplicationDomain } from "../models/Entities/Checkout";
+import { BuildPlatform, ApplicationDomain } from "models/Entities/Checkout";
+
 
 export interface IENV {
 	mode: string;
@@ -13,10 +14,4 @@ export interface IENV {
 
 	BUILD_PLATFORM: BuildPlatform;
 	APPLICATION_DOMAIN: ApplicationDomain;
-}
-
-export enum BuildPlatform {
-	Pwa = 1,
-	Android = 2,
-	IOs = 3,
 }
