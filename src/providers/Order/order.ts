@@ -9,8 +9,7 @@ import { CheckOrderIsAcceptedRpc } from '../../models/Rpc/CheckOrderIsAcceptedRp
 import { RpcResponse } from '../../models/Request/ResponseRpc';
 import { CheckOrderIsPrintedRpc } from '../../models/Rpc/CheckOrderIsPrintedRpc';
 import { CheckOrderIsPaidRpc } from '../../models/Rpc/CheckOrderIsPaidRpc';
-import { ApplicationType } from '../../models/Entities/Checkout';
-import { BuildPlatform } from '../../environments/IENV';
+import { ApplicationType, BuildPlatform } from '../../models/Entities/Checkout';
 
 
 @Injectable()

@@ -138,23 +138,27 @@ export class StorePage {
 		);
 
 		this.categories = Object.keys(categories).map((tagName: string) => {
-			const category = categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
-				...a,
-				OfferGroups: null,
-				Product_AttributeGroups: a.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
-					...d,
-					Product: null,
-					Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
-						...e,
-						Product_AttributeGroup: null
+			const category: CategoryViewModel = {
+				product: categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
+					...a,
+					OfferGroups: null,
+					Product_AttributeGroups: a.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
+						...d,
+						Product: null,
+						Product_Attributes: d.Product_Attributes.sort(this.sortAttributes).map(e => new Product_AttributeViewModel({
+							...e,
+							Product_AttributeGroup: null
+						})),
+					})),
+					Product_Ingredients: a.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
+						...d,
+						Product: null,
 					})),
 				})),
-				Product_Ingredients: a.Product_Ingredients.sort(this.sortIngredients).map(d => new Product_IngredientViewModel({
-					...d,
-					Product: null,
-				})),
-			}));
-			category.key = tagName;
+				key: tagName,
+				open: false,
+				orderNumber: categories[tagName].reduce((min: number, product) => !!product.orderNumber && product.orderNumber < min ? product.orderNumber : min, 99999),
+			} as CategoryViewModel;
 			return category;
 		});
 	}
@@ -250,6 +254,10 @@ export class StorePage {
 		return items + itemOffers;
 	}
 
+
+	private sortCategories(a: CategoryViewModel, b: CategoryViewModel): number {
+		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1;
+	}
 
 	sortProducts(a: ProductApi, b: ProductApi): number {
 		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1;

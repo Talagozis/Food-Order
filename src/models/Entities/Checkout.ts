@@ -51,3 +51,9 @@ export enum OrderPaymentType {
 	VivaWallet = 3
 }
 
+export enum BuildPlatform {
+	Pwa = 1,
+	Android = 2,
+	IOs = 3,
+}
+

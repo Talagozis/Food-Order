@@ -1,7 +1,7 @@
-import { BuildPlatform, IENV } from "./IENV";
-import { ApplicationDomain } from "../models/Entities/Checkout";
+import { IENV } from "./IENV";
+import { ApplicationDomain, BuildPlatform } from "../models/Entities/Checkout";
 
-export const ENV: IENV = {
+export const ENV: IENV  = {
 	mode: 'Empty',
 	IMAGE_URL: "",
 	API_HEADER_NAME: "",
