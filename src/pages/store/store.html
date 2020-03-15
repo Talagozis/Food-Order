@@ -45,6 +45,7 @@
 		<div [ngSwitch]="storeSegment">
 
 			<ion-list *ngSwitchCase="'catalog'" class="accordion-list">
+				
 				<ion-list-header *ngIf="liveDeals && liveDeals.length > 0" class="accordion-list" no-lines no-padding>
 					<button ion-item detail-none class="section-active">
 						<ion-icon item-left name="flame"></ion-icon>
@@ -57,7 +58,7 @@
 									<h3 class="name">
 										{{liveDeal.name}}
 									</h3>
-									<p class="description" *ngIf="liveDeal.shortDescription">
+									<p *ngIf="liveDeal.shortDescription" class="description">
 										{{ liveDeal.shortDescription.length < 73 ? liveDeal.shortDescription : (liveDeal.shortDescription | slice:0:73) + '...' }}
 									</p>
 								</div>
@@ -154,19 +155,19 @@
 						<ion-list-header class="accordion-list" no-lines no-padding>
 							<button ion-item detail-none class="section">
 								<ion-icon item-left name="arrow-forward"></ion-icon>
-								<span style="background-color: #ffab91; display: inline-block; border-radius: 1px; height: 1.7rem; width: 35%; max-width: 100px;"></span>
+								<span class="mock bg-pink inline-block border-radius" style="height: 1.7rem; width: 35%; max-width: 100px;"></span >
 							</button>
 						</ion-list-header>
 						<ion-list-header class="accordion-list" no-lines no-padding>
 							<button ion-item detail-none class="section">
 								<ion-icon item-left name="arrow-forward"></ion-icon>
-								<span style="background-color: #ffab91; display: inline-block; border-radius: 1px; height: 1.7rem; width: 30%; max-width: 90px;"></span>
+								<span class="mock bg-pink inline-block border-radius" style="height: 1.4rem; width: 30%; max-width: 90px;"></span>
 							</button>
 						</ion-list-header>
 						<ion-list-header class="accordion-list" no-lines no-padding>
 							<button ion-item detail-none class="section">
 								<ion-icon item-left name="arrow-forward"></ion-icon>
-								<span style="background-color: #ffab91; display: inline-block; border-radius: 1px; height: 1.7rem; width: 32%; max-width: 120px;"></span>
+								<span class="mock bg-pink inline-block border-radius" style="height: 1.1rem; width: 32%; max-width: 120px;"></span>
 							</button>
 						</ion-list-header>
 					</ng-container>

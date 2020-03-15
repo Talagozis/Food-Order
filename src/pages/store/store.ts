@@ -47,18 +47,18 @@ export class StorePage {
 	}
 
 	ionViewDidEnter() {
-		var storeSlug = this.navParams.get('storeSlug');
+		const storeSlug = this.navParams.get('storeSlug');
 		this.analyticsProvider.trackView("/store/" + storeSlug);
 	}
 
 	async ionViewDidLoad(): Promise<void> {
-		let loader = this.loadingCtrl.create({
+		const loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});
 		loader.present();
 
-		var storeSlug = this.navParams.get('storeSlug');
-		let store: StoreApi = await this.initializeStore(storeSlug);
+		const storeSlug = this.navParams.get('storeSlug');
+		const store: StoreApi = await this.initializeStore(storeSlug);
 
 		await Promise.all([
 			this.initializeOffers(store.bid),
@@ -99,7 +99,7 @@ export class StorePage {
 				})),
 			}));
 		});
-		
+
 		await this.offerProvider.findLiveDeals(storeBid, (offers: OfferApi[]) => {
 			this.liveDeals = offers.map(a => new OfferViewModel({
 				...a,
@@ -131,14 +131,14 @@ export class StorePage {
 		products = products.Where(a => a.isActive);
 		products = products.Where(a => a.Product_Tags.filter(b => b.level === 2 || b.level === 3).length > 0);
 		products = products.OrderBy(a => a.orderNumber);
-		var categories = products.GroupBy(a =>
+		const categories = products.GroupBy(a =>
 			a.Product_Tags
 				.filter(b => b.level === 2 || b.level === 3)
 				.sort(b => b.level === 3 ? 1 : b.level === 2 ? -1 : 0)[0].Tag.name, b => b
 		);
-		
+
 		this.categories = Object.keys(categories).map((tagName: string) => {
-			let category = categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
+			const category = categories[tagName].sort(this.sortProducts).map((a: ProductApi) => new ProductViewModel({
 				...a,
 				OfferGroups: null,
 				Product_AttributeGroups: a.Product_AttributeGroups.map(d => new Product_AttributeGroupViewModel({
@@ -160,7 +160,7 @@ export class StorePage {
 	}
 
 	private async initializeStore(storeSlug: string): Promise<StoreApi> {
-		let store = await this.storeProvider.findBySlug(storeSlug);
+		const store = await this.storeProvider.findBySlug(storeSlug);
 		this.store = new StoreViewModel({ ...store });
 		return store;
 	}
@@ -186,21 +186,22 @@ export class StorePage {
 	}
 
 	async openModal(product: ProductApi) {
-		let productModal = this.modalCtrl.create('ProductModalPage', { storeBid: this.store.bid, product: product });
+		const productModal = this.modalCtrl.create('ProductModalPage', { storeBid: this.store.bid, product });
 		productModal.onDidDismiss(this.onProductModalDidDismiss.bind(this));
 		await productModal.present();
 	}
 
 	async onProductModalDidDismiss(data: any): Promise<void> {
-		if (!data.isAdded)
+		if (!data.isAdded) {
 			return;
+		}
 
-		let loader = this.loadingCtrl.create({
+		const loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});
 		loader.present();
 
-		var storeBid = this.store.bid;
+		const storeBid = this.store.bid;
 
 		await Promise.all([
 			this.initializeOffers(storeBid),
@@ -212,21 +213,22 @@ export class StorePage {
 	}
 
 	async openOfferModal(offer: OfferApi) {
-		let offerModal = this.modalCtrl.create('OfferModalPage', { storeBid: this.store.bid, offer: offer });
+		const offerModal = this.modalCtrl.create('OfferModalPage', { storeBid: this.store.bid, offer });
 		offerModal.onDidDismiss(this.onOfferModalDidDismiss.bind(this));
 		await offerModal.present();
 	}
 
 	async onOfferModalDidDismiss(data: any): Promise<void> {
-		if (!data.isAdded)
+		if (!data.isAdded) {
 			return;
+		}
 
-		let loader = this.loadingCtrl.create({
+		const loader = this.loadingCtrl.create({
 			content: "Φόρτωση καταστήματος"
 		});
 		loader.present();
 
-		var storeBid = this.store.bid;
+		const storeBid = this.store.bid;
 
 		await Promise.all([
 			this.initializeOffers(storeBid),
@@ -242,28 +244,28 @@ export class StorePage {
 	}
 
 	getAmountOfCartProducts(cart: CartViewModel): number {
-		var items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
-		var itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((a, b) => a + b.quantity, 0), 0);
+		const items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
+		const itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.offerGroups.reduce((c, d) => c + d.product.quantity, 0), 0);
 
 		return items + itemOffers;
 	}
 
 
 	sortProducts(a: ProductApi, b: ProductApi): number {
-		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1
+		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1;
 	}
 
 	sortIngredients(a: Product_IngredientApi, b: Product_IngredientApi): number {
-		var sumA = (!a.isDefault ? 4 : 0) + (!a.orderNumber ? 2 : 0) + (Number(a.orderNumber) > Number(b.orderNumber) ? 1 : 0);
-		var sumB = (!b.isDefault ? 4 : 0) + (!b.orderNumber ? 2 : 0) + (Number(b.orderNumber) > Number(a.orderNumber) ? 1 : 0);
-	
+		const sumA = (!a.isDefault ? 4 : 0) + (!a.orderNumber ? 2 : 0) + (Number(a.orderNumber) > Number(b.orderNumber) ? 1 : 0);
+		const sumB = (!b.isDefault ? 4 : 0) + (!b.orderNumber ? 2 : 0) + (Number(b.orderNumber) > Number(a.orderNumber) ? 1 : 0);
+
 		return sumA > sumB ? 1 : (sumA < sumB ? -1 : 0);
 	}
-	
-	sortAttributes(a: Product_AttributeApi, b: Product_AttributeApi): number {	
-		var sumA = (!a.isDefault ? 4 : 0) + (!a.orderNumber ? 2 : 0) + (Number(a.orderNumber) > Number(b.orderNumber) ? 1 : 0);
-		var sumB = (!b.isDefault ? 4 : 0) + (!b.orderNumber ? 2 : 0) + (Number(b.orderNumber) > Number(a.orderNumber) ? 1 : 0);
-	
+
+	sortAttributes(a: Product_AttributeApi, b: Product_AttributeApi): number {
+		const sumA = (!a.isDefault ? 4 : 0) + (!a.orderNumber ? 2 : 0) + (Number(a.orderNumber) > Number(b.orderNumber) ? 1 : 0);
+		const sumB = (!b.isDefault ? 4 : 0) + (!b.orderNumber ? 2 : 0) + (Number(b.orderNumber) > Number(a.orderNumber) ? 1 : 0);
+
 		return sumA > sumB ? 1 : (sumA < sumB ? -1 : 0);
 	}
 }

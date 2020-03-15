@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ENV } from '@app/env'
+import { ENV } from '@app/env';
 
 @Injectable()
 export class HttpClientExt {
@@ -17,7 +17,7 @@ export class HttpClientExt {
 		let headers = new HttpHeaders();
 		headers = this.createAuthorizationHeader(headers);
 		return this.http.get<T>(url, {
-			headers: headers
+			headers
 		});
 	}
 
@@ -25,7 +25,7 @@ export class HttpClientExt {
 		let headers = new HttpHeaders();
 		headers = this.createAuthorizationHeader(headers);
 		return this.http.post<T>(url, data, {
-			headers: headers
+			headers
 		});
 	}
 
@@ -33,7 +33,7 @@ export class HttpClientExt {
 		let headers = new HttpHeaders();
 		headers = this.createAuthorizationHeader(headers);
 		return this.http.post<T>(url, data, {
-			headers: headers
+			headers
 		});
 	}
 
@@ -41,7 +41,7 @@ export class HttpClientExt {
 		let headers = new HttpHeaders();
 		headers = this.createAuthorizationHeader(headers);
 		return this.http.get<T>(url, {
-			headers: headers
+			headers
 		});
 	}
 
@@ -49,7 +49,7 @@ export class HttpClientExt {
 		let headers = new HttpHeaders();
 		headers = this.createAuthorizationHeader(headers);
 		return this.http.post<T>(url, data, {
-			headers: headers
+			headers
 		});
 	}
 

@@ -1,7 +1,7 @@
 export interface OpenHourApi {
-    bid: number;
+	bid: number;
 
-    dayOfWeek: number;
-    startTime: Date;
-    endTime: Date;
+	dayOfWeek: number;
+	startTime: Date;
+	endTime: Date;
 }

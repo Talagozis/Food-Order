@@ -1,3 +1,3 @@
 export interface CheckOrderIsAcceptedRpc {
-    orderBid: number;
+	orderBid: number;
 }

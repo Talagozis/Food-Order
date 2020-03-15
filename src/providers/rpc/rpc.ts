@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClientExt } from '../http-client/http-client';
-import { ENV } from '@app/env'
+import { ENV } from '@app/env';
 import { RpcResponse } from '../../models/Request/ResponseRpc';
 
 

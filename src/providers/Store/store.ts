@@ -20,20 +20,20 @@ export class StoreProvider {
 		subscription = StoreSubscriptionFilters.filterHasDeliveryOrTakeaway(subscription);
 		subscription = StoreSubscriptionFilters.filterSendOrderByPushOrEmail(subscription);
 
-		return this.find({ "isActive": true, "isOpen": true }).subscribe(subscription);
+		return this.find({ isActive: true, isOpen: true }).subscribe(subscription);
 	}
 
 
 	private find(parameters?: object): Observable<StoreApi[]> {
-		return this.api.get('store', parameters)
+		return this.api.get('store', parameters);
 	}
 
 	public findOne(bid: number): Observable<StoreApi> {
-		return this.api.getOne('store', bid)
+		return this.api.getOne('store', bid);
 	}
 
 	public findBySlug(storeSlug: string): Promise<StoreApi> {
-		return this.api.getOne('store', { "slug": storeSlug }).toPromise();
+		return this.api.getOne('store', { slug: storeSlug }).toPromise();
 	}
 
 

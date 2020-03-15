@@ -1,7 +1,7 @@
 import { AreaApi } from "./Area";
 
 export interface Store_AreaApi {
-    cost: number;
+	cost: number;
 
-    Area: AreaApi;
+	Area: AreaApi;
 }

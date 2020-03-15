@@ -35,7 +35,7 @@ export class ProductModalPage {
 		this.quantity = 1;
 		this.info = '';
 
-		let productApi: ProductApi = this.navParams.get('product') as ProductApi;
+		const productApi: ProductApi = this.navParams.get('product') as ProductApi;
 
 		this.product = new ProductViewModel({
 			...productApi,
@@ -50,21 +50,22 @@ export class ProductModalPage {
 			Product_Ingredients: productApi.Product_Ingredients.map(a => new Product_IngredientViewModel({
 				...a,
 				amount: 1,
-				Product: null,				
+				Product: null,
 			})),
 		});
 		this.totalPrice = this.product.getDefaultPrice();
 
-		//Prepare order and selection
+		// Prepare order and selection
 		this.attributeGroups = this.product.Product_AttributeGroups.ToList()
-			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderByDescending(b => b.isDefault).ThenBy(a => a.price).ToArray(); return a; })
+			.Select(a => { a.Product_Attributes = a.Product_Attributes.ToList().OrderByDescending(b => b.isDefault).ThenBy(b => b.price).ToArray(); return a; })
 			.ToArray();
 
 		this.ingredients = this.product.Product_Ingredients.ToList().OrderBy(b => !b.isDefault).ThenBy(b => b.price).ToArray();
 
 		for (let i = 0; i < this.attributeGroups.length; i++) {
-			if (this.attributeGroups[i].Product_Attributes.length > 0)
+			if (this.attributeGroups[i].Product_Attributes.length > 0) {
 				this.attributeGroups[i].selectedAttributeBid = this.attributeGroups[i].Product_Attributes[0].Ingredient.bid;
+			}
 		}
 
 	}
@@ -77,7 +78,7 @@ export class ProductModalPage {
 			.reduce((a, b) => a + b, 0);
 		sum += this.product.Product_AttributeGroups
 			.map(b => b.Product_Attributes
-				.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
+				.filter(a => a.Ingredient.bid === b.selectedAttributeBid))
 			.reduce((a, b) => a.concat(b), [])
 			.reduce((a, b) => a + b.price, 0);
 		sum += this.product.price;
@@ -87,7 +88,7 @@ export class ProductModalPage {
 	}
 
 	addToCart() {
-		var cartItem: CartItemViewModel = {
+		const cartItem: CartItemViewModel = {
 			bid: this.product.bid,
 			name: this.product.name,
 			totalPrice: this.calculateTotalPrice(),
@@ -97,10 +98,11 @@ export class ProductModalPage {
 			ingredients: this.product.Product_Ingredients.map(a => ({
 				bid: a.Ingredient.bid,
 				name: a.Ingredient.name,
-				has: a.isDefault
+				amount: a.amount,
+				has: a.isDefault,
 			})),
 			attributes: this.product.Product_AttributeGroups
-				.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid == b.selectedAttributeBid))
+				.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid === b.selectedAttributeBid))
 				.reduce((a, b) => a.concat(b), [])
 				.map(a => ({
 					bid: a.Ingredient.bid,

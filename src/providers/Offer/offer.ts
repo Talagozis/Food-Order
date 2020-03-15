@@ -11,11 +11,11 @@ export class OfferProvider {
 	constructor(public api: Api<OfferApi>) { }
 
 	private find(parameters?: object): Promise<OfferApi[]> {
-		return this.api.get('offer', { ...parameters, "isActive": true }).toPromise();
+		return this.api.get('offer', { ...parameters, isActive: true }).toPromise();
 	}
-	
+
 	private findByStoreBid(storeBid: number, parameters?: object): Promise<OfferApi[]> {
-		return this.api.get('offer', { ...parameters, "storeBid": storeBid, "isActive": true }).toPromise();
+		return this.api.get('offer', { ...parameters, storeBid, isActive: true }).toPromise();
 	}
 
 	public findDeals(storeBid: number, subscription: SubscriptionDelegate): Promise<void> {
@@ -23,7 +23,7 @@ export class OfferProvider {
 		// subscription = OfferSubscriptionFilters.filterActive(subscription);
 		// subscription = OfferSubscriptionFilters.filterByLevel(subscription, OfferLevel.Deal);
 
-		return this.findByStoreBid(storeBid, { "level": OfferLevel.Deal, "isAvailable": true }).then(subscription);
+		return this.findByStoreBid(storeBid, { level: OfferLevel.Deal, isAvailable: true }).then(subscription);
 	}
 
 	public findSuperDeals(storeBid: number, subscription: SubscriptionDelegate): Promise<void> {
@@ -31,16 +31,15 @@ export class OfferProvider {
 		// subscription = OfferSubscriptionFilters.filterActive(subscription);
 		// subscription = OfferSubscriptionFilters.filterByLevel(subscription, OfferLevel.SuperDeal);
 
-		return this.findByStoreBid(storeBid, { "level": OfferLevel.SuperDeal, "isAvailable": true }).then(subscription);
+		return this.findByStoreBid(storeBid, { level: OfferLevel.SuperDeal, isAvailable: true }).then(subscription);
 	}
 
 	public findLiveDeals(storeBid: number, subscription: SubscriptionDelegate): Promise<void> {
 
-		if(storeBid) {
-			return this.findByStoreBid(storeBid, { "level": OfferLevel.LiveDeal, "offerSchedulerDateTime": (new Date).toJSON() }).then(subscription);
-		}
-		else {
-			return this.find({ "level": OfferLevel.LiveDeal, "offerSchedulerDateTime": (new Date).toJSON() }).then(subscription);
+		if (storeBid) {
+			return this.findByStoreBid(storeBid, { level: OfferLevel.LiveDeal, offerSchedulerDateTime: (new Date).toJSON() }).then(subscription);
+		} else {
+			return this.find({ level: OfferLevel.LiveDeal, offerSchedulerDateTime: (new Date).toJSON() }).then(subscription);
 		}
 		// subscription = OfferSubscriptionFilters.filterActive(subscription);
 		// subscription = OfferSubscriptionFilters.filterByLevel(subscription, OfferLevel.LiveDeal);

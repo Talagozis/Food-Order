@@ -1,3 +1,3 @@
-export interface HubUserApi{
-    bid: number;
+export interface HubUserApi {
+	bid: number;
 }

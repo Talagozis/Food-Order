@@ -1,17 +1,17 @@
 export interface StoreContactApi {
-    bid: number;
+	bid: number;
 
-    value: string;
+	value: string;
 
-    contactTypeName: string;
-    contactTypePicture: string;
+	contactTypeName: string;
+	contactTypePicture: string;
 
-    ContactType: ContactTypeApi;
+	ContactType: ContactTypeApi;
 }
 
 export interface ContactTypeApi {
-    bid: number;
+	bid: number;
 
-    name: string;
-    picture: string;
+	name: string;
+	picture: string;
 }

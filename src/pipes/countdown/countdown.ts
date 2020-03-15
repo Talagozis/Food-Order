@@ -5,21 +5,22 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CountdownPipe implements PipeTransform {
 
-	
+
 	transform(value: Date | string, ...args): string {
-		if (typeof value == "string")
+		if (typeof value === "string") {
 			value = new Date(value);
+		}
 
 		// console.log(value);
 		// console.log(new Date());
 
-		var ms: number = value.valueOf() - new Date().valueOf();
+		const ms: number = value.valueOf() - new Date().valueOf();
 
-		var hours: number = Math.floor(ms / 3600000);
-		var mins: number = Math.floor((ms % 3600000) / 60000);
+		const hours: number = Math.floor(ms / 3600000);
+		const mins: number = Math.floor((ms % 3600000) / 60000);
 
-		var hoursText: string = hours + " ώρες και ";
-		var minsText: string = mins + " λεπτά";
+		const hoursText: string = hours + " ώρες και ";
+		const minsText: string = mins + " λεπτά";
 
 		return hours !== 0 ? hoursText + minsText : minsText;
 	}

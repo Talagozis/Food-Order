@@ -11,7 +11,7 @@ export class ProductProvider {
 	constructor(public api: Api<ProductApi>) { }
 
 	public findByStoreBid(storeBid: number): Observable<ProductApi[]> {
-		return this.api.get('product', { "storeBid": storeBid, "isActive": true, "onlyInOffer": false })
+		return this.api.get('product', { storeBid, isActive: true, onlyInOffer: false });
 	}
 
 }

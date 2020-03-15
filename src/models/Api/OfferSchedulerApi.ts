@@ -7,7 +7,7 @@ export interface OfferSchedulerApi {
 	maxAmount: number;
 	usedAmount: number;
 	usedAmountVirtual: number;
-	description: string
+	description: string;
 	info: string;
 	isActive: boolean;
 	isArchived: boolean;

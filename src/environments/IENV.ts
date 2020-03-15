@@ -1,4 +1,6 @@
-interface IENV {
+import { ApplicationDomain } from "../models/Entities/Checkout";
+
+export interface IENV {
 	mode: string;
 	IMAGE_URL: string;
 	API_HEADER_NAME: string;
@@ -8,4 +10,13 @@ interface IENV {
 	RPC_HEADER_VALUE: string;
 	RPC_URL: string;
 	GOOGLE_ANALYTICS_TRACKING_ID: string;
+
+	BUILD_PLATFORM: BuildPlatform;
+	APPLICATION_DOMAIN: ApplicationDomain;
+}
+
+export enum BuildPlatform {
+	Pwa = 1,
+	Android = 2,
+	IOs = 3,
 }

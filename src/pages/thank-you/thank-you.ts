@@ -22,12 +22,12 @@ export class ThankYouPage {
 	}
 
 	ionViewDidEnter() {
-		var storeSlug = this.navParams.get('storeSlug');
+		const storeSlug = this.navParams.get('storeSlug');
 		this.analyticsProvider.trackView("/thank-you/" + storeSlug);
 	}
 
 	ionViewDidLoad(): void {
-		var storeSlug = this.navParams.get('storeSlug');
+		const storeSlug = this.navParams.get('storeSlug');
 		this.storeProvider.findBySlug(storeSlug).then(s => {
 			this.store = new StoreViewModel({ ...s });
 		});

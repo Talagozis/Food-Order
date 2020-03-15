@@ -1,3 +1,6 @@
+import { BuildPlatform, IENV } from "./IENV";
+import { ApplicationDomain } from "../models/Entities/Checkout";
+
 export const ENV: IENV = {
 	mode: 'Empty',
 	IMAGE_URL: "",
@@ -8,4 +11,7 @@ export const ENV: IENV = {
 	RPC_HEADER_VALUE: "",
 	RPC_URL: "",
 	GOOGLE_ANALYTICS_TRACKING_ID: "",
-}
+
+	BUILD_PLATFORM: BuildPlatform.Pwa,
+	APPLICATION_DOMAIN: ApplicationDomain.SerresDelivery,
+};

@@ -24,9 +24,9 @@ export class CartProvider {
 
 	public async getByStoreBid(storeBid: number): Promise<CartViewModel> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
 
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		return cart;
 	}
@@ -34,8 +34,8 @@ export class CartProvider {
 
 	public async addCartItem(storeBid: number, cartItem: CartItemViewModel): Promise<void> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cartItem.identifier = this.generateIdentifier();
 
@@ -46,8 +46,8 @@ export class CartProvider {
 
 	public async clearCartItem(storeBid: number): Promise<void> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItems = new Array<CartItemViewModel>();
 
@@ -56,8 +56,8 @@ export class CartProvider {
 
 	public async removeCartItem(storeBid: number, cartItem: CartItemViewModel): Promise<CartViewModel> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItems = cart.cartItems.filter((a: CartItemViewModel) => a.identifier !== cartItem.identifier);
 
@@ -67,8 +67,8 @@ export class CartProvider {
 
 	public async addCartItemOffer(storeBid: number, cartItemOffer: CartItemOfferViewModel): Promise<void> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cartItemOffer.identifier = this.generateIdentifier();
 
@@ -79,8 +79,8 @@ export class CartProvider {
 
 	public async clearCartItemOffer(storeBid: number): Promise<void> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItemOffers = new Array<CartItemOfferViewModel>();
 
@@ -89,8 +89,8 @@ export class CartProvider {
 
 	public async removeCartItemOffer(storeBid: number, cartItemOffer: CartItemOfferViewModel): Promise<CartViewModel> {
 
-		let carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
-		let cart: CartViewModel = await this.validateCart(carts, storeBid);
+		const carts: CartViewModel[] = await this.storage.get(this.CARTS_KEYWORD);
+		const cart: CartViewModel = await this.validateCart(carts, storeBid);
 
 		cart.cartItemOffers = cart.cartItemOffers.filter((a: CartItemOfferViewModel) => a.identifier !== cartItemOffer.identifier);
 
@@ -100,7 +100,7 @@ export class CartProvider {
 
 	public async clearCarts(): Promise<void> {
 
-		let carts: CartViewModel[] = new Array<CartViewModel>();
+		const carts: CartViewModel[] = new Array<CartViewModel>();
 
 		await this.storage.set(this.CARTS_KEYWORD, carts);
 	}
@@ -109,7 +109,7 @@ export class CartProvider {
 	private async validateCarts(carts: CartViewModel[]): Promise<CartViewModel[]> {
 
 		if (!carts) {
-			console.debug("Carts from storage was undefined or null. It is created now.");
+			console.log("Carts from storage was undefined or null. It is created now.");
 			carts = new Array<CartViewModel>();
 			await this.storage.set(this.CARTS_KEYWORD, carts);
 		}
@@ -121,13 +121,13 @@ export class CartProvider {
 
 		carts = await this.validateCarts(carts);
 
-		var cart: CartViewModel = carts.find(a => a.storeBid === storeBid);
+		let cart: CartViewModel = carts.find(a => a.storeBid === storeBid);
 
 		if (!cart) {
-			console.debug("No cart for this store. It is created now.");
+			console.log("No cart for this store. It is created now.");
 
 			cart = new CartViewModel({
-				storeBid: storeBid,
+				storeBid,
 				cartItems: new Array<CartItemViewModel>(),
 				cartItemOffers: new Array<CartItemOfferViewModel>(),
 			});
