@@ -131,7 +131,7 @@
 						{{category.key}}
 					</button>
 					<ion-list class="product-list" *ngIf="category.open">
-						<ion-item *ngFor="let product of category; let k = index" detail-none class="child-item pointer" text-wrap
+						<ion-item *ngFor="let product of category.product; let k = index" detail-none class="child-item pointer" text-wrap
 						 (click)="openModal(product)">
 							<div class="details">
 								<div class="flex-1">
