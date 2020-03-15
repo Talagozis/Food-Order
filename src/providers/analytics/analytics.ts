@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StoreApi } from '../../models/Api/Store';
-import { CartItemViewModel, CartViewModel } from '../../models/ViewModels/CartViewModel';
+import { CartItemViewModel, CartViewModel, CartItemOfferGroupViewModel } from '../../models/ViewModels/CartViewModel';
 import { ENV } from '@app/env';
 
 declare global {
@@ -62,7 +62,7 @@ export class AnalyticsProvider {
 			affiliation: "mobile.serresdelivery.gr",
 			value: totalPrice,
 			currency: "EUR",
-			items: cart.cartItems.concat(cart.cartItemOffers.reduce<CartItemViewModel[]>((a, b) => b.products.concat(a), [])).map(a => ({
+			items: cart.cartItems.concat(cart.cartItemOffers.reduce<CartItemOfferGroupViewModel[]>((a, b) => b.offerGroups.concat(a), []).map(a => a.product)).map(a => ({
 				id: a.bid,
 				name: a.name,
 				brand: store.name,

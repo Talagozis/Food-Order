@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ENV } from '@app/env';
+
 import { OrderProvider } from '../../providers/Order/order';
 import { AnalyticsProvider } from '../../providers/analytics/analytics';
 import { CheckoutRpcResponse } from '../../models/Request/CheckoutRpcResponse';
@@ -8,11 +10,10 @@ import { ResponseStatus } from '../../models/Request/Response';
 import { CheckoutRpc } from '../../models/Rpc/Checkout';
 import { StoreApi } from '../../models/api/Store';
 import { StoreProvider } from '../../providers/store/store';
-import { OrderDetails, ApplicationType, OrderDeliveryType } from '../../models/Entities/Checkout';
+import { OrderDetails, OrderDeliveryType, OrderPaymentType } from '../../models/Entities/Checkout';
 import { CartProvider } from '../../providers/Cart/cart';
 import { CartViewModel, CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
 import { AspNetUserDetails } from '../../models/Entities/Cart';
-import { ENV } from '@app/env';
 
 @IonicPage({
 	name: 'CheckoutPage',
@@ -65,7 +66,6 @@ export class CheckoutPage {
 
 		this.cartProvider.getByStoreBid(store.bid).then((cart: CartViewModel) => {
 			this.cart = cart;
-			console.log(cart);
 			this.totalCartPrice = cart.cartItems.map(a => a.totalPrice * a.quantity).reduce((a, b) => a + b, 0) + cart.cartItemOffers.reduce((a, b) => a + b.finalPrice * b.quantity, 0);
 			this.showCartDetails = cart.cartItems.length <= 5;
 			this.canSendOrder = true;
@@ -108,8 +108,13 @@ export class CheckoutPage {
 			bid: this.store.bid,
 		} as AspNetUserDetails;
 		checkoutRpc.sessionDetails = {
-			applicationType: ApplicationType.Pwa,
 			userAgent: this.platform.userAgent(),
+			applicationType: undefined,
+			applicationDomain: undefined
+		};
+		checkoutRpc.paymentDetails = {
+			paymentType: OrderPaymentType.Cash,
+			vivaWalletPaymentToken: null,
 		};
 
 		const checkoutRpcResponse: CheckoutRpcResponse = await this.orderProvider.checkout(checkoutRpc).toPromise();
@@ -123,14 +128,16 @@ export class CheckoutPage {
 
 		let isAccepted: boolean = false;
 		let isPrinted: boolean = false;
+		let isPaid: boolean = false;
 		await Promise.all([
-			new Promise(resolve => setTimeout(resolve, 2 * 800)),
+			new Promise(resolve => setTimeout(resolve, 2 * 1000)),
 			this.orderProvider.checkOrderIsAccepted({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isAccepted = true).catch(e => isAccepted = false),
 			this.orderProvider.checkOrderIsPrinted({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isPrinted = true).catch(e => isPrinted = false),
+			this.orderProvider.checkOrderIsPaid({ orderBid: checkoutRpcResponse.orderBid }).toPromise().then(a => isPaid = true).catch(e => isPaid = false),
 		]);
 		await showConfirmationLoading.dismiss();
 
-		if (!isAccepted || !isPrinted) {
+		if (!isAccepted || !isPrinted || !isPaid) {
 			this.showFailedConfirmationLoading();
 			this.canSendOrder = true;
 			return;
@@ -198,7 +205,7 @@ export class CheckoutPage {
 
 	public getAmountOfCartProducts(cart: CartViewModel): number {
 		const items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
-		const itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((c, d) => c + d.quantity, 0), 0);
+		const itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.offerGroups.reduce((c, d) => c + d.product.quantity, 0), 0);
 
 		return items + itemOffers;
 	}

@@ -98,7 +98,8 @@ export class ProductModalPage {
 			ingredients: this.product.Product_Ingredients.map(a => ({
 				bid: a.Ingredient.bid,
 				name: a.Ingredient.name,
-				has: a.isDefault
+				amount: a.amount,
+				has: a.isDefault,
 			})),
 			attributes: this.product.Product_AttributeGroups
 				.map(b => b.Product_Attributes.filter(a => a.Ingredient.bid === b.selectedAttributeBid))

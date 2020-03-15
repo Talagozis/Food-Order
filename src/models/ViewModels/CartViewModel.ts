@@ -17,17 +17,9 @@ export interface CartItemViewModel {
 	info: string;
 	identifier?: number;
 
-	ingredients: {
-		bid: number;
-		name: string;
-		has: boolean;
-	}[];
+	ingredients: CartItemIngredientViewModel[];
 
-	attributes: {
-		bid: number;
-		name: string;
-		has: boolean;
-	}[];
+	attributes: CartItemAttributeViewModel[];
 }
 
 export interface CartItemOfferViewModel {
@@ -40,5 +32,23 @@ export interface CartItemOfferViewModel {
 	info: string;
 	identifier?: number;
 
-	products: CartItemViewModel[];
+	offerGroups: CartItemOfferGroupViewModel[];
+}
+
+export interface CartItemOfferGroupViewModel {
+	bid: number;
+	product: CartItemViewModel;
+}
+
+export interface CartItemAttributeViewModel {
+	bid: number;
+	name: string;
+	has: boolean;
+}
+
+export interface CartItemIngredientViewModel {
+	bid: number;
+	name: string;
+	has: boolean;
+	amount: number;
 }

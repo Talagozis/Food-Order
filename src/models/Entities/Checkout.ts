@@ -1,4 +1,4 @@
-import { Cart } from "models/Entities/Cart";
+import { Cart } from "./Cart";
 
 export interface Checkout extends Cart {
 	deliveryType: OrderDeliveryType;
@@ -19,12 +19,23 @@ export interface OrderDetails {
 
 export interface SessionDetails {
 	applicationType: ApplicationType;
+	applicationDomain: ApplicationDomain;
 	userAgent: string;
+}
+
+export interface PaymentDetails {
+	paymentType: OrderPaymentType;
+	vivaWalletPaymentToken: string;
 }
 
 export enum OrderDeliveryType {
 	Delivery = 1,
 	Takeaway = 2,
+}
+
+export enum ApplicationDomain {
+	SerresDelivery = 1,
+	MammasPizza = 2,
 }
 
 export enum ApplicationType {
@@ -33,3 +44,10 @@ export enum ApplicationType {
 	Android = 3,
 	Ios = 4,
 }
+
+export enum OrderPaymentType {
+	Cash = 1,
+	CardOnDelivery = 2,
+	VivaWallet = 3
+}
+

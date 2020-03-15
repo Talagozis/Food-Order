@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
-import { CartItemViewModel, CartItemOfferViewModel } from '../../models/ViewModels/CartViewModel';
+import { CartItemViewModel, CartItemOfferViewModel, CartItemIngredientViewModel, CartItemAttributeViewModel, CartItemOfferGroupViewModel } from '../../models/ViewModels/CartViewModel';
 import { OfferViewModel } from '../../models/ViewModels/OfferViewModel';
 import { OfferGroupViewModel } from '../../models/ViewModels/OfferGroupViewModel';
 import { CartProvider } from '../../providers/Cart/cart';
@@ -78,27 +78,32 @@ export class OfferModalPage {
 			quantity: this.quantity,
 			discount: this.offer.discount,
 			info: this.info,
-			products: this.offer.OfferGroups.map(a => ({
-				bid: a.selectedProduct.bid,
-				name: a.selectedProduct.name,
-				totalPrice: a.selectedTotalPrice,
-				quantity: 1,
-				discount: 0,
-				info: this.info,
-				ingredients: a.selectedProduct.Product_Ingredients.map(c => ({
-					bid: c.Ingredient.bid,
-					name: c.Ingredient.name,
-					has: c.isDefault
-				})),
-				attributes: a.selectedProduct.Product_AttributeGroups
-					.map(b => b.Product_Attributes.filter(c => c.Ingredient.bid === b.selectedAttributeBid))
-					.reduce((c, d) => c.concat(d), [])
-					.map(e => ({
-						bid: e.Ingredient.bid,
-						name: e.Ingredient.name,
-						has: true
-					})),
-			}) as CartItemViewModel),
+			offerGroups: this.offer.OfferGroups.map(a => ({
+				bid: a.bid,
+				product: {
+					bid: a.selectedProduct.bid,
+					name: a.selectedProduct.name,
+					totalPrice: a.selectedTotalPrice,
+					quantity: 1,
+					discount: 0,
+					info: this.info,
+					ingredients: a.selectedProduct.Product_Ingredients.map(c => ({
+						bid: c.Ingredient.bid,
+						name: c.Ingredient.name,
+						has: c.isDefault,
+						amount: c.amount,
+					})) as CartItemIngredientViewModel[],
+					attributes: a.selectedProduct.Product_AttributeGroups
+						.map(b => b.Product_Attributes.filter(c => c.Ingredient.bid === b.selectedAttributeBid))
+						.reduce((c, d) => c.concat(d), [])
+						.map(e => ({
+							bid: e.Ingredient.bid,
+							name: e.Ingredient.name,
+							has: true
+						})) as CartItemAttributeViewModel[],
+				} as CartItemViewModel
+			})) as CartItemOfferGroupViewModel[],
+
 
 		};
 

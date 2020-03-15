@@ -245,7 +245,7 @@ export class StorePage {
 
 	getAmountOfCartProducts(cart: CartViewModel): number {
 		const items: number = cart.cartItems.reduce((a, b) => a + b.quantity, 0);
-		const itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.products.reduce((c, d) => c + d.quantity, 0), 0);
+		const itemOffers: number = cart.cartItemOffers.reduce((a, b) => a + b.offerGroups.reduce((c, d) => c + d.product.quantity, 0), 0);
 
 		return items + itemOffers;
 	}
