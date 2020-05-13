@@ -6,11 +6,12 @@
 	"private": true,
 	"description": "An Ionic project",
 	"scripts": {
+		"serve": "ionic serve --host=0.0.0.0 --no-open",
 		"clean": "ionic-app-scripts clean",
 		"build": "ionic-app-scripts build && node ./cache-busting.js",
 		"lint": "ionic-app-scripts lint",
 		"ionic:build": "ionic-app-scripts build && node ./cache-busting.js",
-		"ionic:serve": "ionic-app-scripts serve"
+		"ionic:serve": "ionic-app-scripts serve --host=0.0.0.0 --no-open"
 	},
 	"dependencies": {
 		"@angular/animations": "5.2.10",
