@@ -21,8 +21,6 @@ export class OfferGroupComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.offerGroup);
-
 		this.offerGroup.Products.forEach(p => {
 			p.Product_Ingredients = p.Product_Ingredients.sort((a, b) => a.isDefault > b.isDefault ? -1 : 1);
 			p.Product_AttributeGroups.forEach(ag => {
@@ -30,16 +28,14 @@ export class OfferGroupComponent implements OnInit {
 			});
 		});
 
-
 		this.offerGroup.selectedTotalPrice = this.calculateTotalPrice();
 		if (this.offerGroup.Products.length === 1) {
 			this.onProductChange(this.offerGroup.Products[0].bid);
 		}
-
 	}
 
-	onProductChange(value: number) {
-		this.offerGroup.selectedProduct = this.offerGroup.Products.find(a => a.bid === value);
+	onProductChange(productId: number) {
+		this.offerGroup.selectedProduct = this.offerGroup.Products.find(a => a.bid === +productId);
 
 		// Prepare order and selection
 		this.offerGroup.selectedProduct.Product_AttributeGroups = this.offerGroup.selectedProduct.Product_AttributeGroups.ToList()
