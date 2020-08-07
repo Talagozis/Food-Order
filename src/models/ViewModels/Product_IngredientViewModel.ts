@@ -17,7 +17,7 @@ export class Product_IngredientViewModel implements Product_IngredientApi {
 		Object.assign(this, init);
 
 		if (!this.amount) {
-			this.amount = 1;
+			this.amount = this.isDefault ? 1 : 0;
 		}
 	}
 
