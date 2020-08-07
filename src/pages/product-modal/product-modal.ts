@@ -49,7 +49,6 @@ export class ProductModalPage {
 			})),
 			Product_Ingredients: productApi.Product_Ingredients.map(a => new Product_IngredientViewModel({
 				...a,
-				amount: 1,
 				Product: null,
 			})),
 		});
@@ -73,8 +72,8 @@ export class ProductModalPage {
 	calculateTotalPrice(): number {
 		let sum = 0;
 		sum += this.product.Product_Ingredients
-			.filter(i => i.isDefault)
-			.map(a => a.price * a.amount)
+			// .filter(i => i.isDefault)
+			.map(a => a.isDefault ? Math.max(a.price * (a.amount - 1), 0) : a.price * a.amount)
 			.reduce((a, b) => a + b, 0);
 		sum += this.product.Product_AttributeGroups
 			.map(b => b.Product_Attributes
@@ -87,7 +86,7 @@ export class ProductModalPage {
 		return sum;
 	}
 
-	addToCart() {
+	async addToCart() {
 		const cartItem: CartItemViewModel = {
 			bid: this.product.bid,
 			name: this.product.name,
@@ -111,9 +110,9 @@ export class ProductModalPage {
 				})),
 		};
 
-		this.cartProvider.addCartItem(this.storeBid, cartItem);
+		await this.cartProvider.addCartItem(this.storeBid, cartItem);
 
-		this.viewCtrl.dismiss({ isAdded: true });
+		await this.viewCtrl.dismiss({ isAdded: true });
 	}
 
 	changeQuantity(amount: number) {
@@ -122,7 +121,7 @@ export class ProductModalPage {
 		this.calculateTotalPrice();
 	}
 
-	closeProductModal() {
-		this.viewCtrl.dismiss({ isAdded: false });
+	async closeProductModal() {
+		await this.viewCtrl.dismiss({ isAdded: false });
 	}
 }
