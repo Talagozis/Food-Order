@@ -55,7 +55,7 @@
 								<span class="label">{{ingredient.Ingredient.name}}</span>
 								<span class="price" *ngIf="ingredient.price > 0">+{{ingredient.price|priceFormat}}</span>
 							</ion-label>
-							<ion-toggle [(ngModel)]="ingredient.isDefault" (ionChange)="calculateTotalPrice()"></ion-toggle>
+							<ion-toggle [(ngModel)]="ingredient.amount" (ionChange)="calculateTotalPrice()"></ion-toggle>
 						</ion-item>
 					</ion-list>
 				</ion-col>
