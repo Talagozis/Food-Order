@@ -7,6 +7,7 @@
 	"description": "An Ionic project",
 	"scripts": {
 		"serve": "ionic serve --host=0.0.0.0 --no-open",
+		"build-release": "ionic build --prod --release",
 		"clean": "ionic-app-scripts clean",
 		"build": "ionic-app-scripts build && node ./cache-busting.js",
 		"lint": "ionic-app-scripts lint",
@@ -50,7 +51,7 @@
 		"cordova": "^9.0.0",
 		"ionic": "^4.12.0",
 		"rev-hash": "^2.0.0",
-		"typescript": "2.6.2" 
+		"typescript": "2.6.2"
 	},
 	"config": {
 		"ionic_copy": "./config/copy.config.js",

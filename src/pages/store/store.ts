@@ -183,7 +183,7 @@ export class StorePage {
 
 	getBackgroundStyle(imagepath: string) {
 		return {
-			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + ')',
+			'background-image': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + imagepath + "?height=400&width=860&rmode=max" + ')',
 			'background-position': 'center center',
 			'background-size': 'cover',
 		};

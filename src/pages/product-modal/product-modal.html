@@ -1,5 +1,5 @@
 <ion-header>
-	<div class="product-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (product.picture|imageProduct) + ')  center center / cover no-repeat'}">
+	<div class="product-picture" [ngStyle]="{'background': 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 80%), url(' + (product.picture|imageProduct) + '?height=400&width=860&rmode=max' + ')  center center / cover no-repeat'}">
 		<ion-navbar transparent>
 			<h3 ion-text color="light">{{product.name}}</h3>
 			<ion-buttons end>

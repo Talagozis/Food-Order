@@ -24,7 +24,7 @@
 	<ion-list *ngIf="stores" >
 		<ion-item class="pointer" *ngFor="let store of stores" (click)="navigateToStorePage(store)">
 			<ion-thumbnail item-start>
-				<img src="{{store.logo|imageStore}}" class="img-responsive store-logo">
+				<img src="{{store.logo|imageStore}}?width=80&height=80" class="img-responsive store-logo">
 			</ion-thumbnail>
 			<h2>{{store.name}}</h2>
 			<div *ngIf="store.isOpen">

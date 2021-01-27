@@ -214,7 +214,7 @@ export class CheckoutPage {
 		const safeHtml: any = this.sanitizer.bypassSecurityTrustHtml(
 			`<div class="checkoutAccepting">
 				<h3>Αναμονή αποδοχής παραγγελίας...</h3>
-				<div class="spinning-image" style="background-image: url(${ENV.IMAGE_URL + "image/store/" + this.store.logo});">
+				<div class="spinning-image" style="background-image: url(${ENV.IMAGE_URL + "store" + this.store.logo});">
 					<div></div>
 				</div>
 				<p>Η παραγγελίας απεστάλη επιτυχώς. Παρακαλώ περιμένετε για την αποδοχή της από το κατάστημα.</p>
