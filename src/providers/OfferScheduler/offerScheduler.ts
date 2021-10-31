@@ -12,7 +12,7 @@ export class OfferSchedulerProvider {
 	constructor(public api: Api<OfferSchedulerApi>) { }
 
 	public getLive(): Observable<OfferSchedulerApi[]> {
-		return this.api.get('offerScheduler', { dateTime: (new Date).toJSON() });
+		return this.api.get('offerScheduler', { dateTime: (new Date()).toJSON() });
 	}
 
 }
