@@ -22,8 +22,7 @@ export class Api<T> {
 		return this.http.get<T[]>(this.url + endpoint + x);
 	}
 
-	getOne(endpoint: string, parameters: object): Observable<T>;
-	getOne(endpoint: string, bid: number): Observable<T>;
+
 	getOne(endpoint: string, bidOrParameters: number | object): Observable<T> {
 		if (typeof bidOrParameters === "number") {
 			return this.http.get<T>(this.url + endpoint + '/' + bidOrParameters);

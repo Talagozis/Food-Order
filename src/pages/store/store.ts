@@ -255,9 +255,9 @@ export class StorePage {
 	}
 
 
-	private sortCategories(a: CategoryViewModel, b: CategoryViewModel): number {
-		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1;
-	}
+	// private sortCategories(a: CategoryViewModel, b: CategoryViewModel): number {
+	// 	return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1;
+	// }
 
 	sortProducts(a: ProductApi, b: ProductApi): number {
 		return a.orderNumber === null || (b.orderNumber !== null && a.orderNumber > b.orderNumber) ? 1 : -1;

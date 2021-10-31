@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StoreApi } from '../../models/Api/Store';
-import { CartItemViewModel, CartViewModel, CartItemOfferGroupViewModel } from '../../models/ViewModels/CartViewModel';
+import { CartViewModel, CartItemOfferGroupViewModel } from '../../models/ViewModels/CartViewModel';
 import { ENV } from '@app/env';
 
 declare global {
@@ -22,8 +22,8 @@ export class AnalyticsProvider {
 		document.body.appendChild(script);
 
 		window.dataLayer = window.dataLayer || [];
-		window.gtag = function() {
-			window.dataLayer.push(arguments);
+		window.gtag = (...parameters) => {
+			window.dataLayer.push(parameters);
 		};
 
 		window.gtag('js', new Date());

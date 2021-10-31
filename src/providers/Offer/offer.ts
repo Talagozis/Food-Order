@@ -37,9 +37,9 @@ export class OfferProvider {
 	public findLiveDeals(storeBid: number, subscription: SubscriptionDelegate): Promise<void> {
 
 		if (storeBid) {
-			return this.findByStoreBid(storeBid, { level: OfferLevel.LiveDeal, offerSchedulerDateTime: (new Date).toJSON() }).then(subscription);
+			return this.findByStoreBid(storeBid, { level: OfferLevel.LiveDeal, offerSchedulerDateTime: (new Date()).toJSON() }).then(subscription);
 		} else {
-			return this.find({ level: OfferLevel.LiveDeal, offerSchedulerDateTime: (new Date).toJSON() }).then(subscription);
+			return this.find({ level: OfferLevel.LiveDeal, offerSchedulerDateTime: (new Date()).toJSON() }).then(subscription);
 		}
 		// subscription = OfferSubscriptionFilters.filterActive(subscription);
 		// subscription = OfferSubscriptionFilters.filterByLevel(subscription, OfferLevel.LiveDeal);
